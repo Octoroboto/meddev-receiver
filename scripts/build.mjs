@@ -1,7 +1,8 @@
 // Zero-dependency build: src/ -> dist/receiver.css, dist/receiver.js, dist/badges.html, dist/blocks.html and dist/manifest.json.
 // Apps read dist/ (bundled copy at build time, or live from GitHub with client/updater.js). Edit src/, never dist/.
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from "node:fs";
 import { createHash } from "node:crypto";
+import { buildSkin } from "./skins.mjs";
 const root = new URL("../", import.meta.url);
 const read = p => readFileSync(new URL(p, root), "utf8");
 const { version } = JSON.parse(read("package.json"));
@@ -13,16 +14,25 @@ const js = `${banner}window.MDFM_BADGES=${JSON.stringify(badges)};
 (()=>{ const V=${JSON.stringify(version)}; const fill=()=>document.querySelectorAll("[data-mdfm-badges]").forEach(el=>{ if(el.dataset.mdfmBadges===V) return; el.classList.add("deck","pinfoot"); if(!el.getAttribute("aria-label")) el.setAttribute("aria-label","MedDev"); el.innerHTML=window.MDFM_BADGES; el.dataset.mdfmBadges=V; }); if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",fill); else fill(); window.MDFM_mountBadges=fill; })();
 ${read("src/behaviour.js")}
 ${read("src/controls.js")}
+${read("src/skins.js")}
 window.MedDevReceiver={version:${JSON.stringify(version)},mountBadges:()=>window.MDFM_mountBadges(),mountControls:(radio,o)=>window.MDFM_receiver(radio,o||{})};
 `;
+const skinsIndex = JSON.parse(read("skins/skins.json"));
+const ids = [...new Set([...(skinsIndex.order || []), ...readdirSync(new URL("skins/", root), { withFileTypes: true }).filter(d => d.isDirectory()).map(d => d.name)])];
+const skins = ids.map(id => buildSkin(new URL(`skins/${id}/`, root), id));
+if (!skins.find(s => s.id === skinsIndex.default)) throw new Error(`skins.json default "${skinsIndex.default}" isn't a skin`);
+const skinsBundle = JSON.stringify({ version, default: skinsIndex.default, skins });
+const skinsTag = skinsBundle.replace(/</g, "\\u003c");
 for (const [n, s] of [["css", css], ["js", js]]) {
-  if (/<\/(style|script)/i.test(s)) throw new Error(`build: receiver.${n} must not contain a closing </style> or </script> tag`);
+  if (/<\/?(style|script)\b/i.test(s)) throw new Error(`build: receiver.${n} must not contain a <style> or <script> tag, even in a comment`);
 }
 mkdirSync(new URL("dist/", root), { recursive: true });
 const out = (p, s) => writeFileSync(new URL("dist/" + p, root), s);
 out("receiver.css", css); out("receiver.js", js); out("badges.html", badges + "\n");
-out("blocks.html", `<!-- MedDev Receiver ${version}: paste into a page's <head> (style) and end of <body> (script). Artifacts: swap these blocks, then republish. -->\n<style id="mdfm-skin">${css}</style>\n<script id="meddev-receiver-js">${js}</script>\n`);
+out("skins.json", skinsBundle);
+out("blocks.html", `<!-- MedDev Receiver ${version}: paste into a page's <head> (style) and end of <body> (skins, then script). Artifacts: swap these blocks, then republish. -->\n<style id="mdfm-skin">${css}</style>\n<script id="meddev-skins" type="application/json">${skinsTag}</script>\n<script id="meddev-receiver-js">${js}</script>\n`);
 const h = s => createHash("sha256").update(s).digest("hex");
 out("manifest.json", JSON.stringify({ name: "meddev-receiver", version, files: {
-  "receiver.css": { sha256: h(css), bytes: Buffer.byteLength(css) }, "receiver.js": { sha256: h(js), bytes: Buffer.byteLength(js) } } }, null, 2) + "\n");
-console.log(`built meddev-receiver ${version} -> dist/receiver.css, receiver.js, badges.html, blocks.html, manifest.json`);
+  "receiver.css": { sha256: h(css), bytes: Buffer.byteLength(css) }, "receiver.js": { sha256: h(js), bytes: Buffer.byteLength(js) },
+  "skins.json": { sha256: h(skinsBundle), bytes: Buffer.byteLength(skinsBundle) } }, skins: skins.map(s => s.id), default: skinsIndex.default }, null, 2) + "\n");
+console.log(`built meddev-receiver ${version} (${skins.length} skin${skins.length === 1 ? "" : "s"}, default ${skinsIndex.default}) -> dist/`);

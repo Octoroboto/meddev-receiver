@@ -4,9 +4,11 @@ The receiver look and controls in one place: brushed steel, scratched-glass LCDs
 
 **Update it here once, and every app that points here follows.**
 
+It also holds the **skins**: different looks for the metal, picked from a Skin dropdown in every app. Default is the original steel Winamp-style look.
+
 ## Who uses it
 
-| App | Gets new versions | How |
+| App | Gets new versions and skins | How |
 |---|---|---|
 | MDFM Radio (Mac app) | Live, on next launch | `client/updater.cjs` (via mdfm `apps/common/receiver.js`) |
 | MD Hub (Mac app) | Live, on next launch or hub reload | Same updater. It also restyles the hub page inside the app. |
@@ -24,6 +26,47 @@ The receiver look and controls in one place: brushed steel, scratched-glass LCDs
 3. Add a line to `CHANGELOG.md`, commit everything (including `dist/`) and push.
 
 That's it. Installed MDFM Radio and MD Hub apps pick it up on their next check (launch, then every 6 hours) and use it from the next launch. To also update the hub page and the mdfm bundled copy, run `npm run receiver:sync` in mdfm, rebuild, and have Claude republish the hub.
+
+## Skins
+
+Each skin lives in `skins/<id>/`:
+
+- `skin.json`: `{ "id", "name", "description" }`
+- `skin.css`
+- `images/` (optional; built in as data: URLs)
+
+`skins/skins.json` lists them in order and names the **house default**.
+
+**What a skin can change:** skins can be wildly different, like a western saloon of wood and rusty nails, or a Giger-style one of organic forms and dripping slime. Every control stays and works the same, but everything about how it looks can change.
+
+- **The metal:**
+  - The skin settings at the end of `src/receiver.css`: plates, steel, keys, title bars, buttons, knobs, the volume knob, bezels, trim and captions.
+  - Any styling of the receiver's parts: `.deck`, `.panel`, `.wtitle`, `.rd-btn button`, `.rd-knob`, `.vol-knob`, `.mixer`, `.vu`, `.tk` and so on. That includes textures, borders, shapes, shadows, fonts and spacing.
+- **Moving things:** parts can be rearranged to fit the theme (flex/grid direction, gaps, order, margins).
+- **Decorations:**
+  - `.skin-decor` sits over each `.deck` and `.panel`. Use its `::before` and `::after`, and as many layered background images as you like.
+  - Decorations may overlap the glass a little (a tentacle over an LCD corner), and can animate with `@keyframes` (dripping slime).
+  - They never take clicks.
+
+**What stays the same in every skin (the build refuses changes):**
+
+- **Glass:** LCDs, VU glass and the EQ display keep their look. A skin may *move* glass (margin, order, translate, relative position), but not restyle it.
+- **Lights:** LCD text glow, LEDs, the EQ bars and VU faces.
+- **The spray can and the fruit flies.**
+- **Text fields, the hub's lists, and every control's behaviour.**
+- **Effects that would reach the glass inside a panel:** filter, opacity, transform, clip and animation are only allowed on buttons, knobs and decorations.
+- **Keep it a little under 1.5 MB per skin.** Use WebP images; the hub page carries every skin.
+
+**How a person's skin is chosen:** their own pick wins. Next comes "House default", which follows `skins.json`'s `default`. The built-in Default is the last resort.
+
+**Adding a skin:**
+
+1. Make the candidate in a scratch folder, not in `skins/`.
+2. Run `node scripts/preview.mjs <folder>`. It writes `preview/<id>.html`: the playable receiver with the skin on and a Compare dropdown. Nothing is added yet.
+3. When it's approved, copy the folder to `skins/<id>/`, add the id to `skins/skins.json` `order`, bump the version, then run `npm test`, commit and push.
+4. To make it the house default, set `default` in `skins/skins.json` and bump the version again.
+
+The `/newmdfmlook` and `/updatemdfmlook` commands in Claude walk through this.
 
 ## Pointing another app at it
 
@@ -59,7 +102,7 @@ const { css, js } = rx.active();       // newest good copy, or the bundled one
 
 ### Web page or artifact
 
-Paste the two blocks from `dist/blocks.html`: the style in `<head>`, the script at the end of `<body>`.
+Paste the blocks from `dist/blocks.html`: the style in `<head>`, and the skins and script at the end of `<body>`. Add `<select data-mdfm-skins></select>` anywhere for a Skin dropdown.
 
 - For the badging: add `<footer data-mdfm-badges></footer>`.
 - For the controls: use the standard markup (see MDFM's `skin/radio-body.html`) and call `MedDevReceiver.mountControls(radio, { app })`.
@@ -69,3 +112,4 @@ Paste the two blocks from `dist/blocks.html`: the style in `<head>`, the script 
 - **Classes:** `.deck`, `.wtitle`, `.lcd`, `.rd-btn` with `.rd-led`, `.vizsw`, `.tk` / `.vol` knobs, `.vu`, `.rdeck`, `.pinfoot`.
 - **Badging:** `[data-mdfm-badges]`, `window.MDFM_BADGES`, `MDFM_mountBadges()`.
 - **Controls and version:** `MDFM_receiver(radio, { app })`, and `window.MedDevReceiver` (`version`, `mountBadges`, `mountControls`).
+- **Skins:** `window.MDFM_skins` (`list`, `current`, `set`, `houseDefault`), the `meddev:skin` event, `select[data-mdfm-skins]`, and `html[data-skin]`.

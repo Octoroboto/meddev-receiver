@@ -1,5 +1,8 @@
 /* MedDev Receiver behaviour: LED equalizer, fruit flies + spray can + swatter, light-colour knobs, VU meters.
    Shared by every app that uses the receiver look. Edit here, then npm run build. */
+/* Skin settings for the canvas parts: read once, re-read when the skin changes (the "meddev:skin" event). */
+window.MDFM_tok=(()=>{ let cache={}; const get=(n,fb)=>{ if(n in cache) return cache[n]; let v=""; try{ v=getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }catch(e){} return cache[n]=v||fb; };
+  window.addEventListener("meddev:skin",()=>{ cache={}; }); return get; })();
 /* Spectrum analyzer: classic 19-band LED bars dancing to made-up music. No audio, no network, no credits. */
 (()=>{
   const cv=document.getElementById("vizCanvas"); if(!cv) return;
@@ -93,16 +96,16 @@
     ctx.clearRect(0,0,W,H);
     const bw=W/N, seg=SEG*dpr, gap=GAP*dpr, rows=Math.floor(H/(seg+gap));
     const g=ctx.createLinearGradient(0,H,0,0);
-    g.addColorStop(0,"#1ec81e");g.addColorStop(.45,"#7fe22a");g.addColorStop(.68,"#e8e030");g.addColorStop(.85,"#ff9a1e");g.addColorStop(1,"#ff3b2a");
+    const T=window.MDFM_tok; g.addColorStop(0,T("--eq-1","#1ec81e"));g.addColorStop(.45,T("--eq-2","#7fe22a"));g.addColorStop(.68,T("--eq-3","#e8e030"));g.addColorStop(.85,T("--eq-4","#ff9a1e"));g.addColorStop(1,T("--eq-5","#ff3b2a"));
     for(let i=0;i<N;i++){
       const x=Math.round(i*bw+gap), w=Math.max(1,Math.round(bw-gap*2)), on=Math.round(lvl[i]*rows);
       // unlit segments, faintly visible like a real LED ladder
-      ctx.fillStyle="rgba(60,90,60,.16)";
+      ctx.fillStyle=T("--eq-off","rgba(60,90,60,.16)");
       for(let r=on;r<rows;r++) ctx.fillRect(x,H-(r+1)*(seg+gap),w,seg);
       ctx.fillStyle=g;
       for(let r=0;r<on;r++) ctx.fillRect(x,H-(r+1)*(seg+gap),w,seg);
       const pr=Math.min(rows-1,Math.round(peak[i]*rows));
-      if(pr>0){ctx.fillStyle="#d8dbe6";ctx.fillRect(x,H-(pr+1)*(seg+gap),w,Math.max(1,Math.round(seg*.7)));}
+      if(pr>0){ctx.fillStyle=T("--eq-peak","#d8dbe6");ctx.fillRect(x,H-(pr+1)*(seg+gap),w,Math.max(1,Math.round(seg*.7)));}
     }
   }
   let on=true; const box=document.getElementById("vizOn");
@@ -532,25 +535,26 @@ ${[0,1,2,3,4,5,6,7].map(k=>`<rect x="52" y="${262+k*7}" width="16" height="2.4" 
     const r=c.getBoundingClientRect(), dpr=Math.min(3,window.devicePixelRatio||1), w=Math.max(80,r.width), h=Math.max(50,r.height);
     if(s.face&&s.w===w&&s.h===h&&s.dpr===dpr) return; s.w=w; s.h=h; s.dpr=dpr;
     c.width=Math.round(w*dpr); c.height=Math.round(h*dpr);
+    const T=window.MDFM_tok, INK=T("--vu-ink","#1b1a17"), RED=T("--vu-red","#c8231b");
     const o=document.createElement("canvas"); o.width=c.width; o.height=c.height; const g=o.getContext("2d"); g.scale(dpr,dpr);
-    const bg=g.createRadialGradient(w/2,h*.62,h*.1,w/2,h*.62,w*.75); bg.addColorStop(0,"#fbf0cf"); bg.addColorStop(.6,"#f0dfae"); bg.addColorStop(1,"#cdb57a");
+    const bg=g.createRadialGradient(w/2,h*.62,h*.1,w/2,h*.62,w*.75); bg.addColorStop(0,T("--vu-face-1","#fbf0cf")); bg.addColorStop(.6,T("--vu-face-2","#f0dfae")); bg.addColorStop(1,T("--vu-face-3","#cdb57a"));
     g.fillStyle=bg; g.fillRect(0,0,w,h);
     const cx=w/2, cy=h*1.08, R=h*.86; s.cx=cx; s.cy=cy; s.R=R;
     const ang=f=>-SPAN+f*2*SPAN, pt=(a,rr)=>[cx+Math.sin(a)*rr, cy-Math.cos(a)*rr];
     g.lineCap="butt";
-    g.strokeStyle="#1b1a17"; g.lineWidth=1.3; g.beginPath(); g.arc(cx,cy,R,-Math.PI/2+ang(0),-Math.PI/2+ang(frac(0))); g.stroke();
-    g.strokeStyle="#c8231b"; g.lineWidth=h*.055; g.beginPath(); g.arc(cx,cy,R+h*.03,-Math.PI/2+ang(frac(0)),-Math.PI/2+ang(1)); g.stroke();
-    g.strokeStyle="#1b1a17"; g.lineWidth=1; g.beginPath(); g.arc(cx,cy,R*.9,-Math.PI/2+ang(0),-Math.PI/2+ang(1)); g.stroke();
+    g.strokeStyle=INK; g.lineWidth=1.3; g.beginPath(); g.arc(cx,cy,R,-Math.PI/2+ang(0),-Math.PI/2+ang(frac(0))); g.stroke();
+    g.strokeStyle=RED; g.lineWidth=h*.055; g.beginPath(); g.arc(cx,cy,R+h*.03,-Math.PI/2+ang(frac(0)),-Math.PI/2+ang(1)); g.stroke();
+    g.strokeStyle=INK; g.lineWidth=1; g.beginPath(); g.arc(cx,cy,R*.9,-Math.PI/2+ang(0),-Math.PI/2+ang(1)); g.stroke();
     g.textAlign="center"; g.textBaseline="middle"; const fs=Math.max(7,h*.1);
     g.font=`700 ${fs}px "Arial Narrow",Arial,sans-serif`;
     for(const [vu,lab] of MARKS){ const a=ang(frac(vu)), big=vu===-20||vu===-10||vu===-5||vu===0||vu===3;
-      g.strokeStyle=vu>0?"#c8231b":"#1b1a17"; g.lineWidth=big?1.6:1.1;
+      g.strokeStyle=vu>0?RED:INK; g.lineWidth=big?1.6:1.1;
       const [x1,y1]=pt(a,R*.9),[x2,y2]=pt(a,R+(big?h*.07:h*.045)); g.beginPath(); g.moveTo(x1,y1); g.lineTo(x2,y2); g.stroke();
-      const [tx,ty]=pt(a,R+h*.15); g.fillStyle=vu>0?"#c8231b":"#1b1a17"; g.fillText((vu>0?"+":"")+lab,tx,ty); }
-    for(let i=0;i<=10;i++){ const a=ang(frac(-20)+(frac(0)-frac(-20))*i/10); const [x1,y1]=pt(a,R*.9),[x2,y2]=pt(a,R*.86); g.strokeStyle="#1b1a17"; g.lineWidth=.8; g.beginPath(); g.moveTo(x1,y1); g.lineTo(x2,y2); g.stroke(); }
-    g.font=`${Math.max(6,h*.075)}px Arial,sans-serif`; g.fillStyle="#1b1a17";
-    { const [x,y]=pt(ang(0)+.04,R*.76); g.fillText("−",x,y); const [x2,y2]=pt(ang(1)-.04,R*.76); g.fillStyle="#c8231b"; g.fillText("+",x2,y2); }
-    g.fillStyle="#1b1a17"; g.font=`900 ${Math.max(10,h*.2)}px Georgia,"Times New Roman",serif`; g.fillText("VU",cx,h*.62);
+      const [tx,ty]=pt(a,R+h*.15); g.fillStyle=vu>0?RED:INK; g.fillText((vu>0?"+":"")+lab,tx,ty); }
+    for(let i=0;i<=10;i++){ const a=ang(frac(-20)+(frac(0)-frac(-20))*i/10); const [x1,y1]=pt(a,R*.9),[x2,y2]=pt(a,R*.86); g.strokeStyle=INK; g.lineWidth=.8; g.beginPath(); g.moveTo(x1,y1); g.lineTo(x2,y2); g.stroke(); }
+    g.font=`${Math.max(6,h*.075)}px Arial,sans-serif`; g.fillStyle=INK;
+    { const [x,y]=pt(ang(0)+.04,R*.76); g.fillText("−",x,y); const [x2,y2]=pt(ang(1)-.04,R*.76); g.fillStyle=RED; g.fillText("+",x2,y2); }
+    g.fillStyle=INK; g.font=`900 ${Math.max(10,h*.2)}px Georgia,"Times New Roman",serif`; g.fillText("VU",cx,h*.62);
     g.font=`700 ${Math.max(6,h*.068)}px Arial,sans-serif`; g.fillStyle="rgba(27,26,23,.7)"; g.fillText("MDFM 99.9 HD",cx,h*.78);
     // pivot hood
     const hg=g.createLinearGradient(0,h*.84,0,h); hg.addColorStop(0,"#2b2b31"); hg.addColorStop(1,"#09090b");
@@ -574,11 +578,12 @@ ${[0,1,2,3,4,5,6,7].map(k=>`<rect x="52" y="${262+k*7}" width="16" height="2.4" 
       g.setTransform(1,0,0,1,0,0); g.drawImage(s.face,0,0); g.setTransform(s.dpr,0,0,s.dpr,0,0);
       const a=s.ang(s.pos), x2=s.cx+Math.sin(a)*s.R*1.08, y2=s.cy-Math.cos(a)*s.R*1.08;
       g.lineCap="round"; g.strokeStyle="rgba(0,0,0,.18)"; g.lineWidth=2.2; g.beginPath(); g.moveTo(s.cx+2,s.cy); g.lineTo(x2+2,y2+3); g.stroke();
-      g.strokeStyle="#111"; g.lineWidth=1.3; g.beginPath(); g.moveTo(s.cx,s.cy); g.lineTo(x2,y2); g.stroke();
+      g.strokeStyle=window.MDFM_tok("--vu-needle","#111"); g.lineWidth=1.3; g.beginPath(); g.moveTo(s.cx,s.cy); g.lineTo(x2,y2); g.stroke();
       const led=c.parentElement.querySelector(".vu-pk"); led&&led.classList.toggle("on",now<s.peak);
     });
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
   window.addEventListener("resize",()=>st.forEach(s=>s.face=null));
+  window.addEventListener("meddev:skin",()=>st.forEach(s=>s.face=null));
 })();

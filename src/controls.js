@@ -11,8 +11,11 @@ window.MDFM_receiver=function(radio,{app=null}={}){
     const tone=Object.assign({low:0,mid:0,high:0},load("mdfmTone",{})); let vol=load("mdfmVolume",.8);
     const ticks=(svg,n,r,cx,big)=>{ let h=""; for(let i=0;i<=n;i++){ const a=(-135+i*270/n)*Math.PI/180, major=i===0||i===n||i===n/2; h+=`<circle cx="${cx+Math.sin(a)*r}" cy="${cx-Math.cos(a)*r}" r="${major?1.5:.9}" fill="rgba(226,229,238,.75)"/>`; } svg.innerHTML=h+(big||""); };
     document.querySelectorAll(".tk-ticks").forEach(s=>ticks(s,10,27,30));
-    { let lab=""; for(let i=0;i<=10;i++){ const a=(-135+i*27)*Math.PI/180; lab+=`<text x="${70+Math.sin(a)*64}" y="${70-Math.cos(a)*64+3}" text-anchor="middle" font-family="Tahoma,Verdana,sans-serif" font-weight="700" font-size="8.5" fill="rgba(226,229,238,.82)">${i}</text>`; }
-      const sc=document.querySelector(".vol-scale"); if(sc) ticks(sc,40,54,70,lab); }
+    // The VOLUME scale: dots in the SVG, numbers as plain positioned text (SVG text drifts out of place in iPhone Safari).
+    document.querySelectorAll(".vol-scale").forEach(sc=>{ ticks(sc,40,54,70); const dial=sc.parentElement; if(!dial) return;
+      dial.querySelectorAll(":scope > .vol-num").forEach(n=>n.remove());
+      for(let i=0;i<=10;i++){ const a=(-135+i*27)*Math.PI/180, n=document.createElement("span"); n.className="vol-num"; n.setAttribute("aria-hidden","true");
+        n.textContent=String(i); n.style.left=(70+Math.sin(a)*64)+"px"; n.style.top=(70-Math.cos(a)*64)+"px"; dial.appendChild(n); } });
     const knob=(el,get,set,min,max,step,fmt,reset)=>{ if(!el) return; const show=()=>{ const v=get(), f=(v-min)/(max-min); el.style.transform=`rotate(${-135+f*270}deg)`; el.setAttribute("aria-valuenow",String(Math.round(v*10)/10)); el.setAttribute("aria-valuetext",fmt(v)); el.title=fmt(v); };
       const put=v=>{ set(Math.max(min,Math.min(max,v))); show(); }; let sx=0,sy=0,sv=0;
       el.addEventListener("pointerdown",e=>{ el.setPointerCapture(e.pointerId); sx=e.clientX; sy=e.clientY; sv=get(); e.preventDefault(); e.stopPropagation(); });
