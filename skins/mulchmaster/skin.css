@@ -1,0 +1,83 @@
+/* Mulchmaster: a beat-up push mower seen from above. The handle sits over the top, the engine shroud is the header,
+   the deck is dirty red steel, the wheels stick out at the corners and the front bumper carries the decal.
+   The gas cap is the volume knob; the light knobs are yellow choke caps; the round buttons are primer bulbs. */
+@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Oswald:wght@500;600;700&display=swap");
+
+:root{
+  --f-display:"Alfa Slab One",Georgia,serif; --f-body:"Oswald","Arial Narrow",Arial,sans-serif;
+  --caption:rgba(252,240,214,.95); --focus:#ffd23f; --gold:#e8b51e; --gold-dark:#7a5a08;
+  --btn-1:#ff7a5e; --btn-2:#c9281b; --btn-3:#5e0b06; --btn-down-1:#a31f15; --btn-down-2:#4a0805; --btn-bezel:#121212; --btn-rim:#3c3c3e;
+  --knob-1:#56565b; --knob-2:#1e1e21; --knob-3:#0a0a0b; --knurl-1:#2b2b2e; --knurl-2:#060606; --knob-pointer:#f2c230;
+  --vol-1:#2a2a2d; --vol-2:#141416; --vol-3:#050506; --vol-cap:#1b1b1d; --vol-dot:#e6e0cf;
+  --bezel-1:#2a2a2d; --bezel-2:#141416; --bezel-3:#050506;
+  --plate-1:#b0281f; --plate-2:#8f1d16; --plate-3:#5c120d; --key-1:#2f2f33; --key-2:#151517; --key-hover-1:#3a3a3f; --key-hover-2:#1c1c1f;
+  --title-1:#1d1d20; --title-2:#0b0b0c;
+}
+
+/* The lawn (browsers only; in the apps the window is clear, so the mower is the window's shape). Room for the handle and wheels. */
+body:not(.pop){background:#4d7a2a repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 90px,rgba(0,0,0,.07) 90px 180px);padding:clamp(96px,10vw,132px) clamp(18px,10.5vw,112px) 34px clamp(18px,7.4vw,80px)}
+
+/* The deck: dirty red steel, square at the back, rounded at the front. */
+.wrap.wrap{max-width:1180px;background:url(images/red-paint.webp) 0 0/512px 512px,#a31f17;border:3px solid #3e0a06;border-radius:34px 34px 46% 46%/34px 34px 170px 170px;
+  padding:16px clamp(10px,1.8vw,20px) 46px;gap:16px;box-shadow:0 22px 44px rgba(0,0,0,.55),0 5px 12px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,170,150,.35),inset 0 0 0 5px rgba(0,0,0,.18),inset 0 -40px 70px rgba(30,0,0,.45);position:relative}
+
+/* Engine shroud (the header) and plastic parts */
+.top .deck,.sheet,.pop,.syncbar,.ahead,.bellpanel{background:radial-gradient(circle at 14px 14px,#9a9aa0 0 3px,#3a3a3e 4px,transparent 6px),radial-gradient(circle at calc(100% - 14px) 14px,#9a9aa0 0 3px,#3a3a3e 4px,transparent 6px),
+  radial-gradient(circle at 14px calc(100% - 14px),#9a9aa0 0 3px,#3a3a3e 4px,transparent 6px),radial-gradient(circle at calc(100% - 14px) calc(100% - 14px),#9a9aa0 0 3px,#3a3a3e 4px,transparent 6px),
+  linear-gradient(180deg,rgba(255,255,255,.08),transparent 30%,rgba(0,0,0,.35)),url(images/black-plastic.webp) 0 0/384px 384px,#1c1c1e;
+  border:2px solid #000;box-shadow:0 8px 16px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -2px 0 rgba(0,0,0,.6);color:#f1ece0}
+.top .deck{border-radius:22px 22px 30px 30px;padding:16px 22px 18px}
+
+/* The deck panel: a stamped section of the same red steel */
+.panel{background:linear-gradient(180deg,rgba(255,200,180,.08),rgba(0,0,0,.14)),url(images/red-paint.webp) 137px 61px/512px 512px,#9b1d15;border:2px solid rgba(48,6,3,.75);border-radius:18px;
+  box-shadow:inset 0 2px 6px rgba(0,0,0,.45),inset 0 -1px 0 rgba(255,170,150,.25),0 1px 0 rgba(255,170,150,.25);color:#fbf1e2;text-shadow:0 1px 1px rgba(0,0,0,.7)}
+
+/* Front bumper with the decal */
+.pinfoot{background:url(images/decal.webp) center 16px/min(440px,86%) auto no-repeat,url(images/sticker.webp) left calc(clamp(84px,14vw,176px) * .45) top 20px/clamp(0px,(100vw - 900px) * .5,160px) auto no-repeat,linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.35)),url(images/black-plastic.webp) 40px 0/384px 384px,#1c1c1e;
+  border:2px solid #000;border-radius:16px 16px 44% 44%/16px 16px 70px 70px;padding:calc(40px + min(440px,86%) * .24) 16px clamp(30px,7vw,64px);margin-top:6px;box-shadow:0 8px 16px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.14)}
+
+/* Title strips: black rubber with hazard stripes */
+.wtitle{background:linear-gradient(180deg,var(--title-1),var(--title-2));border-bottom:2px solid #000;border-radius:6px 6px 0 0;height:24px;color:#f2c230;font:15px var(--f-display);letter-spacing:.12em}
+.wtitle::before,.wtitle::after{height:10px;border-radius:2px;background:repeating-linear-gradient(135deg,#e8b51e 0 7px,#111 7px 14px);box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+
+/* Captions in an engine-sticker face */
+small,.rd-mm,.vizsw{font-family:"Oswald","Arial Narrow",sans-serif;font-weight:700;letter-spacing:.1em}
+.rdeck small,.tk small,.vol small,.vu-m small,.fxbtns small,.rd-mm{color:var(--caption);text-shadow:0 1px 1px rgba(0,0,0,.85)}
+
+/* Keys: black plastic levers with yellow print */
+.btn{background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(0,0,0,.3)),url(images/black-plastic.webp) 0 0/384px 384px,#1d1d20;color:#f2c230;border:1px solid;border-color:#55555a #000 #000 #55555a;
+  border-radius:7px;font:600 .9rem/1 var(--f-body);letter-spacing:.08em;text-transform:uppercase;text-shadow:0 1px 0 #000;box-shadow:0 3px 0 #000,0 4px 6px rgba(0,0,0,.5)}
+.btn:hover{background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(0,0,0,.2)),url(images/black-plastic.webp) 0 0/384px 384px,#2a2a2e;color:#ffd84a}
+.btn:active{translate:0 2px;box-shadow:0 1px 0 #000}
+.btn.primary{background:linear-gradient(180deg,#ffd54a,#d9a10c);color:#1a1a1a;border-color:#fff0a8 #6a4c00 #6a4c00 #fff0a8;text-shadow:none}
+.btn.danger{background:linear-gradient(180deg,#3a3a3f,#141416);color:#ff8a7a}
+
+/* Light knobs: yellow choke caps on black rubber skirts */
+.rd-k .rd-knob{background:radial-gradient(circle at 36% 30%,#fff0a6 0,#f4c021 30%,#c08a08 64%,#5a3c00 100%);box-shadow:0 3px 5px rgba(0,0,0,.75),inset 0 -2px 3px rgba(0,0,0,.35)}
+.rd-k .rd-knob::before{mask:radial-gradient(circle,transparent 0 14px,#000 14.5px);-webkit-mask:radial-gradient(circle,transparent 0 14px,#000 14.5px)}
+.rd-knob::before{background:repeating-conic-gradient(#232326 0 9deg,#0a0a0b 9deg 18deg);box-shadow:0 0 0 1px #000,0 2px 4px rgba(0,0,0,.6)}
+
+/* Volume: the gas cap */
+.vol-knob{background:url(images/gas-cap.webp) center/100% 100% no-repeat;box-shadow:0 7px 12px rgba(0,0,0,.6),0 2px 3px rgba(0,0,0,.6);border-radius:50%}
+.vol-knob::before{content:none}
+.vol-dot{width:11px;height:9px;margin-left:-5.5px;top:5px;border-radius:0;background:#e6e0cf;box-shadow:none;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.vol-num{color:#fff3d6;font-family:"Oswald",sans-serif;text-shadow:0 1px 1px #000}
+
+/* Decorations */
+.skin-decor::before,.skin-decor::after{content:"";position:absolute;pointer-events:none}
+/* the handle, rising out of the back of the engine */
+.top .skin-decor::before{left:-4%;right:-4%;top:calc(-1 * clamp(96px,10vw,132px) - 2px);height:calc(clamp(96px,10vw,132px) + 24px);background:url(images/handle.webp) center/100% 100% no-repeat;filter:drop-shadow(0 8px 6px rgba(0,0,0,.45))}
+/* rear wheels */
+.top .skin-decor::after{left:calc(-20px - clamp(84px,14vw,176px) * .55);right:calc(-20px - clamp(84px,14vw,176px) * .55);top:calc(clamp(84px,14vw,176px) * -.42);height:clamp(84px,14vw,176px);background:url(images/wheel.webp) left center/clamp(84px,14vw,176px) clamp(84px,14vw,176px) no-repeat,url(images/wheel.webp) right center/clamp(84px,14vw,176px) clamp(84px,14vw,176px) no-repeat;filter:drop-shadow(0 6px 6px rgba(0,0,0,.5))}
+/* engine bits on the deck: oil cap, rinse port, the sound-control sticker, the fuel line and clippings */
+.station .skin-decor::before{left:calc(-1 * (clamp(10px,1.8vw,20px) + clamp(60px,7.2vw,150px) + 3px));right:calc(-1 * (clamp(10px,1.8vw,20px) + clamp(60px,10.2vw,150px) + 3px));top:-36px;bottom:-22px;
+  background:url(images/greeble-left.webp) left top 58%/clamp(60px,7.2vw,150px) auto no-repeat,url(images/greeble-right.webp) right top 58%/clamp(60px,10.2vw,150px) auto no-repeat,
+    url(images/dipstick.webp) left calc((clamp(10px,1.8vw,20px) + clamp(60px,7.2vw,150px) + 3px) - 34px) top 0/84px 84px no-repeat,url(images/clippings.webp) left calc((clamp(10px,1.8vw,20px) + clamp(60px,7.2vw,150px) + 3px) - 6px) bottom/220px 62px no-repeat,url(images/clippings.webp) right calc((clamp(10px,1.8vw,20px) + clamp(60px,10.2vw,150px) + 3px) + 40px) bottom/180px 50px no-repeat;
+  filter:drop-shadow(0 4px 4px rgba(0,0,0,.5))}
+/* rinse port in the empty strip at the bottom of the deck; the garden hose runs off the right side and under the front wheel */
+.station .skin-decor::after{left:45%;right:-54px;bottom:-42px;height:130px;
+  background:url(images/rinse-port.webp) left top/70px 70px no-repeat,url(images/hose.webp) left 18px top 0/calc(100% - 18px) 130px no-repeat;
+  filter:drop-shadow(0 3px 3px rgba(0,0,0,.45))}
+/* front wheels and clippings stuck to the bumper */
+.pinfoot .skin-decor::before{left:calc(-20px - clamp(84px,14vw,176px) * .55);right:calc(-20px - clamp(84px,14vw,176px) * .55);top:-30px;height:clamp(84px,14vw,176px);background:url(images/wheel.webp) left center/clamp(84px,14vw,176px) clamp(84px,14vw,176px) no-repeat,url(images/wheel.webp) right center/clamp(84px,14vw,176px) clamp(84px,14vw,176px) no-repeat;filter:drop-shadow(0 6px 6px rgba(0,0,0,.5))}
+.pinfoot .skin-decor::after{left:18%;right:18%;bottom:-10px;height:50px;background:url(images/clippings.webp) center bottom/100% 50px no-repeat;opacity:.9}

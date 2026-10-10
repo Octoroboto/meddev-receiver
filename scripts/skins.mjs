@@ -74,7 +74,7 @@ export function buildSkin(dirUrl, id) {
   if (!/^[a-z0-9][a-z0-9-]{0,39}$/.test(id)) throw new Error(`skin "${id}": folder names are lowercase letters, numbers and dashes`);
   const meta = JSON.parse(read("skin.json"));
   if (meta.id !== id) throw new Error(`skin "${id}": skin.json id must be "${id}"`);
-  let c = read("skin.css").replace(/url\(\s*["']?(images\/[a-z0-9._-]+)["']?\s*\)/gi, (m, f) => {
+  let c = read("skin.css").replace(/\/\*[\s\S]*?\*\//g, "").replace(/url\(\s*["']?(images\/[a-z0-9._-]+)["']?\s*\)/gi, (m, f) => {
     const ext = f.split(".").pop().toLowerCase(); if (!MIME[ext]) throw new Error(`skin "${id}": ${f} isn't an image type skins can use`);
     return `url("data:${MIME[ext]};base64,${readFileSync(new URL(f, dirUrl)).toString("base64")}")`; });
   c = c.replace(/:root\b/g, `html[data-skin="${id}"]`);
