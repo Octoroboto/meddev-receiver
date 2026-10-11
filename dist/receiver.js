@@ -609,7 +609,8 @@ window.MDFM_receiver=function(radio,{app=null}={}){
   // LOW / MID / HIGH tone knobs (-12..+12 dB, centre = flat) and the big VOLUME knob. Drag up/right, scroll, or use the arrow keys;
   // double-click puts a knob back. Remembered on this device.
   { const load=(k,d)=>{ try{ const v=JSON.parse(localStorage.getItem(k)); return v==null?d:v; }catch(e){ return d; } }, save=(k,v)=>{ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} };
-    const tone=Object.assign({low:0,mid:0,high:0},load("mdfmTone",{})); let vol=load("mdfmVolume",.8);
+    const num=(v,d,lo,hi)=>typeof v==="number"&&Number.isFinite(v)?Math.max(lo,Math.min(hi,v)):d;   // a saved value that isn't a usable number goes back to its default
+    const saved=load("mdfmTone",{})||{}, tone={low:num(saved.low,0,-12,12),mid:num(saved.mid,0,-12,12),high:num(saved.high,0,-12,12)}; let vol=num(load("mdfmVolume",.8),.8,0,1);
     const ticks=(svg,n,r,cx,big)=>{ let h=""; for(let i=0;i<=n;i++){ const a=(-135+i*270/n)*Math.PI/180, major=i===0||i===n||i===n/2; h+=`<circle cx="${cx+Math.sin(a)*r}" cy="${cx-Math.cos(a)*r}" r="${major?1.5:.9}" fill="rgba(226,229,238,.75)"/>`; } svg.innerHTML=h+(big||""); };
     document.querySelectorAll(".tk-ticks").forEach(s=>ticks(s,10,27,30));
     // The VOLUME scale: dots in the SVG, numbers as plain positioned text (SVG text drifts out of place in iPhone Safari).
@@ -630,7 +631,7 @@ window.MDFM_receiver=function(radio,{app=null}={}){
     knob(document.querySelector(".vol-knob"),()=>vol,v=>{ vol=Math.round(v*100)/100; radio.setVolume(vol); save("mdfmVolume",vol); },0,1,.05,v=>`Volume ${Math.round(v*10*10)/10}`,.8); }
   // Collin's sound modes: LET IT RIDE (longer songs) and UNDERWATER. Remembered on this device.
   const mode=(btn,led,key,set,get)=>{ const b=$(btn); if(!b) return; let v=false; try{ v=localStorage.getItem(key)==="1"; }catch(e){}
-    const show=()=>{ b.setAttribute("aria-pressed",String(get())); $(led).classList.toggle("on",get()); };
+    const show=()=>{ b.setAttribute("aria-pressed",String(get())); const l=$(led); l&&l.classList.toggle("on",get()); };
     if(v) set(true); show();
     b.addEventListener("click",e=>{ if(e.detail>0) b.blur(); set(!get()); show(); try{ localStorage.setItem(key,get()?"1":"0"); }catch(err){} }); };
   if(radio.setLetItRide) mode("#rideBtn","#rideLed","mdfmRide",v=>radio.setLetItRide(v),()=>radio.isLetItRide());
