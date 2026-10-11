@@ -41,13 +41,44 @@ export function splitKeyframes(c) {
     out.push(c.slice(start, j + 1)); i = j + 1; }
   return [rest, out];
 }
+// Reads a skin the way a browser tokenises CSS, so the rule checks below see exactly the rules the browser will. Refuses
+// what could make the two disagree: backslash escapes (\66ilter, \70 ointer-events, -\-lcd, @\69mport), rules nested
+// inside rules (CSS nesting), braces or semicolons inside quotes, unquoted url(), and quoted image addresses outside url().
+const IMGFN = /^(-[a-z]+-)?(image-set|image|cross-fade|src)$/;
+export function lexSkin(c, bad) {
+  let depth = 0, kf = false, q = null, stmt = "", fns = [], wantQuote = false;
+  for (const ch of c) {
+    if (q) {
+      if (ch === q) { q = null; stmt += ch; continue; }
+      if (ch === "\\") bad("backslash escapes aren't allowed in a skin");
+      if (ch === "\n" || ch === "\r" || ch === "\f") bad("a quoted string must end on the line it starts");
+      if (ch === "{" || ch === "}") bad("{ and } can't be inside quotes in a skin");
+      if (ch === ";" && !/^\s*@import\b/i.test(stmt)) bad("; can only be inside quotes in an @import");
+      stmt += ch; continue;
+    }
+    if (wantQuote && !/\s/.test(ch)) { if (ch !== '"' && ch !== "'") bad("url() needs quotes, and images must be in the skin's images/ folder: url(\"images/...\")"); wantQuote = false; }
+    if (ch === "\\") bad("backslash escapes aren't allowed in a skin");
+    if (ch === '"' || ch === "'") { if (fns.length && IMGFN.test(fns[fns.length - 1])) bad("images must be in the skin's images/ folder, as url(\"images/...\")"); q = ch; stmt += ch; continue; }
+    if (ch === "(") { const f = /[-a-z0-9_]*$/i.exec(stmt)[0].toLowerCase(); fns.push(f); if (f === "url") wantQuote = true; }
+    else if (ch === ")") fns.pop();
+    if (ch === "{") { if (depth === 0) kf = /^\s*@(-webkit-)?keyframes\b/i.test(stmt); if (++depth > (kf ? 2 : 1)) bad("rules inside rules (CSS nesting) aren't allowed in a skin");
+      stmt = ""; fns = []; continue; }
+    if (ch === "}") { if (--depth < 0) bad("has a } without its {"); stmt = ""; fns = []; continue; }
+    if (ch === ";") { stmt = ""; fns = []; continue; }
+    stmt += ch;
+  }
+  if (q) bad("a quoted string isn't closed"); if (depth) bad("has a { without its }");
+}
+// A property as the browser applies it: -webkit-filter is filter, -webkit-user-select is user-select, and so on.
+const base = p => p.replace(/^-(webkit|moz|ms|o)-/, "");
 export function checkSkin(id, c) {
   const bad = m => { throw new Error(`skin "${id}": ${m}`); };
   const [flat, frames] = splitKeyframes(c.replace(/\/\*[\s\S]*?\*\//g, ""));
   { const at = /@(?!import\b|font-face\b)([a-z-]+)/i.exec(flat); if (at) bad(`@${at[1]} isn't allowed in a skin`); }
+  lexSkin(c.replace(/\/\*[\s\S]*?\*\//g, ""), bad);
   for (const m of c.matchAll(/(--[a-z0-9-]+)\s*:/gi)) if (!EXEMPT[id] && !METAL.includes(m[1])) bad(`${m[1]} isn't a skin setting. Glass, LCD and LED lights stay as Default.`);
   for (const f of frames) for (const m of f.matchAll(/\{([^{}]*)\}/g)) for (const [p] of decls(m[1]))
-    if (/^(filter|backdrop-filter|mix-blend-mode|display|visibility)$/.test(p)) bad(`${p} can't be animated`);
+    if (/^(filter|backdrop-filter|mix-blend-mode|display|visibility|pointer-events|user-select|app-region)$/.test(base(p))) bad(`${p} can't be animated`);
   if (EXEMPT[id]) {
     for (const m of flat.matchAll(/([^{};]+)\{([^{}]*)\}/g)) {
       const sel = m[1].trim(), body = m[2];
@@ -57,7 +88,7 @@ export function checkSkin(id, c) {
         if (PESTS.test(one)) bad(`"${one}" is the spray can or the flies; they stay the same in every skin`);
         if (/#[a-z_-]/i.test(one)) bad(`"${one}": ids aren't allowed in a skin`);
       }
-      for (const [p, v] of decls(body)) if (/(^|-)app-region$|^user-select$/.test(p) || (p === "pointer-events" && !/^none(\s*!important)?$/.test(v))) bad(`${p} isn't allowed in a skin (it would change how the receiver takes clicks)`);
+      for (const [p, v] of decls(body)) if (/(^|-)app-region$|^user-select$/.test(base(p)) || (base(p) === "pointer-events" && !/^none(\s*!important)?$/.test(v))) bad(`${p} isn't allowed in a skin (it would change how the receiver takes clicks)`);
     }
     return;
   }
@@ -75,11 +106,11 @@ export function checkSkin(id, c) {
       const glass = GLASS_IN.test(one);
       for (const [p, v] of decls(body)) {
         if (p.startsWith("--")) continue;
-        if (/(^|-)app-region$|^user-select$/.test(p) || (p === "pointer-events" && !/^none(\s*!important)?$/.test(v))) bad(`${p} isn't allowed in a skin (it would change how the receiver takes clicks)`);
+        if (/(^|-)app-region$|^user-select$/.test(base(p)) || (base(p) === "pointer-events" && !/^none(\s*!important)?$/.test(v))) bad(`${p} isn't allowed in a skin (it would change how the receiver takes clicks)`);
         if (glass) {
           if (!MOVE.test(p)) bad(`"${one}" is glass: a skin can move it (margin, order, translate, relative position) but not change ${p}`);
           if (p === "position" && v !== "relative") bad(`"${one}" is glass: position can only be relative`);
-        } else if (SUBTREE.test(p) && !LEAF.test(one)) bad(`"${one}" contains glass; ${p} there would change the glass too. Use it on a button, knob or .skin-decor instead.`);
+        } else if (SUBTREE.test(base(p)) && !LEAF.test(one)) bad(`"${one}" contains glass; ${p} there would change the glass too. Use it on a button, knob or .skin-decor instead.`);
       }
     }
   }

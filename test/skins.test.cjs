@@ -56,3 +56,18 @@ test("selector lists split only at top-level commas", async () => {
   const { splitSel } = await import("../scripts/skins.mjs");
   assert.deepStrictEqual(splitSel(".a:is(.b,.c),.d:not(.e,.f)"), [".a:is(.b,.c)", ".d:not(.e,.f)"]);
 });
+
+test("skins can't slip past the checks with nesting, escapes, quotes or prefixes", () => {
+  no(".lcd{color:red;.btn{}}", /nesting/); no(".deck{filter:hue-rotate(90deg);.btn{}}", /nesting/);
+  no('@keyframes x{0%{content:"{"}} .lcd{color:red}}', /inside quotes/);
+  no(".deck{\\66ilter:hue-rotate(90deg)}", /backslash/); no(".btn{\\70 ointer-events:auto}", /backslash/);
+  no(":root{-\\-lcd:red}", /backslash/); no('@\\69mport "https://example.com/x.css";', /backslash/);
+  no(".deck{-webkit-filter:hue-rotate(90deg)}", /would change the glass/); no(".btn{-webkit-user-select:none}", /isn't allowed/);
+  no('.deck{background-image:image-set("https://example.com/x.png" 1x)}', /images must be in/);
+  no(".deck{background:url(data:image/png;base64,AAAA)}", /needs quotes/);
+  no("@keyframes y{to{pointer-events:auto}} button{animation:y 1s}", /can't be animated/);
+  no('.btn::after{content:"a;b"}', /inside quotes/);
+  const ex = css => assert.throws(() => buildSkin(mk(css, "analyze-pics"), "analyze-pics"), /quotes|backslash|nesting/, css);
+  ex(".fly:not([x=';']){display:none}"); ex(".\\66ly{display:none}"); ex(".btn{display:none;.fly{}}");
+  ok('@import url("https://fonts.googleapis.com/css2?family=A:wght@600;700&display=swap");.btn::after{content:"ok"}');
+});
