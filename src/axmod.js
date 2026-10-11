@@ -7,7 +7,8 @@
      AXMOD.describe(el, () => "text", {label}) a text version of a visual (when Text version of visuals is on)
      AXMOD.setSpeaker(fn(text, {rate, voice}))   use the app's own voices for Read aloud
      AXMOD.get(), AXMOD.set({...}), AXMOD.reset(), AXMOD.open(), AXMOD.close(), AXMOD.still(), AXMOD.on(fn)
-     "axmod:change" event on window, with detail = the current values. */
+     "axmod:change" event on window, with detail = the current values; "axmod:open" / "axmod:close" when the drawer opens or closes.
+   Pages that want the look and AXMOD but not the fruit flies and spray can put data-no-flies on <html>. */
 (()=>{
   if(window.AXMOD&&window.AXMOD.mounted) return;
   const S=/*AXMOD_SCHEMA*/null;
@@ -274,9 +275,11 @@
   /* ---------- open / close ---------- */
   function open(){ if(!drawer) build(); lastFocus=document.activeElement; drawer.classList.add("open"); drawer.removeAttribute("inert"); led();
     setTimeout(()=>{ const f=drawer.querySelector(".ax-presets button")||drawer; try{ f.focus({preventScroll:true}); }catch(e){ f.focus(); } },30);
-    if(val("speak")) speak("Accessibility settings open."); }
+    if(val("speak")) speak("Accessibility settings open.");
+    try{ window.dispatchEvent(new Event("axmod:open")); }catch(e){} }
   function close(){ if(!drawer||!drawer.classList.contains("open")) return; drawer.classList.remove("open"); drawer.setAttribute("inert",""); led();
-    const back=opener&&opener.isConnected?opener:lastFocus; try{ back&&back.focus&&back.focus(); }catch(e){} }
+    const back=opener&&opener.isConnected?opener:lastFocus; try{ back&&back.focus&&back.focus(); }catch(e){}
+    try{ window.dispatchEvent(new Event("axmod:close")); }catch(e){} }
   function toggle(){ drawer&&drawer.classList.contains("open")?close():open(); }
   document.addEventListener("pointerdown",e=>{ if(drawer&&drawer.classList.contains("open")&&!drawer.contains(e.target)&&!e.target.closest(".ax-open")) close(); },true);
 

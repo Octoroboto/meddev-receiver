@@ -140,6 +140,7 @@ window.MDFM_still=()=>{ try{ if(window.AXMOD&&window.AXMOD.still) return window.
 /* Fruit flies + bug spray. Flies wander in now and then, land on lit glass, potter, leave.
    The nozzle by the EQ: BUG SPRAY kills them and stops visits; SUGAR MIST brings a swarm back. No network, no credits. */
 (()=>{
+  if(document.documentElement.hasAttribute("data-no-flies")) return;   // pages that only want the look (MD Hub's frame, the uploader apps) opt out
   const still=()=>window.MDFM_still();
   const FLY_SVG='<svg viewBox="0 0 18 18"><g stroke="#2a1a0e" stroke-width=".6" stroke-linecap="round" fill="none">'+
     '<path class="legf" d="M8 7 L5.5 4.5 M10 7 L12.5 4.5"/><path d="M8 9 L5 9.5 M10 9 L13 9.5 M8 10.5 L5.8 13 M10 10.5 L12.2 13"/></g>'+

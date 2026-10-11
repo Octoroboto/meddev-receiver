@@ -2,6 +2,11 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.7.1 (2026-10-11, Rob)
+- **For apps that only want the look and AXMOD:** `data-no-flies` on `<html>` skips the fruit flies and spray can. MD Hub's frame uses it, and the uploader apps will too.
+- AXMOD fires `axmod:open` and `axmod:close` when the drawer opens and closes. MD Hub uses them to move the hub page aside.
+- `npm run fonts` keeps going when one font can't be fetched, and tries the newest OpenDyslexic when the pinned one isn't there.
+
 ## 1.7.0 (2026-10-11, Rob)
 - **AXMOD, the accessibility module.** Put `<div data-axmod></div>` in an app's Settings and it becomes an ACCESSIBILITY push button (its LED lights when anything is changed). The button slides out a drawer built from receiver parts (title bar, push buttons, keys, knobs, LCD readouts), so every skin restyles it. Cmd+Option+A opens it from anywhere.
   - **Options:** the standard 15 (text size to 200%, high contrast, readable font, wider spacing, reduce motion, no flashing, colourblind-safe colours, grayscale, underlined links and a bold focus ring, big cursor, lock the layout, no idle surprises, buttons stay put, sound captions, text versions of visuals).
