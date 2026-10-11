@@ -2,6 +2,9 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.2.1 (2026-10-10, Rob)
+- Mulchmaster: a black engine vent on the bumper, and a crumpled honey-do sticky note stuck under the engine sticker. The note cycles through four chore lists, changing every two minutes. Both hide on phones.
+
 ## 1.2.0 (2026-10-10, Rob)
 - **New skin: Mulchmaster.** A beat-up push mower seen from above. It has a dirty red deck, a black engine housing, a handlebar with a pull-start grip, and big cream wheels at the corners. A gas cap is the volume knob, yellow choke caps are the light knobs and primer bulbs are the buttons. There's an oil fill cap, a rinse port with a garden hose, spark plugs and a muffler off the sides, a sound-control sticker and a Mulchmaster decal. In the apps the window itself is mower-shaped. It isn't the house default.
 - Skin build: comments in a skin's CSS are removed before the rules are scoped. A comment with a comma or semicolon used to break the rule after it.
