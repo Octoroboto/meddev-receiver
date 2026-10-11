@@ -145,7 +145,7 @@ export function checkExtras(id, x) {
   }
   const act = (o, what) => { const n = ["say", "page", "back", "menu", "open"].filter(k => o[k] != null).length; if (n > 1) bad(`${what}: one of say, page, back, menu or open`);
     if (o.open != null && o.open !== true) bad(`${what}: open must be true`);
-    if (o.say != null) str(o.say, 300, `${what} say`); if (o.page != null && !pages[o.page]) bad(`${what}: page "${o.page}" isn't in pages`); if (o.back != null && o.back !== true) bad(`${what}: back must be true`); };
+    if (o.say != null) str(o.say, 300, `${what} say`); if (o.page != null && !(typeof o.page === "string" && Object.prototype.hasOwnProperty.call(pages, o.page))) bad(`${what}: page "${o.page}" isn't in pages`); if (o.back != null && o.back !== true) bad(`${what}: back must be true`); };
   const layers = x.layers || []; if (!Array.isArray(layers) || layers.length > 6) bad("layers must be a list of up to 6");
   let count = 0;
   layers.forEach((L, i) => { only(L, ["anchor", "box", "spots"], `layer ${i}`);

@@ -41,7 +41,7 @@
   function xSay(text,from){ xClose("dlg"); const d=el("div","sx-dialog"); d.setAttribute("role","alertdialog"); d.setAttribute("aria-label","Message");
     const ok=el("button","btn sx-back","OK"); ok.type="button"; ok.addEventListener("click",()=>{ xClose("dlg"); if(from&&from.isConnected) from.focus(); });
     d.append(el("p","sx-note",text),ok); document.body.appendChild(d); X.dlg=d; ok.focus(); }
-  function xPage(pid,x){ const pg=(x.pages||{})[pid]; if(!pg) return; if(X.page) X.page.remove();
+  function xPage(pid,x){ const ps=x.pages||{}, pg=Object.prototype.hasOwnProperty.call(ps,pid)?ps[pid]:null; if(!pg||!Array.isArray(pg.cols)||!Array.isArray(pg.rows)) return; if(X.page) X.page.remove();
     const P=el("section","sx-page"); P.setAttribute("aria-label",pg.title);
     const back=el("button","btn sx-back","← Back"); back.type="button"; back.addEventListener("click",xBack);
     const head=el("div","sx-head"); head.append(back,el("h2",null,pg.title)); P.appendChild(head);

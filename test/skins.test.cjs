@@ -42,6 +42,7 @@ test("skin extras: plain data only, every page reachable and closable", async ()
   bad({ layers: [{ anchor: "top", box: { left: "url(x)" }, spots: [] }] }, /plain CSS length/);
   bad({ layers: [{ anchor: "top", box: { left: "var(--x)" }, spots: [] }] }, /plain CSS length/);
   bad({ layers: [{ anchor: "top", spots: [{ label: "x", page: "nope" }] }] }, /isn't in pages/);
+  for (const page of ["constructor", "toString", "__proto__"]) bad({ layers: [{ anchor: "top", spots: [{ label: "x", page }] }] }, /isn't in pages/);
   bad({ layers: [{ anchor: "top", spots: [{ label: "x", say: "a", page: "p" }] }], pages: { p: { title: "P", cols: ["a"], rows: [] } } }, /one of/);
   bad({ layers: [{ anchor: "top", spots: [{ label: "x", onclick: "alert(1)" }] }] }, /isn't allowed/);
   bad({ layers: [], pages: { p: { title: "P", cols: ["a"], rows: [], html: "<b>" } } }, /isn't allowed/);
