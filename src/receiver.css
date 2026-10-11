@@ -492,7 +492,7 @@ header.top .lcd.viz{flex:1 1 0;min-height:72px;min-width:0;padding:6px 7px;displ
 .viz canvas{position:absolute;inset:6px 7px;width:calc(100% - 14px);height:calc(100% - 12px)}
 /* when the header wraps, sit the buttons on the left and let the analyzer fill the rest of the row */
 @media (max-width:900px){header.top .hside{flex:1 1 100%;flex-direction:row;flex-wrap:wrap;align-items:stretch}
- header.top .hside>.row{order:0;flex:0 0 auto;justify-content:flex-start}
+ header.top .hside>.row{order:0;flex:0 1 auto;min-width:0;max-width:100%;justify-content:flex-start}
 }
 
 .vizsw{display:inline-flex;align-items:center;gap:5px;font:700 .72rem/1 Tahoma,Verdana,sans-serif;letter-spacing:.14em;color:#cfd2de;text-shadow:var(--engrave);cursor:pointer;user-select:none;margin-right:auto}

@@ -2,6 +2,11 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.5.0 (2026-10-11, Rob)
+- **New skin: Business Lightning.** A rain-soaked neon back alley: wet brick, a pink neon tube around the receiver, a black sign-cabinet header, neon title bars, glass sign keys, chrome knobs with neon rings, a flickering OPEN 24/7 sign, a lightning-bolt briefcase, a vertical MDFM sign, a fire escape, a puddle with rain, and lightning that flashes across the whole deck. It isn't the house default.
+- **Fix: buttons fit on every skin.** On phones, the header's SOUND and Station Break controls could hang off the edge. The header controls row now wraps. Default looks the same.
+- `scripts/fitcheck.mjs`: checks that every control sits inside the receiver for every skin at phone, tablet, app and desktop widths.
+
 ## 1.4.0 (2026-10-11, Rob)
 - **New skin: Analyze Pics, by Collin Geldmeier.** The Mac OS 8 "Platinum" look of his Analyze Pics app: platinum plates with bevels, pinstriped title bars, dark green screens, note-yellow VU meters, platinum knobs and buttons, on his dithered green desktop picture. It isn't the house default.
 - Skin rules: `EXEMPT` in `scripts/skins.mjs` lists skins Rob has approved to recolour glass, lights and fields too. Only Analyze Pics is on it. Those skins still can't touch the spray can or the flies, use ids or @media, or change how the receiver takes clicks. Approval lives in the rules, never in the skin.
