@@ -2,6 +2,9 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.3.0 (2026-10-10, Rob)
+- **New skin: Barnaclava.** A sunken wreck on the sea floor, seen from just off the bow. Nautical realism x streetwear x gross cartoon close-ups. Encrusted, rusted steel with a broken railing and mast over the top, an organic keel, embedded barnacle clusters, coral growing from the hull, thick rope piles, tattered nets, trash bags with made-up brands, six-pack rings, a wicker basket of lemons, and portholes with eyes pressed to the glass. Every knob is a barnacle in a balaclava that opens and feeds; the round buttons are barnacles that open when pressed. The bow carries an embroidered Barnaclava patch. It isn't the house default.
+
 ## 1.2.2 (2026-10-10, Rob)
 - **Fix: skinned receivers didn't respond in the apps.** With a skin like Mulchmaster on, macOS treated the whole window as a drag area, so buttons, knobs and scrolling did nothing; you could only move the window. Skins now turn off the CSS drag regions, and the apps' drag-by-the-metal still moves the window. Default is unchanged.
 - The window controls (POWER / MIN / FULL) always sit above a skin's decorations.

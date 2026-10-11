@@ -1,0 +1,101 @@
+/* Barnaclava: a sunken wreck on the sea floor, seen from just off the bow. Nautical realism (rusted, encrusted steel,
+   coral, nets) x streetwear (balaclavas, track-suit navy, techwear keys) x gross cartoon close-ups (bloodshot eyes,
+   pustules, wiry hairs). The knobs are barnacles in balaclavas that open and feed; portholes have eyes pressed to the glass. */
+@import url("https://fonts.googleapis.com/css2?family=Bungee&family=Barlow+Condensed:wght@600;700&display=swap");
+
+:root{
+  --f-display:"Bungee",Impact,sans-serif; --f-body:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --caption:rgba(236,244,240,.96); --focus:#7ff0e0; --gold:#40c4b2; --gold-dark:#1d6e66;
+  --btn-1:#d8ccb0; --btn-2:#8a7a5c; --btn-3:#3a3026; --btn-down-1:#4a3c2c; --btn-down-2:#1c1610; --btn-bezel:#0e0c0a; --btn-rim:#4a4034;
+  --knob-1:#d8ccb0; --knob-2:#8a7a5c; --knob-3:#3a3026; --knurl-1:#a89a7a; --knurl-2:#4a4034; --knob-pointer:#7ff0e0;
+  --vol-1:#d8ccb0; --vol-2:#8a7a5c; --vol-3:#3a3026; --vol-cap:#1d2a5c; --vol-dot:#f4f4f6;
+  --bezel-1:#2a2a26; --bezel-2:#161614; --bezel-3:#080808;
+  --plate-1:#3e4c4a; --plate-2:#2c3836; --plate-3:#1a2220; --key-1:#2a2a30; --key-2:#121216; --key-hover-1:#34343c; --key-hover-2:#18181d;
+  --title-1:#1f2d62; --title-2:#111a3c;
+}
+
+/* Deep water and god rays (browsers only; in the apps the window is clear, so the wreck is the window's shape). */
+body:not(.pop){background:repeating-linear-gradient(105deg,rgba(150,230,230,.06) 0 40px,transparent 40px 130px),radial-gradient(ellipse at 30% -5%,rgba(120,220,220,.38),transparent 60%),
+  linear-gradient(180deg,#155a6c,#0a2c40 55%,#05141f) #05141f;padding:clamp(110px,11vw,150px) clamp(18px,10.5vw,112px) clamp(90px,10vw,150px) clamp(18px,7.4vw,80px)}
+
+/* The hull: rusted, encrusted steel, listing a little (higher on the left), the bow narrowing to the bottom. */
+.wrap.wrap{max-width:1180px;background:linear-gradient(100deg,rgba(0,0,0,.45),transparent 18%,transparent 70%,rgba(0,0,0,.5)),url(images/hull.webp) 0 0/512px 512px,#2e3a3a;
+  border:3px solid #0b1214;border-radius:22px 60px 46% 50%/22px 40px 230px 260px;padding:18px clamp(10px,1.8vw,20px) 70px;gap:16px;position:relative;
+  box-shadow:0 30px 60px rgba(0,0,0,.65),inset 0 0 0 7px rgba(20,28,30,.85),inset 0 0 0 9px rgba(140,90,50,.35),inset 0 0 60px 20px rgba(0,0,0,.55)}
+
+/* Rusted riveted steel deckhouse (the header) and pop-ups */
+.top .deck,.sheet,.pop,.syncbar,.ahead,.bellpanel{background:linear-gradient(180deg,rgba(255,255,255,.06),transparent 30%,rgba(0,0,0,.4)),url(images/steel.webp) 0 0/384px 384px,#4a3a30;
+  border:2px solid #120c08;box-shadow:0 12px 20px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,220,180,.18),inset 0 -3px 8px rgba(0,0,0,.5);color:#f2ebe0}
+.top .deck{border-radius:14px 18px 10px 12px;padding:16px 22px 18px}
+
+/* Deck panel: a darker patch of hull so the controls read */
+.panel{background:linear-gradient(180deg,rgba(6,14,16,.55),rgba(6,12,14,.68)),url(images/hull.webp) 137px 61px/512px 512px,#22302e;border:2px solid rgba(0,0,0,.6);border-radius:14px;
+  box-shadow:inset 0 2px 10px rgba(0,0,0,.6),inset 0 -1px 0 rgba(180,220,210,.12);color:#eef4f0;text-shadow:0 1px 2px rgba(0,0,0,.9)}
+
+/* The bow: encrusted hull with the stitched Barnaclava patch, portholes with eyes, a rope coil and a lemon basket */
+.pinfoot{background:url(images/patch.webp) center 18px/min(500px,90%) auto no-repeat,url(images/bigcluster-3.webp) right 8% top calc(46px + min(500px,90%) * .31)/clamp(90px,11vw,150px) auto no-repeat,url(images/bigcluster-1.webp) left 1% bottom 6%/clamp(150px,22vw,300px) auto no-repeat,url(images/pustule-patch.webp) center bottom/clamp(180px,30vw,330px) auto no-repeat,
+  url(images/porthole-1.webp) left 7% top 30px/clamp(0px,(100vw - 900px) * .45,150px) auto no-repeat,url(images/porthole-2.webp) right 7% top 30px/clamp(0px,(100vw - 900px) * .45,150px) auto no-repeat,
+  linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.55)),url(images/hull.webp) 60px 0/512px 512px,#22302e;
+  border:2px solid #0b1214;border-radius:14px 14px 50% 50%/14px 14px 170px 170px;padding:calc(34px + min(500px,90%) * .31) 16px clamp(110px,15vw,200px);margin-top:6px;
+  box-shadow:0 10px 18px rgba(0,0,0,.55),inset 0 0 30px rgba(0,0,0,.5);color:#eef0f8}
+
+/* Title strips: track-suit navy with white piping, rope at both ends */
+.wtitle{background:linear-gradient(180deg,transparent 3px,#e8ecf4 3px 5px,transparent 5px calc(100% - 5px),#e8ecf4 calc(100% - 5px) calc(100% - 3px),transparent calc(100% - 3px)),linear-gradient(180deg,var(--title-1),var(--title-2));
+  border-bottom:2px solid #070b1c;border-radius:8px 8px 0 0;height:28px;color:#f4f1e6;font:14px var(--f-display);letter-spacing:.1em}
+.wtitle::before,.wtitle::after{height:14px;border-radius:7px;background:url(images/rope.webp) 0 center/48px 14px repeat-x;box-shadow:0 2px 2px rgba(0,0,0,.5)}
+
+small,.rd-mm,.vizsw{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;letter-spacing:.12em}
+.rdeck small,.tk small,.vol small,.vu-m small,.fxbtns small,.rd-mm{color:var(--caption);text-shadow:0 1px 2px rgba(0,0,0,.95)}
+
+/* Keys: black ripstop techwear with a reflective strip */
+.btn{background:repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 1px,transparent 1px 7px),repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 7px),linear-gradient(180deg,#2c2c33,#111115);
+  color:#f6f6f8;border:1px solid #000;border-radius:12px;font:700 .95rem/1 var(--f-body);letter-spacing:.14em;text-transform:uppercase;text-shadow:0 1px 0 #000;
+  box-shadow:inset 0 -5px 0 #8f979f,inset 0 -6px 0 #000,0 3px 0 #000,0 5px 8px rgba(0,0,0,.5);padding-bottom:12px}
+.btn:hover{box-shadow:inset 0 -5px 0 #e8f4ff,inset 0 -6px 0 #000,0 3px 0 #000,0 0 12px rgba(200,240,255,.35);color:#fff}
+.btn:active{translate:0 2px;box-shadow:inset 0 -5px 0 #b8c0c8,inset 0 -6px 0 #000,0 1px 0 #000}
+.btn.primary{background:linear-gradient(180deg,#43d2be,#1d8c7e);color:#06201c;text-shadow:none}
+.btn.danger{color:#ff9a8a}
+
+/* Barnacle knobs: a barnacle in a balaclava, bloodshot eyes and all; they open and feed in turns */
+.rd-knob{background:url(images/knob.webp) center/100% 100% no-repeat;box-shadow:0 0 0 3px rgba(10,8,6,.85),0 5px 9px rgba(0,0,0,.75)}
+.rd-knob::before{inset:16%;border-radius:0;box-shadow:none;background:url(images/feed-closed.webp) center/contain no-repeat;animation:bc-feed 7s infinite}
+.rd-k:nth-child(2) .rd-knob::before{animation-delay:-2.3s}
+.rd-k:nth-child(3) .rd-knob::before{animation-delay:-4.6s}
+.tk:nth-child(1) .rd-knob::before{animation-delay:-1.1s;animation-duration:8s}
+.tk:nth-child(2) .rd-knob::before{animation-delay:-3.7s;animation-duration:8s}
+.tk:nth-child(3) .rd-knob::before{animation-delay:-6s;animation-duration:8s}
+@keyframes bc-feed{0%,30%{background-image:url(images/feed-closed.webp);opacity:1;scale:1}36%{background-image:url(images/feed-half.webp);opacity:1;scale:1}42%,60%{background-image:url(images/feed-cirri.webp);opacity:1;scale:1.9}66%{background-image:url(images/feed-half.webp);opacity:1;scale:1}72%,94%{opacity:0;scale:1}100%{background-image:url(images/feed-closed.webp);opacity:1}}
+
+/* Volume: the big barnacle in a balaclava */
+.vol-knob{background:url(images/vol.webp) center/100% 100% no-repeat;box-shadow:0 0 0 3px rgba(10,8,6,.85),0 8px 14px rgba(0,0,0,.7);border-radius:50%}
+.vol-knob::before{content:"";inset:24%;border-radius:0;box-shadow:none;background:url(images/feed-closed.webp) center/contain no-repeat;animation:bc-feed 9s -3s infinite}
+.vol-dot{width:10px;height:9px;margin-left:-5px;top:2px;border-radius:0;background:#f4f4f6;box-shadow:none;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.vol-num{color:#eef4f0;font-family:"Barlow Condensed",sans-serif;font-weight:700;text-shadow:0 1px 2px #000}
+
+/* Round buttons: closed barnacles that open to a balaclava face when pressed */
+.rd-btn button,.vizsw input[type=checkbox]{background:url(images/btn.webp) center/100% 100% no-repeat;border:none;box-shadow:0 2px 4px rgba(0,0,0,.6)}
+.rd-btn button:active,.rd-btn button[aria-pressed=true],.vizsw input[type=checkbox]:checked,.vizsw input[type=checkbox]:active{background:url(images/btn-open.webp) center/100% 100% no-repeat;box-shadow:0 1px 2px rgba(0,0,0,.6)}
+
+/* Decorations */
+.skin-decor::before,.skin-decor::after{content:"";position:absolute;pointer-events:none}
+/* the wreck's railing and broken mast along the top edge */
+.top .skin-decor::before{left:-3%;right:-3%;top:calc(-1 * clamp(110px,11vw,150px) + 10px);height:calc(clamp(110px,11vw,150px) + 10px);background:url(images/railing.webp) center bottom/100% 100% no-repeat;filter:drop-shadow(0 10px 8px rgba(0,0,0,.55))}
+/* a tattered net hanging off the railing, pustules crusting the top-right corner */
+.top .skin-decor::after{left:-30px;right:-12px;top:-104px;bottom:-30px;
+  background:url(images/bag-3.webp) left 22% top 0/clamp(0px,(100vw - 900px) * .2,90px) auto no-repeat,url(images/bag-grocery.webp) right 6% top 10px/clamp(0px,(100vw - 900px) * .2,96px) auto no-repeat,url(images/sixpack-1.webp) right calc(26% + 40px) top 44px/clamp(60px,8vw,110px) auto no-repeat,
+    url(images/net.webp) left top 44px/clamp(150px,19vw,280px) auto no-repeat;filter:drop-shadow(0 4px 4px rgba(0,0,0,.55))}
+/* coral growing out of both sides of the hull, rooted on it */
+.station .skin-decor::before{left:calc(-1 * (clamp(10px,1.8vw,20px) + clamp(56px,7vw,140px) + 3px));right:calc(-1 * (clamp(10px,1.8vw,20px) + clamp(56px,9.6vw,140px) + 3px));top:-10px;bottom:-24px;
+  background:url(images/coral-side-l.webp) left top 30%/clamp(56px,7vw,140px) auto no-repeat,url(images/coral-side-r.webp) right top 62%/clamp(56px,9.6vw,140px) auto no-repeat;filter:drop-shadow(0 6px 6px rgba(0,0,0,.55))}
+/* coral and pustules along the bottom of the deck, a lemon basket in the gap on wide windows */
+.station .skin-decor::after{left:-4px;right:-4px;bottom:-30px;height:300px;
+  background:url(images/sixpack-2.webp) left 34% bottom 34px/clamp(56px,6vw,90px) auto no-repeat,url(images/coral-pink.webp) left 33% bottom/clamp(70px,8vw,130px) auto no-repeat,
+    url(images/bigcluster-2.webp) right 24% bottom -4px/clamp(110px,15vw,210px) auto no-repeat,
+    url(images/coral-orange.webp) right 3% bottom/clamp(70px,8vw,130px) auto no-repeat;filter:drop-shadow(0 4px 4px rgba(0,0,0,.5))}
+/* the keel under the bow, a rope coil and coral on it */
+.pinfoot .skin-decor::before{left:0;right:0;bottom:calc(-1 * clamp(90px,10vw,140px));height:calc(clamp(90px,10vw,140px) + 40px);
+  background:url(images/bag-2.webp) left calc(50% - clamp(70px,9vw,120px)) bottom calc(clamp(90px,10vw,140px) * .2)/clamp(60px,7vw,100px) auto no-repeat,url(images/sixpack-2.webp) left calc(50% + clamp(10px,2vw,30px)) bottom calc(clamp(90px,10vw,140px) * .4)/clamp(46px,5vw,76px) auto no-repeat,
+    url(images/keel.webp) center bottom/auto 100% no-repeat;filter:drop-shadow(0 10px 10px rgba(0,0,0,.6))}
+.pinfoot .skin-decor::after{left:6%;right:6%;bottom:-14px;height:220px;
+  background:url(images/coil-big.webp) left 4% bottom 2px/clamp(120px,16vw,240px) auto no-repeat,url(images/bag-1.webp) left 27% bottom 0/clamp(70px,9vw,124px) auto no-repeat,
+    url(images/lemons.webp) right 3% bottom 0/clamp(80px,9vw,130px) auto no-repeat,url(images/coil-mid.webp) right 15% bottom 4px/clamp(90px,12vw,170px) auto no-repeat}

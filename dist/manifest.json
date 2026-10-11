@@ -1,23 +1,24 @@
 {
   "name": "meddev-receiver",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "files": {
     "receiver.css": {
-      "sha256": "2758a8717d4b61a1e85c096806d76c719556581733b1d961f00affcc7f4f45fa",
+      "sha256": "da7b65abb628135e9f6b50e1df9442ff5eea2c5e249c8667798568183ceaa0da",
       "bytes": 236841
     },
     "receiver.js": {
-      "sha256": "6883257d9eacc06e3aa29fb07aab1795ac61968263d2a4fd55a673cb19030766",
+      "sha256": "da7b44182a475add600c0e6baf61a32de5f74f17afd14702c93d7fa763a71dc3",
       "bytes": 71192
     },
     "skins.json": {
-      "sha256": "a23c5ced9f62cb6924d610acc3289c35adbb965ea1dbbc263d227676ae12e906",
-      "bytes": 513804
+      "sha256": "1044bf1595ea62aac42c8578a19961b3d5f8ec168c1499eaafe9b8e5de930099",
+      "bytes": 1435913
     }
   },
   "skins": [
     "default",
-    "mulchmaster"
+    "mulchmaster",
+    "barnaclava"
   ],
   "default": "default"
 }

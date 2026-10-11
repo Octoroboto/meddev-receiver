@@ -2,6 +2,7 @@
   "default": "default",
   "order": [
     "default",
-    "mulchmaster"
+    "mulchmaster",
+    "barnaclava"
   ]
 }
