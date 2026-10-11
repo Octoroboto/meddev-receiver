@@ -2,6 +2,15 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.9.0 (2026-10-11, Rob)
+- **New skin: Q3 Reconciliation.** A very sensible spreadsheet: "Q3_Reconciliation_FINAL_v2 (Reviewed) (2).xlsx" open in LedgerSheet Pro. A title bar, menus, toolbar, formula bar and column headers over the top, row numbers and gridlines on the sheet, the Station as the current selection, grey buttons, option-button lights and flat dials. Cell comments from Accounting, HR, Facilities, Compliance and others change every half minute and agree that this is a very normal choice. There's a Responsible Adult Checklist, a Q3 Flossing Compliance chart, sheet tabs and a status bar. It isn't the house default.
+- **Skin extras: a skin can now make its decorations tappable.** `extras` in a skin's skin.json lists spots laid over its decorations: a spot opens a menu, pops up a message, opens a read-only page (a title, a table and a note), or goes back. It's data only: the receiver builds plain buttons, menus, message boxes and tables, with all text set as text and no markup or code. Every page has a Back button, and Esc closes menus, messages and pages. The build checks extras (`checkExtras` in scripts/skins.mjs): known keys only, plain CSS lengths, length and count limits, and every page a spot points to must exist. In Q3 Reconciliation, the menus, toolbar, formula bar, window buttons, sheet tabs and status bar all respond.
+- `scripts/fitcheck.mjs` skips skin extras. They sit on decorations, outside the receiver, and narrow windows crop them on purpose.
+
+## 1.8.0 (2026-10-11, Rob)
+- **New skin: Mouth Jamboree.** The receiver is a kids' toothpaste tube that has been squeezed half flat. Glossy blue laminate with squeeze creases, a white plastic shoulder and threaded neck with Sparkle Jam gel crusted in the threads and a swirl on top, white printed panel outlines, and title bars printed in navy with a row of red dots. The front label carries the Mouth Jamboree logo and a made-up "MDA Accepted" seal, then a white swoosh and the red confetti Cavity Patrol band. The crimped end has a LOT/EXP stamp (99.9 · NEVER). Knobs and buttons are the cap (pressed, you see the gel inside), the volume knob is a cap full of glitter gel, and Jam Facts is printed on the back. A used toothbrush and the cap sit on the counter on wide windows. It isn't the house default.
+- CHANGELOG: removed a duplicated 1.6.0 entry.
+
 ## 1.7.1 (2026-10-11, Rob)
 - **For apps that only want the look and AXMOD:** `data-no-flies` on `<html>` skips the fruit flies and spray can. MD Hub's frame uses it, and the uploader apps will too.
 - AXMOD fires `axmod:open` and `axmod:close` when the drawer opens and closes. MD Hub uses them to move the hub page aside.
@@ -16,9 +25,6 @@ Bump `version` in package.json, run `npm run build`, add an entry here, commit `
   - **For apps:** `AXMOD.caption`, `sound`, `channels`, `describe`, `setSpeaker`, `on` and the `axmod:change` event. `dist/axmod.schema.json` is the shared settings list for the Swift port.
 - **Receiver motion follows AXMOD live:** the LED EQ, the fruit flies, the spray can and the AUTO lights (`window.MDFM_still()`). The canvas colours re-read on AXMOD changes.
 - `npm run fonts` builds Atkinson Hyperlegible and OpenDyslexic into receiver.css. Until it's run, Verdana and Comic Sans stand in. `scripts/axpreview.mjs` makes a playable preview.
-
-## 1.6.0 (2026-10-11, Rob)
-- **New skin: Mr. Spoonatelli's House of Spoons.** An old-world spoon shop that has lost control of its inventory. Walnut cabinetry with an arched gilt crown, emerald velvet with a damask of tiny spoons, brass nameplate title bars, ivory keys, spoon-bowl knobs (silver for the lights, gold for tone) and an engraved serving-ladle volume knob. Spoons are stabbed into every edge of the cabinet, hang off the counter and lie across the panels: silver, gold, rusted, tarnished and carved wood. Some carry messages ("THE 4TH SPOON IS A LIE", "THE 4TH IS REAL", "COUNT THE HOOKS"). A spoon rack sways over the crown, the founder's portrait hangs on the counter, and the corkboard notes argue about the fourth spoon, changing every forty seconds. On phones the side spoons step aside. It isn't the house default.
 
 ## 1.6.0 (2026-10-11, Rob)
 - **New skin: Mr. Spoonatelli's House of Spoons.** An old-world spoon shop that has lost control of its inventory. Walnut cabinetry with an arched gilt crown, emerald velvet with a damask of tiny spoons, brass nameplate title bars, ivory keys, spoon-bowl knobs (silver for the lights, gold for tone) and an engraved serving-ladle volume knob. Spoons are stabbed into every edge of the cabinet, hang off the counter and lie across the panels: silver, gold, rusted, tarnished and carved wood. Some carry messages ("THE 4TH SPOON IS A LIE", "THE 4TH IS REAL", "COUNT THE HOOKS"). A spoon rack sways over the crown, the founder's portrait hangs on the counter, and the corkboard notes argue about the fourth spoon, changing every forty seconds. On phones the side spoons step aside. It isn't the house default.

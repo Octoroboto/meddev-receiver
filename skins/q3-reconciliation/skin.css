@@ -1,0 +1,70 @@
+/* Q3 Reconciliation: the receiver as an open spreadsheet in LedgerSheet Pro. Gridlines, row numbers, column headers,
+   a formula bar, sheet tabs and a status bar. Light grey, mid grey and darker grey. Cell comments from Accounting, HR,
+   Compliance and friends confirm that this is a very normal, very professional choice. */
+@import url("https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap");
+
+:root{
+  --f-display:Calibri,Carlito,Arimo,"Segoe UI",sans-serif; --f-body:Calibri,Carlito,Arimo,"Segoe UI",sans-serif;
+  --caption:#555555; --focus:#333333; --gold:#777777; --gold-dark:#999999;
+  --btn-1:#ffffff; --btn-2:#efefef; --btn-3:#bdbdbd; --btn-down-1:#d6d6d6; --btn-down-2:#bdbdbd; --btn-bezel:#c8c8c8; --btn-rim:#9a9a9a;
+  --knob-1:#ffffff; --knob-2:#e6e6e6; --knob-3:#bcbcbc; --knurl-1:#ececec; --knurl-2:#c6c6c6; --knob-pointer:#555555;
+  --vol-1:#ffffff; --vol-2:#e3e3e3; --vol-3:#b8b8b8; --vol-cap:#f4f4f4; --vol-knurl-1:#efefef; --vol-knurl-2:#c9c9c9; --vol-knurl-3:#dddddd; --vol-dot:#555555;
+  --bezel-1:#ececec; --bezel-2:#d4d4d4; --bezel-3:#bcbcbc;
+  --plate-1:#f7f7f7; --plate-2:#f0f0f0; --plate-3:#e6e6e6; --key-1:#ffffff; --key-2:#ededed; --key-hover-1:#ffffff; --key-hover-2:#f4f4f4;
+  --title-1:#f2f2f2; --title-2:#ebebeb;
+}
+
+/* Outside the window: more spreadsheet. It goes on for a while. */
+body:not(.pop){background:linear-gradient(90deg,#e4e4e4 0 1px,transparent 1px) 0 0/100px 21px,linear-gradient(#e4e4e4 0 1px,transparent 1px) 0 0/100px 21px,#fbfbfb;
+  padding:176px clamp(18px,10.5vw,112px) 104px clamp(18px,7.4vw,80px)}
+
+/* The window: a sheet. Row numbers down the left, gridlines everywhere, no curves, no surprises. */
+.wrap.wrap{max-width:1180px;position:relative;padding:12px 10px 12px clamp(10px,100vw - 564px,36px);gap:14px;border:1px solid #a9a9a9;border-radius:0;
+  background:url(images/rows.webp) 0 0/clamp(0px,100vw - 570px,30px) auto no-repeat,linear-gradient(#ececec,#ececec) 0 0/clamp(0px,100vw - 570px,30px) 100% no-repeat,
+    linear-gradient(90deg,#e1e1e1 0 1px,transparent 1px) 30px 0/100px 21px,linear-gradient(#e1e1e1 0 1px,transparent 1px) 0 20px/100px 21px,#ffffff;
+  box-shadow:0 10px 30px rgba(0,0,0,.16),0 2px 6px rgba(0,0,0,.12)}
+
+/* Ranges on the sheet. The header is a plain range; the station is the current selection. */
+.top .deck,.panel{background:rgba(255,255,255,.55);border:1px solid #c6c6c6;border-radius:0;color:#333;box-shadow:none;text-shadow:none}
+.panel.station{border:2px solid #5a5a5a;background:rgba(240,240,240,.45)}
+.top .deck{padding:14px clamp(10px,2vw,20px) 14px}
+.pinfoot.pinfoot{background:rgba(255,255,255,.6);border:1px solid #c6c6c6;border-radius:0;box-shadow:none;padding-left:clamp(16px,(100vw - 1180px) * 1 + 20px,264px);padding-right:clamp(16px,(100vw - 820px) * .9 + 20px,314px)}
+.sheet,.pop,.syncbar,.ahead,.bellpanel{background:#ffffff;border:1px solid #b5b5b5;border-radius:0;color:#333;box-shadow:0 6px 18px rgba(0,0,0,.15)}
+
+/* Title bars: a header cell. */
+.wtitle{height:24px;border-radius:0;border:1px solid #d0d0d0;color:#333333;font:700 14px/1 var(--f-display);letter-spacing:.02em;text-transform:none;text-shadow:none;
+  background:linear-gradient(180deg,#f6f6f6,#ececec);box-shadow:none}
+.wtitle::before,.wtitle::after{background:none}
+
+small,.rd-mm,.vizsw{font-family:var(--f-body);font-weight:400;letter-spacing:0;text-transform:none}
+.rdeck small,.tk small,.vol small,.vu-m small,.fxbtns small,.rd-mm{color:#555555;text-shadow:none}
+
+/* Buttons: the grey ones. The primary button is a slightly darker grey. */
+.btn{background:linear-gradient(180deg,#fdfdfd,#ececec);color:#222;border:1px solid #b5b5b5;border-radius:3px;font:400 .95rem/1 var(--f-body);letter-spacing:0;text-shadow:none;
+  padding:8px clamp(10px,1.6vw,16px);box-shadow:0 1px 0 rgba(0,0,0,.05)}
+.btn:hover{background:linear-gradient(180deg,#ffffff,#f3f3f3);border-color:#9c9c9c}
+.btn:active{background:#e2e2e2;box-shadow:inset 0 1px 2px rgba(0,0,0,.15)}
+.btn.primary{background:linear-gradient(180deg,#e9e9e9,#d6d6d6);color:#222;border-color:#9a9a9a}
+.btn.danger{background:linear-gradient(180deg,#fdfdfd,#ececec);color:#222}
+
+/* Round buttons: option buttons. */
+.rd-btn button,.vizsw input[type=checkbox]{background:radial-gradient(circle,#ffffff 0 60%,#f1f1f1 100%);border:1px solid #8c8c8c;box-shadow:inset 0 1px 2px rgba(0,0,0,.12)}
+.rd-btn button:active,.rd-btn button[aria-pressed=true],.vizsw input[type=checkbox]:checked,.vizsw input[type=checkbox]:active{background:radial-gradient(circle,#444 0 30%,#ffffff 34%);border-color:#666}
+.vol-num{color:#555;font-family:var(--f-body);text-shadow:none}
+
+/* Decorations */
+.skin-decor::before,.skin-decor::after{content:"";position:absolute;pointer-events:none}
+/* the title bar, menus, toolbar, formula bar and column headers */
+.top .skin-decor::before{left:calc(-1 * clamp(10px,100vw - 564px,36px));right:-10px;bottom:calc(100% + 12px);height:152px;background:url(images/winbtns.webp) right 4px top 0/150px 32px no-repeat,url(images/ribbon.webp) left top/1180px 152px no-repeat,linear-gradient(#e8e8e8,#e8e8e8) 0 0/100% 32px no-repeat,linear-gradient(#ececec,#ececec) 0 130px/100% 22px no-repeat,#f2f2f2;
+  box-shadow:0 0 0 1px #a9a9a9;border-radius:6px 6px 0 0}
+/* cell comments, one at a time (they change every half minute) */
+.station .skin-decor::before{left:46.5%;bottom:10px;width:min(16.5%,clamp(0px,(100vw - 1150px) * 1,200px));aspect-ratio:236/104;background:url(images/note-1.webp) left top/100% auto no-repeat;animation:q3-notes 240s steps(1,end) infinite}
+/* the selection's fill handle, and the little red comment marker */
+.station .skin-decor::after{inset:-6px;background:linear-gradient(#5a5a5a,#5a5a5a) right 0 bottom 0/9px 9px no-repeat,linear-gradient(225deg,#c0392b 0 7px,transparent 7px) right 6px top 6px/12px 12px no-repeat}
+/* the charts and lists everyone made for Q3 */
+.pinfoot .skin-decor::before{inset:12px 14px;background:url(images/chart.webp) right top/clamp(0px,(100vw - 820px) * .9,280px) auto no-repeat,url(images/checklist.webp) left top/clamp(0px,(100vw - 1180px) * 1,230px) auto no-repeat}
+/* sheet tabs and the status bar */
+.pinfoot .skin-decor::after{left:calc(-1 * clamp(10px,100vw - 564px,36px));right:-10px;top:calc(100% + 13px);height:56px;background:url(images/status-r.webp) right 0 bottom 0/clamp(0px,(100vw - 760px) * 2,430px) auto no-repeat,url(images/tabs.webp) left top/1180px 56px no-repeat,linear-gradient(#e8e8e8,#e8e8e8) 0 30px/100% 26px no-repeat,#f2f2f2;
+  box-shadow:0 0 0 1px #a9a9a9;border-radius:0 0 6px 6px}
+
+@keyframes q3-notes{0%{background-image:url(images/note-1.webp)}12.5%{background-image:url(images/note-2.webp)}25%{background-image:url(images/note-3.webp)}37.5%{background-image:url(images/note-4.webp)}50%{background-image:url(images/note-5.webp)}62.5%{background-image:url(images/note-6.webp)}75%{background-image:url(images/note-7.webp)}87.5%{background-image:url(images/note-8.webp)}}

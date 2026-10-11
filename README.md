@@ -68,6 +68,35 @@ Each skin lives in `skins/<id>/`:
 
 The `/newmdfmlook` and `/updatemdfmlook` commands in Claude walk through this.
 
+### Skin extras (tappable decorations)
+
+A skin can make its decorations respond to taps and clicks with an `extras` block in `skin.json`. It's data, not code. The receiver turns it into plain buttons, menus, message boxes and read-only tables, and sets all text as text. The build checks it with `checkExtras` in `scripts/skins.mjs`.
+
+```json
+"extras": {
+  "layers": [{ "anchor": "top", "box": { "left": "-10px", "right": "-10px", "bottom": "calc(100% + 12px)", "height": "152px" },
+    "spots": [
+      { "label": "File", "left": "6px", "top": "34px", "width": "40px", "height": "24px",
+        "menu": [{ "text": "Save", "say": "Saved." }, { "sep": true }, { "text": "Log", "page": "log" }] },
+      { "label": "First tab", "left": "58px", "top": "0", "width": "140px", "height": "30px", "back": true }] }],
+  "pages": { "log": { "title": "Log", "cols": ["Date", "Done"], "rows": [["10/01", "✓"]], "note": "All done." } }
+}
+```
+
+- **`anchor`:** `top` (the header deck), `station` or `pinfoot`. The `box` is placed against that part with plain CSS lengths: px, %, vw and calc/clamp/min/max.
+- **What a spot does (one of):**
+  - `menu`: entries with `text`, plus optional `hint`, `disabled`, `say`, `page` or `back`; `{ "sep": true }` is a divider;
+  - `say`: a message box with OK;
+  - `page`: opens a page over the receiver, which has a Back button;
+  - `back`: closes the page.
+- **Esc** closes the open menu, then the message, then the page.
+- **Styling:** skins may restyle every `.sx-` part: `sx-layer`, `sx-spot`, `sx-menu`, `sx-item`, `sx-sep`, `sx-dialog`, `sx-page`, `sx-head`, `sx-grid`, `sx-note` and `sx-back`.
+- **Limits:**
+  - 6 layers and 60 spots;
+  - 16 entries per menu;
+  - 20 pages, each with up to 8 columns and 60 rows;
+  - text is capped (labels 60 characters, messages 300).
+
 ## Pointing another app at it
 
 ### Electron app

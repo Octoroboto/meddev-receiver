@@ -665,3 +665,26 @@ html.rgbk .vizsw::before{filter:url(#rgbk)}
    control) still moves the window. Default keeps its regions exactly as before. Window controls stay above decorations. */
 html[data-skin]:not([data-skin="default"]) :is(.wrap,.wrap *){-webkit-app-region:no-drag!important}
 .top .wtitle .wctl{z-index:6}
+/* Skin extras: tappable spots a skin's data lays over its decorations, with plain menus, message boxes and read-only
+   pages (see checkExtras in scripts/skins.mjs). Skins may restyle every .sx- part. */
+:is(.deck,.panel):has(> .sx-layer){position:relative}
+.sx-layer{position:absolute;z-index:7;overflow:hidden;pointer-events:none}
+.sx-spot{position:absolute;pointer-events:auto;background:transparent;border:0;padding:0;margin:0;cursor:pointer;border-radius:3px;-webkit-app-region:no-drag}
+.sx-spot:hover{background:rgba(0,0,0,.07)}
+.sx-spot:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
+.sx-menu{position:absolute;z-index:60;min-width:220px;max-width:min(360px,calc(100vw - 8px));background:#fff;color:#222;border:1px solid #b5b5b5;box-shadow:0 8px 24px rgba(0,0,0,.18);padding:4px 0;display:flex;flex-direction:column;font:14px/1.3 var(--f-body)}
+.sx-item{display:flex;flex-direction:column;align-items:flex-start;gap:1px;text-align:left;background:none;border:0;padding:6px 14px;color:inherit;font:inherit;cursor:pointer}
+.sx-item small{color:#767676;font-size:12px}
+.sx-item:hover,.sx-item:focus-visible{background:#e8e8e8;outline:none}
+.sx-item:disabled{color:#8a8a8a;cursor:default}
+.sx-sep{height:1px;background:#ddd;margin:4px 0}
+.sx-dialog{position:fixed;z-index:61;left:50%;top:40%;translate:-50% -50%;width:min(380px,calc(100vw - 32px));background:#fff;color:#222;border:1px solid #9a9a9a;box-shadow:0 12px 36px rgba(0,0,0,.25);padding:18px;display:flex;flex-direction:column;gap:14px;align-items:flex-end;font:15px/1.4 var(--f-body)}
+.sx-dialog .sx-note{align-self:stretch;margin:0}
+.sx-page{position:absolute;inset:0;z-index:50;overflow:auto;background:#fff;color:#222;padding:14px;display:flex;flex-direction:column;gap:12px;font:14px/1.35 var(--f-body);-webkit-app-region:no-drag}
+.sx-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.sx-head h2{margin:0;font:700 18px/1.2 var(--f-display);color:inherit}
+.sx-grid-wrap{overflow-x:auto}
+.sx-grid{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+.sx-grid th,.sx-grid td{border:1px solid #d9d9d9;padding:4px 8px;text-align:left;white-space:nowrap}
+.sx-grid th{background:#f2f2f2;font-weight:700}
+.sx-page .sx-note{color:#666;margin:0}

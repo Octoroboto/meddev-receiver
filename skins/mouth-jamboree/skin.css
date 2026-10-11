@@ -1,0 +1,89 @@
+/* Mouth Jamboree: the receiver is a kids' toothpaste tube that has been squeezed half flat. Glossy blue laminate with
+   creases, a white plastic shoulder and threaded neck with Sparkle Jam gel crusted in the threads and a dollop on top,
+   the front label (logo, white swoosh, red confetti Cavity Patrol band), a crimped end with the LOT/EXP stamp, cap knobs,
+   Jam Facts printed on the back, and on the counter: a used toothbrush and the cap nobody put back on. */
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap");
+
+:root{
+  --f-display:"Barlow Condensed","Arial Narrow",sans-serif; --f-body:"Baloo 2","Trebuchet MS",sans-serif;
+  --caption:#ffffff; --focus:#ffd23f; --gold:#ffd23f; --gold-dark:#b07a10;
+  --btn-1:#ffffff; --btn-2:#e6ebf3; --btn-3:#9fb0cf; --btn-down-1:#bfe6ff; --btn-down-2:#3a9ee0; --btn-bezel:#0e2a86; --btn-rim:#ffffff;
+  --knob-1:#ffffff; --knob-2:#dfe5ee; --knob-3:#9aa8c2; --knurl-1:#ffffff; --knurl-2:#aab6cc; --knob-pointer:#e3262c;
+  --vol-1:#ffffff; --vol-2:#dfe5ee; --vol-3:#9aa8c2; --vol-cap:#ffffff; --vol-dot:#e3262c;
+  --bezel-1:#2a5ad8; --bezel-2:#14389f; --bezel-3:#0a2272;
+  --plate-1:#2453d6; --plate-2:#1a45c6; --plate-3:#10329e; --key-1:#ffffff; --key-2:#e6ebf3; --key-hover-1:#ffffff; --key-hover-2:#f1f5fb;
+  --title-1:#ffffff; --title-2:#eef2f8;
+}
+
+/* The bathroom counter (browsers only; in the apps the window is clear, so the tube is the window). */
+body:not(.pop){background:radial-gradient(ellipse 80% 55% at 50% 30%,rgba(255,245,225,.35),transparent 70%),linear-gradient(180deg,rgba(60,40,20,.10),rgba(40,25,10,.38)),url(images/counter.webp) 0 0/512px 512px,#c9b99d;
+  padding:calc(min(1180px,100vw - clamp(18px,7.4vw,80px) - clamp(18px,10.5vw,112px)) * .32 + 10px) clamp(18px,10.5vw,112px) calc(min(1180px,100vw - clamp(18px,7.4vw,80px) - clamp(18px,10.5vw,112px)) * .08 + 40px) clamp(18px,7.4vw,80px)}
+
+/* The tube: glossy blue laminate, rounded like a cylinder, creased from being squeezed. */
+.wrap.wrap{max-width:1180px;position:relative;padding:22px clamp(10px,1.8vw,20px) 22px;gap:16px;border:none;border-radius:4px 4px 0 0;
+  background:url(images/crinkle.webp) 0 0/820px 820px,
+    linear-gradient(90deg,rgba(2,8,40,.55) 0%,rgba(2,8,40,.12) 7%,rgba(255,255,255,.0) 13%,rgba(255,255,255,.22) 22%,rgba(255,255,255,.05) 30%,rgba(255,255,255,0) 60%,rgba(2,8,40,.10) 86%,rgba(2,8,40,.55) 100%),
+    linear-gradient(180deg,#2453d6,#1a46c8 50%,#163db6);
+  box-shadow:0 26px 40px rgba(40,25,10,.45),0 6px 12px rgba(40,25,10,.35),inset 0 1px 0 rgba(255,255,255,.5),inset 0 -1px 0 rgba(0,0,30,.4)}
+
+/* Printed panels: no boxes on a tube, just white printed rules on the blue. */
+.top .deck,.panel{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(0,0,40,.12));border:2px solid rgba(255,255,255,.82);border-radius:18px;color:#fff;
+  box-shadow:inset 0 0 0 1px rgba(0,10,60,.25),0 1px 0 rgba(0,10,60,.25);text-shadow:0 1px 1px rgba(0,10,60,.6)}
+.top .deck{padding:18px clamp(10px,2.2vw,22px) 16px}
+.sheet,.pop,.syncbar,.ahead,.bellpanel{background:linear-gradient(180deg,#2453d6,#163db6);border:2px solid #fff;color:#fff}
+
+/* Title bars: white printed bands with navy condensed type and a row of red stars. */
+.wtitle{height:28px;border-radius:999px;border:none;color:#121a4e;font:800 17px/1 var(--f-display);letter-spacing:.2em;text-transform:uppercase;text-shadow:none;
+  background:linear-gradient(180deg,#ffffff,#e9eef6);box-shadow:0 2px 0 rgba(0,10,60,.35),inset 0 -1px 0 rgba(0,10,60,.15)}
+.wtitle::before,.wtitle::after{height:12px;background:radial-gradient(circle,#e3262c 0 2.2px,transparent 2.8px) 0 50%/14px 12px repeat-x}
+
+small,.rd-mm,.vizsw{font-family:"Baloo 2",sans-serif;font-weight:800;letter-spacing:.06em}
+.rdeck small,.tk small,.vol small,.vu-m small,.fxbtns small,.rd-mm{color:#ffffff;text-shadow:0 1px 0 #0b1f6e,0 0 6px rgba(0,10,60,.7)}
+
+/* Keys: white plastic, like the cap. Primary is the red of the Cavity Patrol band. */
+.btn{background:linear-gradient(180deg,#ffffff,#e4e9f2);color:#121a4e;border:2px solid #ffffff;border-radius:999px;font:800 1rem/1 var(--f-body);letter-spacing:.02em;
+  padding:9px clamp(10px,1.8vw,18px);text-shadow:none;box-shadow:0 3px 0 #8ea2c8,0 6px 10px rgba(0,10,60,.45),inset 0 -3px 6px rgba(120,140,180,.25)}
+.btn:hover{background:linear-gradient(180deg,#ffffff,#f0f4fa)}
+.btn:active{translate:0 2px;box-shadow:0 1px 0 #8ea2c8,0 2px 4px rgba(0,10,60,.45),inset 0 2px 4px rgba(120,140,180,.35)}
+.btn.primary{background:linear-gradient(180deg,#ff4a4f,#d21f25);color:#fff;border-color:#fff;text-shadow:0 1px 0 rgba(90,0,10,.5)}
+.btn.danger{background:linear-gradient(180deg,#ffffff,#ffe0e0);color:#b0141a}
+
+/* Round buttons: the cap seen from the top; pressed, you see inside it, full of gel. */
+.rd-btn button,.vizsw input[type=checkbox]{background:url(images/cap-top-clean.webp) center/112% 112% no-repeat;border:none;box-shadow:0 3px 5px rgba(0,10,60,.55)}
+.rd-btn button:active,.rd-btn button[aria-pressed=true],.vizsw input[type=checkbox]:checked,.vizsw input[type=checkbox]:active{background:url(images/cap-open.webp) center/112% 112% no-repeat;box-shadow:0 1px 2px rgba(0,10,60,.55),0 0 10px rgba(120,210,255,.6)}
+
+/* Knobs: caps with the molded arrow. Volume: a cap full of Sparkle Jam. */
+.rd-knob{background:url(images/cap-top.webp) center/112% 112% no-repeat;box-shadow:0 4px 8px rgba(0,10,60,.6)}
+.tk .rd-knob{background-image:url(images/cap-top-clean.webp)}
+.rd-knob::before{background:none;box-shadow:none}
+.vol-knob{background:url(images/cap-vol.webp) center/106% 106% no-repeat;border-radius:50%;box-shadow:0 8px 16px rgba(0,10,60,.6)}
+.vol-knob::before{content:none}
+.vol-dot{background:#e3262c;box-shadow:0 0 0 2px #fff}
+.vol-num{color:#fff;font-family:"Baloo 2",sans-serif;font-weight:800;text-shadow:0 1px 0 #0b1f6e}
+
+/* The front label: logo on the blue, the white swoosh, then the red confetti band down to the creased, flattened end. */
+.pinfoot.pinfoot{border:none;border-radius:0;margin:6px calc(-1 * clamp(10px,1.8vw,20px)) -22px;padding:calc(30px + min(920px,92%) * .352 + 156px) 16px 34px;box-shadow:none;
+  background:url(images/logo.webp) center 28px/min(920px,92%) auto no-repeat,url(images/crinkle.webp) 120px 40px/820px 820px,
+    linear-gradient(90deg,rgba(2,8,40,.5) 0%,rgba(2,8,40,.1) 7%,rgba(255,255,255,.18) 22%,rgba(255,255,255,0) 32%,rgba(2,8,40,.1) 86%,rgba(2,8,40,.5) 100%),
+    url(images/creases.webp) center bottom/100% auto no-repeat,
+    url(images/swoosh.webp) 0 calc(30px + min(920px,92%) * .352 + 60px)/100% 92px no-repeat,
+    linear-gradient(#1b48cc,#1b48cc) 0 0/100% calc(30px + min(920px,92%) * .352 + 62px) no-repeat,
+    url(images/stars.webp) 0 0/300px 300px,#ce2024}
+
+/* Decorations */
+.skin-decor::before,.skin-decor::after{content:"";position:absolute;pointer-events:none}
+/* the shoulder and threaded neck, gel crusted in the threads and a fresh dollop on top */
+.top .skin-decor::before{left:calc(-1 * clamp(10px,1.8vw,20px) - 2px);right:calc(-1 * clamp(10px,1.8vw,20px) - 2px);bottom:calc(100% + 22px - 6px);aspect-ratio:1600/510;
+  background:url(images/crown.webp) center bottom/100% auto no-repeat}
+/* Jam Facts printed on the panel, a pea-sized blob and a smear */
+.station .skin-decor::before{inset:0;
+  background:url(images/facts.webp) left 57% bottom 14px/clamp(0px,(100vw - 1000px) * .5,200px) auto no-repeat,
+    url(images/pea.webp) right 1.5% top 10px/clamp(36px,4vw,56px) auto no-repeat,
+    url(images/smear.webp) left 32% bottom 2px/clamp(0px,(100vw - 700px) * .25,150px) auto no-repeat}
+/* on the counter: the used toothbrush on the left, the cap nobody put back on the right */
+.station .skin-decor::after{left:calc(-1 * (clamp(10px,1.8vw,20px) + clamp(0px,(100vw - 700px) * .2,100px) + 4px));right:calc(-1 * (clamp(10px,1.8vw,20px) + clamp(0px,(100vw - 700px) * .26,128px) + 4px));top:-40px;bottom:-260px;
+  background:url(images/brush.webp) left top/clamp(0px,(100vw - 700px) * .2,100px) auto no-repeat,url(images/cap-side.webp) right bottom/clamp(0px,(100vw - 700px) * .26,128px) auto no-repeat}
+/* CAVITY PATROL / SPARKLE JAM on the red band */
+.pinfoot .skin-decor::before{right:3%;top:calc(30px + min(920px,92%) * .352 + 140px);width:clamp(0px,(100vw - 900px) * .5,260px);aspect-ratio:760/300;background:url(images/patrol.webp) center/100% auto no-repeat}
+/* the crimped end */
+.pinfoot .skin-decor::after{left:0;right:0;top:100%;aspect-ratio:1600/122;background:url(images/crimp.webp) center top/100% auto no-repeat;filter:drop-shadow(0 8px 8px rgba(40,25,10,.4))}

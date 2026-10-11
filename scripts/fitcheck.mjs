@@ -14,7 +14,7 @@ for (const [w, h, app] of [[390, 844, false], [700, 900, false], [1060, 820, tru
   for (const s of ids) {
     await p.evaluate(s => { MDFM_skins.set(s); document.querySelector(".pv-bar")?.remove(); }, s); await p.waitForTimeout(250);
     const off = await p.evaluate(() => { const W = document.querySelector(".wrap").getBoundingClientRect(), res = [];
-      document.querySelectorAll(".wrap button,.wrap label.vizsw,.wrap [role=slider],.wrap summary").forEach(e => {
+      document.querySelectorAll(".wrap button,.wrap label.vizsw,.wrap [role=slider],.wrap summary").forEach(e => { if (e.closest(".sx-layer")) return;   // skin extras sit on decorations and may be cropped on purpose
         if (e.closest("details:not([open])") && !e.matches("summary")) return; const r = e.getBoundingClientRect(); if (!r.width) return;
         if (r.left < W.left - 1 || r.right > W.right + 1 || r.left < 0 || r.right > innerWidth) res.push(e.id || e.textContent.trim().slice(0, 14) || e.className); });
       return res; });

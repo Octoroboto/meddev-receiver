@@ -1,18 +1,18 @@
 {
   "name": "meddev-receiver",
-  "version": "1.7.1",
+  "version": "1.9.0",
   "files": {
     "receiver.css": {
-      "sha256": "2775328a49d30f23b3b8835fe8b14822cb2485f8bc703f88e1f52d8e8f62b9c1",
-      "bytes": 612206
+      "sha256": "3ea9b397b368db596030e275e86865d7f75ba352b42d6faafb61d9314a3c59fe",
+      "bytes": 614461
     },
     "receiver.js": {
-      "sha256": "6c4520a4c4f0445f69e471ae4c3872cc2a9fb665fddac0e6b5a5530922eb4b42",
-      "bytes": 108085
+      "sha256": "2fd1932d1d150f67d8b568bd073660cdb599661feb7c72249789c35493a222a8",
+      "bytes": 112553
     },
     "skins.json": {
-      "sha256": "355a3a9d0087e04d70b1039350103f7da5e4fa1e08d4f3384d8cce4dbbedda0d",
-      "bytes": 2752839
+      "sha256": "d4aa7e3848c87705b2f46b623c92bb0baea795e07c203a2521698efed6634e40",
+      "bytes": 3804661
     }
   },
   "skins": [
@@ -21,7 +21,9 @@
     "barnaclava",
     "analyze-pics",
     "business-lightning",
-    "house-of-spoons"
+    "house-of-spoons",
+    "mouth-jamboree",
+    "q3-reconciliation"
   ],
   "default": "default"
 }

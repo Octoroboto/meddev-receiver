@@ -11,7 +11,7 @@ const METAL = ["--steel-a", "--steel-b", "--steel-c", "--brushed", "--brushed2",
   "--bezel-1", "--bezel-2", "--bezel-3", "--plate-1", "--plate-2", "--plate-3", "--key-1", "--key-2", "--key-hover-1", "--key-hover-2", "--title-1", "--title-2",
   "--f-display", "--f-body", "--f-mono"];
 // Parts of the receiver a skin may restyle freely (everything about how they look, and where they sit).
-const METAL_PARTS = "skin-decor|deck|panel|ahead|sheet|pop|syncbar|bellpanel|wtitle|btn|rd-btn|rd-btns|rd-knob|rd-knobs|rd-k|rd-dial|rd-mm|rd-ticks|rdeck|tk|tk-dial|tk-knob|tk-ticks|vol|vol-dial|vol-knob|vol-dot|vol-scale|vol-num|vizsw|sndsw|togs|fxbtns|mixer|pinfoot|strow|hrow|hside|row|station|grid|wrap|top|vu|vu-m|vu-btn|hubrx|rxrow|rxbtns|rxskin|rxset|primary|danger|on|lit|off";
+const METAL_PARTS = "sx-layer|sx-spot|sx-menu|sx-item|sx-sep|sx-dialog|sx-page|sx-head|sx-grid|sx-note|sx-back|skin-decor|deck|panel|ahead|sheet|pop|syncbar|bellpanel|wtitle|btn|rd-btn|rd-btns|rd-knob|rd-knobs|rd-k|rd-dial|rd-mm|rd-ticks|rdeck|tk|tk-dial|tk-knob|tk-ticks|vol|vol-dial|vol-knob|vol-dot|vol-scale|vol-num|vizsw|sndsw|togs|fxbtns|mixer|pinfoot|strow|hrow|hside|row|station|grid|wrap|top|vu|vu-m|vu-btn|hubrx|rxrow|rxbtns|rxskin|rxset|primary|danger|on|lit|off";
 // Glass: it keeps its look in every skin, but a skin may move it a little to fit the theme.
 const GLASS_PARTS = "lcd|rxlcd|vu-glass|vizwrap|viz|status";
 // Never touched: lights, the spray can and the flies, the hub's own lists, fields, canvases, ids, wildcards.
@@ -85,6 +85,49 @@ export function checkSkin(id, c) {
 // no outside files except Google Fonts. ":root" in a skin is scoped to html[data-skin="<id>"] so it always wins.
 export const MIME = { png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg", webp: "image/webp", svg: "image/svg+xml", gif: "image/gif" };
 
+// Skin extras (skin.json "extras"): tappable spots a skin lays over its decorations. Data only, never code: the receiver
+// builds plain buttons, menus, message boxes and read-only pages from it, all text set as text. Every page has a way back.
+//   extras.layers[]: { anchor: "top"|"station"|"pinfoot", box: {left,right,top,bottom,width,height}, spots: [spot] }
+//   spot: { label, left, top, width, height, then one of: menu: [entry], say: "text", page: "<page id>", back: true }
+//   entry: { text, hint?, disabled?, say?, page?, back? } or { sep: true }
+//   extras.pages: { <id>: { title, cols: [..], rows: [[..]], note? } }
+const LEN = /^(-?\d+(\.\d+)?(px|%|vw|vh|em|rem)?|0|auto|(calc|clamp|min|max)\([-+*\/ .,%0-9a-z()]*\))$/i;
+export function checkExtras(id, x) {
+  const bad = m => { throw new Error(`skin "${id}": extras ${m}`); };
+  const str = (v, n, what) => { if (typeof v !== "string" || !v.trim() || v.length > n) bad(`${what} must be text up to ${n} characters`); return v; };
+  const len = (v, what) => { if (v == null) return; if (typeof v !== "string" || v.length > 80 || !LEN.test(v.trim()) || /url|var|expression|attr/i.test(v)) bad(`${what} "${v}" isn't a plain CSS length`); };
+  const only = (o, keys, what) => { if (!o || typeof o !== "object" || Array.isArray(o)) bad(`${what} must be an object`); for (const k of Object.keys(o)) if (!keys.includes(k)) bad(`${what}: "${k}" isn't allowed`); };
+  only(x, ["layers", "pages"], "extras");
+  const pages = x.pages || {}; only(pages, Object.keys(pages), "pages");
+  if (Object.keys(pages).length > 20) bad("can have up to 20 pages");
+  for (const [pid, pg] of Object.entries(pages)) {
+    if (!/^[a-z0-9-]{1,30}$/.test(pid)) bad(`page id "${pid}" must be lowercase letters, numbers and dashes`);
+    only(pg, ["title", "cols", "rows", "note"], `page "${pid}"`); str(pg.title, 80, `page "${pid}" title`);
+    if (!Array.isArray(pg.cols) || pg.cols.length < 1 || pg.cols.length > 8) bad(`page "${pid}" needs 1-8 cols`);
+    pg.cols.forEach(c => str(c, 40, `page "${pid}" column`));
+    if (!Array.isArray(pg.rows) || pg.rows.length > 60) bad(`page "${pid}" can have up to 60 rows`);
+    pg.rows.forEach(r => { if (!Array.isArray(r) || r.length > pg.cols.length) bad(`page "${pid}" rows must be lists no longer than cols`); r.forEach(c => { if (typeof c !== "string" || c.length > 80) bad(`page "${pid}" cells must be text up to 80 characters`); }); });
+    if (pg.note != null) str(pg.note, 300, `page "${pid}" note`);
+  }
+  const act = (o, what) => { const n = ["say", "page", "back", "menu"].filter(k => o[k] != null).length; if (n > 1) bad(`${what}: one of say, page, back or menu`);
+    if (o.say != null) str(o.say, 300, `${what} say`); if (o.page != null && !pages[o.page]) bad(`${what}: page "${o.page}" isn't in pages`); if (o.back != null && o.back !== true) bad(`${what}: back must be true`); };
+  const layers = x.layers || []; if (!Array.isArray(layers) || layers.length > 6) bad("layers must be a list of up to 6");
+  let count = 0;
+  layers.forEach((L, i) => { only(L, ["anchor", "box", "spots"], `layer ${i}`);
+    if (!["top", "station", "pinfoot"].includes(L.anchor)) bad(`layer ${i}: anchor must be top, station or pinfoot`);
+    only(L.box || {}, ["left", "right", "top", "bottom", "width", "height"], `layer ${i} box`); for (const [k, v] of Object.entries(L.box || {})) len(v, `layer ${i} box ${k}`);
+    if (!Array.isArray(L.spots)) bad(`layer ${i}: spots must be a list`);
+    L.spots.forEach((sp, j) => { const w = `layer ${i} spot ${j}`; count++;
+      only(sp, ["label", "left", "top", "width", "height", "menu", "say", "page", "back"], w); str(sp.label, 60, `${w} label`);
+      for (const k of ["left", "top", "width", "height"]) len(sp[k], `${w} ${k}`); act(sp, w);
+      if (sp.menu != null) { if (!Array.isArray(sp.menu) || sp.menu.length > 16) bad(`${w}: menu must be a list of up to 16`);
+        sp.menu.forEach((e, k) => { if (e && e.sep === true) { only(e, ["sep"], `${w} entry ${k}`); return; }
+          only(e, ["text", "hint", "disabled", "say", "page", "back"], `${w} entry ${k}`); str(e.text, 80, `${w} entry ${k} text`);
+          if (e.hint != null) str(e.hint, 80, `${w} entry ${k} hint`); if (e.disabled != null && typeof e.disabled !== "boolean") bad(`${w} entry ${k}: disabled is true or false`); act(e, `${w} entry ${k}`); }); }
+    }); });
+  if (count > 60) bad("can have up to 60 spots");
+  return x;
+}
 // Reads skins/<id> (skin.json + skin.css + images/) from a folder URL and returns { id, name, description, css } ready for skins.json.
 export function buildSkin(dirUrl, id) {
   const read = p => readFileSync(new URL(p, dirUrl), "utf8");
@@ -107,5 +150,7 @@ export function buildSkin(dirUrl, id) {
   if (/url\(\s*(?!["']?(data:|#))/i.test(c.replace(/@import\s+url\([^)]*\)/g, ""))) throw new Error(`skin "${id}": images must be in the skin's images/ folder`);
   c = c.replace(/data:img(\d+)x(?=")/g, (m, n) => imgs[+n]);
   if (c.length > 1.5e6) throw new Error(`skin "${id}" is ${(c.length / 1e6).toFixed(1)} MB; keep it under 1.5 MB (compress the images)`);
-  return { id, name: String(meta.name || id), description: String(meta.description || ""), css: c };
+  const out = { id, name: String(meta.name || id), description: String(meta.description || ""), css: c };
+  if (meta.extras != null) out.extras = checkExtras(id, meta.extras);
+  return out;
 }

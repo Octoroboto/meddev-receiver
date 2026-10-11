@@ -30,3 +30,19 @@ test("only plain CSS with its own images", () => {
   no('.deck{background-image:url(https://example.com/x.png)}', /images must be in/); no("@media (min-width:1px){.deck{color:red}}", /isn't allowed/);
   no(".deck{background:url(javascript:alert(1))}", /images must be in|only plain CSS/);
 });
+test("skin extras: plain data only, every page reachable and closable", async () => {
+  const { checkExtras } = await import("../scripts/skins.mjs");
+  const good = { layers: [{ anchor: "top", box: { left: "calc(-1 * 10px)", bottom: "calc(100% + 12px)", height: "152px" },
+    spots: [{ label: "File", left: "6px", top: "34px", width: "40px", height: "24px", menu: [{ text: "Save", say: "Saved." }, { sep: true }, { text: "Log", page: "log" }] },
+      { label: "Tab", left: "0", top: "0", width: "50px", height: "30px", back: true }] }],
+    pages: { log: { title: "Log", cols: ["A", "B"], rows: [["1", "2"]], note: "n" } } };
+  assert.strictEqual(checkExtras("t", good), good);
+  const bad = (x, re) => assert.throws(() => checkExtras("t", x), re);
+  bad({ layers: [{ anchor: "body", spots: [] }] }, /anchor/);
+  bad({ layers: [{ anchor: "top", box: { left: "url(x)" }, spots: [] }] }, /plain CSS length/);
+  bad({ layers: [{ anchor: "top", box: { left: "var(--x)" }, spots: [] }] }, /plain CSS length/);
+  bad({ layers: [{ anchor: "top", spots: [{ label: "x", page: "nope" }] }] }, /isn't in pages/);
+  bad({ layers: [{ anchor: "top", spots: [{ label: "x", say: "a", page: "p" }] }], pages: { p: { title: "P", cols: ["a"], rows: [] } } }, /one of/);
+  bad({ layers: [{ anchor: "top", spots: [{ label: "x", onclick: "alert(1)" }] }] }, /isn't allowed/);
+  bad({ layers: [], pages: { p: { title: "P", cols: ["a"], rows: [], html: "<b>" } } }, /isn't allowed/);
+});
