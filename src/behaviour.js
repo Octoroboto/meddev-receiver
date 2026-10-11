@@ -2,12 +2,14 @@
    Shared by every app that uses the receiver look. Edit here, then npm run build. */
 /* Skin settings for the canvas parts: read once, re-read when the skin changes (the "meddev:skin" event). */
 window.MDFM_tok=(()=>{ let cache={}; const get=(n,fb)=>{ if(n in cache) return cache[n]; let v=""; try{ v=getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }catch(e){} return cache[n]=v||fb; };
-  window.addEventListener("meddev:skin",()=>{ cache={}; }); return get; })();
+  window.addEventListener("meddev:skin",()=>{ cache={}; }); window.addEventListener("axmod:change",()=>{ cache={}; }); return get; })();
+/* Hold still? The computer's reduce-motion setting, or AXMOD's Reduce motion / No idle surprises / Buttons stay put / Calm mode. Checked live. */
+window.MDFM_still=()=>{ try{ if(window.AXMOD&&window.AXMOD.still) return window.AXMOD.still(); }catch(e){} try{ return matchMedia("(prefers-reduced-motion: reduce)").matches; }catch(e){ return false; } };
 /* Spectrum analyzer: classic 19-band LED bars dancing to made-up music. No audio, no network, no credits. */
 (()=>{
   const cv=document.getElementById("vizCanvas"); if(!cv) return;
   const ctx=cv.getContext("2d"), N=19, SEG=3, GAP=1;
-  const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const still=()=>window.MDFM_still();
   let W=0,H=0,dpr=1;
   const lvl=new Float32Array(N), peak=new Float32Array(N), pv=new Float32Array(N), hold=new Float32Array(N);
   const fit=()=>{const r=cv.getBoundingClientRect();dpr=Math.min(2,devicePixelRatio||1);W=Math.max(1,Math.round(r.width*dpr));H=Math.max(1,Math.round(r.height*dpr));cv.width=W;cv.height=H;};
@@ -114,8 +116,11 @@ window.MDFM_tok=(()=>{ let cache={}; const get=(n,fb)=>{ if(n in cache) return c
   if(box){ box.checked=on; box.addEventListener("change",()=>{ on=box.checked; try{localStorage.setItem("hubVizOff",on?"0":"1");}catch(e){} if(!on) blank(); }); }
   new ResizeObserver(()=>{ if(!on) blank(); }).observe(cv);
   let last=0, t0=performance.now();
+  let frozen=false;
+  const freeze=()=>{ const tg=target(1.3); for(let i=0;i<N;i++){lvl[i]=tg[i]*.8;peak[i]=Math.min(1,tg[i]*.8+.08);} draw(); };
   function step(now){
     requestAnimationFrame(step);
+    if(still()){ if(!frozen&&on){ frozen=true; freeze(); } return; } frozen=false;
     if(!on||document.hidden||now-last<16) return;
     const dt=Math.min(.1,(now-last)/1000); last=now;
     const tg=(window.__vizSource&&window.__vizSource())||target(Math.max(0,(now-t0)/1000));
@@ -127,14 +132,15 @@ window.MDFM_tok=(()=>{ let cache={}; const get=(n,fb)=>{ if(n in cache) return c
     }
     draw();
   }
-  if(still){ const tg=target(1.3); for(let i=0;i<N;i++){lvl[i]=tg[i]*.8;peak[i]=Math.min(1,tg[i]*.8+.08);} draw(); new ResizeObserver(draw).observe(cv); }
-  else requestAnimationFrame(step);
+  new ResizeObserver(()=>{ if(still()&&on) freeze(); }).observe(cv);
+  window.addEventListener("axmod:change",()=>{ if(still()&&on) freeze(); });
+  requestAnimationFrame(step);
 })();
 
 /* Fruit flies + bug spray. Flies wander in now and then, land on lit glass, potter, leave.
    The nozzle by the EQ: BUG SPRAY kills them and stops visits; SUGAR MIST brings a swarm back. No network, no credits. */
 (()=>{
-  const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const still=()=>window.MDFM_still();
   const FLY_SVG='<svg viewBox="0 0 18 18"><g stroke="#2a1a0e" stroke-width=".6" stroke-linecap="round" fill="none">'+
     '<path class="legf" d="M8 7 L5.5 4.5 M10 7 L12.5 4.5"/><path d="M8 9 L5 9.5 M10 9 L13 9.5 M8 10.5 L5.8 13 M10 10.5 L12.2 13"/></g>'+
     '<g class="wing wl"><ellipse cx="6" cy="11" rx="2.6" ry="5" transform="rotate(25 6 11)" fill="rgba(220,235,255,.35)" stroke="rgba(255,255,255,.45)" stroke-width=".35"/></g>'+
@@ -206,9 +212,10 @@ window.MDFM_tok=(()=>{ let cache={}; const get=(n,fb)=>{ if(n in cache) return c
     remove(){ this.dead=true; this.el.remove(); flies.delete(this); }
   }
 
-  async function visit(){ if(!enabled||document.hidden||flies.size) return; const s=edgePoint(); await new Fly(s.x,s.y).visitLit(); }
+  async function visit(){ if(!enabled||document.hidden||flies.size||still()) return; const s=edgePoint(); await new Fly(s.x,s.y).visitLit(); }
   const schedule=first=>setTimeout(async()=>{ try{ await visit(); }catch(e){} schedule(false); }, first?rnd(15000,35000):rnd(60000,150000));
-  if(!still) schedule(true);
+  schedule(true);
+  window.addEventListener("axmod:change",()=>{ if(still()) for(const f of [...flies]) f.remove(); });
   window.__fruitFly=visit;
 
   /* ---------- the spray can ---------- */
@@ -412,7 +419,7 @@ ${[0,1,2,3,4,5,6,7].map(k=>`<rect x="52" y="${262+k*7}" width="16" height="2.4" 
     if(spraying) return; spraying=true; const sugar=!enabled;
     const setOn=v=>{ enabled=v; try{localStorage.setItem("hubFliesOff",v?"0":"1");}catch(e){} };
     const finish=()=>{ jet.on=false; can.classList.remove("live"); spraying=false; label(); park(); };
-    if(still){ if(sugar) setOn(true); else { for(const f of [...flies]) f.remove(); setOn(false); } finish(); return; }
+    if(still()){ if(sugar) setOn(true); else { for(const f of [...flies]) f.remove(); setOn(false); } finish(); return; }
     const failsafe=setTimeout(finish,6000);
     const rest=restPoint(), W=document.documentElement.clientWidth;
     if(!sugar&&(window.__forceSwat||Math.random()<.1)){ can.classList.add("live"); return swat(rest,W,setOn,finish,failsafe); }
@@ -501,8 +508,7 @@ ${[0,1,2,3,4,5,6,7].map(k=>`<rect x="52" y="${262+k*7}" width="16" height="2.4" 
   autoB.addEventListener("click",()=>{
     if(autoRaf){ stopAuto(); return; }
     autoB.setAttribute("aria-pressed","true"); led.classList.add("on"); const t0=performance.now();
-    const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const tick=now=>{ const t=(now-t0)/1000*(still?.15:.6);
+    const tick=now=>{ const t=(now-t0)/1000*(window.MDFM_still()?.15:.6);
       v.r=1+.75*Math.sin(t); v.g=1+.75*Math.sin(t+2.094); v.b=1+.75*Math.sin(t+4.189); apply(false); autoRaf=requestAnimationFrame(tick); };
     autoRaf=requestAnimationFrame(tick);
   });
@@ -586,4 +592,5 @@ ${[0,1,2,3,4,5,6,7].map(k=>`<rect x="52" y="${262+k*7}" width="16" height="2.4" 
   requestAnimationFrame(frame);
   window.addEventListener("resize",()=>st.forEach(s=>s.face=null));
   window.addEventListener("meddev:skin",()=>st.forEach(s=>s.face=null));
+  window.addEventListener("axmod:change",()=>st.forEach(s=>s.face=null));
 })();

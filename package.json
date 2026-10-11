@@ -1,12 +1,13 @@
 {
   "name": "meddev-receiver",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "The MedDev receiver look and controls: brushed steel, LCDs, LEDs, knobs, VU meters and the MedDev badging. One place to update it; every app that points here follows.",
   "private": true,
   "license": "UNLICENSED",
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "test": "node scripts/build.mjs && node --test test/*.test.cjs"
+    "test": "node scripts/build.mjs && node --test test/*.test.cjs",
+    "fonts": "node scripts/fonts.mjs"
   }
 }

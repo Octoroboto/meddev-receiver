@@ -1,0 +1,339 @@
+{
+  "name": "AXMOD",
+  "schema": 1,
+  "about": "The AXMOD settings: one list for every platform (Electron, browsers, and later Swift). Option ids, types, defaults and presets mean the same thing everywhere. Settings are saved as { \"schema\": 1, \"values\": { <only the options the person changed> }, \"channels\": { <id>: 0..1 } }.",
+  "sections": [
+    {
+      "id": "presets",
+      "label": "Quick setups"
+    },
+    {
+      "id": "vision",
+      "label": "Seeing"
+    },
+    {
+      "id": "reading",
+      "label": "Reading"
+    },
+    {
+      "id": "motion",
+      "label": "Motion and calm"
+    },
+    {
+      "id": "hearing",
+      "label": "Hearing"
+    },
+    {
+      "id": "controls",
+      "label": "Controls"
+    }
+  ],
+  "options": [
+    {
+      "id": "size",
+      "section": "vision",
+      "type": "choice",
+      "default": "100",
+      "label": "Text size",
+      "hint": "Makes everything bigger, the receiver included.",
+      "wcag": "1.4.4",
+      "choices": [
+        [
+          "100",
+          "100%"
+        ],
+        [
+          "125",
+          "125%"
+        ],
+        [
+          "150",
+          "150%"
+        ],
+        [
+          "175",
+          "175%"
+        ],
+        [
+          "200",
+          "200%"
+        ]
+      ]
+    },
+    {
+      "id": "contrast",
+      "section": "vision",
+      "type": "bool",
+      "default": false,
+      "os": "prefers-contrast: more",
+      "label": "High contrast",
+      "hint": "Black, white and yellow. Sets the skin aside while it's on.",
+      "wcag": "1.4.3, 1.4.11"
+    },
+    {
+      "id": "colorblind",
+      "section": "vision",
+      "type": "bool",
+      "default": false,
+      "label": "Colourblind-safe colours",
+      "hint": "Okabe-Ito colours for status lights, the EQ and categories, with outlines.",
+      "wcag": "1.4.1"
+    },
+    {
+      "id": "gray",
+      "section": "vision",
+      "type": "bool",
+      "default": false,
+      "label": "Grayscale",
+      "hint": "Takes the colour out of everything."
+    },
+    {
+      "id": "saturation",
+      "section": "vision",
+      "type": "range",
+      "default": 100,
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "%",
+      "label": "Colour strength",
+      "hint": "Turn it down if colours feel loud."
+    },
+    {
+      "id": "focus",
+      "section": "vision",
+      "type": "bool",
+      "default": false,
+      "label": "Underline links and bold focus ring",
+      "hint": "A thick yellow ring with a black halo shows where the keyboard is.",
+      "wcag": "2.4.7, 1.4.1"
+    },
+    {
+      "id": "cursor",
+      "section": "vision",
+      "type": "bool",
+      "default": false,
+      "label": "Big cursor",
+      "hint": "A larger, high-contrast pointer."
+    },
+    {
+      "id": "font",
+      "section": "reading",
+      "type": "choice",
+      "default": "off",
+      "label": "Font",
+      "hint": "Atkinson Hyperlegible is built for low vision; OpenDyslexic weights the bottom of each letter.",
+      "choices": [
+        [
+          "off",
+          "Skin font"
+        ],
+        [
+          "readable",
+          "Hyperlegible"
+        ],
+        [
+          "dyslexia",
+          "Dyslexia"
+        ]
+      ]
+    },
+    {
+      "id": "spacing",
+      "section": "reading",
+      "type": "bool",
+      "default": false,
+      "label": "Wider spacing",
+      "hint": "Line height 1.9, letters .12em, words .16em, paragraphs 2em.",
+      "wcag": "1.4.12"
+    },
+    {
+      "id": "left",
+      "section": "reading",
+      "type": "bool",
+      "default": false,
+      "label": "Left-aligned text",
+      "hint": "No centred or justified paragraphs.",
+      "wcag": "1.4.8"
+    },
+    {
+      "id": "ruler",
+      "section": "reading",
+      "type": "bool",
+      "default": false,
+      "label": "Reading ruler",
+      "hint": "A bright band follows your pointer or keyboard and dims the rest.",
+      "wcag": ""
+    },
+    {
+      "id": "speak",
+      "section": "reading",
+      "type": "bool",
+      "default": false,
+      "label": "Read aloud as I move",
+      "hint": "Says the name of each control you focus. Cmd+Option+S reads your selection.",
+      "wcag": ""
+    },
+    {
+      "id": "speakRate",
+      "section": "reading",
+      "type": "range",
+      "default": 1,
+      "min": 0.6,
+      "max": 1.8,
+      "step": 0.1,
+      "unit": "×",
+      "label": "Reading speed",
+      "hint": ""
+    },
+    {
+      "id": "voice",
+      "section": "reading",
+      "type": "voice",
+      "default": "",
+      "label": "Voice",
+      "hint": "Voices installed on this computer."
+    },
+    {
+      "id": "reduce",
+      "section": "motion",
+      "type": "bool",
+      "default": false,
+      "os": "prefers-reduced-motion: reduce",
+      "label": "Reduce motion",
+      "hint": "Stops animations and slides. On by default when your computer asks for less motion.",
+      "wcag": "2.3.3"
+    },
+    {
+      "id": "noflash",
+      "section": "motion",
+      "type": "bool",
+      "default": false,
+      "label": "No flashing",
+      "hint": "Off by default: some skins flash on purpose, and Default never does. Turn it on to slow anything that would blink faster than three times a second.",
+      "wcag": "2.3.1"
+    },
+    {
+      "id": "still",
+      "section": "motion",
+      "type": "bool",
+      "default": false,
+      "label": "No idle surprises",
+      "hint": "Nothing moves on its own: the EQ holds still and the fruit flies stay away.",
+      "wcag": "2.2.2"
+    },
+    {
+      "id": "steady",
+      "section": "motion",
+      "type": "bool",
+      "default": false,
+      "label": "Buttons stay put",
+      "hint": "No moving targets, and small buttons get bigger click areas.",
+      "wcag": "2.5.8"
+    },
+    {
+      "id": "calm",
+      "section": "motion",
+      "type": "bool",
+      "default": false,
+      "label": "Calm mode",
+      "hint": "Hides skin decorations, stops all motion and mutes stingers and sound effects.",
+      "wcag": ""
+    },
+    {
+      "id": "captions",
+      "section": "hearing",
+      "type": "bool",
+      "default": false,
+      "label": "Sound captions",
+      "hint": "Visible text for everything you'd hear: voices, songs and sound effects.",
+      "wcag": "1.2.1, 1.2.2"
+    },
+    {
+      "id": "lock",
+      "section": "controls",
+      "type": "bool",
+      "default": false,
+      "label": "Lock the layout",
+      "hint": "Clicks never change the look or open things you didn't ask for. Skin choice is locked too.",
+      "wcag": "3.2.5"
+    },
+    {
+      "id": "textalt",
+      "section": "controls",
+      "type": "bool",
+      "default": false,
+      "label": "Text version of visuals",
+      "hint": "Meters, charts and the EQ also show as plain text.",
+      "wcag": "1.1.1"
+    },
+    {
+      "id": "hotkeys",
+      "section": "controls",
+      "type": "bool",
+      "default": true,
+      "label": "Keyboard shortcuts",
+      "hint": "Cmd+Option+A opens this drawer, Cmd+Option+S reads aloud, Esc stops speech.",
+      "wcag": "2.1.4"
+    }
+  ],
+  "presets": [
+    {
+      "id": "lowvision",
+      "label": "Low vision",
+      "values": {
+        "size": "150",
+        "contrast": true,
+        "focus": true,
+        "cursor": true,
+        "textalt": true,
+        "font": "readable"
+      }
+    },
+    {
+      "id": "motion",
+      "label": "Motion sensitive",
+      "values": {
+        "reduce": true,
+        "noflash": true,
+        "still": true,
+        "steady": true,
+        "calm": true
+      }
+    },
+    {
+      "id": "dyslexia",
+      "label": "Dyslexia",
+      "values": {
+        "font": "dyslexia",
+        "spacing": true,
+        "left": true,
+        "ruler": true
+      }
+    },
+    {
+      "id": "keyboard",
+      "label": "Keyboard only",
+      "values": {
+        "focus": true,
+        "steady": true,
+        "lock": true,
+        "hotkeys": true
+      }
+    }
+  ],
+  "shortcuts": [
+    [
+      "Cmd+Option+A",
+      "Open or close AXMOD"
+    ],
+    [
+      "Cmd+Option+S",
+      "Read the selection (or what's focused) aloud"
+    ],
+    [
+      "Esc",
+      "Stop reading aloud, or close AXMOD"
+    ]
+  ]
+}

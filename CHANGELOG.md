@@ -2,6 +2,16 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.7.0 (2026-10-11, Rob)
+- **AXMOD, the accessibility module.** Put `<div data-axmod></div>` in an app's Settings and it becomes an ACCESSIBILITY push button (its LED lights when anything is changed). The button slides out a drawer built from receiver parts (title bar, push buttons, keys, knobs, LCD readouts), so every skin restyles it. Cmd+Option+A opens it from anywhere.
+  - **Options:** the standard 15 (text size to 200%, high contrast, readable font, wider spacing, reduce motion, no flashing, colourblind-safe colours, grayscale, underlined links and a bold focus ring, big cursor, lock the layout, no idle surprises, buttons stay put, sound captions, text versions of visuals).
+  - **Extras:** read aloud with speed and voice, a reading ruler, a dyslexia font, colour strength, left-aligned text, calm mode, quick setups (Low vision, Motion sensitive, Dyslexia, Keyboard only), shortcuts, Reset all, a skip link and a projected WCAG 2.2 self-estimate.
+  - **Skins:** High contrast sets the skin aside while it's on. No flashing is off by default, because some skins flash on purpose and Default never does.
+  - **Saving:** settings save to the app's settings (`axmod`), or on this device in a browser. The computer's reduce-motion and increased-contrast settings are the starting defaults.
+  - **For apps:** `AXMOD.caption`, `sound`, `channels`, `describe`, `setSpeaker`, `on` and the `axmod:change` event. `dist/axmod.schema.json` is the shared settings list for the Swift port.
+- **Receiver motion follows AXMOD live:** the LED EQ, the fruit flies, the spray can and the AUTO lights (`window.MDFM_still()`). The canvas colours re-read on AXMOD changes.
+- `npm run fonts` builds Atkinson Hyperlegible and OpenDyslexic into receiver.css. Until it's run, Verdana and Comic Sans stand in. `scripts/axpreview.mjs` makes a playable preview.
+
 ## 1.6.0 (2026-10-11, Rob)
 - **New skin: Mr. Spoonatelli's House of Spoons.** An old-world spoon shop that has lost control of its inventory. Walnut cabinetry with an arched gilt crown, emerald velvet with a damask of tiny spoons, brass nameplate title bars, ivory keys, spoon-bowl knobs (silver for the lights, gold for tone) and an engraved serving-ladle volume knob. Spoons are stabbed into every edge of the cabinet, hang off the counter and lie across the panels: silver, gold, rusted, tarnished and carved wood. Some carry messages ("THE 4TH SPOON IS A LIE", "THE 4TH IS REAL", "COUNT THE HOOKS"). A spoon rack sways over the crown, the founder's portrait hangs on the counter, and the corkboard notes argue about the fourth spoon, changing every forty seconds. On phones the side spoons step aside. It isn't the house default.
 
