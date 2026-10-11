@@ -59,8 +59,9 @@ window.MDFM_still=()=>{ try{ if(window.AXMOD&&window.AXMOD.still) return window.
     return 99;
   }
   const bump=(i,c,w)=>Math.max(0,1-Math.abs(i-c)/w);
+  const tgBuf=new Float32Array(N);   // target() refills this each frame; callers use it straight away
   function target(time){
-    const p=pos(time), s=p.s, out=new Float32Array(N);
+    const p=pos(time), s=p.s, out=tgBuf;
     const lastBar=p.bar===BARS-1, fill=lastBar&&p.stepF>=12;
     const kick=Math.exp(-since(s.K,p)*s.kd);
     const snarePat=fill?"............xxxx":s.S;
@@ -97,11 +98,13 @@ window.MDFM_still=()=>{ try{ if(window.AXMOD&&window.AXMOD.still) return window.
     }
     return out;
   }
+  let grad=null, gradH=0; window.addEventListener("meddev:skin",()=>{ grad=null; }); window.addEventListener("axmod:change",()=>{ grad=null; });
   function draw(){
     ctx.clearRect(0,0,W,H);
     const bw=W/N, seg=SEG*dpr, gap=GAP*dpr, rows=Math.floor(H/(seg+gap));
-    const g=ctx.createLinearGradient(0,H,0,0);
-    const T=window.MDFM_tok; g.addColorStop(0,T("--eq-1","#1ec81e"));g.addColorStop(.45,T("--eq-2","#7fe22a"));g.addColorStop(.68,T("--eq-3","#e8e030"));g.addColorStop(.85,T("--eq-4","#ff9a1e"));g.addColorStop(1,T("--eq-5","#ff3b2a"));
+    const T=window.MDFM_tok;
+    if(!grad||gradH!==H){ gradH=H; grad=ctx.createLinearGradient(0,H,0,0); grad.addColorStop(0,T("--eq-1","#1ec81e"));grad.addColorStop(.45,T("--eq-2","#7fe22a"));grad.addColorStop(.68,T("--eq-3","#e8e030"));grad.addColorStop(.85,T("--eq-4","#ff9a1e"));grad.addColorStop(1,T("--eq-5","#ff3b2a")); }
+    const g=grad;
     for(let i=0;i<N;i++){
       const x=Math.round(i*bw+gap), w=Math.max(1,Math.round(bw-gap*2)), on=Math.round(lvl[i]*rows);
       // unlit segments, faintly visible like a real LED ladder
@@ -461,8 +464,6 @@ ${[0,1,2,3,4,5,6,7].map(k=>`<rect x="52" y="${262+k*7}" width="16" height="2.4" 
     for(let i=0;i<n;i++){ const f=new Fly(x+rnd(-30,30),y+rnd(-20,20)); crowd.push(f); f.hover(x+rnd(-14,14),y+rnd(-10,10),rnd(900,1400)).then(()=>{
       if(f.dead) return; if(Math.random()<.3) f.visitLit(); else f.leave(false); }); }
   }
-  if(nozzle){ nozzle.addEventListener("click",spray); }
-  window.__spray=spray;
 })();
 
 /* Light-colour deck. Knobs scale the R, G and B of anything lit (relative to its own colour); AUTO drifts them; RESET puts them back. */
@@ -575,21 +576,24 @@ ${[0,1,2,3,4,5,6,7].map(k=>`<rect x="52" y="${262+k*7}" width="16" height="2.4" 
   }
   let last=performance.now();
   function frame(now){
-    const dt=Math.min(.05,(now-last)/1000); last=now;
+    const dt=Math.max(0,Math.min(.05,(now-last)/1000)); last=now;
     const radio=window.__radio, live=meterOn&&!!(radio&&radio.isOn&&radio.isOn());
     const lv=live&&radio.getLevels?radio.getLevels():null;
     box&&box.classList.toggle("lit",meterOn);
     cans.forEach((c,i)=>{ const s=st[i]; face(c,s); const g=c.getContext("2d");
-      const ch=+c.dataset.ch||0, db=lv?lv[ch]:-99, vu=db+14;
+      const ch=+c.dataset.ch||0, raw=lv?+lv[ch]:-99, db=Number.isFinite(raw)?raw:-99, vu=db+14;
       const target=lv?Math.max(-.08,Math.min(1.06,frac(Math.max(-30,vu)))):-.08;
       const k=170, d=2*Math.sqrt(k)*.78; s.vel+=((target-s.pos)*k-s.vel*d)*dt; s.pos+=s.vel*dt;
       if(s.pos<-.08){ s.pos=-.08; s.vel=Math.abs(s.vel)*.25; } if(s.pos>1.08){ s.pos=1.08; s.vel=-Math.abs(s.vel)*.3; }
+      if(!Number.isFinite(s.pos)||!Number.isFinite(s.vel)){ s.pos=-.08; s.vel=0; }
       if(lv&&vu>1) s.peak=now+420;
+      const led=s.led||(s.led=c.parentElement&&c.parentElement.querySelector(".vu-pk")); led&&led.classList.toggle("on",now<s.peak);
+      if(!lv&&s.drawn===s.face&&Math.abs(s.pos+.08)<1e-4&&Math.abs(s.vel)<1e-4) return;   // needle parked and already drawn: nothing to repaint
+      s.drawn=s.face;
       g.setTransform(1,0,0,1,0,0); g.drawImage(s.face,0,0); g.setTransform(s.dpr,0,0,s.dpr,0,0);
       const a=s.ang(s.pos), x2=s.cx+Math.sin(a)*s.R*1.08, y2=s.cy-Math.cos(a)*s.R*1.08;
       g.lineCap="round"; g.strokeStyle="rgba(0,0,0,.18)"; g.lineWidth=2.2; g.beginPath(); g.moveTo(s.cx+2,s.cy); g.lineTo(x2+2,y2+3); g.stroke();
       g.strokeStyle=window.MDFM_tok("--vu-needle","#111"); g.lineWidth=1.3; g.beginPath(); g.moveTo(s.cx,s.cy); g.lineTo(x2,y2); g.stroke();
-      const led=c.parentElement.querySelector(".vu-pk"); led&&led.classList.toggle("on",now<s.peak);
     });
     requestAnimationFrame(frame);
   }
