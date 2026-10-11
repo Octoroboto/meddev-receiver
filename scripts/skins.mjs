@@ -9,7 +9,7 @@ const METAL = ["--steel-a", "--steel-b", "--steel-c", "--brushed", "--brushed2",
   "--knob-1", "--knob-2", "--knob-3", "--knurl-1", "--knurl-2", "--knob-pointer",
   "--vol-1", "--vol-2", "--vol-3", "--vol-cap", "--vol-knurl-1", "--vol-knurl-2", "--vol-knurl-3", "--vol-dot",
   "--bezel-1", "--bezel-2", "--bezel-3", "--plate-1", "--plate-2", "--plate-3", "--key-1", "--key-2", "--key-hover-1", "--key-hover-2", "--title-1", "--title-2",
-  "--f-display", "--f-body", "--f-mono"];
+  "--f-display", "--f-body", "--f-mono", "--label", "--hint", "--etch"];
 // Parts of the receiver a skin may restyle freely (everything about how they look, and where they sit).
 const METAL_PARTS = "sx-layer|sx-spot|sx-menu|sx-item|sx-sep|sx-dialog|sx-page|sx-head|sx-grid|sx-note|sx-back|skin-decor|deck|panel|ahead|sheet|pop|syncbar|bellpanel|wtitle|btn|rd-btn|rd-btns|rd-knob|rd-knobs|rd-k|rd-dial|rd-mm|rd-ticks|rdeck|tk|tk-dial|tk-knob|tk-ticks|vol|vol-dial|vol-knob|vol-dot|vol-scale|vol-num|vizsw|sndsw|togs|fxbtns|mixer|pinfoot|strow|hrow|hside|row|station|grid|wrap|top|vu|vu-m|vu-btn|hubrx|rxrow|rxbtns|rxskin|rxset|primary|danger|on|lit|off";
 // Glass: it keeps its look in every skin, but a skin may move it a little to fit the theme.

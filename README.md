@@ -40,7 +40,7 @@ Each skin lives in `skins/<id>/`:
 **What a skin can change:** skins can be wildly different, like a western saloon of wood and rusty nails, or a Giger-style one of organic forms and dripping slime. Every control stays and works the same, but everything about how it looks can change.
 
 - **The metal:**
-  - The skin settings at the end of `src/receiver.css`: plates, steel, keys, title bars, buttons, knobs, the volume knob, bezels, trim and captions.
+  - The skin settings at the end of `src/receiver.css`: plates, steel, keys, title bars, buttons, knobs, the volume knob, bezels, trim and captions, plus `--label`, `--hint` and `--etch` (text colour of settings labels, hints and the faceplate brand marks; light skins set these so the text stays readable).
   - Any styling of the receiver's parts: `.deck`, `.panel`, `.wtitle`, `.rd-btn button`, `.rd-knob`, `.vol-knob`, `.mixer`, `.vu`, `.tk` and so on. That includes textures, borders, shapes, shadows, fonts and spacing.
 - **Moving things:** parts can be rearranged to fit the theme (flex/grid direction, gaps, order, margins).
 - **Decorations:**

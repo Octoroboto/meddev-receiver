@@ -12,7 +12,7 @@
   --vol-1:#ffffff; --vol-2:#dfe5ee; --vol-3:#9aa8c2; --vol-cap:#ffffff; --vol-dot:#e3262c;
   --bezel-1:#2a5ad8; --bezel-2:#14389f; --bezel-3:#0a2272;
   --plate-1:#2453d6; --plate-2:#1a45c6; --plate-3:#10329e; --key-1:#ffffff; --key-2:#e6ebf3; --key-hover-1:#ffffff; --key-hover-2:#f1f5fb;
-  --title-1:#ffffff; --title-2:#eef2f8;
+  --title-1:#ffffff; --title-2:#eef2f8; --hint:#e6edff;
 }
 
 /* The bathroom counter (browsers only; in the apps the window is clear, so the tube is the window). */

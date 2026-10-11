@@ -1,1207 +1,1207 @@
 {
- "id": "q3-reconciliation",
- "name": "Q3 Reconciliation",
- "description": "A sensible spreadsheet: Q3_Reconciliation_FINAL_v2 (Reviewed) (2).xlsx open in LedgerSheet Pro. Gridlines, row numbers, a formula bar, grey buttons and cell comments from Accounting, HR and Compliance confirming that this is a very normal, very professional choice.",
- "extras": {
-  "layers": [
-   {
-    "anchor": "top",
-    "box": {
-     "left": "calc(-1 * clamp(10px,100vw - 564px,36px))",
-     "right": "-10px",
-     "bottom": "calc(100% + 12px)",
-     "height": "152px"
-    },
-    "spots": [
-     {
-      "label": "File",
-      "left": "6px",
-      "top": "34px",
-      "width": "35.84375px",
-      "height": "24px",
-      "menu": [
-       {
-        "text": "New",
-        "hint": "You already have enough going on",
-        "disabled": true
-       },
-       {
-        "text": "Open Recent",
-        "hint": "Q3_Reconciliation_FINAL_v2 (Reviewed) (2).xlsx",
-        "say": "This file is already open. It is always open."
-       },
-       {
-        "text": "Save",
-        "say": "Already saved. Twice. Autosave is also on."
-       },
-       {
-        "sep": true
-       },
-       {
-        "text": "Export as Fun…",
-        "hint": "Not available in your region",
-        "disabled": true
-       },
-       {
-        "text": "Print",
-        "say": "Sent to the printer on the 3rd floor. Double-sided, grayscale, stapled."
-       },
-       {
-        "sep": true
-       },
-       {
-        "text": "Close",
-        "say": "Are you sure? There is a deadline in 2 business days."
-       }
-      ]
-     },
-     {
-      "label": "Edit",
-      "left": "68px",
-      "top": "34px",
-      "width": "37.90625px",
-      "height": "24px",
-      "menu": [
-       {
-        "text": "Undo",
-        "hint": "Can't undo: that was a commitment",
-        "disabled": true
-       },
-       {
-        "text": "Redo",
-        "disabled": true
-       },
-       {
-        "sep": true
-       },
-       {
-        "text": "Paste Special",
-        "hint": "Paste Seriously",
-        "say": "Pasted seriously."
-       },
-       {
-        "text": "Find Joy…",
-        "say": "0 results found in 1 sheet."
-       },
-       {
-        "text": "Replace Fun with Accountability",
-        "say": "Replaced 0 occurrences. There was nothing to replace."
-       }
-      ]
-     },
-     {
-      "label": "View",
-      "left": "130px",
-      "top": "34px",
-      "width": "44.078125px",
-      "height": "24px",
-      "menu": [
-       {
-        "text": "Zoom: 100%",
-        "hint": "The responsible amount",
-        "say": "Zoom stays at 100%. Squinting is not a plan."
-       },
-       {
-        "text": "✓ Gridlines",
-        "hint": "Always",
-        "disabled": true
-       },
-       {
-        "text": "Dark Mode",
-        "hint": "Available after 9:30 PM",
-        "disabled": true
-       },
-       {
-        "text": "Full Screen",
-        "say": "Full screen would be a lot. Let's keep the taskbar visible."
-       }
-      ]
-     },
-     {
-      "label": "Insert",
-      "left": "192px",
-      "top": "34px",
-      "width": "48.890625px",
-      "height": "24px",
-      "menu": [
-       {
-        "text": "Row",
-        "say": "Row inserted. It is blank, as it should be."
-       },
-       {
-        "text": "Column",
-        "say": "Column inserted between C and D. Nobody noticed."
-       },
-       {
-        "text": "Chart",
-        "hint": "Bar, grey",
-        "say": "Inserted a grey bar chart. It shows 100% every month."
-       },
-       {
-        "sep": true
-       },
-       {
-        "text": "Fun",
-        "hint": "Removed in version 9.0 (2009)",
-        "disabled": true
-       }
-      ]
-     },
-     {
-      "label": "Format",
-      "left": "254px",
-      "top": "34px",
-      "width": "56.96875px",
-      "height": "24px",
-      "menu": [
-       {
-        "text": "Cells…",
-        "say": "Cells are formatted as Accounting, 2 decimal places, no surprises."
-       },
-       {
-        "text": "Conditional Formatting",
-        "hint": "If fun > 0, set fun = 0",
-        "say": "Rule applied to the whole sheet."
-       },
-       {
-        "text": "Comic Sans",
-        "hint": "Blocked by IT",
-        "disabled": true
-       }
-      ]
-     },
-     {
-      "label": "Data",
-      "left": "316px",
-      "top": "34px",
-      "width": "42.40625px",
-      "height": "24px",
-      "menu": [
-       {
-        "text": "Sort A→Z",
-        "say": "Sorted. It was already sorted."
-       },
-       {
-        "text": "Sort by Fun",
-        "hint": "No data",
-        "disabled": true
-       },
-       {
-        "text": "Remove Duplicates",
-        "say": "No duplicates found. You are one of a kind, within policy."
-       },
-       {
-        "text": "Refresh All",
-        "say": "Refreshed. Nothing changed. Good."
-       }
-      ]
-     },
-     {
-      "label": "Tools",
-      "left": "378px",
-      "top": "34px",
-      "width": "45.046875px",
-      "height": "24px",
-      "menu": [
-       {
-        "text": "Spelling",
-        "say": "No spelling errors found. As usual."
-       },
-       {
-        "text": "Macros",
-        "hint": "Disabled for your safety",
-        "disabled": true
-       },
-       {
-        "text": "Goal Seek",
-        "say": "Goal found: retire at 65 with a reasonable amount set aside."
-       }
-      ]
-     },
-     {
-      "label": "Review",
-      "left": "440px",
-      "top": "34px",
-      "width": "56.734375px",
-      "height": "24px",
-      "menu": [
-       {
-        "text": "Track Changes",
-        "say": "No changes to track. Everything is the same as it was."
-       },
-       {
-        "text": "New Comment",
-        "say": "Comment added. HR has been cc'd."
-       },
-       {
-        "text": "Show All Comments",
-        "say": "There are 8 comments. All of them say this is very normal."
-       }
-      ]
-     },
-     {
-      "label": "Window",
-      "left": "502px",
-      "top": "34px",
-      "width": "63.75px",
-      "height": "24px",
-      "menu": [
-       {
-        "text": "Arrange All",
-        "say": "Windows are already arranged. Alphabetically."
-       },
-       {
-        "text": "Flossing Log",
-        "page": "flossing"
-       },
-       {
-        "text": "Retirement 401(k)",
-        "page": "retirement"
-       },
-       {
-        "text": "Open Window",
-        "hint": "It's 61°F outside",
-        "say": "Please keep the window closed. The thermostat is set to 70°F for a reason."
-       }
-      ]
-     },
-     {
-      "label": "Help",
-      "left": "564px",
-      "top": "34px",
-      "width": "42.265625px",
-      "height": "24px",
-      "menu": [
-       {
-        "text": "About LedgerSheet Pro",
-        "say": "LedgerSheet Pro 19.0.3 (Responsible Edition). Licensed to a grown-up."
-       },
-       {
-        "text": "Contact Support",
-        "say": "Estimated hold time: 3 fiscal quarters. Your call is important to us."
-       },
-       {
-        "text": "What's New",
-        "say": "Nothing. That's the point."
-       }
-      ]
-     },
-     {
-      "label": "Undo",
-      "left": "12px",
-      "top": "66px",
-      "width": "28px",
-      "height": "28px",
-      "say": "Can't undo. You meant it."
-     },
-     {
-      "label": "Redo",
-      "left": "42px",
-      "top": "66px",
-      "width": "28px",
-      "height": "28px",
-      "say": "Nothing to redo. You did it right the first time."
-     },
-     {
-      "label": "Print",
-      "left": "72px",
-      "top": "66px",
-      "width": "28px",
-      "height": "28px",
-      "say": "Printed. It's in the tray. Don't forget it."
-     },
-     {
-      "label": "Bold",
-      "left": "114px",
-      "top": "66px",
-      "width": "28px",
-      "height": "28px",
-      "say": "Bold is reserved for column headers."
-     },
-     {
-      "label": "Italic",
-      "left": "144px",
-      "top": "66px",
-      "width": "28px",
-      "height": "28px",
-      "say": "Italic is for emphasis. There is nothing to emphasize."
-     },
-     {
-      "label": "Underline",
-      "left": "174px",
-      "top": "66px",
-      "width": "28px",
-      "height": "28px",
-      "say": "Underline is for hyperlinks and signatures."
-     },
-     {
-      "label": "Font: Carlito",
-      "left": "216px",
-      "top": "68px",
-      "width": "108px",
-      "height": "24px",
-      "say": "Carlito, 11 pt. The font of minutes from the last meeting."
-     },
-     {
-      "label": "Font size: 11",
-      "left": "332px",
-      "top": "68px",
-      "width": "44px",
-      "height": "24px",
-      "say": "11 pt is plenty."
-     },
-     {
-      "label": "Style: Normal",
-      "left": "384px",
-      "top": "68px",
-      "width": "92px",
-      "height": "24px",
-      "say": "Style is Normal. All styles are Normal."
-     },
-     {
-      "label": "Number format: Accounting",
-      "left": "484px",
-      "top": "68px",
-      "width": "112px",
-      "height": "24px",
-      "say": "Every number here is in Accounting format, including the radio frequency."
-     },
-     {
-      "label": "Currency",
-      "left": "616px",
-      "top": "66px",
-      "width": "28px",
-      "height": "28px",
-      "say": "Formatted as currency. 99.9 HD is now $99.90."
-     },
-     {
-      "label": "Percent",
-      "left": "646px",
-      "top": "66px",
-      "width": "28px",
-      "height": "28px",
-      "say": "That's 100% compliance."
-     },
-     {
-      "label": "Decimal places",
-      "left": "676px",
-      "top": "66px",
-      "width": "28px",
-      "height": "28px",
-      "say": "2 decimal places. As agreed."
-     },
-     {
-      "label": "Sum",
-      "left": "706px",
-      "top": "66px",
-      "width": "28px",
-      "height": "28px",
-      "say": "Sum: 99.9. Average: 99.9. Count: 1. Checks out."
-     },
-     {
-      "label": "Sort A to Z",
-      "left": "736px",
-      "top": "66px",
-      "width": "28px",
-      "height": "28px",
-      "say": "Sorted A to Z. The radio stays at the top."
-     },
-     {
-      "label": "Filter",
-      "left": "766px",
-      "top": "66px",
-      "width": "28px",
-      "height": "28px",
-      "say": "Filter applied: Fun = (none). 0 rows hidden."
-     },
-     {
-      "label": "Freeze Panes",
-      "left": "808px",
-      "top": "66px",
-      "width": "86px",
-      "height": "28px",
-      "say": "Panes frozen. Rows 1 to 3 will stay where they are, like you."
-     },
-     {
-      "label": "Protect Sheet",
-      "left": "898px",
-      "top": "66px",
-      "width": "92px",
-      "height": "28px",
-      "say": "This sheet is protected. So are your weekends, because you plan ahead."
-     },
-     {
-      "label": "Name box: C4",
-      "left": "6px",
-      "top": "104px",
-      "width": "64px",
-      "height": "22px",
-      "say": "You are in cell C4. You have been in C4 since 2019."
-     },
-     {
-      "label": "Formula bar",
-      "left": "104px",
-      "top": "104px",
-      "width": "500px",
-      "height": "22px",
-      "say": "=IF(USER=\"responsible adult\", \"approved\", \"approved\") — the formula is correct. Both outcomes were reviewed."
-     },
-     {
-      "label": "Column A",
-      "left": "30px",
-      "top": "130px",
-      "width": "100px",
-      "height": "22px",
-      "say": "Column A: empty and tidy. Please keep it that way."
-     },
-     {
-      "label": "Column B",
-      "left": "130px",
-      "top": "130px",
-      "width": "100px",
-      "height": "22px",
-      "say": "Column B: empty and tidy. Please keep it that way."
-     },
-     {
-      "label": "Column C",
-      "left": "230px",
-      "top": "130px",
-      "width": "100px",
-      "height": "22px",
-      "say": "Column C is selected. It was selected on purpose."
-     },
-     {
-      "label": "Column D",
-      "left": "330px",
-      "top": "130px",
-      "width": "100px",
-      "height": "22px",
-      "say": "Column D: empty and tidy. Please keep it that way."
-     },
-     {
-      "label": "Column E",
-      "left": "430px",
-      "top": "130px",
-      "width": "100px",
-      "height": "22px",
-      "say": "Column E: empty and tidy. Please keep it that way."
-     },
-     {
-      "label": "Column F",
-      "left": "530px",
-      "top": "130px",
-      "width": "100px",
-      "height": "22px",
-      "say": "Column F: empty and tidy. Please keep it that way."
-     },
-     {
-      "label": "Column G",
-      "left": "630px",
-      "top": "130px",
-      "width": "100px",
-      "height": "22px",
-      "say": "Column G: empty and tidy. Please keep it that way."
-     },
-     {
-      "label": "Column H",
-      "left": "730px",
-      "top": "130px",
-      "width": "100px",
-      "height": "22px",
-      "say": "Column H: empty and tidy. Please keep it that way."
-     },
-     {
-      "label": "Minimize",
-      "left": "calc(100% - 102px)",
-      "top": "2px",
-      "width": "30px",
-      "height": "28px",
-      "say": "Minimized for 0 seconds. Back to work."
-     },
-     {
-      "label": "Maximize",
-      "left": "calc(100% - 70px)",
-      "top": "2px",
-      "width": "30px",
-      "height": "28px",
-      "say": "The window is already the right size."
-     },
-     {
-      "label": "Close",
-      "left": "calc(100% - 38px)",
-      "top": "2px",
-      "width": "30px",
-      "height": "28px",
-      "say": "You can't close this. You have unsaved feelings. (Just kidding. Everything is saved.)"
-     }
-    ]
-   },
-   {
-    "anchor": "pinfoot",
-    "box": {
-     "left": "calc(-1 * clamp(10px,100vw - 564px,36px))",
-     "right": "-10px",
-     "top": "calc(100% + 13px)",
-     "height": "56px"
-    },
-    "spots": [
-     {
-      "label": "Q3 Reconciliation",
-      "left": "58px",
-      "top": "0px",
-      "width": "127.6015625px",
-      "height": "30px",
-      "back": true
-     },
-     {
-      "label": "Flossing Log",
-      "left": "185.6015625px",
-      "top": "0px",
-      "width": "94.1640625px",
-      "height": "30px",
-      "page": "flossing"
-     },
-     {
-      "label": "Retirement 401(k)",
-      "left": "279.765625px",
-      "top": "0px",
-      "width": "129.078125px",
-      "height": "30px",
-      "page": "retirement"
-     },
-     {
-      "label": "Fiber Intake",
-      "left": "408.84375px",
-      "top": "0px",
-      "width": "92.875px",
-      "height": "30px",
-      "page": "fiber"
-     },
-     {
-      "label": "Bedtime 9:30 PM",
-      "left": "501.71875px",
-      "top": "0px",
-      "width": "124.4609375px",
-      "height": "30px",
-      "page": "bedtime"
-     },
-     {
-      "label": "Tax Docs (Organized)",
-      "left": "626.1796875px",
-      "top": "0px",
-      "width": "143.6953125px",
-      "height": "30px",
-      "page": "taxdocs"
-     },
-     {
-      "label": "Sheet7",
-      "left": "769.875px",
-      "top": "0px",
-      "width": "65.4296875px",
-      "height": "30px",
-      "page": "sheet7"
-     },
-     {
-      "label": "New sheet",
-      "left": "837.3046875px",
-      "top": "0px",
-      "width": "26px",
-      "height": "30px",
-      "say": "New sheet limit reached: 7 per fiscal year."
-     },
-     {
-      "label": "Previous sheet",
-      "left": "8px",
-      "top": "0px",
-      "width": "22px",
-      "height": "30px",
-      "back": true
-     },
-     {
-      "label": "Next sheet",
-      "left": "30px",
-      "top": "0px",
-      "width": "22px",
-      "height": "30px",
-      "page": "flossing"
-     },
-     {
-      "label": "Ready",
-      "left": "6px",
-      "top": "30px",
-      "width": "52px",
-      "height": "26px",
-      "say": "Ready. Always ready."
-     },
-     {
-      "label": "Accessibility: Good to go",
-      "left": "80px",
-      "top": "30px",
-      "width": "160px",
-      "height": "26px",
-      "say": "Accessibility check: good to go. Contrast is grey on slightly lighter grey, within policy."
-     },
-     {
-      "label": "Everything is fine",
-      "left": "370px",
-      "top": "30px",
-      "width": "120px",
-      "height": "26px",
-      "say": "Everything is fine."
-     },
-     {
-      "label": "Zoom 100%",
-      "left": "calc(100% - 46px)",
-      "top": "30px",
-      "width": "44px",
-      "height": "26px",
-      "say": "Zoom: 100%. The responsible amount."
-     }
-    ]
-   }
-  ],
-  "pages": {
-   "flossing": {
-    "title": "Flossing Log",
-    "cols": [
-     "Date",
-     "Day",
-     "Morning",
-     "Night",
-     "Minutes",
-     "Notes"
+  "id": "q3-reconciliation",
+  "name": "Q3 Reconciliation",
+  "description": "A sensible spreadsheet: Q3_Reconciliation_FINAL_v2 (Reviewed) (2).xlsx open in LedgerSheet Pro. Gridlines, row numbers, a formula bar, grey buttons and cell comments from Accounting, HR and Compliance confirming that this is a very normal, very professional choice.",
+  "extras": {
+    "layers": [
+      {
+        "anchor": "top",
+        "box": {
+          "left": "calc(-1 * clamp(10px,100vw - 564px,36px))",
+          "right": "-10px",
+          "bottom": "calc(100% + 12px)",
+          "height": "152px"
+        },
+        "spots": [
+          {
+            "label": "File",
+            "left": "6px",
+            "top": "34px",
+            "width": "35.84375px",
+            "height": "24px",
+            "menu": [
+              {
+                "text": "New",
+                "hint": "You already have enough going on",
+                "disabled": true
+              },
+              {
+                "text": "Open Recent",
+                "hint": "Q3_Reconciliation_FINAL_v2 (Reviewed) (2).xlsx",
+                "say": "This file is already open. It is always open."
+              },
+              {
+                "text": "Save",
+                "say": "Already saved. Twice. Autosave is also on."
+              },
+              {
+                "sep": true
+              },
+              {
+                "text": "Export as Fun…",
+                "hint": "Not available in your region",
+                "disabled": true
+              },
+              {
+                "text": "Print",
+                "say": "Sent to the printer on the 3rd floor. Double-sided, grayscale, stapled."
+              },
+              {
+                "sep": true
+              },
+              {
+                "text": "Close",
+                "say": "Are you sure? There is a deadline in 2 business days."
+              }
+            ]
+          },
+          {
+            "label": "Edit",
+            "left": "68px",
+            "top": "34px",
+            "width": "37.90625px",
+            "height": "24px",
+            "menu": [
+              {
+                "text": "Undo",
+                "hint": "Can't undo: that was a commitment",
+                "disabled": true
+              },
+              {
+                "text": "Redo",
+                "disabled": true
+              },
+              {
+                "sep": true
+              },
+              {
+                "text": "Paste Special",
+                "hint": "Paste Seriously",
+                "say": "Pasted seriously."
+              },
+              {
+                "text": "Find Joy…",
+                "say": "0 results found in 1 sheet."
+              },
+              {
+                "text": "Replace Fun with Accountability",
+                "say": "Replaced 0 occurrences. There was nothing to replace."
+              }
+            ]
+          },
+          {
+            "label": "View",
+            "left": "130px",
+            "top": "34px",
+            "width": "44.078125px",
+            "height": "24px",
+            "menu": [
+              {
+                "text": "Zoom: 100%",
+                "hint": "The responsible amount",
+                "say": "Zoom stays at 100%. Squinting is not a plan."
+              },
+              {
+                "text": "✓ Gridlines",
+                "hint": "Always",
+                "disabled": true
+              },
+              {
+                "text": "Dark Mode",
+                "hint": "Available after 9:30 PM",
+                "disabled": true
+              },
+              {
+                "text": "Full Screen",
+                "say": "Full screen would be a lot. Let's keep the taskbar visible."
+              }
+            ]
+          },
+          {
+            "label": "Insert",
+            "left": "192px",
+            "top": "34px",
+            "width": "48.890625px",
+            "height": "24px",
+            "menu": [
+              {
+                "text": "Row",
+                "say": "Row inserted. It is blank, as it should be."
+              },
+              {
+                "text": "Column",
+                "say": "Column inserted between C and D. Nobody noticed."
+              },
+              {
+                "text": "Chart",
+                "hint": "Bar, grey",
+                "say": "Inserted a grey bar chart. It shows 100% every month."
+              },
+              {
+                "sep": true
+              },
+              {
+                "text": "Fun",
+                "hint": "Removed in version 9.0 (2009)",
+                "disabled": true
+              }
+            ]
+          },
+          {
+            "label": "Format",
+            "left": "254px",
+            "top": "34px",
+            "width": "56.96875px",
+            "height": "24px",
+            "menu": [
+              {
+                "text": "Cells…",
+                "say": "Cells are formatted as Accounting, 2 decimal places, no surprises."
+              },
+              {
+                "text": "Conditional Formatting",
+                "hint": "If fun > 0, set fun = 0",
+                "say": "Rule applied to the whole sheet."
+              },
+              {
+                "text": "Comic Sans",
+                "hint": "Blocked by IT",
+                "disabled": true
+              }
+            ]
+          },
+          {
+            "label": "Data",
+            "left": "316px",
+            "top": "34px",
+            "width": "42.40625px",
+            "height": "24px",
+            "menu": [
+              {
+                "text": "Sort A→Z",
+                "say": "Sorted. It was already sorted."
+              },
+              {
+                "text": "Sort by Fun",
+                "hint": "No data",
+                "disabled": true
+              },
+              {
+                "text": "Remove Duplicates",
+                "say": "No duplicates found. You are one of a kind, within policy."
+              },
+              {
+                "text": "Refresh All",
+                "say": "Refreshed. Nothing changed. Good."
+              }
+            ]
+          },
+          {
+            "label": "Tools",
+            "left": "378px",
+            "top": "34px",
+            "width": "45.046875px",
+            "height": "24px",
+            "menu": [
+              {
+                "text": "Spelling",
+                "say": "No spelling errors found. As usual."
+              },
+              {
+                "text": "Macros",
+                "hint": "Disabled for your safety",
+                "disabled": true
+              },
+              {
+                "text": "Goal Seek",
+                "say": "Goal found: retire at 65 with a reasonable amount set aside."
+              }
+            ]
+          },
+          {
+            "label": "Review",
+            "left": "440px",
+            "top": "34px",
+            "width": "56.734375px",
+            "height": "24px",
+            "menu": [
+              {
+                "text": "Track Changes",
+                "say": "No changes to track. Everything is the same as it was."
+              },
+              {
+                "text": "New Comment",
+                "say": "Comment added. HR has been cc'd."
+              },
+              {
+                "text": "Show All Comments",
+                "say": "There are 8 comments. All of them say this is very normal."
+              }
+            ]
+          },
+          {
+            "label": "Window",
+            "left": "502px",
+            "top": "34px",
+            "width": "63.75px",
+            "height": "24px",
+            "menu": [
+              {
+                "text": "Arrange All",
+                "say": "Windows are already arranged. Alphabetically."
+              },
+              {
+                "text": "Flossing Log",
+                "page": "flossing"
+              },
+              {
+                "text": "Retirement 401(k)",
+                "page": "retirement"
+              },
+              {
+                "text": "Open Window",
+                "hint": "It's 61°F outside",
+                "say": "Please keep the window closed. The thermostat is set to 70°F for a reason."
+              }
+            ]
+          },
+          {
+            "label": "Help",
+            "left": "564px",
+            "top": "34px",
+            "width": "42.265625px",
+            "height": "24px",
+            "menu": [
+              {
+                "text": "About LedgerSheet Pro",
+                "say": "LedgerSheet Pro 19.0.3 (Responsible Edition). Licensed to a grown-up."
+              },
+              {
+                "text": "Contact Support",
+                "say": "Estimated hold time: 3 fiscal quarters. Your call is important to us."
+              },
+              {
+                "text": "What's New",
+                "say": "Nothing. That's the point."
+              }
+            ]
+          },
+          {
+            "label": "Undo",
+            "left": "12px",
+            "top": "66px",
+            "width": "28px",
+            "height": "28px",
+            "say": "Can't undo. You meant it."
+          },
+          {
+            "label": "Redo",
+            "left": "42px",
+            "top": "66px",
+            "width": "28px",
+            "height": "28px",
+            "say": "Nothing to redo. You did it right the first time."
+          },
+          {
+            "label": "Print",
+            "left": "72px",
+            "top": "66px",
+            "width": "28px",
+            "height": "28px",
+            "say": "Printed. It's in the tray. Don't forget it."
+          },
+          {
+            "label": "Bold",
+            "left": "114px",
+            "top": "66px",
+            "width": "28px",
+            "height": "28px",
+            "say": "Bold is reserved for column headers."
+          },
+          {
+            "label": "Italic",
+            "left": "144px",
+            "top": "66px",
+            "width": "28px",
+            "height": "28px",
+            "say": "Italic is for emphasis. There is nothing to emphasize."
+          },
+          {
+            "label": "Underline",
+            "left": "174px",
+            "top": "66px",
+            "width": "28px",
+            "height": "28px",
+            "say": "Underline is for hyperlinks and signatures."
+          },
+          {
+            "label": "Font: Carlito",
+            "left": "216px",
+            "top": "68px",
+            "width": "108px",
+            "height": "24px",
+            "say": "Carlito, 11 pt. The font of minutes from the last meeting."
+          },
+          {
+            "label": "Font size: 11",
+            "left": "332px",
+            "top": "68px",
+            "width": "44px",
+            "height": "24px",
+            "say": "11 pt is plenty."
+          },
+          {
+            "label": "Style: Normal",
+            "left": "384px",
+            "top": "68px",
+            "width": "92px",
+            "height": "24px",
+            "say": "Style is Normal. All styles are Normal."
+          },
+          {
+            "label": "Number format: Accounting",
+            "left": "484px",
+            "top": "68px",
+            "width": "112px",
+            "height": "24px",
+            "say": "Every number here is in Accounting format, including the radio frequency."
+          },
+          {
+            "label": "Currency",
+            "left": "616px",
+            "top": "66px",
+            "width": "28px",
+            "height": "28px",
+            "say": "Formatted as currency. 99.9 HD is now $99.90."
+          },
+          {
+            "label": "Percent",
+            "left": "646px",
+            "top": "66px",
+            "width": "28px",
+            "height": "28px",
+            "say": "That's 100% compliance."
+          },
+          {
+            "label": "Decimal places",
+            "left": "676px",
+            "top": "66px",
+            "width": "28px",
+            "height": "28px",
+            "say": "2 decimal places. As agreed."
+          },
+          {
+            "label": "Sum",
+            "left": "706px",
+            "top": "66px",
+            "width": "28px",
+            "height": "28px",
+            "say": "Sum: 99.9. Average: 99.9. Count: 1. Checks out."
+          },
+          {
+            "label": "Sort A to Z",
+            "left": "736px",
+            "top": "66px",
+            "width": "28px",
+            "height": "28px",
+            "say": "Sorted A to Z. The radio stays at the top."
+          },
+          {
+            "label": "Filter",
+            "left": "766px",
+            "top": "66px",
+            "width": "28px",
+            "height": "28px",
+            "say": "Filter applied: Fun = (none). 0 rows hidden."
+          },
+          {
+            "label": "Freeze Panes",
+            "left": "808px",
+            "top": "66px",
+            "width": "86px",
+            "height": "28px",
+            "say": "Panes frozen. Rows 1 to 3 will stay where they are, like you."
+          },
+          {
+            "label": "Protect Sheet",
+            "left": "898px",
+            "top": "66px",
+            "width": "92px",
+            "height": "28px",
+            "say": "This sheet is protected. So are your weekends, because you plan ahead."
+          },
+          {
+            "label": "Name box: C4",
+            "left": "6px",
+            "top": "104px",
+            "width": "64px",
+            "height": "22px",
+            "say": "You are in cell C4. You have been in C4 since 2019."
+          },
+          {
+            "label": "Formula bar",
+            "left": "104px",
+            "top": "104px",
+            "width": "500px",
+            "height": "22px",
+            "say": "=IF(USER=\"responsible adult\", \"approved\", \"approved\") — the formula is correct. Both outcomes were reviewed."
+          },
+          {
+            "label": "Column A",
+            "left": "30px",
+            "top": "130px",
+            "width": "100px",
+            "height": "22px",
+            "say": "Column A: empty and tidy. Please keep it that way."
+          },
+          {
+            "label": "Column B",
+            "left": "130px",
+            "top": "130px",
+            "width": "100px",
+            "height": "22px",
+            "say": "Column B: empty and tidy. Please keep it that way."
+          },
+          {
+            "label": "Column C",
+            "left": "230px",
+            "top": "130px",
+            "width": "100px",
+            "height": "22px",
+            "say": "Column C is selected. It was selected on purpose."
+          },
+          {
+            "label": "Column D",
+            "left": "330px",
+            "top": "130px",
+            "width": "100px",
+            "height": "22px",
+            "say": "Column D: empty and tidy. Please keep it that way."
+          },
+          {
+            "label": "Column E",
+            "left": "430px",
+            "top": "130px",
+            "width": "100px",
+            "height": "22px",
+            "say": "Column E: empty and tidy. Please keep it that way."
+          },
+          {
+            "label": "Column F",
+            "left": "530px",
+            "top": "130px",
+            "width": "100px",
+            "height": "22px",
+            "say": "Column F: empty and tidy. Please keep it that way."
+          },
+          {
+            "label": "Column G",
+            "left": "630px",
+            "top": "130px",
+            "width": "100px",
+            "height": "22px",
+            "say": "Column G: empty and tidy. Please keep it that way."
+          },
+          {
+            "label": "Column H",
+            "left": "730px",
+            "top": "130px",
+            "width": "100px",
+            "height": "22px",
+            "say": "Column H: empty and tidy. Please keep it that way."
+          },
+          {
+            "label": "Minimize",
+            "left": "calc(100% - 103px)",
+            "top": "1px",
+            "width": "32px",
+            "height": "30px",
+            "say": "Minimized for 0 seconds. Back to work."
+          },
+          {
+            "label": "Maximize",
+            "left": "calc(100% - 71px)",
+            "top": "1px",
+            "width": "32px",
+            "height": "30px",
+            "say": "The window is already the right size."
+          },
+          {
+            "label": "Close",
+            "left": "calc(100% - 39px)",
+            "top": "1px",
+            "width": "32px",
+            "height": "30px",
+            "say": "You can't close this. You have unsaved feelings. (Just kidding. Everything is saved.)"
+          }
+        ]
+      },
+      {
+        "anchor": "pinfoot",
+        "box": {
+          "left": "calc(-1 * clamp(10px,100vw - 564px,36px))",
+          "right": "-10px",
+          "top": "calc(100% + 13px)",
+          "height": "56px"
+        },
+        "spots": [
+          {
+            "label": "Q3 Reconciliation",
+            "left": "58px",
+            "top": "0px",
+            "width": "127.6015625px",
+            "height": "30px",
+            "back": true
+          },
+          {
+            "label": "Flossing Log",
+            "left": "185.6015625px",
+            "top": "0px",
+            "width": "94.1640625px",
+            "height": "30px",
+            "page": "flossing"
+          },
+          {
+            "label": "Retirement 401(k)",
+            "left": "279.765625px",
+            "top": "0px",
+            "width": "129.078125px",
+            "height": "30px",
+            "page": "retirement"
+          },
+          {
+            "label": "Fiber Intake",
+            "left": "408.84375px",
+            "top": "0px",
+            "width": "92.875px",
+            "height": "30px",
+            "page": "fiber"
+          },
+          {
+            "label": "Bedtime 9:30 PM",
+            "left": "501.71875px",
+            "top": "0px",
+            "width": "124.4609375px",
+            "height": "30px",
+            "page": "bedtime"
+          },
+          {
+            "label": "Tax Docs (Organized)",
+            "left": "626.1796875px",
+            "top": "0px",
+            "width": "143.6953125px",
+            "height": "30px",
+            "page": "taxdocs"
+          },
+          {
+            "label": "Sheet7",
+            "left": "769.875px",
+            "top": "0px",
+            "width": "65.4296875px",
+            "height": "30px",
+            "page": "sheet7"
+          },
+          {
+            "label": "New sheet",
+            "left": "837.3046875px",
+            "top": "0px",
+            "width": "26px",
+            "height": "30px",
+            "say": "New sheet limit reached: 7 per fiscal year."
+          },
+          {
+            "label": "Previous sheet",
+            "left": "8px",
+            "top": "0px",
+            "width": "22px",
+            "height": "30px",
+            "back": true
+          },
+          {
+            "label": "Next sheet",
+            "left": "30px",
+            "top": "0px",
+            "width": "22px",
+            "height": "30px",
+            "page": "flossing"
+          },
+          {
+            "label": "Ready",
+            "left": "6px",
+            "top": "30px",
+            "width": "52px",
+            "height": "26px",
+            "say": "Ready. Always ready."
+          },
+          {
+            "label": "Accessibility: Good to go",
+            "left": "80px",
+            "top": "30px",
+            "width": "160px",
+            "height": "26px",
+            "say": "Accessibility check: good to go. Contrast is grey on slightly lighter grey, within policy."
+          },
+          {
+            "label": "Everything is fine",
+            "left": "370px",
+            "top": "30px",
+            "width": "120px",
+            "height": "26px",
+            "say": "Everything is fine."
+          },
+          {
+            "label": "Zoom 100%",
+            "left": "calc(100% - 46px)",
+            "top": "30px",
+            "width": "44px",
+            "height": "26px",
+            "say": "Zoom: 100%. The responsible amount."
+          }
+        ]
+      }
     ],
-    "rows": [
-     [
-      "10/01",
-      "Thu",
-      "✓",
-      "✓",
-      "2.0",
-      "Waxed, mint"
-     ],
-     [
-      "10/02",
-      "Fri",
-      "✓",
-      "✓",
-      "2.0",
-      "Waxed, mint"
-     ],
-     [
-      "10/03",
-      "Sat",
-      "✓",
-      "✓",
-      "2.0",
-      "Unwaxed, unflavored"
-     ],
-     [
-      "10/04",
-      "Sun",
-      "✓",
-      "✓",
-      "2.0",
-      "Waxed, mint"
-     ],
-     [
-      "10/05",
-      "Mon",
-      "✓",
-      "✓",
-      "2.0",
-      "Waxed, mint"
-     ],
-     [
-      "10/06",
-      "Tue",
-      "✓",
-      "✓",
-      "2.0",
-      "Unwaxed, unflavored"
-     ],
-     [
-      "10/07",
-      "Wed",
-      "✓",
-      "✓",
-      "2.0",
-      "Waxed, mint"
-     ],
-     [
-      "10/08",
-      "Thu",
-      "✓",
-      "✓",
-      "2.0",
-      "Waxed, mint"
-     ],
-     [
-      "10/09",
-      "Fri",
-      "✓",
-      "✓",
-      "2.0",
-      "Unwaxed, unflavored"
-     ],
-     [
-      "10/10",
-      "Sat",
-      "✓",
-      "✓",
-      "2.0",
-      "Waxed, mint"
-     ],
-     [
-      "10/11",
-      "Sun",
-      "✓",
-      "✓",
-      "2.0",
-      "Waxed, mint"
-     ],
-     [
-      "10/12",
-      "Mon",
-      "✓",
-      "✓",
-      "2.0",
-      "Unwaxed, unflavored"
-     ],
-     [
-      "10/13",
-      "Tue",
-      "✓",
-      "✓",
-      "2.0",
-      "Waxed, mint"
-     ],
-     [
-      "10/14",
-      "Wed",
-      "✓",
-      "✓",
-      "2.0",
-      "Waxed, mint"
-     ],
-     [
-      "10/15",
-      "Thu",
-      "✓",
-      "✓",
-      "2.0",
-      "Unwaxed, unflavored"
-     ],
-     [
-      "10/16",
-      "Fri",
-      "✓",
-      "✓",
-      "2.0",
-      "Waxed, mint"
-     ],
-     [
-      "10/17",
-      "Sat",
-      "✓",
-      "✓",
-      "2.0",
-      "Waxed, mint"
-     ],
-     [
-      "10/18",
-      "Sun",
-      "✓",
-      "✓",
-      "2.0",
-      "Unwaxed, unflavored"
-     ]
-    ],
-    "note": "Streak: 1,388 days. Dentist says \"keep doing what you're doing.\""
-   },
-   "retirement": {
-    "title": "Retirement 401(k)",
-    "cols": [
-     "Year",
-     "Contribution",
-     "Employer match",
-     "Balance",
-     "On track?"
-    ],
-    "rows": [
-     [
-      "2016",
-      "$6,000.00",
-      "$3,000.00",
-      "$10,400.00",
-      "Yes"
-     ],
-     [
-      "2017",
-      "$6,500.00",
-      "$3,250.00",
-      "$22,000.00",
-      "Yes"
-     ],
-     [
-      "2018",
-      "$7,000.00",
-      "$3,500.00",
-      "$34,800.00",
-      "Yes"
-     ],
-     [
-      "2019",
-      "$7,500.00",
-      "$3,750.00",
-      "$48,800.00",
-      "Yes"
-     ],
-     [
-      "2020",
-      "$8,000.00",
-      "$4,000.00",
-      "$64,000.00",
-      "Yes"
-     ],
-     [
-      "2021",
-      "$8,500.00",
-      "$4,250.00",
-      "$80,400.00",
-      "Yes"
-     ],
-     [
-      "2022",
-      "$9,000.00",
-      "$4,500.00",
-      "$98,000.00",
-      "Yes"
-     ],
-     [
-      "2023",
-      "$9,500.00",
-      "$4,750.00",
-      "$116,800.00",
-      "Yes"
-     ],
-     [
-      "2024",
-      "$10,000.00",
-      "$5,000.00",
-      "$136,800.00",
-      "Yes"
-     ],
-     [
-      "2025",
-      "$10,500.00",
-      "$5,250.00",
-      "$158,000.00",
-      "Yes"
-     ],
-     [
-      "2026",
-      "$11,000.00",
-      "$5,500.00",
-      "$180,400.00",
-      "Yes"
-     ]
-    ],
-    "note": "Rebalanced annually on the second Tuesday of January, as planned."
-   },
-   "fiber": {
-    "title": "Fiber Intake",
-    "cols": [
-     "Date",
-     "Breakfast",
-     "Lunch",
-     "Dinner",
-     "Total (g)",
-     "Goal (g)"
-    ],
-    "rows": [
-     [
-      "10/01",
-      "Bran flakes",
-      "Lentil soup",
-      "Broccoli",
-      "31",
-      "30"
-     ],
-     [
-      "10/02",
-      "Bran flakes",
-      "Lentil soup",
-      "Broccoli",
-      "31",
-      "30"
-     ],
-     [
-      "10/03",
-      "Bran flakes",
-      "Lentil soup",
-      "Broccoli",
-      "31",
-      "30"
-     ],
-     [
-      "10/04",
-      "Bran flakes",
-      "Lentil soup",
-      "Broccoli",
-      "31",
-      "30"
-     ],
-     [
-      "10/05",
-      "Bran flakes",
-      "Lentil soup",
-      "Broccoli",
-      "31",
-      "30"
-     ],
-     [
-      "10/06",
-      "Bran flakes",
-      "Lentil soup",
-      "Broccoli",
-      "31",
-      "30"
-     ],
-     [
-      "10/07",
-      "Bran flakes",
-      "Lentil soup",
-      "Broccoli",
-      "31",
-      "30"
-     ],
-     [
-      "10/08",
-      "Bran flakes",
-      "Lentil soup",
-      "Broccoli",
-      "31",
-      "30"
-     ],
-     [
-      "10/09",
-      "Bran flakes",
-      "Lentil soup",
-      "Broccoli",
-      "31",
-      "30"
-     ],
-     [
-      "10/10",
-      "Bran flakes",
-      "Lentil soup",
-      "Broccoli",
-      "31",
-      "30"
-     ],
-     [
-      "10/11",
-      "Bran flakes",
-      "Lentil soup",
-      "Broccoli",
-      "31",
-      "30"
-     ],
-     [
-      "10/12",
-      "Bran flakes",
-      "Lentil soup",
-      "Broccoli",
-      "31",
-      "30"
-     ],
-     [
-      "10/13",
-      "Bran flakes",
-      "Lentil soup",
-      "Broccoli",
-      "31",
-      "30"
-     ],
-     [
-      "10/14",
-      "Bran flakes",
-      "Lentil soup",
-      "Broccoli",
-      "31",
-      "30"
-     ]
-    ],
-    "note": "Goal met 14 of 14 days. Water intake: also logged, also met."
-   },
-   "bedtime": {
-    "title": "Bedtime 9:30 PM",
-    "cols": [
-     "Date",
-     "Lights out",
-     "Woke up",
-     "Hours",
-     "Screens off"
-    ],
-    "rows": [
-     [
-      "10/01",
-      "9:30 PM",
-      "5:45 AM",
-      "8.25",
-      "8:30 PM"
-     ],
-     [
-      "10/02",
-      "9:30 PM",
-      "5:45 AM",
-      "8.25",
-      "8:30 PM"
-     ],
-     [
-      "10/03",
-      "9:30 PM",
-      "5:45 AM",
-      "8.25",
-      "8:30 PM"
-     ],
-     [
-      "10/04",
-      "9:30 PM",
-      "5:45 AM",
-      "8.25",
-      "8:30 PM"
-     ],
-     [
-      "10/05",
-      "9:30 PM",
-      "5:45 AM",
-      "8.25",
-      "8:30 PM"
-     ],
-     [
-      "10/06",
-      "9:30 PM",
-      "5:45 AM",
-      "8.25",
-      "8:30 PM"
-     ],
-     [
-      "10/07",
-      "9:30 PM",
-      "5:45 AM",
-      "8.25",
-      "8:30 PM"
-     ],
-     [
-      "10/08",
-      "9:30 PM",
-      "5:45 AM",
-      "8.25",
-      "8:30 PM"
-     ],
-     [
-      "10/09",
-      "9:30 PM",
-      "5:45 AM",
-      "8.25",
-      "8:30 PM"
-     ],
-     [
-      "10/10",
-      "9:30 PM",
-      "5:45 AM",
-      "8.25",
-      "8:30 PM"
-     ],
-     [
-      "10/11",
-      "9:30 PM",
-      "5:45 AM",
-      "8.25",
-      "8:30 PM"
-     ],
-     [
-      "10/12",
-      "9:30 PM",
-      "5:45 AM",
-      "8.25",
-      "8:30 PM"
-     ],
-     [
-      "10/13",
-      "9:30 PM",
-      "5:45 AM",
-      "8.25",
-      "8:30 PM"
-     ],
-     [
-      "10/14",
-      "9:30 PM",
-      "5:45 AM",
-      "8.25",
-      "8:30 PM"
-     ]
-    ],
-    "note": "Average: 8.25 hours. Variance: 0. Alarm used: never."
-   },
-   "taxdocs": {
-    "title": "Tax Docs (Organized)",
-    "cols": [
-     "Folder",
-     "Contents",
-     "Status"
-    ],
-    "rows": [
-     [
-      "2026 / W-2",
-      "1 document",
-      "Filed"
-     ],
-     [
-      "2026 / 1099-INT",
-      "2 documents",
-      "Filed"
-     ],
-     [
-      "2026 / Receipts",
-      "312 documents, alphabetized",
-      "Filed"
-     ],
-     [
-      "2026 / Charitable",
-      "Itemized, with letters",
-      "Filed"
-     ],
-     [
-      "2025",
-      "Everything",
-      "Filed in February"
-     ],
-     [
-      "2024",
-      "Everything",
-      "Filed in February"
-     ],
-     [
-      "Shoebox",
-      "None. There is no shoebox.",
-      "N/A"
-     ]
-    ],
-    "note": "Taxes for 2027 are already estimated."
-   },
-   "sheet7": {
-    "title": "Sheet7",
-    "cols": [
-     "A",
-     "B",
-     "C"
-    ],
-    "rows": [],
-    "note": "This sheet intentionally left blank, for future responsibilities."
-   }
+    "pages": {
+      "flossing": {
+        "title": "Flossing Log",
+        "cols": [
+          "Date",
+          "Day",
+          "Morning",
+          "Night",
+          "Minutes",
+          "Notes"
+        ],
+        "rows": [
+          [
+            "10/01",
+            "Thu",
+            "✓",
+            "✓",
+            "2.0",
+            "Waxed, mint"
+          ],
+          [
+            "10/02",
+            "Fri",
+            "✓",
+            "✓",
+            "2.0",
+            "Waxed, mint"
+          ],
+          [
+            "10/03",
+            "Sat",
+            "✓",
+            "✓",
+            "2.0",
+            "Unwaxed, unflavored"
+          ],
+          [
+            "10/04",
+            "Sun",
+            "✓",
+            "✓",
+            "2.0",
+            "Waxed, mint"
+          ],
+          [
+            "10/05",
+            "Mon",
+            "✓",
+            "✓",
+            "2.0",
+            "Waxed, mint"
+          ],
+          [
+            "10/06",
+            "Tue",
+            "✓",
+            "✓",
+            "2.0",
+            "Unwaxed, unflavored"
+          ],
+          [
+            "10/07",
+            "Wed",
+            "✓",
+            "✓",
+            "2.0",
+            "Waxed, mint"
+          ],
+          [
+            "10/08",
+            "Thu",
+            "✓",
+            "✓",
+            "2.0",
+            "Waxed, mint"
+          ],
+          [
+            "10/09",
+            "Fri",
+            "✓",
+            "✓",
+            "2.0",
+            "Unwaxed, unflavored"
+          ],
+          [
+            "10/10",
+            "Sat",
+            "✓",
+            "✓",
+            "2.0",
+            "Waxed, mint"
+          ],
+          [
+            "10/11",
+            "Sun",
+            "✓",
+            "✓",
+            "2.0",
+            "Waxed, mint"
+          ],
+          [
+            "10/12",
+            "Mon",
+            "✓",
+            "✓",
+            "2.0",
+            "Unwaxed, unflavored"
+          ],
+          [
+            "10/13",
+            "Tue",
+            "✓",
+            "✓",
+            "2.0",
+            "Waxed, mint"
+          ],
+          [
+            "10/14",
+            "Wed",
+            "✓",
+            "✓",
+            "2.0",
+            "Waxed, mint"
+          ],
+          [
+            "10/15",
+            "Thu",
+            "✓",
+            "✓",
+            "2.0",
+            "Unwaxed, unflavored"
+          ],
+          [
+            "10/16",
+            "Fri",
+            "✓",
+            "✓",
+            "2.0",
+            "Waxed, mint"
+          ],
+          [
+            "10/17",
+            "Sat",
+            "✓",
+            "✓",
+            "2.0",
+            "Waxed, mint"
+          ],
+          [
+            "10/18",
+            "Sun",
+            "✓",
+            "✓",
+            "2.0",
+            "Unwaxed, unflavored"
+          ]
+        ],
+        "note": "Streak: 1,388 days. Dentist says \"keep doing what you're doing.\""
+      },
+      "retirement": {
+        "title": "Retirement 401(k)",
+        "cols": [
+          "Year",
+          "Contribution",
+          "Employer match",
+          "Balance",
+          "On track?"
+        ],
+        "rows": [
+          [
+            "2016",
+            "$6,000.00",
+            "$3,000.00",
+            "$10,400.00",
+            "Yes"
+          ],
+          [
+            "2017",
+            "$6,500.00",
+            "$3,250.00",
+            "$22,000.00",
+            "Yes"
+          ],
+          [
+            "2018",
+            "$7,000.00",
+            "$3,500.00",
+            "$34,800.00",
+            "Yes"
+          ],
+          [
+            "2019",
+            "$7,500.00",
+            "$3,750.00",
+            "$48,800.00",
+            "Yes"
+          ],
+          [
+            "2020",
+            "$8,000.00",
+            "$4,000.00",
+            "$64,000.00",
+            "Yes"
+          ],
+          [
+            "2021",
+            "$8,500.00",
+            "$4,250.00",
+            "$80,400.00",
+            "Yes"
+          ],
+          [
+            "2022",
+            "$9,000.00",
+            "$4,500.00",
+            "$98,000.00",
+            "Yes"
+          ],
+          [
+            "2023",
+            "$9,500.00",
+            "$4,750.00",
+            "$116,800.00",
+            "Yes"
+          ],
+          [
+            "2024",
+            "$10,000.00",
+            "$5,000.00",
+            "$136,800.00",
+            "Yes"
+          ],
+          [
+            "2025",
+            "$10,500.00",
+            "$5,250.00",
+            "$158,000.00",
+            "Yes"
+          ],
+          [
+            "2026",
+            "$11,000.00",
+            "$5,500.00",
+            "$180,400.00",
+            "Yes"
+          ]
+        ],
+        "note": "Rebalanced annually on the second Tuesday of January, as planned."
+      },
+      "fiber": {
+        "title": "Fiber Intake",
+        "cols": [
+          "Date",
+          "Breakfast",
+          "Lunch",
+          "Dinner",
+          "Total (g)",
+          "Goal (g)"
+        ],
+        "rows": [
+          [
+            "10/01",
+            "Bran flakes",
+            "Lentil soup",
+            "Broccoli",
+            "31",
+            "30"
+          ],
+          [
+            "10/02",
+            "Bran flakes",
+            "Lentil soup",
+            "Broccoli",
+            "31",
+            "30"
+          ],
+          [
+            "10/03",
+            "Bran flakes",
+            "Lentil soup",
+            "Broccoli",
+            "31",
+            "30"
+          ],
+          [
+            "10/04",
+            "Bran flakes",
+            "Lentil soup",
+            "Broccoli",
+            "31",
+            "30"
+          ],
+          [
+            "10/05",
+            "Bran flakes",
+            "Lentil soup",
+            "Broccoli",
+            "31",
+            "30"
+          ],
+          [
+            "10/06",
+            "Bran flakes",
+            "Lentil soup",
+            "Broccoli",
+            "31",
+            "30"
+          ],
+          [
+            "10/07",
+            "Bran flakes",
+            "Lentil soup",
+            "Broccoli",
+            "31",
+            "30"
+          ],
+          [
+            "10/08",
+            "Bran flakes",
+            "Lentil soup",
+            "Broccoli",
+            "31",
+            "30"
+          ],
+          [
+            "10/09",
+            "Bran flakes",
+            "Lentil soup",
+            "Broccoli",
+            "31",
+            "30"
+          ],
+          [
+            "10/10",
+            "Bran flakes",
+            "Lentil soup",
+            "Broccoli",
+            "31",
+            "30"
+          ],
+          [
+            "10/11",
+            "Bran flakes",
+            "Lentil soup",
+            "Broccoli",
+            "31",
+            "30"
+          ],
+          [
+            "10/12",
+            "Bran flakes",
+            "Lentil soup",
+            "Broccoli",
+            "31",
+            "30"
+          ],
+          [
+            "10/13",
+            "Bran flakes",
+            "Lentil soup",
+            "Broccoli",
+            "31",
+            "30"
+          ],
+          [
+            "10/14",
+            "Bran flakes",
+            "Lentil soup",
+            "Broccoli",
+            "31",
+            "30"
+          ]
+        ],
+        "note": "Goal met 14 of 14 days. Water intake: also logged, also met."
+      },
+      "bedtime": {
+        "title": "Bedtime 9:30 PM",
+        "cols": [
+          "Date",
+          "Lights out",
+          "Woke up",
+          "Hours",
+          "Screens off"
+        ],
+        "rows": [
+          [
+            "10/01",
+            "9:30 PM",
+            "5:45 AM",
+            "8.25",
+            "8:30 PM"
+          ],
+          [
+            "10/02",
+            "9:30 PM",
+            "5:45 AM",
+            "8.25",
+            "8:30 PM"
+          ],
+          [
+            "10/03",
+            "9:30 PM",
+            "5:45 AM",
+            "8.25",
+            "8:30 PM"
+          ],
+          [
+            "10/04",
+            "9:30 PM",
+            "5:45 AM",
+            "8.25",
+            "8:30 PM"
+          ],
+          [
+            "10/05",
+            "9:30 PM",
+            "5:45 AM",
+            "8.25",
+            "8:30 PM"
+          ],
+          [
+            "10/06",
+            "9:30 PM",
+            "5:45 AM",
+            "8.25",
+            "8:30 PM"
+          ],
+          [
+            "10/07",
+            "9:30 PM",
+            "5:45 AM",
+            "8.25",
+            "8:30 PM"
+          ],
+          [
+            "10/08",
+            "9:30 PM",
+            "5:45 AM",
+            "8.25",
+            "8:30 PM"
+          ],
+          [
+            "10/09",
+            "9:30 PM",
+            "5:45 AM",
+            "8.25",
+            "8:30 PM"
+          ],
+          [
+            "10/10",
+            "9:30 PM",
+            "5:45 AM",
+            "8.25",
+            "8:30 PM"
+          ],
+          [
+            "10/11",
+            "9:30 PM",
+            "5:45 AM",
+            "8.25",
+            "8:30 PM"
+          ],
+          [
+            "10/12",
+            "9:30 PM",
+            "5:45 AM",
+            "8.25",
+            "8:30 PM"
+          ],
+          [
+            "10/13",
+            "9:30 PM",
+            "5:45 AM",
+            "8.25",
+            "8:30 PM"
+          ],
+          [
+            "10/14",
+            "9:30 PM",
+            "5:45 AM",
+            "8.25",
+            "8:30 PM"
+          ]
+        ],
+        "note": "Average: 8.25 hours. Variance: 0. Alarm used: never."
+      },
+      "taxdocs": {
+        "title": "Tax Docs (Organized)",
+        "cols": [
+          "Folder",
+          "Contents",
+          "Status"
+        ],
+        "rows": [
+          [
+            "2026 / W-2",
+            "1 document",
+            "Filed"
+          ],
+          [
+            "2026 / 1099-INT",
+            "2 documents",
+            "Filed"
+          ],
+          [
+            "2026 / Receipts",
+            "312 documents, alphabetized",
+            "Filed"
+          ],
+          [
+            "2026 / Charitable",
+            "Itemized, with letters",
+            "Filed"
+          ],
+          [
+            "2025",
+            "Everything",
+            "Filed in February"
+          ],
+          [
+            "2024",
+            "Everything",
+            "Filed in February"
+          ],
+          [
+            "Shoebox",
+            "None. There is no shoebox.",
+            "N/A"
+          ]
+        ],
+        "note": "Taxes for 2027 are already estimated."
+      },
+      "sheet7": {
+        "title": "Sheet7",
+        "cols": [
+          "A",
+          "B",
+          "C"
+        ],
+        "rows": [],
+        "note": "This sheet intentionally left blank, for future responsibilities."
+      }
+    }
   }
- }
 }

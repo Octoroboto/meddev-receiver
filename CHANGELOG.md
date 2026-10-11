@@ -2,6 +2,10 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.10.3 (2026-10-11, Rob)
+- **Q3 Reconciliation:** the minimize, maximize and close glyphs are redrawn and sit in the middle of their tap areas. The settings (skin picker, "What plays between songs", Slack, city and units labels, hints) and the brand marks on the faceplate are dark ink on the light sheet instead of the base's light text.
+- **New skin settings `--label`, `--hint` and `--etch`:** the text colour of settings labels and option names, of hints, and of the faceplate brand marks, spec line and window-button captions. The base keeps its old colours when a skin doesn't set them; light skins set them so that text stays readable. Q3 Reconciliation, Clara Stamford's Homestead Collection and Mouth Jamboree (hints) use them.
+
 ## 1.10.2 (2026-10-11, Rob)
 - **Skin rules:** closed about a dozen ways a skin could get past the checks (nested rules, backslash escapes, quoted braces and semicolons, -webkit- prefixes, image-set(), animated pointer-events). No existing skin changes.
 - **Spray can:** each click was handled once instead of twice, so BUG SPRAY and SUGAR MIST work with reduced motion on.

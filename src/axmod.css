@@ -10,7 +10,7 @@
 .ax-host{display:flex;align-items:center;gap:16px;padding:6px 0 6px 14px;grid-column:1/-1}
 .ax-host .rd-btn{flex:none}
 .ax-host small{font:700 .56rem/1 Tahoma,Verdana,sans-serif;letter-spacing:.16em;color:var(--caption);text-shadow:0 1px 0 rgba(0,0,0,.65);white-space:nowrap}
-.ax-host-hint{font-size:.85rem;color:var(--muted,#b9bdc9)}
+.ax-host-hint{font-size:.85rem;color:var(--hint,var(--muted,#b9bdc9))}
 
 /* The drawer */
 .ax-drawer{position:fixed!important;top:0;right:0;left:auto;bottom:auto;z-index:2147483000;margin:0!important;

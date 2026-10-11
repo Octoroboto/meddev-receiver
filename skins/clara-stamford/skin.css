@@ -13,6 +13,7 @@
   --bezel-1:#ffffff; --bezel-2:#ecebe6; --bezel-3:#d6d3ca;
   --plate-1:#fbfaf7; --plate-2:#f3f1ec; --plate-3:#e6e3dc; --key-1:#ffffff; --key-2:#f1efe9; --key-hover-1:#ffffff; --key-hover-2:#f7f5f0;
   --title-1:#fbf6ea; --title-2:#efe6d0;
+  --label:#3e3228; --hint:#5b4a3a; --engrave:0 1px 0 rgba(255,255,255,.8);
   /* the hub page and MD Hub: dark ink on white paint, cloth-coloured lists */
   --bg:#f6f5f1; --surface:#fbfaf7; --sunk:#efece5; --ink:#3e3228; --muted:#6e5d4c; --line:#d6d1c4;
   --accent:#a8344a; --accent-ink:#fffaf0; --accent-soft:#f3dfe2; --sel:#efdcc8;
@@ -185,3 +186,4 @@ small,.rd-mm,.vizsw{font-family:var(--f-body);font-style:italic;font-weight:600;
 :is(.fitem,.hit,.msg){color:#3e3228}
 .fitem.new{background:#f3dfe2}
 .rxset > summary,.rxset summary{color:#3e3228!important;text-shadow:none!important}
+.wbtn small{color:#5b4a3a;text-shadow:0 1px 0 rgba(255,255,255,.7)}

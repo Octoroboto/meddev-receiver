@@ -12,6 +12,7 @@
   --bezel-1:#ececec; --bezel-2:#d4d4d4; --bezel-3:#bcbcbc;
   --plate-1:#f7f7f7; --plate-2:#f0f0f0; --plate-3:#e6e6e6; --key-1:#ffffff; --key-2:#ededed; --key-hover-1:#ffffff; --key-hover-2:#f4f4f4;
   --title-1:#f2f2f2; --title-2:#ebebeb;
+  --label:#222222; --hint:#595959; --etch:#555555; --engrave:0 1px 0 rgba(255,255,255,.85);
 }
 
 /* Outside the window: more spreadsheet. It goes on for a while. */
