@@ -1,0 +1,109 @@
+/* Mr. Spoonatelli's House of Spoons: an old-world spoon shop. Walnut cabinetry with gilt molding and an arched crown,
+   emerald velvet with a damask of tiny spoons, brass nameplate title bars, ivory enamel keys, spoon-bowl knobs (silver for
+   the lights, gold for tone), an engraved serving-ladle volume knob, a swaying rack of spoons over the top (count the
+   hooks), spoons stabbed into every edge and strewn across the panels, the founder's portrait, and a corkboard that cannot agree whether a fourth spoon exists. */
+@import url("https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Cormorant+SC:wght@600;700&family=Cormorant+Garamond:wght@600;700&display=swap");
+
+:root{
+  --f-display:"IM Fell English SC",Georgia,serif; --f-body:"Cormorant Garamond",Georgia,serif;
+  --caption:#f6ead0; --focus:#ffd56a; --gold:#d9b25e; --gold-dark:#6e5220;
+  --btn-1:#f4f4f8; --btn-2:#b4b8c6; --btn-3:#4a4c58; --btn-down-1:#ffe7a6; --btn-down-2:#a87a24; --btn-bezel:#2a160c; --btn-rim:#c9a050;
+  --knob-1:#f0f0f6; --knob-2:#a8acba; --knob-3:#3c3e48; --knurl-1:#c9a050; --knurl-2:#5a3e16; --knob-pointer:#2a160c;
+  --vol-1:#f0f0f6; --vol-2:#a8acba; --vol-3:#3c3e48; --vol-cap:#d9b25e; --vol-dot:#7a1a1a;
+  --bezel-1:#5a3018; --bezel-2:#3a1e0e; --bezel-3:#1e0e06;
+  --plate-1:#6a3c1e; --plate-2:#4a2812; --plate-3:#2a160a; --key-1:#fbf6ea; --key-2:#e6dcc2; --key-hover-1:#fffaf0; --key-hover-2:#efe4c8;
+  --title-1:#d9b25e; --title-2:#a07a30;
+}
+
+/* The shop floor: dark walnut paneling, warm lamplight from above (browsers only; in the apps the window is clear). */
+body:not(.pop){background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(255,200,120,.22),transparent 70%),linear-gradient(180deg,rgba(20,8,2,.35),rgba(10,4,0,.7)),url(images/walnut.webp) 0 0/420px 420px,#2a160a;
+  padding:clamp(150px,15vw,200px) clamp(18px,10.5vw,112px) clamp(90px,12vw,170px) clamp(18px,7.4vw,80px)}
+
+/* The display cabinet: walnut with an arched crown, a gilt molding and a deep shadow line. */
+.wrap.wrap{max-width:1180px;position:relative;padding:28px clamp(10px,1.8vw,20px) 22px;gap:18px;
+  border-radius:200px 200px 22px 22px/90px 90px 22px 22px;border:3px solid #e8c878;
+  background:linear-gradient(180deg,rgba(255,220,160,.12),transparent 25%,rgba(0,0,0,.35)),url(images/walnut.webp) 40px 0/360px 360px,#4a2812;
+  box-shadow:0 0 0 2px #6e5220,0 0 0 6px #3a1e0e,0 0 0 8px #c9a050,0 30px 70px rgba(0,0,0,.75),
+    inset 0 0 0 2px #6e5220,inset 0 0 0 5px rgba(255,220,150,.35),inset 0 10px 40px rgba(0,0,0,.6)}
+
+/* Header and panels: emerald velvet behind gilt piping. */
+.top .deck,.sheet,.pop,.syncbar,.ahead,.bellpanel{background:linear-gradient(180deg,rgba(255,240,200,.10),transparent 30%,rgba(0,0,0,.35)),url(images/velvet.webp) 0 0/150px 150px,#123a2a;
+  border:2px solid #d9b25e;color:#f6ead0;box-shadow:0 0 0 1px #3a1e0e,0 0 0 4px #6e5220,0 10px 22px rgba(0,0,0,.6),inset 0 0 0 1px rgba(255,230,170,.35),inset 0 0 30px rgba(0,0,0,.55)}
+.top .deck{border-radius:110px 110px 14px 14px/50px 50px 14px 14px;padding:22px clamp(10px,2.2vw,24px) 18px}
+.panel{background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.4)),url(images/velvet.webp) 37px 21px/150px 150px,#0e3022;border:2px solid #c9a050;border-radius:14px;color:#f6ead0;
+  text-shadow:0 1px 1px #000;box-shadow:0 0 0 1px #3a1e0e,inset 0 0 0 1px rgba(255,230,170,.3),inset 0 0 40px rgba(0,0,0,.6)}
+
+/* Title bars: engraved brass nameplates. */
+.wtitle{height:28px;border-radius:6px;border:1px solid #6e5220;color:#3a2410;font:19px/1 var(--f-display);letter-spacing:.14em;text-transform:none;
+  background:linear-gradient(180deg,#f2d690 0%,#d9b25e 45%,#a87a30 100%);box-shadow:inset 0 1px 0 rgba(255,250,220,.8),inset 0 -2px 3px rgba(80,50,10,.5),0 2px 4px rgba(0,0,0,.5);
+  text-shadow:0 1px 0 rgba(255,240,190,.75),0 -1px 0 rgba(70,40,10,.35)}
+.wtitle::before,.wtitle::after{height:8px;border-radius:4px;background:radial-gradient(circle at 50% 50%,#6e5220 0 2.5px,transparent 3px) 0 0/16px 8px repeat-x}
+
+small,.rd-mm,.vizsw{font-family:"Cormorant SC",Georgia,serif;font-weight:700;letter-spacing:.12em}
+.rdeck small,.tk small,.vol small,.vu-m small,.fxbtns small,.rd-mm{color:#f6e2b0;text-shadow:0 1px 1px #000,0 0 6px rgba(0,0,0,.6)}
+
+/* Keys: ivory enamel with a gilt rim. */
+.btn{background:linear-gradient(180deg,#fffaf0,#e6dcc2);color:#3a2410;border:2px solid #c9a050;border-radius:999px;font:700 1.02rem/1 var(--f-body);letter-spacing:.06em;
+  padding:9px clamp(10px,1.8vw,18px);text-shadow:0 1px 0 #fff;box-shadow:0 0 0 1px #6e5220,0 3px 0 #6e5220,0 5px 8px rgba(0,0,0,.45),inset 0 1px 0 #fff}
+.btn:hover{background:linear-gradient(180deg,#fffdf6,#f2e8cc);border-color:#f2d690}
+.btn:active{translate:0 2px;box-shadow:0 0 0 1px #6e5220,0 1px 0 #6e5220,inset 0 1px 3px rgba(0,0,0,.25)}
+.btn.primary{background:linear-gradient(180deg,#f2d690,#c9a050);color:#2a160c}
+.btn.danger{background:linear-gradient(180deg,#f4d0c8,#d8a090);color:#5a1010}
+
+/* Round buttons: polished spoon bowls; pressed, they turn gold. */
+.rd-btn button,.vizsw input[type=checkbox]{background:url(images/knob.webp) center/118% 118% no-repeat;border:none;box-shadow:0 2px 3px rgba(0,0,0,.7),0 0 0 2px #2a160c,0 0 0 3px #c9a050}
+.rd-btn button:active,.rd-btn button[aria-pressed=true],.vizsw input[type=checkbox]:checked,.vizsw input[type=checkbox]:active{background:url(images/knob-gold.webp) center/118% 118% no-repeat;box-shadow:inset 0 1px 3px rgba(0,0,0,.4),0 0 0 2px #2a160c,0 0 0 3px #f2d690,0 0 10px rgba(255,210,120,.55)}
+
+/* Knobs: spoon bowls in a gilt collar. Silver for the lights, gold for tone. Volume: the engraved serving ladle. */
+.rd-knob{background:url(images/knob.webp) center/116% 116% no-repeat;box-shadow:0 0 0 3px #3a1e0e,0 0 0 4px #c9a050,0 5px 9px rgba(0,0,0,.7)}
+.tk .rd-knob{background-image:url(images/knob-gold.webp)}
+.rd-knob::before{background:none;box-shadow:none}
+.vol-knob{background:url(images/vol.webp) center/100% 100% no-repeat;border-radius:50%;box-shadow:0 0 0 3px #3a1e0e,0 0 0 5px #c9a050,0 10px 18px rgba(0,0,0,.7)}
+.vol-knob::before{content:none}
+.vol-dot{background:#7a1a1a;box-shadow:0 0 0 1px #f2d690}
+.vol-num{color:#f6e2b0;font-family:"Cormorant SC",serif;font-weight:700;text-shadow:0 1px 1px #000}
+
+/* The counter: walnut, with the brass nameplate, the founder's portrait, and the corkboard. */
+.pinfoot{border-radius:16px;margin-top:4px;padding:calc(30px + min(520px,80%) * .29) 16px 30px;
+  background:url(images/plaque.webp) center 18px/min(520px,80%) auto no-repeat,
+    url(images/portrait.webp) left 4% top 18px/clamp(0px,(100vw - 900px) * .4,140px) auto no-repeat,
+    linear-gradient(180deg,rgba(255,220,160,.10),transparent 30%,rgba(0,0,0,.4)),url(images/walnut.webp) 0 0/360px 360px,#4a2812;
+  border:2px solid #c9a050;box-shadow:0 0 0 1px #3a1e0e,inset 0 0 0 1px rgba(255,230,170,.3),inset 0 0 40px rgba(0,0,0,.55)}
+
+/* Decorations: the shop has lost control of its inventory. Spoons are jammed into every edge of the cabinet,
+   hanging off the counter and lying across the panels. Some fancy, some rusted, some carved with warnings. */
+.skin-decor::before,.skin-decor::after{content:"";position:absolute;pointer-events:none}
+/* the spoon rack across the crown, swaying a little (count the hooks) */
+.top .skin-decor::before{left:6%;right:6%;top:calc(-1 * clamp(150px,15vw,200px) + 6px);height:clamp(110px,13vw,170px);
+  background:url(images/rack.webp) center top/100% auto no-repeat;transform-origin:50% 0;animation:hs-sway 6s ease-in-out infinite;filter:drop-shadow(0 8px 6px rgba(0,0,0,.5));z-index:1}
+/* spoons stabbed into the top of the cabinet, all the way across, plus two carved ones jammed into the header corners */
+.top .skin-decor::after{left:calc(-1 * (clamp(10px,1.8vw,20px) + clamp(0px,(100vw - 700px) * .2,72px) + 4px));right:calc(-1 * (clamp(10px,1.8vw,20px) + clamp(0px,(100vw - 700px) * .25,96px) + 4px));top:calc(-1 * clamp(60px,9vw,110px) - 30px);bottom:-10px;
+  background:url(images/loose-1.webp) left calc(clamp(0px,(100vw - 700px) * .2,72px) + 1%) top calc(clamp(60px,9vw,110px) + 30px)/clamp(0px,(100vw - 760px) * .08,48px) auto no-repeat,
+    url(images/loose-6.webp) right calc(clamp(0px,(100vw - 700px) * .25,96px) + 1%) top calc(clamp(60px,9vw,110px) + 34px)/clamp(0px,(100vw - 760px) * .08,46px) auto no-repeat,
+    url(images/burst-top.webp) center top/min(1000px,100%) clamp(60px,9vw,110px) repeat-x,
+    url(images/burst-left.webp) left top 300px/clamp(0px,(100vw - 700px) * .2,72px) auto repeat-y,url(images/burst-right.webp) right top 60px/clamp(0px,(100vw - 700px) * .25,96px) auto repeat-y;filter:drop-shadow(0 6px 6px rgba(0,0,0,.55))}
+/* the walls: spoons sticking out of both sides of the cabinet, top to bottom */
+.station .skin-decor::before{left:calc(-1 * (clamp(10px,1.8vw,20px) + clamp(0px,(100vw - 700px) * .2,72px) + 4px));right:calc(-1 * (clamp(10px,1.8vw,20px) + clamp(0px,(100vw - 700px) * .25,96px) + 4px));top:-10px;bottom:-10px;
+  background:url(images/burst-left.webp) left top/clamp(0px,(100vw - 700px) * .2,72px) auto repeat-y,url(images/burst-right.webp) right top 140px/clamp(0px,(100vw - 700px) * .25,96px) auto repeat-y;filter:drop-shadow(0 8px 8px rgba(0,0,0,.6))}
+/* loose spoons left lying across the panel and jammed in its edges */
+.station .skin-decor::after{inset:-26px -18px -30px -18px;z-index:3;
+  background:url(images/lie-1.webp) left 53% top 74%/clamp(0px,(100vw - 900px) * .5,230px) auto no-repeat,
+    url(images/loose-3.webp) left 2% bottom 0/clamp(26px,3.2vw,40px) auto no-repeat,
+    url(images/loose-5.webp) right 3% top 0/clamp(24px,3vw,36px) auto no-repeat,
+    url(images/loose-2.webp) right 0 bottom 6%/clamp(0px,(100vw - 900px) * .1,44px) auto no-repeat,
+    url(images/loose-4.webp) left 0 top 40%/clamp(0px,(100vw - 900px) * .1,34px) auto no-repeat;
+  filter:drop-shadow(0 4px 4px rgba(0,0,0,.55))}
+/* the corkboard: two pinned notes that keep arguing (they change every forty seconds) */
+.pinfoot .skin-decor::before{right:3%;top:10px;width:clamp(0px,(100vw - 900px) * .45,190px);height:220px;
+  background:url(images/note-1.webp) left top/100% auto no-repeat;animation:hs-notes 240s steps(1,end) infinite;filter:drop-shadow(0 4px 4px rgba(0,0,0,.4))}
+/* the red string, and a fringe of spoons hanging off the bottom of the counter */
+.pinfoot .skin-decor::after{left:calc(-1 * (clamp(10px,1.8vw,20px) + clamp(0px,(100vw - 700px) * .2,72px) + 4px));right:calc(-1 * (clamp(10px,1.8vw,20px) + clamp(0px,(100vw - 700px) * .25,96px) + 4px));top:8px;bottom:calc(-1 * clamp(70px,10vw,140px));
+  background:url(images/string.webp) left 22% top 0/clamp(0px,(100vw - 900px) * 1.3,62%) 70px no-repeat,
+    url(images/lie-2.webp) left calc(clamp(0px,(100vw - 700px) * .2,72px) + 15%) top 38%/clamp(0px,(100vw - 900px) * .22,100px) auto no-repeat,
+    url(images/lie-4.webp) right calc(clamp(0px,(100vw - 700px) * .25,96px) + 9%) top 39%/clamp(0px,(100vw - 900px) * .3,130px) auto no-repeat,
+    url(images/lie-3.webp) left 69% top 41%/clamp(0px,(100vw - 900px) * .22,110px) auto no-repeat,
+    url(images/burst-bottom.webp) center bottom/min(1000px,100%) clamp(70px,10vw,140px) repeat-x,
+    url(images/burst-left.webp) left top/clamp(0px,(100vw - 700px) * .2,72px) auto repeat-y,url(images/burst-right.webp) right top 140px/clamp(0px,(100vw - 700px) * .25,96px) auto repeat-y;filter:drop-shadow(0 6px 6px rgba(0,0,0,.5))}
+
+@keyframes hs-sway{0%,100%{rotate:-.5deg}50%{rotate:.5deg}}
+@keyframes hs-notes{0%{background-image:url(images/note-1.webp)}16.6%{background-image:url(images/note-2.webp)}33.3%{background-image:url(images/note-3.webp)}50%{background-image:url(images/note-4.webp)}66.6%{background-image:url(images/note-5.webp)}83.3%{background-image:url(images/note-6.webp)}}

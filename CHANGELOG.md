@@ -2,6 +2,13 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.6.0 (2026-10-11, Rob)
+- **New skin: Mr. Spoonatelli's House of Spoons.** An old-world spoon shop that has lost control of its inventory. Walnut cabinetry with an arched gilt crown, emerald velvet with a damask of tiny spoons, brass nameplate title bars, ivory keys, spoon-bowl knobs (silver for the lights, gold for tone) and an engraved serving-ladle volume knob. Spoons are stabbed into every edge of the cabinet, hang off the counter and lie across the panels: silver, gold, rusted, tarnished and carved wood. Some carry messages ("THE 4TH SPOON IS A LIE", "THE 4TH IS REAL", "COUNT THE HOOKS"). A spoon rack sways over the crown, the founder's portrait hangs on the counter, and the corkboard notes argue about the fourth spoon, changing every forty seconds. On phones the side spoons step aside. It isn't the house default.
+
+## 1.6.0 (2026-10-11, Rob)
+- **New skin: Mr. Spoonatelli's House of Spoons.** An old-world spoon shop that has lost control of its inventory. Walnut cabinetry with an arched gilt crown, emerald velvet with a damask of tiny spoons, brass nameplate title bars, ivory keys, spoon-bowl knobs (silver for the lights, gold for tone) and an engraved serving-ladle volume knob. Spoons are stabbed into every edge of the cabinet, hang off the counter and lie across the panels: silver, gold, rusted, tarnished and carved wood. Some carry messages ("THE 4TH SPOON IS A LIE", "THE 4TH IS REAL", "COUNT THE HOOKS"). A spoon rack sways over the crown, the founder's portrait hangs on the counter, and the corkboard notes argue about the fourth spoon, changing every forty seconds. On phones the side spoons step aside. It isn't the house default.
+- **Faster build.** Skins with several images in one rule made `npm run build` take minutes. Images are now inlined after the checks. Every existing skin builds byte-for-byte the same.
+
 ## 1.5.0 (2026-10-11, Rob)
 - **New skin: Business Lightning.** A rain-soaked neon back alley: wet brick, a pink neon tube around the receiver, a black sign-cabinet header, neon title bars, glass sign keys, chrome knobs with neon rings, a flickering OPEN 24/7 sign, a lightning-bolt briefcase, a vertical MDFM sign, a fire escape, a puddle with rain, and lightning that flashes across the whole deck. It isn't the house default.
 - **Fix: buttons fit on every skin.** On phones, the header's SOUND and Station Break controls could hang off the edge. The header controls row now wraps. Default looks the same.

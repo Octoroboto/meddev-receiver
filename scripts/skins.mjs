@@ -91,9 +91,12 @@ export function buildSkin(dirUrl, id) {
   if (!/^[a-z0-9][a-z0-9-]{0,39}$/.test(id)) throw new Error(`skin "${id}": folder names are lowercase letters, numbers and dashes`);
   const meta = JSON.parse(read("skin.json"));
   if (meta.id !== id) throw new Error(`skin "${id}": skin.json id must be "${id}"`);
+  // Images become short placeholders while the CSS is checked and scoped, and are inlined at the end. Scanning the
+  // rules with megabytes of base64 inside them made the build take minutes (a regex re-scanned every long data URI).
+  const imgs = [];
   let c = read("skin.css").replace(/\/\*[\s\S]*?\*\//g, "").replace(/url\(\s*["']?(images\/[a-z0-9._-]+)["']?\s*\)/gi, (m, f) => {
     const ext = f.split(".").pop().toLowerCase(); if (!MIME[ext]) throw new Error(`skin "${id}": ${f} isn't an image type skins can use`);
-    return `url("data:${MIME[ext]};base64,${readFileSync(new URL(f, dirUrl)).toString("base64")}")`; });
+    imgs.push(`data:${MIME[ext]};base64,${readFileSync(new URL(f, dirUrl)).toString("base64")}`); return `url("data:img${imgs.length - 1}x")`; });
   c = c.replace(/:root\b/g, `html[data-skin="${id}"]`);
   checkSkin(id, c);
   // scope every rule to this skin so it outranks the base look whatever order the styles load in (keyframes stay as they are)
@@ -102,6 +105,7 @@ export function buildSkin(dirUrl, id) {
     return t.split(",").map(x => x.trim()).map(x => x === "html" ? scope : x.startsWith("html ") ? scope + x.slice(4) : `${scope} ${x}`).join(",") + "{"; }) + frames.join("\n");
   if (/<\/(style|script)|javascript:|expression\(|@import(?!\s+url\(\s*["']?https:\/\/fonts\.googleapis\.com\/)/i.test(c)) throw new Error(`skin "${id}": only plain CSS is allowed (no tags, scripts or imports except Google Fonts)`);
   if (/url\(\s*(?!["']?(data:|#))/i.test(c.replace(/@import\s+url\([^)]*\)/g, ""))) throw new Error(`skin "${id}": images must be in the skin's images/ folder`);
+  c = c.replace(/data:img(\d+)x(?=")/g, (m, n) => imgs[+n]);
   if (c.length > 1.5e6) throw new Error(`skin "${id}" is ${(c.length / 1e6).toFixed(1)} MB; keep it under 1.5 MB (compress the images)`);
   return { id, name: String(meta.name || id), description: String(meta.description || ""), css: c };
 }
