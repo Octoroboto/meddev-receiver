@@ -64,3 +64,33 @@ test("applyToPage swaps only when newer and only on pages with both blocks", () 
   assert.strictEqual(applyToPage(page, { version, css, js }), page, "same version: unchanged");
   assert.strictEqual(applyToPage(`<style id="mdfm-skin">${css}</style>`, { version: bump(version), css: r.c, js: r.j }), `<style id="mdfm-skin">${css}</style>`, "old layout: unchanged");
 });
+
+test("versions compare as numbers, not text", () => {
+  const { cmp } = require("../client/updater.cjs");
+  assert.ok(cmp("1.10.1", "1.9.0") > 0); assert.ok(cmp("1.9.0", "1.10.1") < 0); assert.strictEqual(cmp("1.10.1", "1.10.1"), 0);
+  assert.ok(cmp("2.0.0", "1.99.99") > 0); assert.ok(cmp("1.10.10", "1.10.9") > 0);
+});
+test("a kept copy damaged on disk, or left half-written, is never used", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rx-")), newer = bump(version), r = remote(newer);
+  const u = createReceiverUpdater({ dir, getJSON: serve(r), bundled: { version, css, js } });
+  assert.match((await u.check()).result, /got/); assert.strictEqual(u.active().source, "updated");
+  assert.ok(fs.existsSync(path.join(dir, newer, "manifest.json")), "the manifest is kept with the copy");
+  assert.deepStrictEqual(fs.readdirSync(dir), [newer], "no side folders left behind");
+  fs.appendFileSync(path.join(dir, newer, "receiver.js"), "\n;window.evil=1");
+  assert.strictEqual(u.active().source, "bundled", "a changed receiver.js fails its manifest check");
+  const u2 = createReceiverUpdater({ dir, getJSON: serve(r), bundled: { version, css, js } });
+  assert.strictEqual(u2.active().source, "bundled");
+  assert.match((await u2.check()).result, /got/, "the damaged copy is replaced by a fresh download");
+  assert.strictEqual(u2.active().source, "updated");
+  // a crash part-way through a download leaves only a side folder, which is never picked up
+  const dir2 = fs.mkdtempSync(path.join(os.tmpdir(), "rx-")), side = path.join(dir2, `.${newer}.1.2.tmp`);
+  fs.mkdirSync(side); fs.writeFileSync(path.join(side, "receiver.css"), r.c); fs.writeFileSync(path.join(side, "receiver.js"), r.j);
+  assert.strictEqual(createReceiverUpdater({ dir: dir2, getJSON: serve(r), bundled: { version, css, js } }).active().source, "bundled");
+});
+test("checks don't overlap and don't wait forever", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rx-")), r = remote(bump(version)); let asks = 0;
+  const u = createReceiverUpdater({ dir, getJSON: async url => { if (url.endsWith("manifest.json")) asks++; return serve(r)(url); }, bundled: { version, css, js } });
+  const [a, b] = await Promise.all([u.check(), u.check()]); assert.strictEqual(a, b); assert.strictEqual(asks, 1);
+  const hung = createReceiverUpdater({ dir: fs.mkdtempSync(path.join(os.tmpdir(), "rx-")), getJSON: () => new Promise(() => {}), bundled: { version, css, js }, timeoutMs: 50 });
+  assert.match((await hung.check()).result, /timed out/); assert.strictEqual(hung.active().source, "bundled");
+});
