@@ -2,6 +2,10 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.4.0 (2026-10-11, Rob)
+- **New skin: Analyze Pics, by Collin Geldmeier.** The Mac OS 8 "Platinum" look of his Analyze Pics app: platinum plates with bevels, pinstriped title bars, dark green screens, note-yellow VU meters, platinum knobs and buttons, on his dithered green desktop picture. It isn't the house default.
+- Skin rules: `EXEMPT` in `scripts/skins.mjs` lists skins Rob has approved to recolour glass, lights and fields too. Only Analyze Pics is on it. Those skins still can't touch the spray can or the flies, use ids or @media, or change how the receiver takes clicks. Approval lives in the rules, never in the skin.
+
 ## 1.3.0 (2026-10-10, Rob)
 - **New skin: Barnaclava.** A sunken wreck on the sea floor, seen from just off the bow. Nautical realism x streetwear x gross cartoon close-ups. Encrusted, rusted steel with a broken railing and mast over the top, an organic keel, embedded barnacle clusters, coral growing from the hull, thick rope piles, tattered nets, trash bags with made-up brands, six-pack rings, a wicker basket of lemons, and portholes with eyes pressed to the glass. Every knob is a barnacle in a balaclava that opens and feeds; the round buttons are barnacles that open when pressed. The bow carries an embroidered Barnaclava patch. It isn't the house default.
 

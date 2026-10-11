@@ -1,0 +1,101 @@
+/* Analyze Pics skin for MedDev Receiver: the Mac OS 8 "Platinum" look of Collin's Analyze Pics app.
+   Platinum grey plates with black outlines and white/grey bevels, pinstriped title bars, Charcoal-style captions,
+   dark green displays, platinum push buttons and knobs, note-yellow VU faces, and the app's dithered green
+   desktop picture behind everything. CSS only; the one image is the desktop picture (data: URL). */
+:root[data-skin="analyze-pics"]{
+  --bg:#1a241c; --surface:#dddddd; --sunk:#cccccc; --ink:#000; --muted:#555; --line:#000;
+  --accent:#333399; --accent-ink:#fff; --accent-soft:#ccccff;
+  --lcd:#b8e6a0; --lcd-dim:#7fbf6a; --lcd-bg:#0f1711; --gold:#000; --gold-dark:#888;
+  --steel-hi:#ffffff; --steel-lo:#808080; --steel-a:#dddddd; --steel-b:#dddddd; --steel-c:#dddddd;
+  --shadow:2px 2px 0 rgba(0,0,0,.5);
+  --f-display:"Charcoal","Chicago","Geneva","Verdana",sans-serif;
+  --f-body:"Geneva","Verdana",sans-serif;
+  --f-mono:"Monaco","VT323","Courier New",monospace;
+  --glass:none; --spec:none; --streak:none; --sheen:none;
+  --glow-g:none; --glow-g-soft:none; --glow-a:none; --glow-r:none; --glow-b:none; --glow-b-tight:none; --glow-k:none;
+  --engrave:none; --raise:none;
+  --led:#33cc33; --led-core:#ccffcc; --led-off:#4d5a4d; --caption:#000; --focus:#333399;
+  --btn-1:#ffffff; --btn-2:#dddddd; --btn-3:#a8a8a8; --btn-down-1:#8a8a8a; --btn-down-2:#5e5e5e; --btn-bezel:#dddddd; --btn-rim:#000;
+  --knob-1:#ffffff; --knob-2:#dedede; --knob-3:#9a9a9a; --knurl-1:#bdbdbd; --knurl-2:#6e6e6e; --knob-pointer:#333399;
+  --vol-1:#ffffff; --vol-2:#d4d4d4; --vol-3:#8c8c8c; --vol-cap:#eeeeee; --vol-knurl-1:#f2f2f2; --vol-knurl-2:#9a9a9a; --vol-knurl-3:#cfcfcf; --vol-dot:#333399;
+  --bezel-1:#eeeeee; --bezel-2:#cccccc; --bezel-3:#999999;
+  --plate-1:#dddddd; --plate-2:#dddddd; --plate-3:#dddddd; --key-1:#ffffff; --key-2:#d4d4d4; --key-hover-1:#ffffff; --key-hover-2:#d4d4d4; --title-1:#eeeeee; --title-2:#cccccc;
+  --eq-1:#5f8f58; --eq-2:#8fbf7a; --eq-3:#c6e2b0; --eq-4:#f0a8cc; --eq-5:#e86caa; --eq-off:rgba(130,146,126,.13); --eq-peak:#ffffff;
+  --vu-face-1:#ffffe8; --vu-face-2:#ffffcc; --vu-face-3:#e2e2a6; --vu-ink:#000; --vu-red:#cc2222; --vu-needle:#000;
+  color-scheme:light;
+}
+/* the desktop: Analyze Pics' dithered green picture, big pixels */
+html[data-skin="analyze-pics"]{background:#1a241c url("images/desktop.png") center/cover fixed no-repeat;image-rendering:pixelated;min-height:100%}
+html[data-skin="analyze-pics"] body{background:transparent!important;image-rendering:auto}
+
+/* windows: flat platinum, black outline, white/grey bevel, hard shadow */
+html[data-skin="analyze-pics"] :is(.panel,.deck,.ahead,.syncbar,.sheet,.bellpanel,.pop){background:#dddddd!important;background-image:none!important;
+  border:1px solid #000;border-radius:0;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #999,2px 2px 0 rgba(0,0,0,.5);color:#000;text-shadow:none}
+html[data-skin="analyze-pics"] :is(.panel,.deck) :is(b,h2){color:#000}
+html[data-skin="analyze-pics"] :is(.panel,.deck) .muted{color:#555}
+
+/* title bars: pinstripes either side of a centred title */
+html[data-skin="analyze-pics"] .wtitle{height:19px;background:#dddddd;border-bottom:1px solid #999;box-shadow:0 1px 0 #fff;
+  font:bold 12px var(--f-display);letter-spacing:0;text-transform:none;color:#000;text-shadow:none}
+html[data-skin="analyze-pics"] .wtitle::before,html[data-skin="analyze-pics"] .wtitle::after{height:11px;
+  background:repeating-linear-gradient(180deg,#fafafa 0 1px,#a8a8a8 1px 2px)}
+html[data-skin="analyze-pics"] .wtitle span{text-transform:capitalize}
+
+/* displays: dark green glass set into the plate */
+html[data-skin="analyze-pics"] :is(.lcd,.list,.tabs,.hits,.msgs){background:#0f1711!important;background-image:none!important;
+  border:1px solid #000;border-radius:0;box-shadow:inset 1px 1px 0 #3a4a3c,0 0 0 1px #fff,-1px -1px 0 1px #808080;color:var(--lcd)}
+html[data-skin="analyze-pics"] :is(.lcd,.list,.tabs,.hits,.msgs)::before,
+html[data-skin="analyze-pics"] :is(.lcd,.list,.tabs,.hits,.msgs)::after{display:none!important}
+html[data-skin="analyze-pics"] :is(.lcd,.lcd *){text-shadow:none}
+html[data-skin="analyze-pics"] header.top h1{font-family:var(--f-mono);color:#c8f0b4;text-shadow:none;letter-spacing:.02em}
+html[data-skin="analyze-pics"] header.top .lede{font-family:var(--f-mono);color:#7fbf6a;text-shadow:none}
+html[data-skin="analyze-pics"] .lcd.status b{color:#fff}
+
+/* push buttons */
+html[data-skin="analyze-pics"] :is(.btn,.tabs button,.seg button,.autopick button,.bell,.mover button,.revq){
+  background:linear-gradient(#ffffff,#d4d4d4)!important;color:#000;border:1px solid #000;border-radius:5px;
+  box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #999;text-shadow:none;font:bold 12px var(--f-display)}
+html[data-skin="analyze-pics"] :is(.btn,.tabs button,.seg button,.autopick button,.bell,.mover button,.revq):active{
+  background:linear-gradient(#666,#8a8a8a)!important;color:#fff;box-shadow:inset 1px 1px 0 #444,inset -1px -1px 0 #aaa}
+html[data-skin="analyze-pics"] .btn.primary{box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #999,0 0 0 2px #dddddd,0 0 0 4px #333}
+html[data-skin="analyze-pics"] .btn.link,html[data-skin="analyze-pics"] .btn.link:not(:is(.lcd,.list,.tabs,.hits,.msgs,.toast) *){
+  background:none!important;border:0;box-shadow:none;color:#333399;text-shadow:none}
+
+/* round buttons and switches: platinum, black rim */
+html[data-skin="analyze-pics"] :is(.rd-btn button,.vizsw input){box-shadow:0 1px 0 #fff,0 0 0 2px var(--btn-bezel),0 0 0 3px var(--btn-rim)}
+html[data-skin="analyze-pics"] :is(.rd-btn button,.vizsw input):is(:active,:checked,[aria-pressed=true]){box-shadow:inset 0 2px 3px rgba(0,0,0,.6),0 0 0 2px var(--btn-bezel),0 0 0 3px var(--btn-rim)}
+html[data-skin="analyze-pics"] :is(.rd-led,.vizsw::before){box-shadow:inset 0 0 0 1px rgba(0,0,0,.55)}
+html[data-skin="analyze-pics"] .rd-led.on,html[data-skin="analyze-pics"] .vizsw:has(input:checked)::before{box-shadow:inset 0 0 0 1px rgba(0,0,0,.4),0 0 4px var(--led)}
+
+/* knobs: platinum, black outline, navy pointer (no glow) */
+html[data-skin="analyze-pics"] .rd-knob{box-shadow:0 0 0 1px #000,1px 2px 0 rgba(0,0,0,.35)}
+html[data-skin="analyze-pics"] .rd-knob::before{box-shadow:0 0 0 1px #000}
+html[data-skin="analyze-pics"] .rd-knob::after{box-shadow:none}
+html[data-skin="analyze-pics"] .vol-knob{box-shadow:0 0 0 1px #000,2px 2px 0 rgba(0,0,0,.35)}
+html[data-skin="analyze-pics"] .vol-dot{box-shadow:none}
+
+/* captions: black Charcoal-style, no engraving */
+html[data-skin="analyze-pics"] :is(.rdeck small,.rd-mm,.vu-m small,.vizsw,.vol-num,.tk small,.vol small){color:#000;text-shadow:none;font-family:var(--f-display)}
+
+/* VU meters: platinum bezel, note-yellow faces */
+html[data-skin="analyze-pics"] .vu-glass{border-radius:0;border:1px solid #000;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #999,2px 2px 0 rgba(0,0,0,.35)}
+html[data-skin="analyze-pics"] .vu-glass::after{background:linear-gradient(160deg,rgba(255,255,255,.35),rgba(255,255,255,0) 38%);box-shadow:none}
+
+/* fields and pop-up menus */
+html[data-skin="analyze-pics"] :is(input[type=text],textarea){background:#fff!important;background-image:none!important;color:#000;text-shadow:none;
+  border:1px solid #000;border-radius:0;box-shadow:inset 1px 1px 0 #808080}
+html[data-skin="analyze-pics"] select{appearance:none;-webkit-appearance:none;color:#000;text-shadow:none;border:1px solid #000;border-radius:4px;
+  padding:3px 28px 3px 8px;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #999,1px 1px 0 rgba(0,0,0,.4);
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='11' shape-rendering='crispEdges'%3E%3Cpath d='M3.5 0L7 4H0zM0 7H7L3.5 11z'/%3E%3C/svg%3E") right 9px center no-repeat,linear-gradient(#fff,#d8d8d8)!important}
+html[data-skin="analyze-pics"] select option{background:#fff;color:#000}
+html[data-skin="analyze-pics"] :is(.settings summary,legend,.fld,.slackset,.types label){color:#000;text-shadow:none}
+html[data-skin="analyze-pics"] :is(.hint,.types .opt small,label.f span.hint){color:#444}
+html[data-skin="analyze-pics"] .slackset{border:1px solid #999;box-shadow:1px 1px 0 #fff}
+html[data-skin="analyze-pics"] input[type=checkbox]{accent-color:#333399}
+
+/* receiver footer: dark silkscreen on platinum */
+html[data-skin="analyze-pics"] .faceplate{color:rgba(0,0,0,.72);text-shadow:0 1px 0 rgba(255,255,255,.8)}
+html[data-skin="analyze-pics"] .fmark svg{filter:none}
+html[data-skin="analyze-pics"] :is(.fmark.boxed,.fmark.pill,.fmark.sq){box-shadow:none}
+html[data-skin="analyze-pics"] .specline{color:#555;text-shadow:0 1px 0 #fff}
+html[data-skin="analyze-pics"] :focus-visible{outline-color:#333399}

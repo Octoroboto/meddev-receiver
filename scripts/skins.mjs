@@ -24,6 +24,9 @@ const MOVE = /^(margin(-(top|right|bottom|left|inline|block)(-(start|end))?)?|or
 // Properties that change everything inside a part: only on parts with no glass inside (buttons, knobs, decorations).
 const SUBTREE = /^(filter|backdrop-filter|opacity|mix-blend-mode|transform|rotate|scale|zoom|visibility|display|content-visibility|clip-path|mask(-[a-z-]+)?|animation(-[a-z-]+)?)$/;
 const LEAF = new RegExp(String.raw`(\.(skin-decor|rd-knob|tk-knob|vol-knob|vol-dot)|button|small|input\[type=checkbox\])${PSEUDO}$`);
+// Skins Rob has approved to recolour glass, lights and fields as well (still no layout changes to glass, no pests, no
+// @media, no ids, no click/drag behaviour changes). Approval lives here, never in the skin itself.
+export const EXEMPT = { "analyze-pics": "Collin's Analyze Pics (Mac OS 8 Platinum) look: its screens, LEDs, EQ, VU faces and fields are part of it. Approved by Rob, 2026-10-11." };
 const decls = body => body.split(";").map(d => d.trim()).filter(Boolean).map(d => { const i = d.indexOf(":"); return [d.slice(0, i).trim().toLowerCase(), d.slice(i + 1).trim()]; });
 
 // Pulls @keyframes out (they're checked separately and never scoped). Returns [rest, keyframes[]].
@@ -39,9 +42,22 @@ export function checkSkin(id, c) {
   const bad = m => { throw new Error(`skin "${id}": ${m}`); };
   const [flat, frames] = splitKeyframes(c.replace(/\/\*[\s\S]*?\*\//g, ""));
   { const at = /@(?!import\b|font-face\b)([a-z-]+)/i.exec(flat); if (at) bad(`@${at[1]} isn't allowed in a skin`); }
-  for (const m of c.matchAll(/(--[a-z0-9-]+)\s*:/gi)) if (!METAL.includes(m[1])) bad(`${m[1]} isn't a skin setting. Glass, LCD and LED lights stay as Default.`);
+  for (const m of c.matchAll(/(--[a-z0-9-]+)\s*:/gi)) if (!EXEMPT[id] && !METAL.includes(m[1])) bad(`${m[1]} isn't a skin setting. Glass, LCD and LED lights stay as Default.`);
   for (const f of frames) for (const m of f.matchAll(/\{([^{}]*)\}/g)) for (const [p] of decls(m[1]))
     if (/^(filter|backdrop-filter|mix-blend-mode|display|visibility)$/.test(p)) bad(`${p} can't be animated`);
+  if (EXEMPT[id]) {
+    for (const m of flat.matchAll(/([^{};]+)\{([^{}]*)\}/g)) {
+      const sel = m[1].trim(), body = m[2];
+      if (/^@font-face$/.test(sel)) continue;
+      if (/^@/.test(sel)) bad(`${sel.split(" ")[0]} isn't allowed in a skin`);
+      for (const one of sel.split(",").map(x => x.trim())) {
+        if (PESTS.test(one)) bad(`"${one}" is the spray can or the flies; they stay the same in every skin`);
+        if (/#[a-z_-]/i.test(one)) bad(`"${one}": ids aren't allowed in a skin`);
+      }
+      for (const [p, v] of decls(body)) if (/(^|-)app-region$|^user-select$/.test(p) || (p === "pointer-events" && !/^none(\s*!important)?$/.test(v))) bad(`${p} isn't allowed in a skin (it would change how the receiver takes clicks)`);
+    }
+    return;
+  }
   for (const m of flat.matchAll(/([^{};]+)\{([^{}]*)\}/g)) {
     const sel = m[1].trim(), body = m[2];
     if (/^@font-face$/.test(sel)) continue;
