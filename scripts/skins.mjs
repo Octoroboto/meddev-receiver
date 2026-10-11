@@ -56,6 +56,7 @@ export function checkSkin(id, c) {
       const glass = GLASS_IN.test(one);
       for (const [p, v] of decls(body)) {
         if (p.startsWith("--")) continue;
+        if (/(^|-)app-region$|^user-select$/.test(p) || (p === "pointer-events" && !/^none(\s*!important)?$/.test(v))) bad(`${p} isn't allowed in a skin (it would change how the receiver takes clicks)`);
         if (glass) {
           if (!MOVE.test(p)) bad(`"${one}" is glass: a skin can move it (margin, order, translate, relative position) but not change ${p}`);
           if (p === "position" && v !== "relative") bad(`"${one}" is glass: position can only be relative`);

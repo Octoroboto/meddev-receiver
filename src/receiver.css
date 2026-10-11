@@ -660,3 +660,8 @@ html.rgbk .vizsw::before{filter:url(#rgbk)}
 .skin-decor{position:absolute;inset:0;z-index:4;overflow:visible;pointer-events:none!important}
 .skin-decor::before,.skin-decor::after{pointer-events:none!important}
 :is(.deck,.panel):has(> .skin-decor){position:relative}
+/* Skinned receivers in the apps: no CSS drag regions. Decorations made macOS treat the whole window as a drag area, so
+   clicks and scrolling never reached the controls. The apps' own drag-by-the-metal (a press on anything that isn't a
+   control) still moves the window. Default keeps its regions exactly as before. Window controls stay above decorations. */
+html[data-skin]:not([data-skin="default"]) :is(.wrap,.wrap *){-webkit-app-region:no-drag!important}
+.top .wtitle .wctl{z-index:6}

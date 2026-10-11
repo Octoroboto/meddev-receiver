@@ -2,6 +2,11 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.2.2 (2026-10-10, Rob)
+- **Fix: skinned receivers didn't respond in the apps.** With a skin like Mulchmaster on, macOS treated the whole window as a drag area, so buttons, knobs and scrolling did nothing; you could only move the window. Skins now turn off the CSS drag regions, and the apps' drag-by-the-metal still moves the window. Default is unchanged.
+- The window controls (POWER / MIN / FULL) always sit above a skin's decorations.
+- Skin build: skins can't set app-region or user-select, and pointer-events only to none.
+
 ## 1.2.1 (2026-10-10, Rob)
 - Mulchmaster: a black engine vent on the bumper, and a crumpled honey-do sticky note stuck under the engine sticker. The note cycles through four chore lists, changing every two minutes. Both hide on phones.
 

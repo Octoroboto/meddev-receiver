@@ -1,17 +1,17 @@
 {
   "name": "meddev-receiver",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "files": {
     "receiver.css": {
-      "sha256": "36cba89f58a006cc1737d9733d2e4c980586ad91ef19dce007e3638e3761f0cb",
-      "bytes": 236349
+      "sha256": "2758a8717d4b61a1e85c096806d76c719556581733b1d961f00affcc7f4f45fa",
+      "bytes": 236841
     },
     "receiver.js": {
-      "sha256": "087be66b5cd13e497f4ed5011ec645f735b03c6fbb3b01f5bedff6a88cc9310e",
+      "sha256": "6883257d9eacc06e3aa29fb07aab1795ac61968263d2a4fd55a673cb19030766",
       "bytes": 71192
     },
     "skins.json": {
-      "sha256": "22488e7d40e588824719014e0422b71cb972ed7d48df3660a0b2bfda480e0163",
+      "sha256": "a23c5ced9f62cb6924d610acc3289c35adbb965ea1dbbc263d227676ae12e906",
       "bytes": 513804
     }
   },
