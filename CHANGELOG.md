@@ -2,6 +2,13 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.10.2 (2026-10-11, Rob)
+- **Skin rules:** closed about a dozen ways a skin could get past the checks (nested rules, backslash escapes, quoted braces and semicolons, -webkit- prefixes, image-set(), animated pointer-events). No existing skin changes.
+- **Spray can:** each click was handled once instead of twice, so BUG SPRAY and SUGAR MIST work with reduced motion on.
+- **Updater:** kept copies are re-checked on load and written all-or-nothing; checks time out and don't overlap.
+- **Extras:** page links must name the skin's own pages; Esc and Back return focus to the spot that opened them; refresh() rebuilds changed extras.
+- **Smaller:** VU needle recovers from a bad level; fewer per-frame allocations; bad saved tone/volume fall back to defaults; a missing mode LED no longer stops setup; stable skin order in the build.
+
 ## 1.10.1 (2026-10-11, Rob)
 - Clara Stamford's Homestead Collection on the hub page and MD Hub: their headings are stitched in rose thread (the embroidered MDFM 99.9 HD logo stays on the radio only), and the lists, tabs, fields and text use dark ink on the cloth and paint instead of the base's light glass colours.
 
