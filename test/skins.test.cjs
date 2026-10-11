@@ -45,4 +45,14 @@ test("skin extras: plain data only, every page reachable and closable", async ()
   bad({ layers: [{ anchor: "top", spots: [{ label: "x", say: "a", page: "p" }] }], pages: { p: { title: "P", cols: ["a"], rows: [] } } }, /one of/);
   bad({ layers: [{ anchor: "top", spots: [{ label: "x", onclick: "alert(1)" }] }] }, /isn't allowed/);
   bad({ layers: [], pages: { p: { title: "P", cols: ["a"], rows: [], html: "<b>" } } }, /isn't allowed/);
+  const door = { layers: [{ anchor: "top", spots: [{ label: "Cupboard", open: true }] }] };
+  assert.strictEqual(checkExtras("t", door), door);
+  bad({ layers: [{ anchor: "top", spots: [{ label: "x", open: "yes" }] }] }, /open must be true/);
+  bad({ layers: [{ anchor: "top", spots: [{ label: "x", open: true, say: "a" }] }] }, /one of/);
+  bad({ layers: [{ anchor: "top", spots: [{ label: "x", menu: [{ text: "a", open: true }] }] }] }, /isn't allowed/);
+});
+
+test("selector lists split only at top-level commas", async () => {
+  const { splitSel } = await import("../scripts/skins.mjs");
+  assert.deepStrictEqual(splitSel(".a:is(.b,.c),.d:not(.e,.f)"), [".a:is(.b,.c)", ".d:not(.e,.f)"]);
 });

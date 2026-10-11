@@ -88,7 +88,8 @@ A skin can make its decorations respond to taps and clicks with an `extras` bloc
   - `menu`: entries with `text`, plus optional `hint`, `disabled`, `say`, `page` or `back`; `{ "sep": true }` is a divider;
   - `say`: a message box with OK;
   - `page`: opens a page over the receiver, which has a Back button;
-  - `back`: closes the page.
+  - `back`: closes the page;
+  - `open: true`: the spot toggles open and shut (its `aria-pressed` flips). Style `.sx-spot[aria-pressed=true]` to swing a door open, and `.sx-spot[aria-pressed=true] + .sx-spot` to reveal what's behind it.
 - **Esc** closes the open menu, then the message, then the page.
 - **Styling:** skins may restyle every `.sx-` part: `sx-layer`, `sx-spot`, `sx-menu`, `sx-item`, `sx-sep`, `sx-dialog`, `sx-page`, `sx-head`, `sx-grid`, `sx-note` and `sx-back`.
 - **Limits:**

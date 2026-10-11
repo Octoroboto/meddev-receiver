@@ -1,0 +1,187 @@
+/* Clara Stamford's Homestead Collection: a sunlit farmhouse kitchen. White shaker cupboards with brass pulls, a white
+   subway-tile backsplash, an oak floating shelf on corbels, brass globe pendants, a butcher-block island with three
+   counter stools on a striped rug. The screens are embroidered on display cloth. Everything is lovely. Some of the
+   cupboards are open a crack. That's the draught. Please don't look inside. */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Lora:ital,wght@0,500;0,600;0,700;1,500&display=swap");
+
+:root{
+  --f-display:"Playfair Display",Lora,Georgia,serif; --f-body:Lora,Georgia,serif;
+  --caption:#5b4a3a; --focus:#a8344a; --gold:#b98a3e; --gold-dark:#7a5a28;
+  --btn-1:#f5e3b8; --btn-2:#c99a4a; --btn-3:#8a6224; --btn-down-1:#ffd98a; --btn-down-2:#a8702c; --btn-bezel:#e9e5dc; --btn-rim:#ffffff;
+  --knob-1:#f5e3b8; --knob-2:#c99a4a; --knob-3:#8a6224; --knurl-1:#d9b46a; --knurl-2:#9a7030; --knob-pointer:#5a3a14;
+  --vol-1:#e7b878; --vol-2:#c88c4c; --vol-3:#8c5a2a; --vol-cap:#f0d0a0; --vol-knurl-1:#e7c08a; --vol-knurl-2:#b47a40; --vol-knurl-3:#d4a066; --vol-dot:#5a2a5a;
+  --bezel-1:#ffffff; --bezel-2:#ecebe6; --bezel-3:#d6d3ca;
+  --plate-1:#fbfaf7; --plate-2:#f3f1ec; --plate-3:#e6e3dc; --key-1:#ffffff; --key-2:#f1efe9; --key-hover-1:#ffffff; --key-hover-2:#f7f5f0;
+  --title-1:#fbf6ea; --title-2:#efe6d0;
+  /* the hub page and MD Hub: dark ink on white paint, cloth-coloured lists */
+  --bg:#f6f5f1; --surface:#fbfaf7; --sunk:#efece5; --ink:#3e3228; --muted:#6e5d4c; --line:#d6d1c4;
+  --accent:#a8344a; --accent-ink:#fffaf0; --accent-soft:#f3dfe2; --sel:#efdcc8;
+  --lcd:#2f4a72; --lcd-dim:#5b6f8e; --lcd-bg:#efe8d8;
+  --info:#2f5f9e; --warn:#9a6200; --ok:#3f7a3a; --bad:#b0303a; --idle:#756e60;
+  --fvu:#2f63b8; --spu:#1d8466; --spud:#b5611a; --tatey:#7a4fb0; --pics:#b53a78; --misc:#23848a;
+  /* no brushed steel or scratched glass in a kitchen */
+  --brushed:linear-gradient(transparent,transparent); --brushed2:linear-gradient(transparent,transparent); --grain:linear-gradient(transparent,transparent);
+  --scratch:linear-gradient(transparent,transparent); --scratch2:linear-gradient(transparent,transparent); --sheen:linear-gradient(transparent,transparent);
+}
+
+/* The kitchen: subway tile down to the wide-plank oak floor. */
+body:not(.pop){background:radial-gradient(ellipse 60% 40% at 18% 12%,rgba(255,246,222,.6),transparent 70%),url(images/floor.webp) center bottom/1024px 256px repeat-x,url(images/subway.webp) 0 0/256px 256px,#f6f5f1;
+  padding:calc(min(1180px,100vw - clamp(16px,24vw - 77px,192px)) * .375 + 20px) calc(clamp(16px,24vw - 77px,192px) - clamp(8px,10vw - 31px,80px)) calc(min(1180px,100vw - clamp(16px,24vw - 77px,192px)) * .27 + 40px) clamp(8px,10vw - 31px,80px)}
+
+/* The base cabinets: white satin paint, a butcher-block counter along the top edge. */
+.wrap.wrap{max-width:1180px;position:relative;padding:20px clamp(10px,1.8vw,20px) 22px;gap:16px;border:none;border-radius:2px 2px 6px 6px;
+  background:linear-gradient(180deg,rgba(255,250,236,.5),transparent 30%,rgba(120,100,80,.06)),url(images/paint.webp) 0 0/256px 256px,#f7f6f2;
+  box-shadow:0 24px 40px rgba(70,50,30,.28),0 4px 10px rgba(70,50,30,.2),inset 0 0 0 1px rgba(150,140,124,.35),inset 0 0 0 8px #fbfaf7,inset 0 0 0 9px rgba(150,140,124,.3)}
+
+/* Panels are shaker doors: a flat frame around a recessed centre panel. */
+.top .deck,.panel,.deck:not(.pinfoot){background:linear-gradient(180deg,rgba(120,100,80,.07),rgba(255,255,255,0) 30%),url(images/paint.webp) 0 0/256px 256px,#f4f2ed;border:4px solid transparent;border-image:url(images/frame.webp) 62 / 24px / 0 stretch;border-radius:0;color:#3e3228;text-shadow:none;
+  box-shadow:0 3px 6px rgba(70,50,30,.16),0 0 0 1px rgba(150,140,124,.25)}
+.top .deck{padding:22px clamp(14px,2.4vw,26px) 18px}
+.panel{padding-left:clamp(12px,1.6vw,22px);padding-right:clamp(12px,1.6vw,22px)}
+.sheet,.pop,.syncbar,.ahead,.bellpanel{background:url(images/paint.webp) 0 0/256px 256px,#fbfaf7;border:1px solid #d6d3ca;border-radius:8px;color:#3e3228;box-shadow:0 10px 30px rgba(70,50,30,.25)}
+
+/* The island: oak boards under a butcher-block top, the Homestead sign screwed on, cupboards at each end. */
+.pinfoot.pinfoot{border:none;border-radius:0 0 4px 4px;color:#3e3228;margin-top:4px;
+  box-shadow:0 -2px 0 rgba(255,255,255,.4),0 6px 12px rgba(70,50,30,.3),inset 0 -6px 10px rgba(50,30,14,.25);
+  background:url(images/sign.webp) center 38px/min(560px,66%) auto no-repeat,url(images/butcher.webp) 0 0/512px 26px repeat-x,linear-gradient(rgba(60,30,10,.35),transparent) 0 26px/100% 10px no-repeat,url(images/beadboard.webp) 0 0/192px 192px,#b8743a;
+  padding:calc(min(560px,66%) * .359 + 52px) calc(clamp(0px,(100vw - 900px) * .5,170px) + 30px) 24px}
+.pinfoot.pinfoot small,.pinfoot.pinfoot p{color:#fbefd8;text-shadow:0 1px 2px rgba(40,20,6,.7)}
+
+/* Title bars: brass label holders with a cream card. */
+.wtitle{height:28px;border-radius:5px;border:none;color:#4a3420;font:italic 600 17px/1 var(--f-display);letter-spacing:.03em;text-transform:none;text-shadow:0 1px 0 rgba(255,255,255,.8);
+  background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0) 50%),#fbf3df;
+  box-shadow:inset 0 0 0 3px #c99a4a,inset 0 0 0 4px #8a6224,inset 0 5px 0 2px rgba(255,236,190,.0),0 2px 3px rgba(70,50,30,.35),0 0 0 1px #6e4c1c}
+.wtitle::before,.wtitle::after{height:10px;background:radial-gradient(circle at 40% 35%,#f8dfa0 0 1.5px,#c99a4a 2.5px,#7a5420 4px,transparent 4.6px) center/10px 10px no-repeat}
+
+small,.rd-mm,.vizsw{font-family:var(--f-body);font-style:italic;font-weight:600;letter-spacing:.02em;text-transform:none}
+.rdeck small,.tk small,.vol small,.vu-m small,.fxbtns small,.rd-mm{color:#5b4a3a;text-shadow:0 1px 0 rgba(255,255,255,.8)}
+
+/* Keys: little shaker drawer fronts. Primary is oiled butcher block. */
+.btn{background:linear-gradient(180deg,#ffffff,#f1efe9);color:#3e3228;border:1px solid #cfcabd;border-radius:4px;font:600 .98rem/1 var(--f-body);letter-spacing:.01em;text-shadow:0 1px 0 #fff;
+  padding:9px clamp(10px,1.6vw,16px);box-shadow:inset 0 0 0 3px #ffffff,inset 0 0 0 4px rgba(150,140,124,.28),0 2px 0 #d6d1c4,0 4px 8px rgba(70,50,30,.16)}
+.btn:hover{background:linear-gradient(180deg,#ffffff,#f8f6f1)}
+.btn:active{translate:0 1px;box-shadow:inset 0 0 0 3px #f7f5f0,inset 0 0 0 4px rgba(150,140,124,.3),0 1px 0 #d6d1c4}
+.btn.primary{background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(0,0,0,.08)),url(images/butcher.webp) 0 0/256px 64px,#b8743a;color:#fffaf0;border-color:#7a4a1e;text-shadow:0 1px 1px rgba(50,24,6,.8);
+  box-shadow:inset 0 1px 0 rgba(255,236,200,.5),0 2px 0 #7a4a1e,0 4px 8px rgba(70,50,30,.25)}
+.btn.danger{color:#a8344a}
+
+/* Round buttons: brass mushroom pulls. Pressed, the oil-rubbed one, warm under the pendant light. */
+.rd-btn button,.vizsw input[type=checkbox]{background:url(images/pull.webp) center/112% 112% no-repeat;border:none;box-shadow:0 2px 3px rgba(70,50,30,.45)}
+.rd-btn button:active,.rd-btn button[aria-pressed=true],.vizsw input[type=checkbox]:checked,.vizsw input[type=checkbox]:active{background:url(images/pull-on.webp) center/112% 112% no-repeat;box-shadow:0 1px 2px rgba(70,50,30,.45),0 0 10px rgba(255,190,90,.7)}
+
+/* Knobs: brass on the light dials, white porcelain with a brass collar on the tone dials. Volume: the pie. */
+.rd-knob{background:url(images/knob-brass.webp) center/104% 104% no-repeat;box-shadow:0 4px 7px rgba(70,50,30,.45)}
+.tk .rd-knob{background-image:url(images/knob-white.webp)}
+.rd-knob::before{background:none;box-shadow:none}
+.vol-knob{background:url(images/pie-vol.webp) center/104% 104% no-repeat;border-radius:50%;box-shadow:0 8px 16px rgba(70,50,30,.45)}
+.vol-knob::before{content:none}
+.vol-dot{background:#fbf6ea;box-shadow:0 0 0 2px #a8344a}
+.vol-num{color:#5b4a3a;font-family:var(--f-body);font-style:italic;text-shadow:0 1px 0 #fff}
+
+/* The screens: embroidered on display cloth, pulled taut and stitched around the edge. The light-colour knobs still
+   tint them (the whole cloth takes the dye, like it went through the wash with a red sock). */
+:is(.lcd,.rxlcd,.rd-lcd,.list,.tabs,.hits,.msgs){background:radial-gradient(ellipse at 50% 40%,rgba(255,252,240,.5),transparent 70%),url(images/aida.webp) 0 0/160px 160px,#efe8d8!important;
+  border:none;border-radius:6px;color:#33496e;text-shadow:none;
+  box-shadow:inset 0 0 0 5px #efe8d8,inset 0 1px 10px 5px rgba(90,70,50,.22),0 0 0 3px #fbfaf7,0 0 0 4px rgba(150,140,124,.45),0 2px 4px 3px rgba(70,50,30,.12);
+  outline:2px dashed rgba(168,52,74,.6);outline-offset:-9px}
+:is(.lcd,.rxlcd,.rd-lcd,.list,.tabs,.hits,.msgs)::before,:is(.lcd,.rxlcd,.rd-lcd,.list,.tabs,.hits,.msgs)::after{display:none!important}
+.lcd *{text-shadow:none}
+/* the station name, satin-stitched in rose with a vine of leaves and French knots */
+.lcd:has(> .cap) > h1{color:transparent;background:url(images/title-emb.webp) left center/contain no-repeat}
+/* other apps' headings (the hub, MD Hub) are their own words: stitched in rose thread instead */
+.lcd:not(:has(> .cap)) > h1{color:#a8304a;font-family:Lora,Georgia,serif;font-weight:700;letter-spacing:.01em;text-shadow:0 1px 0 rgba(255,255,255,.7),0 2px 1.5px rgba(70,20,30,.4);
+  background:repeating-linear-gradient(60deg,rgba(255,255,255,.28) 0 1px,transparent 1px 3px);-webkit-background-clip:text;background-clip:text}
+/* everything that changes: thread-stitched text */
+.lcd :is(p,span,b,.lede){color:#2f4a72;font-weight:400;text-shadow:0 1px 0 rgba(255,255,255,.75),0 1.5px 1px rgba(60,40,20,.35);
+  background:repeating-linear-gradient(60deg,rgba(255,255,255,.22) 0 1px,transparent 1px 2.5px);-webkit-background-clip:text;background-clip:text}
+.lcd.status b{color:#4f7a44}
+/* the hub's lists, tabs and search results on cloth: thread colours, no glow */
+:is(.list,.tabs,.hits,.msgs,.steps,.toast) *,:is(.steps span,.toast,.showlbl,.code,.rank,.empty){text-shadow:none}
+.list .item .t,.empty b{color:#7a2a3a}
+:is(.list .item .s,.list .item .meta,.list .item .side,.rank,.empty){color:#4a3a2e}
+.showlbl{color:#a8344a}
+:is(.tabs button,.seg button,.steps span){color:#3e3228;text-shadow:none}
+:is(.tabs button,.seg button)[aria-pressed=true],.steps span.on{background:#3e3228;color:#fbf3df}
+.item:hover,.rowwrap:hover .item{background:rgba(185,138,62,.14)}
+:is(input[type=text],textarea,select){background:#fffdf8;color:#3e3228;border:1px solid #cfcabd;text-shadow:none}
+.toast{background:#3e3228;color:#fbf3df;border:none}
+/* the EQ: bars stitched in rose thread on the cloth */
+.lcd.viz canvas{filter:invert(1) hue-rotate(48deg) saturate(.75) contrast(1.1);mix-blend-mode:multiply}
+/* the VU faces: printed on the cloth */
+.vu-glass{background:url(images/aida.webp) 0 0/160px 160px,#efe8d8;border-radius:6px;box-shadow:inset 0 1px 8px rgba(90,70,50,.3),0 0 0 3px #fbfaf7,0 0 0 4px rgba(150,140,124,.45);outline:2px dashed rgba(92,124,80,.55);outline-offset:-7px}
+.vu-glass canvas{mix-blend-mode:multiply}
+
+/* Skin extras: cupboard doors that open (tap), a couple left ajar. What's inside is just kitchen things. */
+.sx-spot:hover{background:transparent}
+.sx-spot:focus-visible{outline:2px dashed #a8344a;outline-offset:2px}
+/* the doors: the door is drawn on ::before so it can swing on its hinge */
+.top .sx-spot:is(:nth-child(1),:nth-child(5))::before,.pinfoot .sx-spot:nth-child(1)::before{content:"";position:absolute;inset:0;background:url(images/door-l.webp) center/100% 100% no-repeat;transform-origin:0 50%;
+  transition:transform .9s cubic-bezier(.25,1.25,.4,1),filter .9s;filter:drop-shadow(0 2px 3px rgba(60,40,20,.25))}
+.top .sx-spot:is(:nth-child(3),:nth-child(7))::before,.pinfoot .sx-spot:nth-child(3)::before{content:"";position:absolute;inset:0;background:url(images/door-r.webp) center/100% 100% no-repeat;transform-origin:100% 50%;
+  transition:transform .9s cubic-bezier(.25,1.25,.4,1),filter .9s;filter:drop-shadow(0 2px 3px rgba(60,40,20,.25))}
+.pinfoot .sx-spot:nth-child(1)::before{background-image:url(images/idoor-l.webp)}
+.pinfoot .sx-spot:nth-child(3)::before{background-image:url(images/idoor-r.webp)}
+/* a little nudge on hover: the door gives */
+.top .sx-spot:is(:nth-child(1),:nth-child(5)):hover::before,.pinfoot .sx-spot:nth-child(1):hover::before{transform:perspective(900px) rotateY(-14deg)}
+.top .sx-spot:is(:nth-child(3),:nth-child(7)):hover::before,.pinfoot .sx-spot:nth-child(3):hover::before{transform:perspective(900px) rotateY(14deg)}
+/* open */
+.top .sx-spot:is(:nth-child(1),:nth-child(5))[aria-pressed=true]::before,.pinfoot .sx-spot:nth-child(1)[aria-pressed=true]::before{transform:perspective(900px) rotateY(-74deg);filter:drop-shadow(-6px 4px 6px rgba(60,40,20,.35)) brightness(.96)}
+.top .sx-spot:is(:nth-child(3),:nth-child(7))[aria-pressed=true]::before,.pinfoot .sx-spot:nth-child(3)[aria-pressed=true]::before{transform:perspective(900px) rotateY(74deg);filter:drop-shadow(6px 4px 6px rgba(60,40,20,.35)) brightness(.96)}
+/* the two that won't stay shut */
+.top .sx-spot:nth-child(3)::before{animation:cs-drift 7s ease-in-out infinite}
+.pinfoot .sx-spot:nth-child(3)::before{animation:cs-drift 9s ease-in-out -3s infinite}
+.top .sx-spot:nth-child(3)[aria-pressed=true]::before,.pinfoot .sx-spot:nth-child(3)[aria-pressed=true]::before{animation:none}
+/* what's behind a door can only be tapped while it's open */
+.top .sx-spot:is(:nth-child(2),:nth-child(4),:nth-child(6),:nth-child(8)),.pinfoot .sx-spot:is(:nth-child(2),:nth-child(4)){visibility:hidden}
+.sx-spot[aria-pressed=true] + .sx-spot{visibility:visible}
+.sx-menu,.sx-dialog{background:url(images/paint.webp) 0 0/256px 256px,#fbfaf7;color:#3e3228;border:1px solid #cfcabd;border-radius:8px;box-shadow:0 12px 30px rgba(70,50,30,.3);font-family:var(--f-body)}
+.sx-item:hover,.sx-item:focus-visible{background:rgba(185,138,62,.16)}
+.sx-item small{color:#7a6a5a;font-style:italic}
+.sx-page{background:url(images/paint.webp) 0 0/256px 256px,#fbfaf7;color:#3e3228;font-family:var(--f-body);border-radius:2px 2px 6px 6px}
+.sx-head{color:#7a2a3a;font-style:italic}
+.sx-page .sx-note{color:#7a2a3a;font-style:italic}
+.sx-grid{background:rgba(255,255,255,.6);color:#3e3228}
+.sx-back{background:url(images/butcher.webp) 0 0/256px 64px,#b8743a;color:#fffaf0;border:1px solid #7a4a1e;border-radius:4px;padding:7px 14px;font:600 14px/1 var(--f-body);cursor:pointer;text-shadow:0 1px 1px rgba(50,24,6,.8)}
+
+/* Decorations */
+.skin-decor::before,.skin-decor::after{content:"";position:absolute;pointer-events:none}
+/* upper cupboards, the backsplash, the oak shelf and the pendants */
+.top .skin-decor::before{left:calc(-1 * clamp(10px,1.8vw,20px));right:calc(-1 * clamp(10px,1.8vw,20px));bottom:calc(100% + 20px);aspect-ratio:1600/600;
+  background:url(images/crown.webp) center bottom/100% auto no-repeat}
+/* the sampler on the door panel */
+.station .skin-decor::before{left:48%;bottom:10px;width:clamp(0px,(100vw - 1150px) * 1,140px);aspect-ratio:1;background:url(images/sampler.webp) center/100% auto no-repeat}
+/* dried lavender hung on the end of the cabinets */
+.station .skin-decor::after{left:calc(-1 * (clamp(10px,1.8vw,20px) + clamp(0px,(100vw - 760px) * .22,84px) - 10px));top:-30px;width:clamp(0px,(100vw - 760px) * .22,84px);aspect-ratio:198/488;
+  background:url(images/lavender.webp) center top/100% auto no-repeat;rotate:-6deg}
+/* inside the island cupboards */
+.pinfoot .skin-decor::before{inset:0;background:url(images/island-l.webp) left 18px top 38px/clamp(0px,(100vw - 900px) * .5,170px) auto no-repeat,url(images/island-r.webp) right 18px top 38px/clamp(0px,(100vw - 900px) * .5,170px) auto no-repeat}
+/* three counter stools on a striped rug */
+.pinfoot .skin-decor::after{left:12%;right:12%;top:calc(100% + 22px + 6px);aspect-ratio:1000/330;background:url(images/stools.webp) center top/100% auto no-repeat}
+
+@keyframes cs-drift{0%,100%{transform:perspective(900px) rotateY(9deg)}45%{transform:perspective(900px) rotateY(23deg)}70%{transform:perspective(900px) rotateY(15deg)}}
+
+/* the hub's own text on the white paint */
+:is(.panel b,.panel h2,.sheet h2,.ahead h2,label.f,.panel h3){color:#3e3228;text-shadow:none}
+:is(.panel .muted,.ahead .muted,.syncbar .muted,.sheet .muted,.postto .hint,label.f span.hint){color:#6e5d4c;text-shadow:none}
+
+/* readability: everything the base draws light-on-dark gets dark ink here */
+.steps span{background:#efe8d8;color:#3e3228;border:1px solid #d8ccb0}
+.steps span.on{background:#3e3228;color:#fbf3df;border-color:#3e3228}
+.tabs button .n{color:#6e5d4c}
+:is(.tabs button,.seg button)[aria-pressed=true] .n{color:#e9dcc0}
+.btn.link,.btn.link:hover{color:#a8344a}
+.autopick button .mono,.code{text-shadow:none}
+:is(.list,.hits,.msgs) :is(.item .t,.t){color:#3e3228!important}
+:is(.list,.hits,.msgs) :is(.item .s,.s,.meta,.side,.mt,.fx){color:#5b4a3a!important}
+.mover{background:#efe8d8;border-left-color:#d8ccb0}
+.mover button{background:linear-gradient(180deg,#ffffff,#efece5);color:#3e3228;border:1px solid #cfcabd}
+:is(.item,.rowwrap){border-top-color:#d8ccb0}
+.pill:not(.fmark){background:#fffdf8;text-shadow:none}
+:is(.rxset,.rxset *,.opt,.opt *,.hint){color:#3e3228;text-shadow:none}
+.rxset .hint{color:#5b4a3a}
+:is(.note,.reply,.owner,.review,.cmtbox,.sharebox,.actsum,.pt,.slackbar,.cmt.act){background:#f6f2ea;color:#3e3228;border-color:#d8ccb0}
+.sheet :is(h2,h3,b,p,li,span){text-shadow:none}
+.sheet h2{color:#7a2a3a}
+:is(.fitem,.hit,.msg){color:#3e3228}
+.fitem.new{background:#f3dfe2}
+.rxset > summary,.rxset summary{color:#3e3228!important;text-shadow:none!important}

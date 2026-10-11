@@ -66,7 +66,8 @@
       for(const [k,v] of Object.entries(L.box||{})) lay.style[k]=v;
       (L.spots||[]).forEach(sp=>{ const b=el("button","sx-spot"); b.type="button"; b.setAttribute("aria-label",sp.label); b.title=sp.label;
         for(const k of ["left","top","width","height"]) if(sp[k]) b.style[k]=sp[k];
-        if(sp.menu){ b.setAttribute("aria-haspopup","menu"); b.addEventListener("click",ev=>{ ev.stopPropagation(); xMenu(sp,b,x); }); }
+        if(sp.open){ b.setAttribute("aria-pressed","false"); b.addEventListener("click",ev=>{ ev.stopPropagation(); b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")==="true"?"false":"true"); }); }
+        else if(sp.menu){ b.setAttribute("aria-haspopup","menu"); b.addEventListener("click",ev=>{ ev.stopPropagation(); xMenu(sp,b,x); }); }
         else b.addEventListener("click",ev=>{ ev.stopPropagation(); xDo(sp,x,b); });
         lay.appendChild(b); });
       a.appendChild(lay); X.els.push(lay); });

@@ -1,18 +1,18 @@
 {
   "name": "meddev-receiver",
-  "version": "1.9.0",
+  "version": "1.10.1",
   "files": {
     "receiver.css": {
-      "sha256": "3ea9b397b368db596030e275e86865d7f75ba352b42d6faafb61d9314a3c59fe",
-      "bytes": 614461
+      "sha256": "36d42f507c10fe5f168b48f66c8b12060f852c4e61d369d4a8e254d21c876d94",
+      "bytes": 614462
     },
     "receiver.js": {
-      "sha256": "2fd1932d1d150f67d8b568bd073660cdb599661feb7c72249789c35493a222a8",
-      "bytes": 112553
+      "sha256": "6258bcc89a22320e34bae1005df575ee7abf34b0dd757846ef1a90579fa50c95",
+      "bytes": 112770
     },
     "skins.json": {
-      "sha256": "d4aa7e3848c87705b2f46b623c92bb0baea795e07c203a2521698efed6634e40",
-      "bytes": 3804661
+      "sha256": "36121be917f1b1c3a051317501532851acd425e8785963b7c7f31968b0c5ef5a",
+      "bytes": 4708133
     }
   },
   "skins": [
@@ -23,7 +23,8 @@
     "business-lightning",
     "house-of-spoons",
     "mouth-jamboree",
-    "q3-reconciliation"
+    "q3-reconciliation",
+    "clara-stamford"
   ],
   "default": "default"
 }

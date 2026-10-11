@@ -1,0 +1,808 @@
+{
+ "id": "clara-stamford",
+ "name": "Clara Stamford's Homestead Collection",
+ "description": "A sunlit farmhouse kitchen from Clara Stamford's Homestead Collection: white shaker cupboards with brass pulls, subway tile, an oak shelf with a lattice pie, brass globe pendants, a butcher-block island and stools, screens embroidered on display cloth, and cupboards that open (two won't stay shut).",
+ "extras": {
+  "layers": [
+   {
+    "anchor": "top",
+    "box": {
+     "left": "calc(-1 * clamp(10px,1.8vw,20px))",
+     "right": "calc(-1 * clamp(10px,1.8vw,20px))",
+     "bottom": "calc(100% + 20px)",
+     "height": "min(442.5px,(100vw - clamp(16px,24vw - 77px,192px))*.375)"
+    },
+    "spots": [
+     {
+      "label": "Left cupboard, left door",
+      "open": true,
+      "left": "1.250%",
+      "top": "12.333%",
+      "width": "11.000%",
+      "height": "84.667%"
+     },
+     {
+      "label": "The shortwave and the cookie jar",
+      "left": "4.330%",
+      "top": "12.333%",
+      "width": "7.920%",
+      "height": "84.667%",
+      "menu": [
+       {
+        "text": "Shortwave radio",
+        "hint": "For the weather",
+        "page": "transmissions"
+       },
+       {
+        "text": "Headphones",
+        "say": "For listening to the weather privately. The weather is personal."
+       },
+       {
+        "sep": true
+       },
+       {
+        "text": "Cookie jar",
+        "hint": "COOKIES",
+        "page": "passports"
+       },
+       {
+        "text": "Close the cupboard",
+        "hint": "Tap the door",
+        "disabled": true
+       }
+      ]
+     },
+     {
+      "label": "Left cupboard, right door (it won't stay shut)",
+      "open": true,
+      "left": "12.250%",
+      "top": "12.333%",
+      "width": "11.000%",
+      "height": "84.667%"
+     },
+     {
+      "label": "The spice rack and the safe",
+      "left": "12.250%",
+      "top": "12.333%",
+      "width": "7.920%",
+      "height": "84.667%",
+      "menu": [
+       {
+        "text": "Spice rack",
+        "hint": "Alphabetical by threat level",
+        "page": "spices"
+       },
+       {
+        "text": "Small safe",
+        "hint": "For recipes",
+        "page": "safe"
+       },
+       {
+        "text": "Why was this door open?",
+        "say": "The draught. Old house. Please continue to the shelf, where the pie is."
+       }
+      ]
+     },
+     {
+      "label": "Right cupboard, left door",
+      "open": true,
+      "left": "76.750%",
+      "top": "12.333%",
+      "width": "11.000%",
+      "height": "84.667%"
+     },
+     {
+      "label": "The binoculars and the folders",
+      "left": "79.830%",
+      "top": "12.333%",
+      "width": "7.920%",
+      "height": "84.667%",
+      "menu": [
+       {
+        "text": "Binoculars",
+        "hint": "Birdwatching",
+        "page": "birds"
+       },
+       {
+        "text": "Rolled map",
+        "say": "A map of the garden. The X is where the tomatoes go. It's always been the tomatoes."
+       },
+       {
+        "text": "Manila folders",
+        "hint": "CLASSIFIED (coupons)",
+        "page": "dossiers"
+       }
+      ]
+     },
+     {
+      "label": "Right cupboard, right door",
+      "open": true,
+      "left": "87.750%",
+      "top": "12.333%",
+      "width": "11.000%",
+      "height": "84.667%"
+     },
+     {
+      "label": "The corkboard and the red telephone",
+      "left": "87.750%",
+      "top": "12.333%",
+      "width": "7.920%",
+      "height": "84.667%",
+      "menu": [
+       {
+        "text": "Corkboard",
+        "hint": "Recipe ideas",
+        "page": "board"
+       },
+       {
+        "text": "Red telephone",
+        "hint": "Only one number",
+        "say": "*ring* \"Bluebell here. The pie is cooling on the sill. Repeat: on the sill.\" *click*"
+       },
+       {
+        "text": "Unplug it",
+        "hint": "It isn't plugged in",
+        "disabled": true
+       }
+      ]
+     },
+     {
+      "label": "Brass pendant light",
+      "left": "30.375%",
+      "top": "20.667%",
+      "width": "10.000%",
+      "height": "28.000%",
+      "say": "A brass globe pendant. It is a light. It has never been a camera. Please stop looking directly up at it."
+     },
+     {
+      "label": "Brass pendant light (the other one)",
+      "left": "59.625%",
+      "top": "20.667%",
+      "width": "10.000%",
+      "height": "28.000%",
+      "say": "Also a light. Also not a camera. The two lights do not talk to each other about you."
+     },
+     {
+      "label": "Potted basil",
+      "left": "27.125%",
+      "top": "50.000%",
+      "width": "5.875%",
+      "height": "29.000%",
+      "say": "Basil. Agent Basil, if we're being formal. We're not. It's basil."
+     },
+     {
+      "label": "Crock of wooden spoons",
+      "left": "34.750%",
+      "top": "40.000%",
+      "width": "5.875%",
+      "height": "39.000%",
+      "menu": [
+       {
+        "text": "Wooden spoon",
+        "say": "For stirring."
+       },
+       {
+        "text": "Other wooden spoon",
+        "say": "For stirring, but quieter."
+       },
+       {
+        "text": "Whisk",
+        "say": "Antenna. Whisk. It's a whisk. Moving on."
+       },
+       {
+        "text": "Spatula",
+        "say": "Flat. For flipping. Things. Pancakes."
+       }
+      ]
+     },
+     {
+      "label": "Lattice blueberry pie",
+      "left": "41.875%",
+      "top": "55.000%",
+      "width": "15.000%",
+      "height": "24.000%",
+      "page": "pie"
+     },
+     {
+      "label": "Stack of white bowls",
+      "left": "56.500%",
+      "top": "60.000%",
+      "width": "7.375%",
+      "height": "19.000%",
+      "say": "Four bowls. There were five. Nobody asks about the fifth bowl."
+     },
+     {
+      "label": "Pitcher of eucalyptus",
+      "left": "65.625%",
+      "top": "35.667%",
+      "width": "8.500%",
+      "height": "43.333%",
+      "say": "Fresh eucalyptus in an ironstone pitcher. The middle sprig is a microphone. Kidding. (Please speak up near the pitcher.)"
+     }
+    ]
+   },
+   {
+    "anchor": "station",
+    "box": {
+     "left": "-120px",
+     "top": "-40px",
+     "right": "0",
+     "bottom": "0"
+    },
+    "spots": [
+     {
+      "label": "Bless This Home sampler",
+      "left": "calc(120px + (100% - 120px) * .48)",
+      "top": "calc(100% - 10px - clamp(0px,(100vw - 1150px) * 1,140px))",
+      "width": "clamp(0px,(100vw - 1150px) * 1,140px)",
+      "height": "clamp(0px,(100vw - 1150px) * 1,140px)",
+      "page": "sampler"
+     },
+     {
+      "label": "Bundle of dried lavender",
+      "left": "calc(130px - clamp(10px,1.8vw,20px) - clamp(0px,(100vw - 760px)*.22,84px))",
+      "top": "10px",
+      "width": "clamp(0px,(100vw - 760px) * .22,84px)",
+      "height": "calc(clamp(0px,(100vw - 760px) * .22,84px) * 2.46)",
+      "page": "lavender"
+     }
+    ]
+   },
+   {
+    "anchor": "pinfoot",
+    "box": {
+     "left": "0",
+     "top": "0",
+     "right": "0",
+     "bottom": "0"
+    },
+    "spots": [
+     {
+      "label": "Island cupboard, left door",
+      "open": true,
+      "left": "18px",
+      "top": "38px",
+      "width": "clamp(0px,(100vw - 900px) * .5,170px)",
+      "height": "calc(clamp(0px,(100vw - 900px) * .5,170px) * 1.2)"
+     },
+     {
+      "label": "The rolling pins",
+      "left": "calc(18px + clamp(0px,(100vw - 900px) * .5,170px) * .28)",
+      "top": "38px",
+      "width": "calc(clamp(0px,(100vw - 900px) * .5,170px) * .72)",
+      "height": "calc(clamp(0px,(100vw - 900px) * .5,170px) * 1.2)",
+      "page": "pins"
+     },
+     {
+      "label": "Island cupboard, right door (it won't stay shut)",
+      "open": true,
+      "left": "calc(100% - 18px - clamp(0px,(100vw - 900px) * .5,170px))",
+      "top": "38px",
+      "width": "clamp(0px,(100vw - 900px) * .5,170px)",
+      "height": "calc(clamp(0px,(100vw - 900px) * .5,170px) * 1.2)"
+     },
+     {
+      "label": "The pie safe",
+      "left": "calc(100% - 18px - clamp(0px,(100vw - 900px) * .5,170px))",
+      "top": "38px",
+      "width": "calc(clamp(0px,(100vw - 900px) * .5,170px) * .72)",
+      "height": "calc(clamp(0px,(100vw - 900px) * .5,170px) * 1.2)",
+      "page": "piesafe"
+     },
+     {
+      "label": "About Clara Stamford",
+      "left": "calc(50% - min(280px,33%))",
+      "top": "38px",
+      "width": "min(560px,66%)",
+      "height": "calc(min(560px,66%) * .359)",
+      "page": "about"
+     }
+    ]
+   }
+  ],
+  "pages": {
+   "transmissions": {
+    "title": "Shortwave Log (Weather)",
+    "cols": [
+     "Time",
+     "Call sign",
+     "Message"
+    ],
+    "rows": [
+     [
+      "05:40",
+      "BLUEBELL",
+      "Sunny. The goose is in the garden."
+     ],
+     [
+      "05:41",
+      "HAYLOFT",
+      "Copy. Which goose."
+     ],
+     [
+      "05:41",
+      "BLUEBELL",
+      "The goose."
+     ],
+     [
+      "06:15",
+      "BLUEBELL",
+      "Chance of rain. Bring in the linens. All the linens."
+     ],
+     [
+      "06:16",
+      "HAYLOFT",
+      "Even the fitted sheet?"
+     ],
+     [
+      "06:16",
+      "BLUEBELL",
+      "Nobody can fold the fitted sheet. Leave it. Let it go."
+     ],
+     [
+      "12:00",
+      "BLUEBELL",
+      "Pie at the windowsill. Repeat, the windowsill."
+     ],
+     [
+      "12:02",
+      "HAYLOFT",
+      "Which window."
+     ],
+     [
+      "12:02",
+      "BLUEBELL",
+      "The one with the pie."
+     ],
+     [
+      "19:30",
+      "BLUEBELL",
+      "Clear skies. Over and out. Out. I said out."
+     ]
+    ],
+    "note": "If you are reading this you are now on the weather committee. Meetings are Tuesdays."
+   },
+   "passports": {
+    "title": "Cookie Jar (Contents)",
+    "cols": [
+     "Item",
+     "Name inside",
+     "Notes"
+    ],
+    "rows": [
+     [
+      "Passport",
+      "Clara Stamford",
+      "Photo is lovely"
+     ],
+     [
+      "Passport",
+      "Klara Stamfjord",
+      "Same photo, braid"
+     ],
+     [
+      "Passport",
+      "Claire Stanford",
+      "Same photo, sun hat"
+     ],
+     [
+      "Passport",
+      "Mrs. Bundt",
+      "Same photo, flour on nose"
+     ],
+     [
+      "Cookie",
+      "Snickerdoodle",
+      "Real. Help yourself"
+     ],
+     [
+      "Cookie",
+      "Oatmeal raisin",
+      "Real. Nobody takes these"
+     ]
+    ],
+    "note": "Put the lid back on. The cookies go soft and the passports go stale."
+   },
+   "spices": {
+    "title": "Spice Rack",
+    "cols": [
+     "Jar",
+     "Use in cooking",
+     "Other use"
+    ],
+    "rows": [
+     [
+      "Sage",
+      "Stuffing",
+      "Wisdom"
+     ],
+     [
+      "Dill",
+      "Pickles",
+      "Dill"
+     ],
+     [
+      "Mace",
+      "Nutmeg's cousin",
+      "We don't talk about it"
+     ],
+     [
+      "Clove",
+      "Ham, cider",
+      "Numbs a tooth, or a conversation"
+     ],
+     [
+      "Bay",
+      "Soups",
+      "Code for the boat"
+     ],
+     [
+      "Anise",
+      "Biscotti",
+      "Smells like a secret"
+     ]
+    ],
+    "note": "Alphabetize by threat level. Paprika is on a watch list."
+   },
+   "safe": {
+    "title": "The Small Safe",
+    "cols": [
+     "Item",
+     "Status"
+    ],
+    "rows": [
+     [
+      "Grandmother's pie crust recipe",
+      "Secured"
+     ],
+     [
+      "Second copy of the recipe",
+      "Secured in the first copy"
+     ],
+     [
+      "Microfilm",
+      "It's a coupon for flour"
+     ],
+     [
+      "Combination",
+      "Written on the safe, on a sticky note, for safety"
+     ],
+     [
+      "One (1) perfect egg",
+      "Do not ask"
+     ]
+    ],
+    "note": "The combination is the oven temperature for the pie, twice."
+   },
+   "birds": {
+    "title": "Birdwatching Notebook",
+    "cols": [
+     "Time",
+     "Bird",
+     "Behaviour"
+    ],
+    "rows": [
+     [
+      "06:02",
+      "Robin",
+      "Pulling a worm. Clearly a decoy."
+     ],
+     [
+      "06:30",
+      "Cardinal",
+      "Red. Too red. Noted."
+     ],
+     [
+      "07:15",
+      "Neighbor (Gary)",
+      "Watering a dry lawn at dawn. Why, Gary."
+     ],
+     [
+      "09:00",
+      "Bluebird",
+      "Delivered nothing. Suspicious."
+     ],
+     [
+      "11:40",
+      "Two crows",
+      "Exchanged a twig. Twig is now missing."
+     ],
+     [
+      "14:00",
+      "Gary",
+      "Waved. Waved back. Professional."
+     ]
+    ],
+    "note": "All birds accounted for except one pigeon. Pigeon has a tiny tube on its leg. Pigeon knows what it did."
+   },
+   "dossiers": {
+    "title": "Manila Folders",
+    "cols": [
+     "Codename",
+     "Known for",
+     "Threat level"
+    ],
+    "rows": [
+     [
+      "THE BAKER",
+      "Sourdough starter older than the house",
+      "Moderate"
+     ],
+     [
+      "MR. GARY",
+      "Lawn",
+      "Low, but watering"
+     ],
+     [
+      "THE BOOK CLUB",
+      "Have not read the book",
+      "High"
+     ],
+     [
+      "PASTOR DALE",
+      "Raffle, 1998, unexplained",
+      "Unknown"
+     ],
+     [
+      "THE PIGEON",
+      "Tiny tube",
+      "Extreme"
+     ],
+     [
+      "Coupons",
+      "Two for one, flour",
+      "Expired"
+     ]
+    ],
+    "note": "Stamped CLASSIFIED with the potato stamp. It was going to be a heart."
+   },
+   "board": {
+    "title": "The Corkboard",
+    "cols": [
+     "Photo",
+     "Red string goes to",
+     "Why"
+    ],
+    "rows": [
+     [
+      "The pie",
+      "The windowsill",
+      "Cooling"
+     ],
+     [
+      "The windowsill",
+      "Gary",
+      "Gary walks past the windowsill"
+     ],
+     [
+      "Gary",
+      "The pigeon",
+      "Both arrived in spring"
+     ],
+     [
+      "The pigeon",
+      "The pie",
+      "Pigeon has been looking at the pie"
+     ],
+     [
+      "The pie",
+      "The pie",
+      "It's always been the pie"
+     ]
+    ],
+    "note": "Recipe ideas. These are recipe ideas. The string is for a craft."
+   },
+   "pie": {
+    "title": "Blueberry Lattice Pie: Ingredients",
+    "cols": [
+     "Ingredient",
+     "Amount",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Blueberries",
+      "3 cups",
+      "Picked at 04:00, unobserved"
+     ],
+     [
+      "Sugar",
+      "1 cup",
+      "Granulated, like the intel"
+     ],
+     [
+      "Lemon",
+      "1, zested",
+      "Zest the courier"
+     ],
+     [
+      "Butter",
+      "Cold. Colder.",
+      "Colder than that"
+     ],
+     [
+      "Lattice",
+      "Over, under",
+      "Never under, over"
+     ],
+     [
+      "The package",
+      "1",
+      "[REDACTED]"
+     ],
+     [
+      "Love",
+      "To taste",
+      "Real"
+     ]
+    ],
+    "note": "Bake at 425 for 15 minutes, then 375 for 35. Burn after baking. Not the pie. The card."
+   },
+   "sampler": {
+    "title": "Sampler, Decoded",
+    "cols": [
+     "Stitched",
+     "Means"
+    ],
+    "rows": [
+     [
+      "Bless",
+      "Rendezvous"
+     ],
+     [
+      "This",
+      "at"
+     ],
+     [
+      "Home",
+      "the farmers market"
+     ],
+     [
+      "Three rosebuds",
+      "at 3 o'clock"
+     ],
+     [
+      "The vine",
+      "bring a tote bag"
+     ],
+     [
+      "Morse along the hem",
+      ". -.. --- --- -.-  (LOOK)"
+     ]
+    ],
+    "note": "Cross-stitched in a weekend. Decoded in a minute. Framed forever."
+   },
+   "lavender": {
+    "title": "Dried Lavender Bundle",
+    "cols": [
+     "Stem",
+     "Function"
+    ],
+    "rows": [
+     [
+      "Stems 1 to 12",
+      "Calming fragrance"
+     ],
+     [
+      "Stem 13",
+      "Lockpick, tension wrench"
+     ],
+     [
+      "Stem 14",
+      "Lockpick, rake"
+     ],
+     [
+      "Stem 15",
+      "Lockpick, it's mostly for jam jars"
+     ],
+     [
+      "Twine",
+      "Twine"
+     ]
+    ],
+    "note": "Hang upside down in a dry place, like a guard you've lulled to sleep with a scented sachet."
+   },
+   "pins": {
+    "title": "Rolling Pin Rack",
+    "cols": [
+     "No.",
+     "Pin",
+     "For"
+    ],
+    "rows": [
+     [
+      "1",
+      "Standard, maple",
+      "Pie crust"
+     ],
+     [
+      "2",
+      "French, tapered",
+      "Pastry, and pointing at a map"
+     ],
+     [
+      "3",
+      "Marble",
+      "Keeping butter cold; doorstop"
+     ],
+     [
+      "4",
+      "Tactical",
+      "Shortbread. It has a flashlight"
+     ],
+     [
+      "5",
+      "Diplomatic",
+      "Only rolled out on special occasions"
+     ]
+    ],
+    "note": "Flour the pin, not the counter. Never the counter."
+   },
+   "piesafe": {
+    "title": "The Pie Safe (Actual Safe)",
+    "cols": [
+     "Shelf",
+     "Pie",
+     "Status"
+    ],
+    "rows": [
+     [
+      "Top",
+      "Blueberry lattice",
+      "Cooling"
+     ],
+     [
+      "Middle",
+      "Apple",
+      "Handcuffed to a briefcase"
+     ],
+     [
+      "Bottom",
+      "Rhubarb",
+      "Under surveillance by the cat"
+     ],
+     [
+      "Hidden",
+      "Shoofly",
+      "Do not exist"
+     ]
+    ],
+    "note": "A pie safe has kept pies safe since the 1800s. This one also keeps them safe."
+   },
+   "about": {
+    "title": "About Clara Stamford",
+    "cols": [
+     "Field",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Born",
+      "Yes"
+     ],
+     [
+      "Known for",
+      "Gracious living, crisp linens, a perfect lattice"
+     ],
+     [
+      "Collections",
+      "Homestead, Harvest, Hearth, and one called Classified"
+     ],
+     [
+      "Hobbies",
+      "Canning, quilting, crossing borders in a cardigan"
+     ],
+     [
+      "Clearance",
+      "Top Secret / Gingham"
+     ],
+     [
+      "Favourite saying",
+      "\"A tidy kitchen is a quiet kitchen.\""
+     ]
+    ],
+    "note": "Clara Stamford is a fictional homemaker. Any resemblance to a lifestyle empire is a coincidence, as is the earpiece."
+   }
+  }
+ }
+}

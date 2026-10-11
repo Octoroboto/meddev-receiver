@@ -26,7 +26,10 @@ const SUBTREE = /^(filter|backdrop-filter|opacity|mix-blend-mode|transform|rotat
 const LEAF = new RegExp(String.raw`(\.(skin-decor|rd-knob|tk-knob|vol-knob|vol-dot)|button|small|input\[type=checkbox\])${PSEUDO}$`);
 // Skins Rob has approved to recolour glass, lights and fields as well (still no layout changes to glass, no pests, no
 // @media, no ids, no click/drag behaviour changes). Approval lives here, never in the skin itself.
-export const EXEMPT = { "analyze-pics": "Collin's Analyze Pics (Mac OS 8 Platinum) look: its screens, LEDs, EQ, VU faces and fields are part of it. Approved by Rob, 2026-10-11." };
+export const EXEMPT = { "analyze-pics": "Collin's Analyze Pics (Mac OS 8 Platinum) look: its screens, LEDs, EQ, VU faces and fields are part of it. Approved by Rob, 2026-10-11.",
+  "clara-stamford": "Clara Stamford's Homestead Collection: the screens, EQ and VU faces are embroidered on display cloth; the light-colour knobs still tint them. Approved by Rob, 2026-10-11." };
+// Splits a selector list at its top-level commas (commas inside :is(), :not() and the like stay put).
+export const splitSel = t => { const out = []; let d = 0, cur = ""; for (const ch of t) { if (ch === "(") d++; else if (ch === ")") d--; if (ch === "," && d === 0) { out.push(cur); cur = ""; } else cur += ch; } out.push(cur); return out; };
 const decls = body => body.split(";").map(d => d.trim()).filter(Boolean).map(d => { const i = d.indexOf(":"); return [d.slice(0, i).trim().toLowerCase(), d.slice(i + 1).trim()]; });
 
 // Pulls @keyframes out (they're checked separately and never scoped). Returns [rest, keyframes[]].
@@ -50,7 +53,7 @@ export function checkSkin(id, c) {
       const sel = m[1].trim(), body = m[2];
       if (/^@font-face$/.test(sel)) continue;
       if (/^@/.test(sel)) bad(`${sel.split(" ")[0]} isn't allowed in a skin`);
-      for (const one of sel.split(",").map(x => x.trim())) {
+      for (const one of splitSel(sel).map(x => x.trim())) {
         if (PESTS.test(one)) bad(`"${one}" is the spray can or the flies; they stay the same in every skin`);
         if (/#[a-z_-]/i.test(one)) bad(`"${one}": ids aren't allowed in a skin`);
       }
@@ -62,7 +65,7 @@ export function checkSkin(id, c) {
     const sel = m[1].trim(), body = m[2];
     if (/^@font-face$/.test(sel)) continue;
     if (/^@/.test(sel)) bad(`${sel.split(" ")[0]} isn't allowed in a skin`);
-    const parts = sel.split(",").map(x => x.trim().replace(/^html\[data-skin="[^"]+"\]\s*/, ""));
+    const parts = splitSel(sel).map(x => x.trim().replace(/^html\[data-skin="[^"]+"\]\s*/, ""));
     for (const one of parts) {
       if (!one) continue;
       if (PESTS.test(one)) bad(`"${one}" is the spray can or the flies; they stay the same in every skin`);
@@ -109,7 +112,8 @@ export function checkExtras(id, x) {
     pg.rows.forEach(r => { if (!Array.isArray(r) || r.length > pg.cols.length) bad(`page "${pid}" rows must be lists no longer than cols`); r.forEach(c => { if (typeof c !== "string" || c.length > 80) bad(`page "${pid}" cells must be text up to 80 characters`); }); });
     if (pg.note != null) str(pg.note, 300, `page "${pid}" note`);
   }
-  const act = (o, what) => { const n = ["say", "page", "back", "menu"].filter(k => o[k] != null).length; if (n > 1) bad(`${what}: one of say, page, back or menu`);
+  const act = (o, what) => { const n = ["say", "page", "back", "menu", "open"].filter(k => o[k] != null).length; if (n > 1) bad(`${what}: one of say, page, back, menu or open`);
+    if (o.open != null && o.open !== true) bad(`${what}: open must be true`);
     if (o.say != null) str(o.say, 300, `${what} say`); if (o.page != null && !pages[o.page]) bad(`${what}: page "${o.page}" isn't in pages`); if (o.back != null && o.back !== true) bad(`${what}: back must be true`); };
   const layers = x.layers || []; if (!Array.isArray(layers) || layers.length > 6) bad("layers must be a list of up to 6");
   let count = 0;
@@ -118,7 +122,7 @@ export function checkExtras(id, x) {
     only(L.box || {}, ["left", "right", "top", "bottom", "width", "height"], `layer ${i} box`); for (const [k, v] of Object.entries(L.box || {})) len(v, `layer ${i} box ${k}`);
     if (!Array.isArray(L.spots)) bad(`layer ${i}: spots must be a list`);
     L.spots.forEach((sp, j) => { const w = `layer ${i} spot ${j}`; count++;
-      only(sp, ["label", "left", "top", "width", "height", "menu", "say", "page", "back"], w); str(sp.label, 60, `${w} label`);
+      only(sp, ["label", "left", "top", "width", "height", "menu", "say", "page", "back", "open"], w); str(sp.label, 60, `${w} label`);
       for (const k of ["left", "top", "width", "height"]) len(sp[k], `${w} ${k}`); act(sp, w);
       if (sp.menu != null) { if (!Array.isArray(sp.menu) || sp.menu.length > 16) bad(`${w}: menu must be a list of up to 16`);
         sp.menu.forEach((e, k) => { if (e && e.sep === true) { only(e, ["sep"], `${w} entry ${k}`); return; }
@@ -145,7 +149,7 @@ export function buildSkin(dirUrl, id) {
   // scope every rule to this skin so it outranks the base look whatever order the styles load in (keyframes stay as they are)
   const scope = `html[data-skin="${id}"]`, [rules, frames] = splitKeyframes(c);
   c = rules.replace(/([^{};]+)\{/g, (m, sel) => { const t = sel.trim(); if (/^@/.test(t) || t.startsWith(scope)) return m;
-    return t.split(",").map(x => x.trim()).map(x => x === "html" ? scope : x.startsWith("html ") ? scope + x.slice(4) : `${scope} ${x}`).join(",") + "{"; }) + frames.join("\n");
+    return splitSel(t).map(x => x.trim()).map(x => x === "html" ? scope : x.startsWith("html ") ? scope + x.slice(4) : `${scope} ${x}`).join(",") + "{"; }) + frames.join("\n");
   if (/<\/(style|script)|javascript:|expression\(|@import(?!\s+url\(\s*["']?https:\/\/fonts\.googleapis\.com\/)/i.test(c)) throw new Error(`skin "${id}": only plain CSS is allowed (no tags, scripts or imports except Google Fonts)`);
   if (/url\(\s*(?!["']?(data:|#))/i.test(c.replace(/@import\s+url\([^)]*\)/g, ""))) throw new Error(`skin "${id}": images must be in the skin's images/ folder`);
   c = c.replace(/data:img(\d+)x(?=")/g, (m, n) => imgs[+n]);
