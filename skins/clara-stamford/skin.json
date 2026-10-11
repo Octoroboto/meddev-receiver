@@ -2,6 +2,7 @@
  "id": "clara-stamford",
  "name": "Clara Stamford's Homestead Collection",
  "description": "A sunlit farmhouse kitchen from Clara Stamford's Homestead Collection: white shaker cupboards with brass pulls, subway tile, an oak shelf with a lattice pie, brass globe pendants, a butcher-block island and stools, screens embroidered on display cloth, and cupboards that open (two won't stay shut).",
+ "tint": "dye",
  "extras": {
   "layers": [
    {

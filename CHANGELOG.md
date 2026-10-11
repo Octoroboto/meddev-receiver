@@ -2,6 +2,11 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.10.4 (2026-10-11, Rob)
+- **Light-colour knobs on skins whose screens aren't lights:** a skin can say `"tint": "dye"` in its skin.json; the RED/GREEN/BLUE knobs then shift the colour of its screens (hue and saturation) and never dim them, so turning all three to MIN no longer blacks them out. Clara Stamford's embroidered screens use it. Lit screens (every other skin) still go dark at MIN, like lights switched off.
+- **Clara Stamford's Homestead Collection:** every prop redrawn at higher resolution and with proper modelling: the shortwave radio and headphones, the glass cookie jar of passports with a kraft tag, the spice jars (labels fitted to the jars), the safe, binoculars, map roll, the CLASSIFIED folders, the corkboard (photos of the pigeon, Gary, the pie, the goose...), the red hotline phone, the basil, utensil crock, pie on its stand, bowls, pitcher of eucalyptus and the brass globe pendants; the island's rolling-pin rack and pie safe are new too.
+- **Mr. Spoonatelli's House of Spoons:** no more half spoons. The spoons stuck in the edges come in tiles of whole spoons, spaced so a tile is never cut off at the corners or where the sections meet.
+
 ## 1.10.3 (2026-10-11, Rob)
 - **Q3 Reconciliation:** the minimize, maximize and close glyphs are redrawn and sit in the middle of their tap areas. The settings (skin picker, "What plays between songs", Slack, city and units labels, hints) and the brand marks on the faceplate are dark ink on the light sheet instead of the base's light text.
 - **New skin settings `--label`, `--hint` and `--etch`:** the text colour of settings labels and option names, of hints, and of the faceplate brand marks, spec line and window-button captions. The base keeps its old colours when a skin doesn't set them; light skins set them so that text stays readable. Q3 Reconciliation, Clara Stamford's Homestead Collection and Mouth Jamboree (hints) use them.

@@ -80,11 +80,11 @@ small,.rd-mm,.vizsw{font-family:"Cormorant SC",Georgia,serif;font-weight:700;let
 .top .skin-decor::after{left:calc(-1 * (clamp(10px,1.8vw,20px) + clamp(0px,(100vw - 700px) * .2,72px) + 4px));right:calc(-1 * (clamp(10px,1.8vw,20px) + clamp(0px,(100vw - 700px) * .25,96px) + 4px));top:calc(-1 * clamp(60px,9vw,110px) - 30px);bottom:-10px;
   background:url(images/loose-1.webp) left calc(clamp(0px,(100vw - 700px) * .2,72px) + 1%) top calc(clamp(60px,9vw,110px) + 30px)/clamp(0px,(100vw - 760px) * .08,48px) auto no-repeat,
     url(images/loose-6.webp) right calc(clamp(0px,(100vw - 700px) * .25,96px) + 1%) top calc(clamp(60px,9vw,110px) + 34px)/clamp(0px,(100vw - 760px) * .08,46px) auto no-repeat,
-    url(images/burst-top.webp) center top/min(1000px,100%) clamp(60px,9vw,110px) repeat-x,
-    url(images/burst-left.webp) left top 300px/clamp(0px,(100vw - 700px) * .2,72px) auto repeat-y,url(images/burst-right.webp) right top 60px/clamp(0px,(100vw - 700px) * .25,96px) auto repeat-y;filter:drop-shadow(0 6px 6px rgba(0,0,0,.55))}
+    url(images/burst-top.webp) center top/calc(clamp(60px,9vw,110px) * 2.5) clamp(60px,9vw,110px) space no-repeat,
+    url(images/burst-left.webp) left top 300px/clamp(0px,(100vw - 700px) * .2,72px) auto no-repeat space,url(images/burst-right.webp) right top 60px/clamp(0px,(100vw - 700px) * .25,96px) auto no-repeat space;filter:drop-shadow(0 6px 6px rgba(0,0,0,.55))}
 /* the walls: spoons sticking out of both sides of the cabinet, top to bottom */
 .station .skin-decor::before{left:calc(-1 * (clamp(10px,1.8vw,20px) + clamp(0px,(100vw - 700px) * .2,72px) + 4px));right:calc(-1 * (clamp(10px,1.8vw,20px) + clamp(0px,(100vw - 700px) * .25,96px) + 4px));top:-10px;bottom:-10px;
-  background:url(images/burst-left.webp) left top/clamp(0px,(100vw - 700px) * .2,72px) auto repeat-y,url(images/burst-right.webp) right top 140px/clamp(0px,(100vw - 700px) * .25,96px) auto repeat-y;filter:drop-shadow(0 8px 8px rgba(0,0,0,.6))}
+  background:url(images/burst-left.webp) left top/clamp(0px,(100vw - 700px) * .2,72px) auto no-repeat space,url(images/burst-right.webp) right top 140px/clamp(0px,(100vw - 700px) * .25,96px) auto no-repeat space;filter:drop-shadow(0 8px 8px rgba(0,0,0,.6))}
 /* loose spoons left lying across the panel and jammed in its edges */
 .station .skin-decor::after{inset:-26px -18px -30px -18px;z-index:3;
   background:url(images/lie-1.webp) left 53% top 74%/clamp(0px,(100vw - 900px) * .5,230px) auto no-repeat,
@@ -102,8 +102,8 @@ small,.rd-mm,.vizsw{font-family:"Cormorant SC",Georgia,serif;font-weight:700;let
     url(images/lie-2.webp) left calc(clamp(0px,(100vw - 700px) * .2,72px) + 15%) top 38%/clamp(0px,(100vw - 900px) * .22,100px) auto no-repeat,
     url(images/lie-4.webp) right calc(clamp(0px,(100vw - 700px) * .25,96px) + 9%) top 39%/clamp(0px,(100vw - 900px) * .3,130px) auto no-repeat,
     url(images/lie-3.webp) left 69% top 41%/clamp(0px,(100vw - 900px) * .22,110px) auto no-repeat,
-    url(images/burst-bottom.webp) center bottom/min(1000px,100%) clamp(70px,10vw,140px) repeat-x,
-    url(images/burst-left.webp) left top/clamp(0px,(100vw - 700px) * .2,72px) auto repeat-y,url(images/burst-right.webp) right top 140px/clamp(0px,(100vw - 700px) * .25,96px) auto repeat-y;filter:drop-shadow(0 6px 6px rgba(0,0,0,.5))}
+    url(images/burst-bottom.webp) center bottom/calc(clamp(70px,10vw,140px) * 2.94) clamp(70px,10vw,140px) space no-repeat,
+    url(images/burst-left.webp) left top/clamp(0px,(100vw - 700px) * .2,72px) auto no-repeat space,url(images/burst-right.webp) right top 140px/clamp(0px,(100vw - 700px) * .25,96px) auto no-repeat space;filter:drop-shadow(0 6px 6px rgba(0,0,0,.5))}
 
 @keyframes hs-sway{0%,100%{rotate:-.5deg}50%{rotate:.5deg}}
 @keyframes hs-notes{0%{background-image:url(images/note-1.webp)}16.6%{background-image:url(images/note-2.webp)}33.3%{background-image:url(images/note-3.webp)}50%{background-image:url(images/note-4.webp)}66.6%{background-image:url(images/note-5.webp)}83.3%{background-image:url(images/note-6.webp)}}

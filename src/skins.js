@@ -20,6 +20,7 @@
     const pick=find(id)||find(bundle.default)||find("default")||bundle.skins[0];
     const css=pick?pick.css||"":""; if(theme().textContent!==css) theme().textContent=css;
     document.documentElement.dataset.skin=pick?pick.id:"default";
+    if(pick&&pick.tint==="dye") document.documentElement.dataset.tint="dye"; else delete document.documentElement.dataset.tint;
     decor(/skin-decor/.test(css)); extras(pick);
     fill(); try{ window.dispatchEvent(new Event("meddev:skin")); }catch(e){}
     return pick;

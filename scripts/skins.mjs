@@ -187,5 +187,8 @@ export function buildSkin(dirUrl, id) {
   if (c.length > 1.5e6) throw new Error(`skin "${id}" is ${(c.length / 1e6).toFixed(1)} MB; keep it under 1.5 MB (compress the images)`);
   const out = { id, name: String(meta.name || id), description: String(meta.description || ""), css: c };
   if (meta.extras != null) out.extras = checkExtras(id, meta.extras);
+  // "tint": "dye" = the light-colour knobs re-colour this skin's screens (hue and saturation) without dimming them,
+  // for skins whose screens aren't lights (Clara's embroidered cloth). The default, "light", dims lit screens to dark.
+  if (meta.tint != null) { if (!["light", "dye"].includes(meta.tint)) throw new Error(`skin "${id}": tint must be "light" or "dye"`); if (meta.tint === "dye") out.tint = "dye"; }
   return out;
 }

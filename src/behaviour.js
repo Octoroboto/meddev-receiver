@@ -467,6 +467,12 @@ ${[0,1,2,3,4,5,6,7].map(k=>`<rect x="52" y="${262+k*7}" width="16" height="2.4" 
 (()=>{
   const deck=document.getElementById("rgbDeck"); if(!deck) return;
   const funcs={r:document.querySelector("#rgbk feFuncR"),g:document.querySelector("#rgbk feFuncG"),b:document.querySelector("#rgbk feFuncB")};
+  // A twin filter with the same hue and saturation but no dimming, for skins whose screens aren't lights ("tint": "dye").
+  { const f=document.getElementById("rgbk"); if(f&&!document.getElementById("rgbkDye")){ const NS="http://www.w3.org/2000/svg", d=document.createElementNS(NS,"filter");
+      d.id="rgbkDye"; d.setAttribute("color-interpolation-filters","sRGB");
+      const h=document.createElementNS(NS,"feColorMatrix"); h.id="rgbHueDye"; h.setAttribute("type","hueRotate"); h.setAttribute("values","0");
+      const t=document.createElementNS(NS,"feColorMatrix"); t.id="rgbSatDye"; t.setAttribute("type","saturate"); t.setAttribute("values","1");
+      d.append(h,t); f.parentNode.appendChild(d); } }
   const v={r:1,g:1,b:1}; try{ const s=JSON.parse(localStorage.getItem("hubRGB")||"null"); if(s) for(const k of "rgb") if(typeof s[k]==="number") v[k]=Math.max(0,Math.min(2,s[k])); }catch(e){}
   const led=document.getElementById("rdLed"), autoB=document.getElementById("rdAuto");
   // tick dots round each dial, receiver style
@@ -489,6 +495,7 @@ ${[0,1,2,3,4,5,6,7].map(k=>`<rect x="52" y="${262+k*7}" width="16" height="2.4" 
       let d=hue-200; d=((d+540)%360)-180; const pull=Math.min(1,chroma/1.0);
       const hr=document.getElementById("rgbHue"), st=document.getElementById("rgbSat");
       hr&&hr.setAttribute("values",(d*pull).toFixed(1)); st&&st.setAttribute("values",(1+chroma*.35).toFixed(3));
+      const hd=document.getElementById("rgbHueDye"), sd=document.getElementById("rgbSatDye"); hd&&hd.setAttribute("values",(d*pull).toFixed(1)); sd&&sd.setAttribute("values",(1+chroma*.35).toFixed(3));
       for(const k of "rgb") funcs[k]&&funcs[k].setAttribute("slope",Math.max(0,mean).toFixed(3)); }
     for(const k of "rgb"){ const kn=knobs[k]; kn.style.transform=`rotate(${(v[k]-1)*135}deg)`; kn.setAttribute("aria-valuenow",String(Math.round(v[k]*100))); kn.setAttribute("aria-valuetext",Math.round(v[k]*100)+" percent"); }
     const off=Math.abs(v.r-1)+Math.abs(v.g-1)+Math.abs(v.b-1)>.02; document.documentElement.classList.toggle("rgbk",off);
