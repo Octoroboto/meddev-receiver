@@ -26,7 +26,7 @@ ${axJs}
 window.MedDevReceiver={version:${JSON.stringify(version)},mountBadges:()=>window.MDFM_mountBadges(),mountControls:(radio,o)=>window.MDFM_receiver(radio,o||{})};
 `;
 const skinsIndex = JSON.parse(read("skins/skins.json"));
-const ids = [...new Set([...(skinsIndex.order || []), ...readdirSync(new URL("skins/", root), { withFileTypes: true }).filter(d => d.isDirectory()).map(d => d.name)])];
+const ids = [...new Set([...(skinsIndex.order || []), ...readdirSync(new URL("skins/", root), { withFileTypes: true }).filter(d => d.isDirectory()).map(d => d.name).sort()])];
 const skins = ids.map(id => buildSkin(new URL(`skins/${id}/`, root), id));
 if (!skins.find(s => s.id === skinsIndex.default)) throw new Error(`skins.json default "${skinsIndex.default}" isn't a skin`);
 const skinsBundle = JSON.stringify({ version, default: skinsIndex.default, skins });
