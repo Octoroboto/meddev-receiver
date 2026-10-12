@@ -366,7 +366,10 @@ ${(()=>{ const w=th.brand.split(" "); const two=th.brand.length>11&&w.length>1; 
   function restPoint(){
     const hd=document.querySelector("header.top"), gr=document.querySelector(".grid"); const W=document.documentElement.clientWidth;
     let y=120; if(hd){ const a=hd.getBoundingClientRect(), b=gr?gr.getBoundingClientRect():null; y=(b?(a.bottom+b.top)/2:a.bottom+10)+scrollY; }
-    return {x:W-62*SC, y};
+    // Rest beside the radio, not at the far edge of a wide window; on phones tuck further out so less of the screen is covered.
+    let x=W-62*SC; const wr=document.querySelector(".wrap"); if(wr){ const r=wr.getBoundingClientRect(); if(r.width>0) x=Math.min(x,r.right+44*SC); }
+    if(W<700) x=Math.max(x,W-22*SC);
+    return {x, y};
   }
   let spraying=false;
   const park=()=>{ if(spraying) return; const p=restPoint(); LT=Math.max(0,p.y-320); layer.style.top=LT+"px"; pose(p.x,p.y,-90); };

@@ -2,6 +2,15 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.13.0 (2026-10-12, Rob)
+- **Layout pass (every skin, any window shape):**
+  - Button LEDs sit right beside their button, however long the caption is. LET IT RIDE, UNDERWATER, ACCESSIBILITY and the like had their LED stranded at the caption's edge, which in some skins put it on the frame.
+  - The header switches to its stacked layout when the header itself is too narrow, not only when the window is. Skins with wide frames (House of Spoons, Mouth Jamboree, Slouch) used to leave the spectrum analyzer at half width with an empty gap beside it. Now the switches and buttons share one row and the analyzer runs full width.
+  - The header's right column is wide enough for the station arrows and both text buttons on one line, even in skins that use capitals.
+  - The tone knobs and volume knob fit beside the meters in narrower panels.
+  - The "What plays" lists use wider columns, so the longer names don't wrap.
+  - The spray can rests beside the radio on wide windows (it used to sit at the far edge of the screen), and tucks further out on phones.
+
 ## 1.12.2 (2026-10-12, Rob)
 - **Mouth Jamboree: terrible advice and the eight sad teeth.** Dr. Toothbert, D.D.S. (Definitely Didn't Study) stands on the red band: tap him for seven pieces of awful oral hygiene advice, read aloud. The Cavity Patrol badge, the gel dollop and the Jam Facts label give more (Jam Facts opens a Directions page, with a note that none of it is real advice). Eight sad, rotten teeth with rain clouds hide around the tube; tap one to hear its troubles and it cheers up. Find all eight and claim the Certificate of Ateethment from Dr. Toothbert: it gets pinned to the tube.
 
