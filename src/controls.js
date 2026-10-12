@@ -11,7 +11,7 @@ window.MDFM_receiver=function(radio,{app=null}={}){
   // double-click puts a knob back. Remembered on this device.
   { const load=(k,d)=>{ try{ const v=JSON.parse(localStorage.getItem(k)); return v==null?d:v; }catch(e){ return d; } }, save=(k,v)=>{ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} };
     const num=(v,d,lo,hi)=>typeof v==="number"&&Number.isFinite(v)?Math.max(lo,Math.min(hi,v)):d;   // a saved value that isn't a usable number goes back to its default
-    const saved=load("mdfmTone",{})||{}, tone={low:num(saved.low,0,-12,12),mid:num(saved.mid,0,-12,12),high:num(saved.high,0,-12,12)}; let vol=num(load("mdfmVolume",.8),.8,0,1);
+    const saved=load("mdfmTone",{})||{}, tone={low:num(saved.low,0,-12,12),mid:num(saved.mid,0,-12,12),high:num(saved.high,0,-12,12)}; let vol=num(load("mdfmVolume",.8),.8,0,1); if(vol<.05) vol=.8;   // a volume left at 0 last time looked like a broken radio (titles change, no sound, blank EQ): start audible
     const ticks=(svg,n,r,cx,big)=>{ let h=""; for(let i=0;i<=n;i++){ const a=(-135+i*270/n)*Math.PI/180, major=i===0||i===n||i===n/2; h+=`<circle cx="${cx+Math.sin(a)*r}" cy="${cx-Math.cos(a)*r}" r="${major?1.5:.9}" fill="rgba(226,229,238,.75)"/>`; } svg.innerHTML=h+(big||""); };
     document.querySelectorAll(".tk-ticks").forEach(s=>ticks(s,10,27,30));
     // The VOLUME scale: dots in the SVG, numbers as plain positioned text (SVG text drifts out of place in iPhone Safari).

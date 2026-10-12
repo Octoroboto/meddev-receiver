@@ -2,6 +2,9 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.12.1 (2026-10-12, Rob)
+- **The radio never starts silent:** if the volume was left at 0 last time, it starts at 8 instead. A zero volume looked like a broken radio (songs changing, no sound, blank EQ).
+
 ## 1.12.0 (2026-10-12, Rob)
 - **House of Spoons: The Case of the Fourth Spoon.** The counter is now an evidence table drawn big enough to read: the founder's portrait, the plaque, the corkboard, a carved spoon, the inventory clipboard, Doug's receipt, Delphine's time card, the Forkington's flyer, the lost & found tag and the case file, tied together with red string. Tap any of them (or the spoon rack) to read the full clue; found clues get a wax seal. With 6 of 10 clues, accuse someone in the case file. Solve it and the cursor turns into a spoon (until you choose Start over). The tiny carved spoons are gone.
 - **Skin extras can now run a mystery:** `clue`, `need` + `locked`, `solve`, `reset`, `{found}` / `{total}` in text, and a `title` on message boxes. `<html>` gets `data-sx-clues` and `data-sx-solved`, so skins can style progress and rewards with `html[data-sx-solved] ...` rules (the build now scopes `html[...]` rules to the skin).
