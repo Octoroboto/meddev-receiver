@@ -2,6 +2,9 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.11.1 (2026-10-12, Rob)
+- **Slouch from the Dead:** the gold rope tiebacks are wrapped twice round each curtain's gathered waist, with a knot and tassel at the inner edge, instead of floating across the stage. The right-hand curtain now reaches the edge of the theatre (it stopped short and showed the backdrop behind it).
+
 ## 1.11.0 (2026-10-11, Rob)
 - **New skin: Slouch from the Dead: The Musical.** A grand theatre in front of the ruined Slouch HQ tower: a hexagonal-hashtag sign and high-tech SLOUCH wordmark with pieces jutting out of the building, typogromby hashtag zombies crawling across the facade, show posters on the bricks when there's room, gold proscenium, curtains, followspots and a chasing marquee.
 - **A play on the stage:** five scenes. The arrow moves to the next one (the set slides off to the left and the next slides in) and wraps around after the last. Click the actors to hear their lines.
