@@ -2,6 +2,9 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.12.2 (2026-10-12, Rob)
+- **Mouth Jamboree: terrible advice and the eight sad teeth.** Dr. Toothbert, D.D.S. (Definitely Didn't Study) stands on the red band: tap him for seven pieces of awful oral hygiene advice, read aloud. The Cavity Patrol badge, the gel dollop and the Jam Facts label give more (Jam Facts opens a Directions page, with a note that none of it is real advice). Eight sad, rotten teeth with rain clouds hide around the tube; tap one to hear its troubles and it cheers up. Find all eight and claim the Certificate of Ateethment from Dr. Toothbert: it gets pinned to the tube.
+
 ## 1.12.1 (2026-10-12, Rob)
 - **The radio never starts silent:** if the volume was left at 0 last time, it starts at 8 instead. A zero volume looked like a broken radio (songs changing, no sound, blank EQ).
 

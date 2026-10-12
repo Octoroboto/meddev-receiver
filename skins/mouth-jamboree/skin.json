@@ -1,5 +1,388 @@
 {
   "id": "mouth-jamboree",
   "name": "Mouth Jamboree",
-  "description": "A squeezed-half-flat tube of Mouth Jamboree kids' toothpaste: glossy creased blue laminate, a white shoulder and threaded neck with Sparkle Jam gel crusted in the threads, a red confetti Cavity Patrol band, a crimped end with a LOT/EXP stamp, cap knobs, Jam Facts on the back, a used toothbrush and the cap left on the counter."
+  "description": "A squeezed-half-flat tube of Mouth Jamboree kids' toothpaste, now with terrible advice: ask Dr. Toothbert anything, read the Jam Facts and the Cavity Patrol tips, and find the eight sad, rotten teeth hiding around the tube to earn a Certificate of Ateethment.",
+  "extras": {
+    "layers": [
+      {
+        "anchor": "top",
+        "box": {
+          "left": "calc(-1 * clamp(10px,1.8vw,20px) - 2px)",
+          "right": "calc(-1 * clamp(10px,1.8vw,20px) - 2px)",
+          "bottom": "calc(100% + 16px)",
+          "height": "calc(min(1180px,82.1vw) * .319)"
+        },
+        "spots": [
+          {
+            "label": "The dollop on top",
+            "left": "40%",
+            "top": "0",
+            "width": "20%",
+            "height": "34%",
+            "title": "Cavity Patrol Tip",
+            "say": "Use a pea-sized amount. We measured it against a very large pea. A pea about the size of a toaster."
+          },
+          {
+            "label": "A sad tooth (Molar Dave)",
+            "left": "58.5%",
+            "top": "52%",
+            "width": "clamp(24px,2.7vw,38px)",
+            "height": "clamp(33px,3.7vw,52px)",
+            "clue": "t1",
+            "title": "You found Molar Dave",
+            "say": "I live in the threads now. The gel never comes for me. It's fine. I'm fine. ({found} of {total} sad teeth found.)"
+          },
+          {
+            "label": "A sad tooth (Canine Carol)",
+            "left": "24%",
+            "top": "74%",
+            "width": "clamp(24px,2.7vw,38px)",
+            "height": "clamp(33px,3.7vw,52px)",
+            "clue": "t2",
+            "title": "You found Canine Carol",
+            "say": "Everyone wants to be a front tooth. I'm a side tooth. Nobody photographs the side. ({found} of {total} sad teeth found.)"
+          }
+        ]
+      },
+      {
+        "anchor": "station",
+        "box": {
+          "left": "0",
+          "right": "0",
+          "top": "0",
+          "bottom": "0"
+        },
+        "spots": [
+          {
+            "label": "Jam Facts (directions)",
+            "left": "calc((100% - clamp(0px,(100vw - 1000px) * .5,200px)) * .57)",
+            "top": "calc(100% - 14px - clamp(0px,(100vw - 1000px) * .36,144px))",
+            "width": "clamp(0px,(100vw - 1000px) * .5,200px)",
+            "height": "clamp(0px,(100vw - 1000px) * .36,144px)",
+            "page": "facts"
+          },
+          {
+            "label": "A sad tooth (Wisdom Pete)",
+            "left": "22%",
+            "top": "calc(100% - clamp(33px,3.7vw,52px) - 8px)",
+            "width": "clamp(24px,2.7vw,38px)",
+            "height": "clamp(33px,3.7vw,52px)",
+            "clue": "t3",
+            "title": "You found Wisdom Pete",
+            "say": "They took my brothers out in 2009. I've been wise ever since. Wise and alone. ({found} of {total} sad teeth found.)"
+          },
+          {
+            "label": "A sad tooth (Crown Craig)",
+            "left": "calc(98% - clamp(36px,4vw,56px) - clamp(24px,2.7vw,38px))",
+            "top": "2px",
+            "width": "clamp(24px,2.7vw,38px)",
+            "height": "clamp(33px,3.7vw,52px)",
+            "clue": "t8",
+            "title": "You found Crown Craig",
+            "say": "I'm a crown. Not the fun kind. The kind they glue on. ({found} of {total} sad teeth found.)"
+          }
+        ]
+      },
+      {
+        "anchor": "pinfoot",
+        "box": {
+          "left": "0",
+          "right": "0",
+          "top": "0",
+          "height": "calc(min(920px,75.5vw) * .352 + 92px)"
+        },
+        "spots": [
+          {
+            "label": "A sad tooth (Incisor Greg)",
+            "left": "calc(50% - min(920px,75.5vw) * .49)",
+            "top": "calc(28px + min(920px,75.5vw) * .1)",
+            "width": "clamp(24px,2.7vw,38px)",
+            "height": "clamp(33px,3.7vw,52px)",
+            "clue": "t4",
+            "title": "You found Incisor Greg",
+            "say": "The Dental Association accepted the toothpaste. They did not accept me. ({found} of {total} sad teeth found.)"
+          },
+          {
+            "label": "A sad tooth (Bicuspid Linda)",
+            "left": "89%",
+            "top": "calc(min(920px,75.5vw) * .352 + 92px - clamp(33px,3.7vw,52px) - 18px)",
+            "width": "clamp(24px,2.7vw,38px)",
+            "height": "clamp(33px,3.7vw,52px)",
+            "clue": "t5",
+            "title": "You found Bicuspid Linda",
+            "say": "I tried to ride the swoosh. It didn't go anywhere. That's the thing about swooshes. ({found} of {total} sad teeth found.)"
+          }
+        ]
+      },
+      {
+        "anchor": "pinfoot",
+        "box": {
+          "left": "0",
+          "right": "0",
+          "top": "calc(min(920px,75.5vw) * .352 + 92px)",
+          "bottom": "0"
+        },
+        "spots": [
+          {
+            "label": "Ask Dr. Toothbert",
+            "left": "2%",
+            "top": "4px",
+            "width": "clamp(79px,11.4vw,157px)",
+            "height": "clamp(100px,14.5vw,200px)",
+            "menu": [
+              {
+                "text": "Ask Dr. Toothbert, D.D.S.",
+                "hint": "Definitely Didn't Study",
+                "disabled": true
+              },
+              {
+                "sep": true
+              },
+              {
+                "text": "How often should I brush?",
+                "title": "Dr. Toothbert says",
+                "say": "Twice a year. Once on your birthday, and once on the birthday of someone you respect.",
+                "speak": {
+                  "pitch": 1.5,
+                  "rate": 1.05,
+                  "voices": [
+                    "Ralph",
+                    "Fred",
+                    "Junior",
+                    "Daniel"
+                  ]
+                }
+              },
+              {
+                "text": "How much toothpaste?",
+                "title": "Dr. Toothbert says",
+                "say": "Fill the brush, then keep going. If you can still see the brush, you're not committed.",
+                "speak": {
+                  "pitch": 1.5,
+                  "rate": 1.05,
+                  "voices": [
+                    "Ralph",
+                    "Fred",
+                    "Junior",
+                    "Daniel"
+                  ]
+                }
+              },
+              {
+                "text": "Should I floss?",
+                "title": "Dr. Toothbert says",
+                "say": "Floss is just spaghetti that gave up. Use real spaghetti. Cooked. Al dente, for grip.",
+                "speak": {
+                  "pitch": 1.5,
+                  "rate": 1.05,
+                  "voices": [
+                    "Ralph",
+                    "Fred",
+                    "Junior",
+                    "Daniel"
+                  ]
+                }
+              },
+              {
+                "text": "How long should I brush?",
+                "title": "Dr. Toothbert says",
+                "say": "Until the song ends. Any song. A really long song if you had a big lunch.",
+                "speak": {
+                  "pitch": 1.5,
+                  "rate": 1.05,
+                  "voices": [
+                    "Ralph",
+                    "Fred",
+                    "Junior",
+                    "Daniel"
+                  ]
+                }
+              },
+              {
+                "text": "What about mouthwash?",
+                "title": "Dr. Toothbert says",
+                "say": "Gargle with orange juice. It has vitamin C. C stands for Cavities. Wait. Hold on.",
+                "speak": {
+                  "pitch": 1.5,
+                  "rate": 1.05,
+                  "voices": [
+                    "Ralph",
+                    "Fred",
+                    "Junior",
+                    "Daniel"
+                  ]
+                }
+              },
+              {
+                "text": "When do I get a new toothbrush?",
+                "title": "Dr. Toothbert says",
+                "say": "When the old one starts giving you advice. Mine started last year. It's how we met.",
+                "speak": {
+                  "pitch": 1.5,
+                  "rate": 1.05,
+                  "voices": [
+                    "Ralph",
+                    "Fred",
+                    "Junior",
+                    "Daniel"
+                  ]
+                }
+              },
+              {
+                "text": "Do I need a real dentist?",
+                "title": "Dr. Toothbert says",
+                "say": "I'm a dentist. Mostly. I have a coat. Look at the coat.",
+                "speak": {
+                  "pitch": 1.5,
+                  "rate": 1.05,
+                  "voices": [
+                    "Ralph",
+                    "Fred",
+                    "Junior",
+                    "Daniel"
+                  ]
+                }
+              },
+              {
+                "sep": true
+              },
+              {
+                "text": "Sad teeth found: {found} of {total}",
+                "disabled": true
+              },
+              {
+                "text": "Claim my Certificate of Ateethment",
+                "need": 8,
+                "locked": "You've found {found} of {total} sad teeth. They're hiding all over the tube: the cap, the label, the shoulders, the confetti. Find all of them first.",
+                "solve": true,
+                "title": "Certificate of Ateethment",
+                "say": "This certifies that you found all eight sad, rotten teeth and listened to every one of them. They still need a real dentist. But they feel seen. Your certificate is pinned to the tube.",
+                "speak": {
+                  "pitch": 1.5,
+                  "rate": 1.05,
+                  "voices": [
+                    "Ralph",
+                    "Fred",
+                    "Junior",
+                    "Daniel"
+                  ]
+                }
+              },
+              {
+                "text": "Start over",
+                "reset": true,
+                "title": "Back in hiding",
+                "say": "The sad teeth went back to their hiding places. They prefer it there. The certificate is back in the drawer."
+              }
+            ]
+          },
+          {
+            "label": "Cavity Patrol tips",
+            "left": "calc(97% - clamp(0px,(100vw - 900px) * .5,260px))",
+            "top": "78px",
+            "width": "clamp(0px,(100vw - 900px) * .5,260px)",
+            "height": "clamp(0px,(100vw - 900px) * .2,103px)",
+            "menu": [
+              {
+                "text": "Cavity Patrol Pro Tips",
+                "disabled": true
+              },
+              {
+                "sep": true
+              },
+              {
+                "text": "Can't see it?",
+                "title": "Cavity Patrol Tip",
+                "say": "If you can't see the cavity, it can't see you. Keep your mouth closed at all times. Even while eating."
+              },
+              {
+                "text": "Sticky snacks",
+                "title": "Cavity Patrol Tip",
+                "say": "Caramel is fine as long as you chew it on the side of your mouth you don't use."
+              },
+              {
+                "text": "Brush technique",
+                "title": "Cavity Patrol Tip",
+                "say": "Brush in a circle, then the other circle, to undo the first circle. Teeth respect balance."
+              },
+              {
+                "text": "Bedtime",
+                "title": "Cavity Patrol Tip",
+                "say": "Brushing before bed wakes the teeth up. Let them sleep. Brush after breakfast, lunch, or never."
+              }
+            ]
+          },
+          {
+            "label": "Certificate of Ateethment",
+            "left": "21%",
+            "top": "8px",
+            "width": "clamp(100px,17vw,240px)",
+            "height": "clamp(73px,12.4vw,175px)",
+            "title": "Certificate of Ateethment",
+            "say": "Awarded for finding all eight sad, rotten teeth and listening to every one of them. Signed, Dr. Toothbert, D.D.S. (Definitely Didn't Study). Frame it. Do not brush it."
+          },
+          {
+            "label": "A sad tooth (Baby Tooth Timmy)",
+            "left": "62%",
+            "top": "5%",
+            "width": "clamp(24px,2.7vw,38px)",
+            "height": "clamp(33px,3.7vw,52px)",
+            "clue": "t6",
+            "title": "You found Baby Tooth Timmy",
+            "say": "The Tooth Fairy came. She looked at me for a long time. She left a nickel and a pamphlet. ({found} of {total} sad teeth found.)"
+          },
+          {
+            "label": "A sad tooth (Premolar Ron)",
+            "left": "93%",
+            "top": "calc(100% - clamp(33px,3.7vw,52px) - 14px)",
+            "width": "clamp(24px,2.7vw,38px)",
+            "height": "clamp(33px,3.7vw,52px)",
+            "clue": "t7",
+            "title": "You found Premolar Ron",
+            "say": "I'm almost a molar. I've been almost a molar for thirty years. ({found} of {total} sad teeth found.)"
+          }
+        ]
+      }
+    ],
+    "pages": {
+      "facts": {
+        "title": "Jam Facts: Directions",
+        "cols": [
+          "Directions",
+          "Why"
+        ],
+        "rows": [
+          [
+            "Brush in a circle",
+            "Teeth respect confidence"
+          ],
+          [
+            "Then brush in the other circle",
+            "To undo the first circle"
+          ],
+          [
+            "Spit with intention",
+            "The sink can tell"
+          ],
+          [
+            "Rinse with soda",
+            "The bubbles get into the hard-to-reach places"
+          ],
+          [
+            "Store your brush in the garden",
+            "Fresh air, natural bristle conditioner"
+          ],
+          [
+            "Children under 6: supervise an adult",
+            "Adults are worse at this"
+          ],
+          [
+            "Questions? Call 1-800-MDFM-JAM",
+            "Nobody will answer, but it's nice to call"
+          ]
+        ],
+        "note": "Mouth Jamboree is not a real toothpaste and none of this is real advice. Brush twice a day and see an actual dentist."
+      }
+    }
+  }
 }
