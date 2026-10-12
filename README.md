@@ -90,10 +90,13 @@ A skin can make its decorations respond to taps and clicks with an `extras` bloc
   - `page`: opens a page over the receiver, which has a Back button;
   - `back`: closes the page;
   - `open: true`: the spot toggles open and shut (its `aria-pressed` flips). Style `.sx-spot[aria-pressed=true]` to swing a door open, and `.sx-spot[aria-pressed=true] + .sx-spot` to reveal what's behind it.
+  - `next: true` / `prev: true` (1.11.0): moves the layer to its next or previous scene, wrapping round.
+- **Scenes (1.11.0):** a layer with `"scenes": 2`–`12` starts at scene 0. A spot with `"scene": k` shows only in scene k; spots without one always show. The layer carries `data-scene` (now) and `data-prev` (the one before), so a skin can slide sets in and out with CSS, e.g. `.sx-layer[data-scene="1"]`.
+- **Speaking (1.11.0):** a `say` can add `"speak": { "pitch": 0–2, "rate": 0.5–2, "voices": ["Daniel", "Karen"] }`. The line shows in the message box and the computer's voice reads it aloud (the first listed voice it has). Changing scene stops it. While it reads, the page gets a `meddev:voice` event (`{on, sung}`); `MDFM_receiver` uses it to duck MDFM's music (to 12%, and to silence for lines with ♪).
 - **Esc** closes the open menu, then the message, then the page.
 - **Styling:** skins may restyle every `.sx-` part: `sx-layer`, `sx-spot`, `sx-menu`, `sx-item`, `sx-sep`, `sx-dialog`, `sx-page`, `sx-head`, `sx-grid`, `sx-note` and `sx-back`.
 - **Limits:**
-  - 6 layers and 60 spots;
+  - 6 layers and 60 spots, 12 scenes per layer;
   - 16 entries per menu;
   - 20 pages, each with up to 8 columns and 60 rows;
   - text is capped (labels 60 characters, messages 300).

@@ -2,6 +2,12 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.11.0 (2026-10-11, Rob)
+- **New skin: Slouch from the Dead: The Musical.** A grand theatre in front of the ruined Slouch HQ tower: a hexagonal-hashtag sign and high-tech SLOUCH wordmark with pieces jutting out of the building, typogromby hashtag zombies crawling across the facade, show posters on the bricks when there's room, gold proscenium, curtains, followspots and a chasing marquee.
+- **A play on the stage:** five scenes. The arrow moves to the next one (the set slides off to the left and the next slides in) and wraps around after the last. Click the actors to hear their lines.
+- **Skin extras can now:** have scenes (`"scenes": 2-12` on a layer; spots with `"scene": k` show only in that scene; `"next"` / `"prev"` spots change scene), and speak a spot's `say` text aloud (`"speak": {pitch, rate, voices}`). Layers, spots and dialogs may be animated.
+- **Music ducks for spoken lines:** while a line is spoken the receiver sends `meddev:voice`; MDFM turns the music down so the line is easy to hear, and all the way to silence for sung (♪) lines, then brings it back.
+
 ## 1.10.4 (2026-10-11, Rob)
 - **Light-colour knobs on skins whose screens aren't lights:** a skin can say `"tint": "dye"` in its skin.json; the RED/GREEN/BLUE knobs then shift the colour of its screens (hue and saturation) and never dim them, so turning all three to MIN no longer blacks them out. Clara Stamford's embroidered screens use it. Lit screens (every other skin) still go dark at MIN, like lights switched off.
 - **Clara Stamford's Homestead Collection:** every prop redrawn at higher resolution and with proper modelling: the shortwave radio and headphones, the glass cookie jar of passports with a kraft tag, the spice jars (labels fitted to the jars), the safe, binoculars, map roll, the CLASSIFIED folders, the corkboard (photos of the pigeon, Gary, the pie, the goose...), the red hotline phone, the basil, utensil crock, pie on its stand, bowls, pitcher of eucalyptus and the brass globe pendants; the island's rolling-pin rack and pie safe are new too.

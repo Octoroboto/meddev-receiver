@@ -5,6 +5,8 @@
    Usage: MDFM_receiver(radio, { app })   (looks for the standard element ids/classes; anything missing is skipped) */
 window.MDFM_receiver=function(radio,{app=null}={}){
   const $=s=>document.querySelector(s);
+  // A skin's actors speaking (skin extras "speak"): duck the music so they can be heard, all the way to silence when they sing.
+  if(typeof window.addEventListener==="function") window.addEventListener("meddev:voice",e=>{ const d=e.detail||{}; try{ if(radio&&typeof radio.setDuck==="function") radio.setDuck(d.on?(d.sung?0:.12):1); }catch(err){} });
   // LOW / MID / HIGH tone knobs (-12..+12 dB, centre = flat) and the big VOLUME knob. Drag up/right, scroll, or use the arrow keys;
   // double-click puts a knob back. Remembered on this device.
   { const load=(k,d)=>{ try{ const v=JSON.parse(localStorage.getItem(k)); return v==null?d:v; }catch(e){ return d; } }, save=(k,v)=>{ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} };

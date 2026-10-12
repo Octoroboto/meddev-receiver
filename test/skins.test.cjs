@@ -30,6 +30,23 @@ test("only plain CSS with its own images", () => {
   no('.deck{background-image:url(https://example.com/x.png)}', /images must be in/); no("@media (min-width:1px){.deck{color:red}}", /isn't allowed/);
   no(".deck{background:url(javascript:alert(1))}", /images must be in|only plain CSS/);
 });
+test("skin extras: scenes, next/prev and spoken lines", async () => {
+  const { checkExtras } = await import("../scripts/skins.mjs");
+  const play = { layers: [{ anchor: "pinfoot", scenes: 3, box: { left: "0", right: "0", top: "0", height: "200px" }, spots: [
+    { label: "Next scene", left: "90%", top: "40%", width: "40px", height: "40px", next: true },
+    { label: "Actor", scene: 0, left: "10%", top: "10%", width: "60px", height: "120px", say: "♪ La la ♪", speak: { pitch: 1.2, rate: .9, voices: ["Daniel"] } },
+    { label: "Actor two", scene: 2, left: "30%", top: "10%", width: "60px", height: "120px", say: "Hi." }] }] };
+  assert.strictEqual(checkExtras("t", play), play);
+  const bad = (x, re) => assert.throws(() => checkExtras("t", x), re);
+  const L = s => ({ layers: [{ anchor: "pinfoot", scenes: 2, spots: [s] }] });
+  bad(L({ label: "x", scene: 2, say: "a" }), /scene must be/);
+  bad(L({ label: "x", next: true, say: "a" }), /one of/);
+  bad(L({ label: "x", speak: { pitch: 1 } }), /speak goes with say/);
+  bad(L({ label: "x", say: "a", speak: { pitch: 3 } }), /pitch/);
+  bad(L({ label: "x", say: "a", speak: { volume: 1 } }), /isn't allowed/);
+  bad({ layers: [{ anchor: "top", spots: [{ label: "x", scene: 0, say: "a" }] }] }, /scene must be/);
+  bad({ layers: [{ anchor: "top", scenes: 20, spots: [] }] }, /scenes must be/);
+});
 test("skin extras: plain data only, every page reachable and closable", async () => {
   const { checkExtras } = await import("../scripts/skins.mjs");
   const good = { layers: [{ anchor: "top", box: { left: "calc(-1 * 10px)", bottom: "calc(100% + 12px)", height: "152px" },

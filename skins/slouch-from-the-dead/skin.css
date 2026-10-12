@@ -1,0 +1,134 @@
+/* Slouch from the Dead: The Musical. A grand theatre, gold and red velvet, staging the fall of Slouch HQ: a ruined glass
+   tower under a storm, its giant 3D sign broken off the roof (the "o" dangles by two cables, the "u" fell over), and
+   hashtag zombies, the typogrombies, crawling all over the building. Footlights, a marquee with chasing bulbs, and a
+   zombie audience in the front row holding up their phones. Slouch is a made-up app; any resemblance is a coincidence. */
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Poiret+One&display=swap");
+
+:root{
+  --f-display:"Outfit",Arial,sans-serif; --f-body:"Outfit",Arial,sans-serif;
+  --caption:rgba(244,232,214,.95); --focus:#f0c040; --gold:#e2b860; --gold-dark:#6a4a18;
+  --btn-1:#fff2c8; --btn-2:#e2b04a; --btn-3:#7a5418; --btn-down-1:#fff7d0; --btn-down-2:#c08a2a; --btn-bezel:#1a0c0c; --btn-rim:#5a3c14;
+  --knob-1:#3a3236; --knob-2:#1c181a; --knob-3:#08070a; --knurl-1:#4a4246; --knurl-2:#141214; --knob-pointer:#46d6b0;
+  --vol-1:#f2d27a; --vol-2:#c89a44; --vol-3:#7a5418; --vol-cap:#f8e2a0; --vol-dot:#ff6e68;
+  --bezel-1:#2a2426; --bezel-2:#151214; --bezel-3:#060506;
+  --plate-1:#2a2a2c; --plate-2:#1a1a1c; --plate-3:#0c0c0e; --key-1:#3a2a4e; --key-2:#24182f; --key-hover-1:#4a3660; --key-hover-2:#2c1f3a;
+  --title-1:#1a1418; --title-2:#0c0a0c;
+}
+
+/* The house: a dark auditorium, red velvet curtains down both sides, the zombie front row at the bottom (browsers only). */
+body:not(.pop){
+  background:
+    url(images/audience.webp) center bottom/1600px 220px repeat-x,
+    url(images/poster1.webp) left calc(50% - (min(1180px,100vw - clamp(16px,24vw - 77px,192px)) * .44 + clamp(0px,(100vw - min(1180px,100vw - clamp(16px,24vw - 77px,192px)) * .88) * .5 - 60px,190px) * .5 + 26px)) bottom 168px/clamp(0px,(100vw - min(1180px,100vw - clamp(16px,24vw - 77px,192px)) * .88) * .5 - 60px,190px) auto no-repeat,
+    url(images/poster2.webp) left calc(50% + (min(1180px,100vw - clamp(16px,24vw - 77px,192px)) * .44 + clamp(0px,(100vw - min(1180px,100vw - clamp(16px,24vw - 77px,192px)) * .88) * .5 - 60px,190px) * .5 + 26px)) bottom 168px/clamp(0px,(100vw - min(1180px,100vw - clamp(16px,24vw - 77px,192px)) * .88) * .5 - 60px,190px) auto no-repeat,
+    url(images/poster3.webp) left calc(50% - (min(1180px,100vw - clamp(16px,24vw - 77px,192px)) * .44 + clamp(0px,(100vw - min(1180px,100vw - clamp(16px,24vw - 77px,192px)) * .88) * .5 - 60px,190px) * 1.5 + 52px)) bottom 168px/clamp(0px,(100vw - min(1180px,100vw - clamp(16px,24vw - 77px,192px)) * .88) * .5 - 60px,190px) auto no-repeat,
+    url(images/poster4.webp) left calc(50% + (min(1180px,100vw - clamp(16px,24vw - 77px,192px)) * .44 + clamp(0px,(100vw - min(1180px,100vw - clamp(16px,24vw - 77px,192px)) * .88) * .5 - 60px,190px) * 1.5 + 52px)) bottom 168px/clamp(0px,(100vw - min(1180px,100vw - clamp(16px,24vw - 77px,192px)) * .88) * .5 - 60px,190px) auto no-repeat,
+    linear-gradient(180deg,rgba(7,3,4,1),rgba(7,3,4,0) 60px) center bottom calc(min(1180px,100vw - clamp(16px,24vw - 77px,192px)) * .1584 + 150px)/100% 60px no-repeat,
+    url(images/bricks.webp) center bottom 120px/512px calc(min(1180px,100vw - clamp(16px,24vw - 77px,192px)) * .1584 + 130px) repeat-x,
+    url(images/curtain.webp) left top/clamp(0px,(100vw - 1180px) * .5 + 40px,240px) auto repeat-y,
+    url(images/curtain-r.webp) right top/clamp(0px,(100vw - 1180px) * .5 + 40px,240px) auto repeat-y,
+    radial-gradient(ellipse 70% 40% at 50% 0%,rgba(255,200,140,.10),transparent 70%),
+    linear-gradient(180deg,#140608,#070304 60%,#020102);
+  padding:calc(min(1180px,100vw - clamp(16px,24vw - 77px,192px)) * .35 + 14px) calc(clamp(16px,24vw - 77px,192px) - clamp(8px,10vw - 31px,80px)) calc(min(1180px,100vw - clamp(16px,24vw - 77px,192px)) * .1584 + 200px) clamp(8px,10vw - 31px,80px)}
+
+/* The stage opening: a fat gold proscenium frame around the tower's facade. */
+.wrap.wrap{max-width:1180px;position:relative;border:16px solid transparent;border-image:url(images/gold-frame.webp) 40 / 16px / 0 stretch;border-radius:0;
+  padding:18px clamp(10px,1.8vw,18px) 20px;gap:16px;
+  background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,0) 30%,rgba(0,0,0,.45)),url(images/facade.webp) 0 0/360px 240px,#2a2c2a;
+  box-shadow:0 30px 60px rgba(0,0,0,.85),0 0 0 2px #2a1606,inset 0 0 60px rgba(0,0,0,.6)}
+
+/* Panels: big panes of smoked glass from the tower, in weathered aluminium mullions. */
+.top .deck,.panel,.sheet,.pop,.syncbar,.ahead,.bellpanel{
+  background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,0) 30%),url(images/glass.webp) 0 0/512px 512px,#101414;
+  border:7px solid transparent;border-image:url(images/mullion.webp) 14 / 7px / 0 stretch;border-radius:0;color:#eef2ea;text-shadow:0 1px 2px #000;
+  box-shadow:0 10px 24px rgba(0,0,0,.6),inset 0 0 30px rgba(0,0,0,.5)}
+.top .deck{padding:14px clamp(10px,2.2vw,22px) 16px}
+
+/* Title bars: Slouch channel headers. "# mdfm radio". */
+.wtitle{height:30px;border-radius:0;border-bottom:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,#24182f,#160e1d);justify-content:flex-start;padding:0 12px;gap:8px;
+  font:800 17px/1 var(--f-display);letter-spacing:.01em;text-transform:lowercase;color:#f2ecf6;text-shadow:0 1px 1px #000}
+.wtitle::before{content:"#";flex:0 0 auto;height:auto;background:none;color:#46d6b0;font:800 20px/1 var(--f-display);text-shadow:0 0 8px rgba(70,214,176,.6)}
+.wtitle::after{flex:1;height:2px;margin-left:8px;background:linear-gradient(90deg,rgba(226,184,96,.9),rgba(226,184,96,0))}
+
+small,.rd-mm,.vizsw{font-family:var(--f-body);font-weight:700;letter-spacing:.12em}
+.rdeck small,.tk small,.vol small,.vu-m small,.fxbtns small,.rd-mm{color:#f6e7c4;text-shadow:0 1px 2px #000,0 0 6px rgba(226,184,96,.35)}
+
+/* Keys: Slouch buttons, bruise violet, a little worse for wear. Primary is the coral one. */
+.btn{background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,0) 50%),linear-gradient(180deg,#5a3a86,#3a2458);
+  color:#f4eefc;border:1px solid #8a6ab8;border-radius:8px;font:700 clamp(.84rem,2.2vw,1rem)/1 var(--f-body);letter-spacing:.02em;padding:9px clamp(10px,1.6vw,16px);
+  text-shadow:0 1px 1px rgba(0,0,0,.6);box-shadow:0 3px 0 #1e1230,0 6px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.18)}
+.btn:hover{background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0) 50%),linear-gradient(180deg,#6a46a0,#44296a)}
+.btn:active{translate:0 2px;box-shadow:0 1px 0 #1e1230,0 2px 6px rgba(0,0,0,.5)}
+.btn.primary{background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,0) 50%),linear-gradient(180deg,#e86a64,#b8443e);border-color:#ffa6a0;box-shadow:0 3px 0 #5a1a18,0 6px 12px rgba(0,0,0,.5)}
+.btn.danger{background:linear-gradient(180deg,#46d6b0,#2a9a7e);color:#06231a;text-shadow:none;border-color:#9af0d8}
+
+/* Round buttons: theatre bulbs. Off, a cold clear bulb; on, lit warm. */
+.rd-btn button,.vizsw input[type=checkbox]{background:url(images/bulb-off.webp) center/108% 108% no-repeat;border:none;box-shadow:0 2px 4px rgba(0,0,0,.7)}
+.rd-btn button:active,.rd-btn button[aria-pressed=true],.vizsw input[type=checkbox]:checked,.vizsw input[type=checkbox]:active{
+  background:url(images/bulb-on.webp) center/108% 108% no-repeat;box-shadow:0 0 10px rgba(255,200,120,.9),0 0 24px rgba(255,180,90,.5)}
+
+/* Knobs: black bakelite dimmer knobs with a gold ring, off the theatre's lighting board. Volume: the big brass master. */
+.rd-knob{background:url(images/knob.webp) center/104% 104% no-repeat;box-shadow:0 4px 8px rgba(0,0,0,.7)}
+.rd-knob::before{background:none;box-shadow:none}
+.vol-knob{background:url(images/knob-vol.webp) center/104% 104% no-repeat;border-radius:50%;box-shadow:0 8px 18px rgba(0,0,0,.75)}
+.vol-knob::before{content:none}
+.vol-dot{background:#ff6e68;box-shadow:0 0 6px rgba(255,110,104,.9)}
+.vol-num{color:#f6e7c4;font-family:var(--f-body);font-weight:700;text-shadow:0 1px 2px #000}
+
+/* The stage: the play's set fills the top of the pinfoot (2200x640), footlights along its lip, the apron below. */
+.pinfoot.pinfoot{border:none;border-radius:0;margin-top:2px;color:#f6e7c4;padding-top:calc(29.09% + 34px);
+  background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.55)),url(images/boards.webp) 0 0/256px 64px,#3a2414;
+  box-shadow:0 -1px 0 #c89a44,0 -3px 0 #4a2a0a,0 12px 24px rgba(0,0,0,.7)}
+.pinfoot .sx-layer{aspect-ratio:2200/640;height:auto;overflow:hidden;
+  background:url(images/set1.webp) 0 0/100% 100% no-repeat;
+  box-shadow:inset 0 0 40px rgba(0,0,0,.6),0 3px 0 #c89a44,0 5px 0 #3a1e0a}
+/* changing scene: the old set slides out to the left as the new one slides in */
+.pinfoot .sx-layer[data-scene="1"]{background-image:url(images/set2.webp),url(images/set1.webp);background-size:100% 100%,100% 100%;background-repeat:no-repeat,no-repeat;animation:sd-set1 1.2s cubic-bezier(.65,0,.3,1) both}
+.pinfoot .sx-layer[data-scene="2"]{background-image:url(images/set3.webp),url(images/set2.webp);background-size:100% 100%,100% 100%;background-repeat:no-repeat,no-repeat;animation:sd-set2 1.2s cubic-bezier(.65,0,.3,1) both}
+.pinfoot .sx-layer[data-scene="3"]{background-image:url(images/set4.webp),url(images/set3.webp);background-size:100% 100%,100% 100%;background-repeat:no-repeat,no-repeat;animation:sd-set3 1.2s cubic-bezier(.65,0,.3,1) both}
+.pinfoot .sx-layer[data-scene="4"]{background-image:url(images/set5.webp),url(images/set4.webp);background-size:100% 100%,100% 100%;background-repeat:no-repeat,no-repeat;animation:sd-set4 1.2s cubic-bezier(.65,0,.3,1) both}
+.pinfoot .sx-layer[data-scene="0"][data-prev="4"]{background-image:url(images/set1.webp),url(images/set5.webp);background-size:100% 100%,100% 100%;background-repeat:no-repeat,no-repeat;animation:sd-set0 1.2s cubic-bezier(.65,0,.3,1) both}
+/* the cast: tap anyone; a followspot finds them on hover */
+.pinfoot .sx-spot{border-radius:40% 40% 12% 12%}
+.pinfoot .sx-spot:hover,.pinfoot .sx-spot:focus-visible{background:radial-gradient(ellipse 60% 55% at 50% 45%,rgba(255,236,190,.28),rgba(255,236,190,.08) 60%,transparent 72%);outline:none;box-shadow:0 0 0 2px rgba(255,214,120,.55)}
+.pinfoot .sx-spot:not([data-scene]):not(:hover){animation:sd-pulse 2.4s ease-in-out infinite}
+.pinfoot .sx-spot:nth-child(1){background:url(images/arrow.webp) center/contain no-repeat;border-radius:8px}
+.pinfoot .sx-spot:nth-child(1):hover{background:url(images/arrow.webp) center/contain no-repeat;box-shadow:none;filter:brightness(1.25) drop-shadow(0 0 10px rgba(255,214,120,.8))}
+.pinfoot .sx-spot[data-scene]:not([hidden]){animation:sd-enter 1.2s cubic-bezier(.65,0,.3,1) both}
+/* the line, on a playbill card */
+.sx-dialog{background:linear-gradient(180deg,#1e0c14,#0c0408);color:#f8ead0;border:3px solid #c89a44;border-radius:10px;box-shadow:0 0 0 2px #3a1e0a,0 20px 50px rgba(0,0,0,.7),0 0 40px rgba(255,190,110,.25);font:500 1.1rem/1.45 "Poiret One","Outfit",sans-serif}
+.sx-dialog .sx-note{font-size:1.15rem;letter-spacing:.02em}
+.sx-dialog .btn{font-family:"Outfit",sans-serif}
+
+/* Decorations */
+.skin-decor::before,.skin-decor::after{content:"";position:absolute;pointer-events:none}
+/* the proscenium arch over the stage: cornice, swags, the masks, and the set: Slouch HQ's roof and its broken sign */
+.top .skin-decor::before{left:calc(-1 * (clamp(10px,1.8vw,18px) + 16px));right:calc(-1 * (clamp(10px,1.8vw,18px) + 16px));bottom:calc(100% + 34px);aspect-ratio:2400/840;
+  background:url(images/crown.webp) center bottom/100% auto no-repeat}
+/* typogrombies on the tower: along the roof, upside down under the cornice, down the facade, up toward the sign */
+.top .skin-decor::after{left:calc(-1 * (clamp(10px,1.8vw,18px) + 16px));right:calc(-1 * (clamp(10px,1.8vw,18px) + 16px));bottom:calc(100% + 34px);aspect-ratio:2400/840;
+  background:url(images/zc1.webp) 130% 69%/15% auto no-repeat,url(images/zc2.webp) -15% 17%/8% auto no-repeat,url(images/zc3.webp) 20% 140%/3.6% auto no-repeat,url(images/zc4.webp) 97% 118%/17% auto no-repeat;
+  animation:sd-crawl-top 140s steps(60,end) infinite}
+/* followspots sweeping the stage */
+.station .skin-decor::before{left:7%;right:7%;top:-520px;bottom:-20px;
+  background:conic-gradient(from 152deg at 18% 0%,transparent 0deg,rgba(255,232,190,.10) 4deg,rgba(255,232,190,.05) 9deg,transparent 12deg),conic-gradient(from 196deg at 82% 0%,transparent 0deg,rgba(220,255,230,.08) 4deg,rgba(220,255,230,.04) 9deg,transparent 12deg);
+  mix-blend-mode:screen;transform-origin:50% 0;animation:sd-sweep 17s ease-in-out infinite alternate}
+/* typogrombies down the left pillar, up the right, and along the stage lip */
+.station .skin-decor::after{left:calc(-1 * (clamp(10px,1.8vw,18px) + 16px));right:calc(-1 * (clamp(10px,1.8vw,18px) + 16px));top:-40px;bottom:-56px;
+  background:url(images/zs1.webp) 1% -20%/clamp(30px,4vw,52px) auto no-repeat,url(images/zs2.webp) 99.6% 118%/clamp(30px,4vw,52px) auto no-repeat,url(images/zs3.webp) 118% 101%/clamp(96px,12vw,150px) auto no-repeat,url(images/zs4.webp) 130% 101%/clamp(120px,15vw,190px) auto no-repeat;
+  animation:sd-crawl-side 110s steps(50,end) infinite}
+/* the marquee hung under the stage, its bulbs chasing */
+.pinfoot .skin-decor::before{left:6%;right:6%;top:calc(100% + 26px);aspect-ratio:2000/360;background:url(images/marquee.webp) center/100% 100% no-repeat;filter:drop-shadow(0 10px 18px rgba(0,0,0,.8))}
+.pinfoot .skin-decor::after{left:6%;right:6%;top:calc(100% + 26px);aspect-ratio:2000/360;background:url(images/marquee-b.webp) center/100% 100% no-repeat;animation:sd-chase .9s steps(1,end) infinite}
+
+@keyframes sd-set1{from{background-position:calc(100vw + 100%) 0,0 0}to{background-position:0 0,calc(-100vw - 100%) 0}}
+@keyframes sd-set2{from{background-position:calc(100vw + 100%) 0,0 0}to{background-position:0 0,calc(-100vw - 100%) 0}}
+@keyframes sd-set3{from{background-position:calc(100vw + 100%) 0,0 0}to{background-position:0 0,calc(-100vw - 100%) 0}}
+@keyframes sd-set4{from{background-position:calc(100vw + 100%) 0,0 0}to{background-position:0 0,calc(-100vw - 100%) 0}}
+@keyframes sd-set0{from{background-position:calc(100vw + 100%) 0,0 0}to{background-position:0 0,calc(-100vw - 100%) 0}}
+@keyframes sd-enter{0%,70%{transform:translateX(100vw)}100%{transform:none}}
+@keyframes sd-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+@keyframes sd-sweep{from{transform:rotate(-2.5deg)}to{transform:rotate(2.5deg)}}
+@keyframes sd-chase{0%{opacity:0}50%{opacity:1}}
+@keyframes sd-crawl-top{0.00%{background-position:130.0% 69.0%,115.0% 17.0%,20.0% 140.0%,60.0% -40.0%}9.80%{background-position:104.7% 69.0%,115.0% 17.0%,20.0% 140.0%,60.0% -40.0%}10.00%{background-position:104.2% 69.0%,115.0% 17.0%,20.0% 140.0%,97.0% 118.0%}29.80%{background-position:53.1% 69.0%,115.0% 17.0%,20.0% 140.0%,84.8% 65.9%}30.00%{background-position:52.6% 69.0%,-15.0% 17.0%,20.0% 140.0%,84.7% 65.3%}44.80%{background-position:14.4% 69.0%,14.6% 17.0%,20.0% 140.0%,75.5% 26.4%}45.00%{background-position:13.9% 69.0%,15.0% 17.0%,20.0% 62.0%,75.4% 25.8%}62.00%{background-position:-30.0% 69.0%,49.0% 17.0%,20.0% 87.0%,64.9% -18.9%}70.00%{background-position:-30.0% 69.0%,65.0% 17.0%,20.0% 98.8%,60.0% -40.0%}95.00%{background-position:-30.0% 69.0%,115.0% 17.0%,20.0% 135.6%,60.0% -40.0%}98.00%{background-position:-30.0% 69.0%,115.0% 17.0%,20.0% 140.0%,60.0% -40.0%}100.00%{background-position:-30.0% 69.0%,115.0% 17.0%,20.0% 140.0%,60.0% -40.0%}}
+@keyframes sd-crawl-side{0.00%{background-position:1.0% -20.0%,99.6% -25.0%,-15.0% 101.0%,-20.0% 101.0%}19.80%{background-position:1.0% 32.2%,99.6% -25.0%,-15.0% 101.0%,-20.0% 101.0%}20.00%{background-position:1.0% 32.7%,99.6% -25.0%,118.0% 101.0%,-20.0% 101.0%}39.80%{background-position:1.0% 84.9%,99.6% -25.0%,74.1% 101.0%,-20.0% 101.0%}40.00%{background-position:1.0% 85.5%,99.6% 118.0%,73.7% 101.0%,-20.0% 101.0%}55.00%{background-position:1.0% 125.0%,99.6% 81.0%,40.4% 101.0%,-20.0% 101.0%}61.80%{background-position:1.0% 125.0%,99.6% 64.3%,25.3% 101.0%,-20.0% 101.0%}62.00%{background-position:1.0% 125.0%,99.6% 63.8%,24.9% 101.0%,130.0% 101.0%}80.00%{background-position:1.0% 125.0%,99.6% 19.4%,-15.0% 101.0%,58.9% 101.0%}98.00%{background-position:1.0% 125.0%,99.6% -25.0%,-15.0% 101.0%,-12.1% 101.0%}100.00%{background-position:1.0% 125.0%,99.6% -25.0%,-15.0% 101.0%,-20.0% 101.0%}}

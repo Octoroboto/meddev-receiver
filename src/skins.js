@@ -39,7 +39,20 @@
   const xFocus=k=>{ const f=X.from[k]; X.from[k]=null; if(f&&f.isConnected) f.focus(); };
   function xClose(kind){ if((!kind||kind==="menu")&&X.menu){ X.menu.remove(); X.menu=null; } if((!kind||kind==="dlg")&&X.dlg){ X.dlg.remove(); X.dlg=null; } }
   function xBack(){ xClose(); if(X.page){ X.page.remove(); X.page=null; } }
-  function xDo(o,x,from){ xClose("menu"); if(o.back){ xBack(); if(from&&from.isConnected) from.focus(); return; } if(o.say!=null){ xSay(o.say,from); return; } if(o.page) xPage(o.page,x,from); }
+  function xDo(o,x,from){ xClose("menu"); if(o.back){ xBack(); if(from&&from.isConnected) from.focus(); return; } if(o.say!=null){ xSay(o.say,from); if(o.speak) xSpeak(o.say,o.speak); return; } if(o.page) xPage(o.page,x,from); }
+  // speak: a spot's line read aloud by the computer's voice (an actor in a play). Text only; pitch, rate and preferred voice names.
+  // While a line is read, the page hears "meddev:voice" {on, sung} so a radio can duck its music (to silence for sung lines).
+  let XV=0; const xVoice=(on,sung)=>{ try{ window.dispatchEvent(new CustomEvent("meddev:voice",{detail:{on,sung}})); }catch(e){} };
+  function xSpeak(text,o){ try{ const S=window.speechSynthesis; if(!S||typeof SpeechSynthesisUtterance!=="function") return; S.cancel();
+    const sung=/[♪♫]/.test(text), my=++XV; let t=0; const fin=()=>{ clearTimeout(t); if(my===XV){ XV++; xVoice(false,sung); } };
+    const u=new SpeechSynthesisUtterance(String(text).replace(/[♪♫]/g,"").trim()); if(o.pitch!=null) u.pitch=o.pitch; if(o.rate!=null) u.rate=o.rate;
+    const vs=S.getVoices(), names=o.voices||[]; for(const n of names){ const v=vs.find(v=>v.name===n||v.name.startsWith(n+" ")); if(v){ u.voice=v; break; } }
+    u.onend=fin; u.onerror=fin; t=setTimeout(fin,Math.min(40000,3000+text.length*120));   // never leave the music ducked
+    xVoice(true,sung); S.speak(u); }catch(e){} }
+  // scenes: a layer can hold several scenes; spots with "scene": k show only in scene k, "next"/"prev" spots move between them (wrapping).
+  function xScene(lay,step){ const n=+lay.dataset.scenes||1, cur=+lay.dataset.scene||0, nx=((cur+step)%n+n)%n;
+    lay.dataset.prev=cur; lay.dataset.scene=nx; lay.querySelectorAll(".sx-spot[data-scene]").forEach(b=>{ b.hidden=+b.dataset.scene!==nx; });
+    try{ window.speechSynthesis&&window.speechSynthesis.cancel(); }catch(e){} xClose("dlg"); }
   function xSay(text,from){ xClose("dlg"); const d=el("div","sx-dialog"); d.setAttribute("role","alertdialog"); d.setAttribute("aria-label","Message");
     const ok=el("button","btn sx-back","OK"); ok.type="button"; ok.addEventListener("click",()=>{ xClose("dlg"); xFocus("dlg"); });
     d.append(el("p","sx-note",text),ok); document.body.appendChild(d); X.dlg=d; X.from.dlg=from; ok.focus(); }
@@ -65,10 +78,13 @@
     xBack(); X.els.forEach(e=>e.remove()); X.els=[]; X.id=id; X.x=x; if(!x||!Array.isArray(x.layers)) return;
     const parts={top:".top .deck",station:".panel.station",pinfoot:".pinfoot"};
     x.layers.forEach(L=>{ const a=document.querySelector(parts[L.anchor]); if(!a) return; const lay=el("div","sx-layer");
+      if(L.scenes){ lay.dataset.scenes=L.scenes; lay.dataset.scene="0"; }
       for(const [k,v] of Object.entries(L.box||{})) lay.style[k]=v;
       (L.spots||[]).forEach(sp=>{ const b=el("button","sx-spot"); b.type="button"; b.setAttribute("aria-label",sp.label); b.title=sp.label;
         for(const k of ["left","top","width","height"]) if(sp[k]) b.style[k]=sp[k];
-        if(sp.open){ b.setAttribute("aria-pressed","false"); b.addEventListener("click",ev=>{ ev.stopPropagation(); b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")==="true"?"false":"true"); }); }
+        if(sp.scene!=null){ b.dataset.scene=sp.scene; b.hidden=sp.scene!==0; }
+        if(sp.next||sp.prev){ b.addEventListener("click",ev=>{ ev.stopPropagation(); xScene(lay,sp.prev?-1:1); }); }
+        else if(sp.open){ b.setAttribute("aria-pressed","false"); b.addEventListener("click",ev=>{ ev.stopPropagation(); b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")==="true"?"false":"true"); }); }
         else if(sp.menu){ b.setAttribute("aria-haspopup","menu"); b.addEventListener("click",ev=>{ ev.stopPropagation(); xMenu(sp,b,x); }); }
         else b.addEventListener("click",ev=>{ ev.stopPropagation(); xDo(sp,x,b); });
         lay.appendChild(b); });

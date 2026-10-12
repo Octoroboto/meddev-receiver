@@ -23,7 +23,7 @@ const GLASS_IN = new RegExp(String.raw`\.(${GLASS_PARTS})\b`);
 const MOVE = /^(margin(-(top|right|bottom|left|inline|block)(-(start|end))?)?|order|align-self|justify-self|grid-(area|column|row)(-(start|end))?|translate|position|top|right|bottom|left|inset)$/;
 // Properties that change everything inside a part: only on parts with no glass inside (buttons, knobs, decorations).
 const SUBTREE = /^(filter|backdrop-filter|opacity|mix-blend-mode|transform|rotate|scale|zoom|visibility|display|content-visibility|clip-path|mask(-[a-z-]+)?|animation(-[a-z-]+)?)$/;
-const LEAF = new RegExp(String.raw`(\.(skin-decor|rd-knob|tk-knob|vol-knob|vol-dot)|button|small|input\[type=checkbox\])${PSEUDO}$`);
+const LEAF = new RegExp(String.raw`(\.(skin-decor|sx-layer|sx-spot|sx-dialog|rd-knob|tk-knob|vol-knob|vol-dot)|button|small|input\[type=checkbox\])${PSEUDO}$`);
 // Skins Rob has approved to recolour glass, lights and fields as well (still no layout changes to glass, no pests, no
 // @media, no ids, no click/drag behaviour changes). Approval lives here, never in the skin itself.
 export const EXEMPT = { "analyze-pics": "Collin's Analyze Pics (Mac OS 8 Platinum) look: its screens, LEDs, EQ, VU faces and fields are part of it. Approved by Rob, 2026-10-11.",
@@ -143,21 +143,27 @@ export function checkExtras(id, x) {
     pg.rows.forEach(r => { if (!Array.isArray(r) || r.length > pg.cols.length) bad(`page "${pid}" rows must be lists no longer than cols`); r.forEach(c => { if (typeof c !== "string" || c.length > 80) bad(`page "${pid}" cells must be text up to 80 characters`); }); });
     if (pg.note != null) str(pg.note, 300, `page "${pid}" note`);
   }
-  const act = (o, what) => { const n = ["say", "page", "back", "menu", "open"].filter(k => o[k] != null).length; if (n > 1) bad(`${what}: one of say, page, back, menu or open`);
+  const act = (o, what) => { const n = ["say", "page", "back", "menu", "open", "next", "prev"].filter(k => o[k] != null).length; if (n > 1) bad(`${what}: one of say, page, back, menu, open, next or prev`);
     if (o.open != null && o.open !== true) bad(`${what}: open must be true`);
+    for (const k of ["next", "prev"]) if (o[k] != null && o[k] !== true) bad(`${what}: ${k} must be true`);
+    if (o.speak != null) { if (o.say == null) bad(`${what}: speak goes with say`); only(o.speak, ["pitch", "rate", "voices"], `${what} speak`);
+      for (const [k, lo, hi] of [["pitch", 0, 2], ["rate", .5, 2]]) if (o.speak[k] != null && !(typeof o.speak[k] === "number" && o.speak[k] >= lo && o.speak[k] <= hi)) bad(`${what} speak ${k} must be a number from ${lo} to ${hi}`);
+      if (o.speak.voices != null) { if (!Array.isArray(o.speak.voices) || o.speak.voices.length > 6) bad(`${what} speak voices must be a list of up to 6 names`); o.speak.voices.forEach(v => str(v, 40, `${what} speak voice`)); } }
     if (o.say != null) str(o.say, 300, `${what} say`); if (o.page != null && !(typeof o.page === "string" && Object.prototype.hasOwnProperty.call(pages, o.page))) bad(`${what}: page "${o.page}" isn't in pages`); if (o.back != null && o.back !== true) bad(`${what}: back must be true`); };
   const layers = x.layers || []; if (!Array.isArray(layers) || layers.length > 6) bad("layers must be a list of up to 6");
   let count = 0;
-  layers.forEach((L, i) => { only(L, ["anchor", "box", "spots"], `layer ${i}`);
+  layers.forEach((L, i) => { only(L, ["anchor", "box", "spots", "scenes"], `layer ${i}`);
+    if (L.scenes != null && !(Number.isInteger(L.scenes) && L.scenes >= 2 && L.scenes <= 12)) bad(`layer ${i}: scenes must be a whole number from 2 to 12`);
     if (!["top", "station", "pinfoot"].includes(L.anchor)) bad(`layer ${i}: anchor must be top, station or pinfoot`);
     only(L.box || {}, ["left", "right", "top", "bottom", "width", "height"], `layer ${i} box`); for (const [k, v] of Object.entries(L.box || {})) len(v, `layer ${i} box ${k}`);
     if (!Array.isArray(L.spots)) bad(`layer ${i}: spots must be a list`);
     L.spots.forEach((sp, j) => { const w = `layer ${i} spot ${j}`; count++;
-      only(sp, ["label", "left", "top", "width", "height", "menu", "say", "page", "back", "open"], w); str(sp.label, 60, `${w} label`);
+      only(sp, ["label", "left", "top", "width", "height", "menu", "say", "page", "back", "open", "next", "prev", "speak", "scene"], w); str(sp.label, 60, `${w} label`);
+      if (sp.scene != null && !(L.scenes && Number.isInteger(sp.scene) && sp.scene >= 0 && sp.scene < L.scenes)) bad(`${w}: scene must be a scene number in a layer with scenes`);
       for (const k of ["left", "top", "width", "height"]) len(sp[k], `${w} ${k}`); act(sp, w);
       if (sp.menu != null) { if (!Array.isArray(sp.menu) || sp.menu.length > 16) bad(`${w}: menu must be a list of up to 16`);
         sp.menu.forEach((e, k) => { if (e && e.sep === true) { only(e, ["sep"], `${w} entry ${k}`); return; }
-          only(e, ["text", "hint", "disabled", "say", "page", "back"], `${w} entry ${k}`); str(e.text, 80, `${w} entry ${k} text`);
+          only(e, ["text", "hint", "disabled", "say", "page", "back", "speak"], `${w} entry ${k}`); str(e.text, 80, `${w} entry ${k} text`);
           if (e.hint != null) str(e.hint, 80, `${w} entry ${k} hint`); if (e.disabled != null && typeof e.disabled !== "boolean") bad(`${w} entry ${k}: disabled is true or false`); act(e, `${w} entry ${k}`); }); }
     }); });
   if (count > 60) bad("can have up to 60 spots");
