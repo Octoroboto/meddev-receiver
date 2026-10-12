@@ -1,7 +1,7 @@
-/* Mr. Spoonatelli's House of Spoons: an old-world spoon shop. Walnut cabinetry with gilt molding and an arched crown,
-   emerald velvet with a damask of tiny spoons, brass nameplate title bars, ivory enamel keys, spoon-bowl knobs (silver for
-   the lights, gold for tone), an engraved serving-ladle volume knob, a swaying rack of spoons over the top (count the
-   hooks), spoons stabbed into every edge and strewn across the panels, the founder's portrait, and a corkboard that cannot agree whether a fourth spoon exists. */
+/* Mr. Spoonatelli's House of Spoons: an old-world spoon shop with a mystery. Walnut cabinetry with gilt molding and an arched crown,
+   emerald velvet with a damask of tiny spoons, brass nameplate title bars, ivory enamel keys, spoon-bowl knobs, an engraved
+   serving-ladle volume knob, a swaying rack of spoons over the top, spoons stabbed into every edge, and a counter covered in
+   evidence for The Case of the Fourth Spoon (tap the clues, accuse someone in the case file; solve it for a spoon cursor). */
 @import url("https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Cormorant+SC:wght@600;700&family=Cormorant+Garamond:wght@600;700&display=swap");
 
 :root{
@@ -63,11 +63,9 @@ small,.rd-mm,.vizsw{font-family:"Cormorant SC",Georgia,serif;font-weight:700;let
 .vol-dot{background:#7a1a1a;box-shadow:0 0 0 1px #f2d690}
 .vol-num{color:#f6e2b0;font-family:"Cormorant SC",serif;font-weight:700;text-shadow:0 1px 1px #000}
 
-/* The counter: walnut, with the brass nameplate, the founder's portrait, and the corkboard. */
-.pinfoot{border-radius:16px;margin-top:4px;padding:calc(30px + min(520px,80%) * .29) 16px 30px;
-  background:url(images/plaque.webp) center 18px/min(520px,80%) auto no-repeat,
-    url(images/portrait.webp) left 4% top 18px/clamp(0px,(100vw - 900px) * .4,140px) auto no-repeat,
-    linear-gradient(180deg,rgba(255,220,160,.10),transparent 30%,rgba(0,0,0,.4)),url(images/walnut.webp) 0 0/360px 360px,#4a2812;
+/* The counter: walnut, and now the evidence table for the case (the clues are drawn by the extras layer below). */
+.pinfoot{border-radius:16px;margin-top:4px;padding:calc(32px + (min(1134px,77.9vw) - 28px) * .62) 16px 30px;
+  background:linear-gradient(180deg,rgba(255,220,160,.12),transparent 30%,rgba(0,0,0,.4)),url(images/walnut.webp) 0 0/360px 360px,#4a2812;
   border:2px solid #c9a050;box-shadow:0 0 0 1px #3a1e0e,inset 0 0 0 1px rgba(255,230,170,.3),inset 0 0 40px rgba(0,0,0,.55)}
 
 /* Decorations: the shop has lost control of its inventory. Spoons are jammed into every edge of the cabinet,
@@ -87,23 +85,51 @@ small,.rd-mm,.vizsw{font-family:"Cormorant SC",Georgia,serif;font-weight:700;let
   background:url(images/burst-left.webp) left top/clamp(0px,(100vw - 700px) * .2,72px) auto no-repeat space,url(images/burst-right.webp) right top 140px/clamp(0px,(100vw - 700px) * .25,96px) auto no-repeat space;filter:drop-shadow(0 8px 8px rgba(0,0,0,.6))}
 /* loose spoons left lying across the panel and jammed in its edges */
 .station .skin-decor::after{inset:-26px -18px -30px -18px;z-index:3;
-  background:url(images/lie-1.webp) left 53% top 74%/clamp(0px,(100vw - 900px) * .5,230px) auto no-repeat,
-    url(images/loose-3.webp) left 2% bottom 0/clamp(26px,3.2vw,40px) auto no-repeat,
+  background:url(images/loose-3.webp) left 2% bottom 0/clamp(26px,3.2vw,40px) auto no-repeat,
     url(images/loose-5.webp) right 3% top 0/clamp(24px,3vw,36px) auto no-repeat,
     url(images/loose-2.webp) right 0 bottom 6%/clamp(0px,(100vw - 900px) * .1,44px) auto no-repeat,
     url(images/loose-4.webp) left 0 top 40%/clamp(0px,(100vw - 900px) * .1,34px) auto no-repeat;
   filter:drop-shadow(0 4px 4px rgba(0,0,0,.55))}
-/* the corkboard: two pinned notes that keep arguing (they change every forty seconds) */
-.pinfoot .skin-decor::before{right:3%;top:10px;width:clamp(0px,(100vw - 900px) * .45,190px);height:220px;
-  background:url(images/note-1.webp) left top/100% auto no-repeat;animation:hs-notes 240s steps(1,end) infinite;filter:drop-shadow(0 4px 4px rgba(0,0,0,.4))}
-/* the red string, and a fringe of spoons hanging off the bottom of the counter */
+/* a fringe of spoons hanging off the bottom of the counter, and more jammed in the sides */
 .pinfoot .skin-decor::after{left:calc(-1 * (clamp(10px,1.8vw,20px) + clamp(0px,(100vw - 700px) * .2,72px) + 4px));right:calc(-1 * (clamp(10px,1.8vw,20px) + clamp(0px,(100vw - 700px) * .25,96px) + 4px));top:8px;bottom:calc(-1 * clamp(70px,10vw,140px));
-  background:url(images/string.webp) left 22% top 0/clamp(0px,(100vw - 900px) * 1.3,62%) 70px no-repeat,
-    url(images/lie-2.webp) left calc(clamp(0px,(100vw - 700px) * .2,72px) + 15%) top 38%/clamp(0px,(100vw - 900px) * .22,100px) auto no-repeat,
-    url(images/lie-4.webp) right calc(clamp(0px,(100vw - 700px) * .25,96px) + 9%) top 39%/clamp(0px,(100vw - 900px) * .3,130px) auto no-repeat,
-    url(images/lie-3.webp) left 69% top 41%/clamp(0px,(100vw - 900px) * .22,110px) auto no-repeat,
-    url(images/burst-bottom.webp) center bottom/calc(clamp(70px,10vw,140px) * 2.94) clamp(70px,10vw,140px) space no-repeat,
+  background:url(images/burst-bottom.webp) center bottom/calc(clamp(70px,10vw,140px) * 2.94) clamp(70px,10vw,140px) space no-repeat,
     url(images/burst-left.webp) left top/clamp(0px,(100vw - 700px) * .2,72px) auto no-repeat space,url(images/burst-right.webp) right top 140px/clamp(0px,(100vw - 700px) * .25,96px) auto no-repeat space;filter:drop-shadow(0 6px 6px rgba(0,0,0,.5))}
 
+/* The Case of the Fourth Spoon (skin extras): every bit of evidence is a button. Tap one to read it in full; found clues
+   get a wax seal. The case file accuses. Solve it and the cursor turns into a spoon. */
+.sx-spot:hover{background-color:transparent}
+.sx-spot:focus-visible{outline:3px dashed #ffd56a;outline-offset:3px}
+.top .sx-spot:hover{background:radial-gradient(ellipse at 50% 30%,rgba(255,220,150,.18),transparent 70%)}
+.pinfoot .sx-layer::after{content:"";position:absolute;inset:0;z-index:2;background:url(images/ev-string.webp) 0 0/100% 100% no-repeat;filter:drop-shadow(0 2px 2px rgba(0,0,0,.4))}
+.pinfoot .sx-spot{background:center bottom/contain no-repeat;transition:translate .18s ease,filter .18s ease}
+.pinfoot .sx-spot:hover,.pinfoot .sx-spot:focus-visible{translate:0 -4px;filter:brightness(1.08) drop-shadow(0 0 10px rgba(255,214,120,.55))}
+.pinfoot .sx-spot:nth-child(1){background-image:url(images/ev-portrait.webp);background-position:center}
+.pinfoot .sx-spot:nth-child(2){background-image:url(images/ev-plaque.webp);background-position:center}
+.pinfoot .sx-spot:nth-child(3){background:url(images/ev-note-1.webp) center top 11%/84% auto no-repeat,url(images/ev-cork.webp) center/contain no-repeat;animation:hs-notes 240s steps(1,end) infinite}
+.pinfoot .sx-spot:nth-child(4){background-image:url(images/ev-carved.webp);background-position:center}
+.pinfoot .sx-spot:nth-child(5){background-image:url(images/ev-ledger.webp)}
+.pinfoot .sx-spot:nth-child(6){background-image:url(images/ev-receipt.webp)}
+.pinfoot .sx-spot:nth-child(7){background-image:url(images/ev-timecard.webp)}
+.pinfoot .sx-spot:nth-child(8){background-image:url(images/ev-flyer.webp)}
+.pinfoot .sx-spot:nth-child(9){background-image:url(images/ev-tag.webp)}
+.pinfoot .sx-spot:nth-child(10){background-image:url(images/ev-notebook.webp)}
+.sx-spot[data-found]::after{content:"";position:absolute;right:2%;bottom:3%;width:clamp(18px,2.8vw,34px);aspect-ratio:1;z-index:3;background:url(images/ev-seal.webp) center/contain no-repeat}
+.top .sx-spot[data-found]::after{right:auto;left:62%;bottom:auto;top:4%}
+html[data-sx-solved] .pinfoot .sx-spot:nth-child(10)::before{content:"";position:absolute;left:-14%;right:-14%;top:34%;height:36%;z-index:3;background:url(images/ev-closed.webp) center/contain no-repeat}
+html[data-sx-solved] body,html[data-sx-solved] button,html[data-sx-solved] .rd-knob,html[data-sx-solved] .vol-knob,html[data-sx-solved] .sx-spot,html[data-sx-solved] .sx-item{cursor:url(images/spoon-cursor.png) 2 2,auto}
+
+/* Evidence cards and the case file menu: aged paper in a gilt frame, big type. */
+.sx-dialog{width:min(520px,calc(100vw - 32px));padding:22px 26px 20px;gap:12px;border:2px solid #c9a050;border-radius:6px;color:#2a1a0c;
+  background:radial-gradient(ellipse at 50% 0%,rgba(255,255,255,.5),transparent 60%),linear-gradient(180deg,#f8eed6,#e8d4a8);font:600 clamp(18px,2.2vw,22px)/1.42 var(--f-body);
+  box-shadow:0 0 0 1px #6e5220,0 0 0 7px #3a1e0e,0 0 0 9px #c9a050,0 30px 70px rgba(0,0,0,.65)}
+.sx-dialog .sx-back{font-size:1.05rem}
+.sx-menu{min-width:270px;padding:6px 0;border:2px solid #c9a050;border-radius:6px;color:#2a1a0c;background:linear-gradient(180deg,#f8eed6,#ead8ae);
+  font:700 19px/1.25 var(--f-body);box-shadow:0 0 0 1px #6e5220,0 14px 34px rgba(0,0,0,.55)}
+.sx-item{padding:7px 18px}
+.sx-item:hover,.sx-item:focus-visible{background:#e6cf96}
+.sx-item small{color:#7a5a30;font-size:14px}
+.sx-item[disabled]{color:#7a1a1a}
+.sx-sep{background:#c9a050}
+
 @keyframes hs-sway{0%,100%{rotate:-.5deg}50%{rotate:.5deg}}
-@keyframes hs-notes{0%{background-image:url(images/note-1.webp)}16.6%{background-image:url(images/note-2.webp)}33.3%{background-image:url(images/note-3.webp)}50%{background-image:url(images/note-4.webp)}66.6%{background-image:url(images/note-5.webp)}83.3%{background-image:url(images/note-6.webp)}}
+@keyframes hs-notes{0%{background-image:url(images/ev-note-1.webp),url(images/ev-cork.webp)}16.6%{background-image:url(images/ev-note-2.webp),url(images/ev-cork.webp)}33.3%{background-image:url(images/ev-note-3.webp),url(images/ev-cork.webp)}50%{background-image:url(images/ev-note-4.webp),url(images/ev-cork.webp)}66.6%{background-image:url(images/ev-note-5.webp),url(images/ev-cork.webp)}83.3%{background-image:url(images/ev-note-6.webp),url(images/ev-cork.webp)}}

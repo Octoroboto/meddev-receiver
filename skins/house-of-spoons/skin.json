@@ -1,5 +1,202 @@
 {
   "id": "house-of-spoons",
   "name": "Mr. Spoonatelli's House of Spoons",
-  "description": "An old-world spoon emporium that has completely lost control of its inventory: walnut cabinetry, emerald velvet with a damask of tiny spoons, spoons stabbed into every edge and strewn across the panels (fancy, rusted, and carved with warnings about the forbidden fourth spoon), a swaying spoon rack, spoon-bowl knobs, a serving-ladle volume knob, the founder's portrait, and a corkboard that can't agree whether the fourth spoon is a lie."
+  "description": "An old-world spoon emporium that has lost control of its inventory, and a mystery to solve: walnut cabinetry, emerald velvet, spoons stabbed into every edge, a swaying spoon rack, and a counter covered in evidence. Tap the clues, then accuse someone in the case file. Solve it and your cursor becomes a spoon.",
+  "extras": {
+    "layers": [
+      {
+        "anchor": "top",
+        "box": {
+          "left": "6%",
+          "right": "6%",
+          "top": "calc(-1 * clamp(150px,15vw,200px) + 6px)",
+          "height": "clamp(110px,13vw,170px)"
+        },
+        "spots": [
+          {
+            "label": "Clue: the spoon rack (count the hooks)",
+            "left": "0%",
+            "top": "0%",
+            "width": "100%",
+            "height": "80%",
+            "clue": "hooks",
+            "title": "The spoon rack",
+            "say": "Sixteen hooks. Fifteen spoons. The empty hook has a tiny brass tag: \"LADLE. Not a spoon. Do not ask him about it. He gets loud.\""
+          }
+        ]
+      },
+      {
+        "anchor": "pinfoot",
+        "box": {
+          "left": "14px",
+          "right": "14px",
+          "top": "14px",
+          "height": "calc((min(1134px,77.9vw) - 28px) * .62)"
+        },
+        "spots": [
+          {
+            "label": "Clue: the founder's portrait",
+            "left": "2%",
+            "top": "1%",
+            "width": "14%",
+            "height": "36%",
+            "clue": "portrait",
+            "title": "Our Founder, 1923",
+            "say": "He's holding a teaspoon. Behind him, slightly out of focus, a very large ladle is also posing for the portrait. Nobody remembers inviting it. It's in every family photo since."
+          },
+          {
+            "label": "Clue: the brass plaque",
+            "left": "19%",
+            "top": "3%",
+            "width": "62%",
+            "height": "30%",
+            "clue": "plaque",
+            "title": "The plaque",
+            "say": "\"Purveyors of the three known spoons.\" Underneath, scratched into the brass very small: \"and one big guy we don't talk about.\""
+          },
+          {
+            "label": "Clue: the corkboard",
+            "left": "83%",
+            "top": "0%",
+            "width": "15%",
+            "height": "37%",
+            "clue": "notes",
+            "title": "The corkboard",
+            "say": "Six notes in six different handwritings, all arguing. The one everybody keeps circling: \"If it holds soup and it's in charge, is it a spoon?\""
+          },
+          {
+            "label": "Clue: the carved wooden spoon",
+            "left": "22%",
+            "top": "35%",
+            "width": "56%",
+            "height": "14%",
+            "clue": "carved",
+            "title": "A carved spoon",
+            "say": "THE 4TH SPOON IS A LIE. On the back, smaller: \"because it isn't a spoon. it's a ladle. it's on the volume knob right now. don't look at it.\""
+          },
+          {
+            "label": "Clue: the inventory clipboard",
+            "left": "1%",
+            "top": "49%",
+            "width": "21%",
+            "height": "50%",
+            "clue": "ledger",
+            "title": "Inventory",
+            "say": "3 spoons. 1 ladle (DO NOT COUNT LADLE). Radio volume at closing: 2. Radio volume at opening: 10. Same thing every day this week. Next to the ladle, someone wrote \"warm???\""
+          },
+          {
+            "label": "Clue: Doug's receipt",
+            "left": "23.5%",
+            "top": "49%",
+            "width": "12%",
+            "height": "50%",
+            "clue": "receipt",
+            "title": "Doug's receipt",
+            "say": "Sold to Doug: one teaspoon, $4. He asked if a ladle is a spoon 11 times and was asked to leave. Came back in a hat. Asked again. Doug was at his nephew's clarinet recital all night. There's video. It's three hours long."
+          },
+          {
+            "label": "Clue: Delphine's time card",
+            "left": "36.8%",
+            "top": "49%",
+            "width": "13%",
+            "height": "50%",
+            "clue": "timecard",
+            "title": "Delphine's time card",
+            "say": "Night polisher. In 9:00, out 9:04, every single night. Note on the back: \"I polish the spoons. I do not polish the big one. It hums along to the radio and it knows my name.\""
+          },
+          {
+            "label": "Clue: the Forkington's flyer",
+            "left": "51.1%",
+            "top": "49%",
+            "width": "16%",
+            "height": "50%",
+            "clue": "flyer",
+            "title": "Forkington's flyer",
+            "say": "From the fork shop across the street: \"We have forks. We have never once wanted your spoons. Please stop calling.\" Gus is allergic to radios. He sleeps in earmuffs."
+          },
+          {
+            "label": "Clue: the lost and found tag",
+            "left": "68.4%",
+            "top": "49%",
+            "width": "12%",
+            "height": "50%",
+            "clue": "tag",
+            "title": "Lost & found",
+            "say": "Item: one ladle. Found sitting on the radio's volume knob. Put back on hook four at 8:00 AM. Found on the volume knob again at 8:15. It was warm. It was humming."
+          },
+          {
+            "label": "The case file: read the case or accuse someone",
+            "left": "81.5%",
+            "top": "49%",
+            "width": "17%",
+            "height": "50%",
+            "menu": [
+              {
+                "text": "Clues found: {found} of {total}",
+                "disabled": true
+              },
+              {
+                "text": "Read the case",
+                "title": "The Case of the Fourth Spoon",
+                "say": "Somebody comes into the shop after closing and cranks the radio to 10. Every morning the volume is all the way up and hook four on the spoon rack is empty. Mr. Spoonatelli says there are only three known spoons. Tap the clues, then accuse someone here."
+              },
+              {
+                "sep": true
+              },
+              {
+                "text": "Accuse Delphine",
+                "hint": "Needs 6 clues",
+                "need": 6,
+                "locked": "Mr. Spoonatelli won't hear an accusation yet. You've found {found} of {total} clues; find at least 6. Tap anything around the shop with writing on it.",
+                "say": "Delphine shows you her time card. She leaves at 9:04 every night and has never stayed late for anything, including her own birthday party. Not Delphine.",
+                "title": "Delphine?"
+              },
+              {
+                "text": "Accuse Gus from Forkington's",
+                "hint": "Needs 6 clues",
+                "need": 6,
+                "locked": "Mr. Spoonatelli won't hear an accusation yet. You've found {found} of {total} clues; find at least 6. Tap anything around the shop with writing on it.",
+                "say": "You march across the street. Gus opens the door in earmuffs. \"I can't hear you,\" he says, correctly. Not Gus.",
+                "title": "Gus?"
+              },
+              {
+                "text": "Accuse Doug",
+                "hint": "Needs 6 clues",
+                "need": 6,
+                "locked": "Mr. Spoonatelli won't hear an accusation yet. You've found {found} of {total} clues; find at least 6. Tap anything around the shop with writing on it.",
+                "say": "Doug shows you all three hours of the clarinet recital. You watch the whole thing. It isn't Doug, and now you know a lot about the clarinet.",
+                "title": "Doug?"
+              },
+              {
+                "text": "Accuse Mr. Spoonatelli",
+                "hint": "Needs 6 clues",
+                "need": 6,
+                "locked": "Mr. Spoonatelli won't hear an accusation yet. You've found {found} of {total} clues; find at least 6. Tap anything around the shop with writing on it.",
+                "say": "\"ME? I go to bed at seven! I wear a nightcap shaped like a spoon! Do I look like a guy who plays the radio LOUD?\" He is shouting. He is always shouting. But no.",
+                "title": "Mr. Spoonatelli?"
+              },
+              {
+                "text": "Accuse the Ladle",
+                "hint": "Needs 6 clues",
+                "need": 6,
+                "locked": "Mr. Spoonatelli won't hear an accusation yet. You've found {found} of {total} clues; find at least 6. Tap anything around the shop with writing on it.",
+                "say": "It was the Ladle. It isn't a spoon, it isn't on its hook, and it's been sitting on your volume knob this whole time. Mr. Spoonatelli thanks you with the only reward he has: a spoon. Your cursor is a spoon now.",
+                "title": "CASE CLOSED",
+                "solve": true
+              },
+              {
+                "sep": true
+              },
+              {
+                "text": "Start over",
+                "reset": true,
+                "title": "Case reopened",
+                "say": "The clues are back where you found them, and Mr. Spoonatelli has taken his spoon back. He was nice about it."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

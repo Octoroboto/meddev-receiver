@@ -33,13 +33,28 @@
   }
   // Skin extras: tappable spots from the skin's own data (menus, message boxes, read-only pages). Built from text only,
   // never markup. Every page has a way back: its Back button, a "back" spot (e.g. the first sheet tab) or Esc.
-  const X={id:null,x:null,els:[],menu:null,page:null,dlg:null,from:{}};
+  const X={id:null,x:null,els:[],menu:null,page:null,dlg:null,from:{},cs:new Set()};
   const el=(t,c,txt)=>{ const e=document.createElement(t); if(c) e.className=c; if(txt!=null) e.textContent=txt; return e; };
   const xHost=()=>document.querySelector(".wrap")||document.body;
   const xFocus=k=>{ const f=X.from[k]; X.from[k]=null; if(f&&f.isConnected) f.focus(); };
   function xClose(kind){ if((!kind||kind==="menu")&&X.menu){ X.menu.remove(); X.menu=null; } if((!kind||kind==="dlg")&&X.dlg){ X.dlg.remove(); X.dlg=null; } }
   function xBack(){ xClose(); if(X.page){ X.page.remove(); X.page=null; } }
-  function xDo(o,x,from){ xClose("menu"); if(o.back){ xBack(); if(from&&from.isConnected) from.focus(); return; } if(o.say!=null){ xSay(o.say,from); if(o.speak) xSpeak(o.say,o.speak); return; } if(o.page) xPage(o.page,x,from); }
+  // Mysteries: a spot or menu entry can carry "clue": "<id>" (found when tapped), "need": n with "locked": text (works only
+  // once n clues are found), "solve": true (the skin's case is solved) and "reset": true (forget the clues and the solve).
+  // Progress is kept per skin in this browser or app. While a skin with clues is on, <html> gets data-sx-clues="<found>"
+  // and, once solved, data-sx-solved (skins use it for rewards, e.g. a new cursor). Found spots get data-found.
+  // Text can say {found} and {total}.
+  const CK="meddev-skin-case:";
+  const cRead=()=>{ try{ const v=JSON.parse(localStorage.getItem(CK+X.id)||"{}")||{}; return {clues:Array.isArray(v.clues)?v.clues.filter(c=>typeof c==="string"&&X.cs.has(c)):[],solved:v.solved===true}; }catch(e){ return {clues:[],solved:false}; } };
+  const cWrite=v=>{ try{ localStorage.setItem(CK+X.id,JSON.stringify(v)); }catch(e){} };
+  function cShow(){ const r=document.documentElement; if(!X.cs.size){ delete r.dataset.sxClues; delete r.dataset.sxSolved; return; }
+    const c=cRead(); r.dataset.sxClues=String(c.clues.length); if(c.solved) r.dataset.sxSolved=""; else delete r.dataset.sxSolved;
+    X.els.forEach(l=>l.querySelectorAll(".sx-spot[data-clue]").forEach(b=>{ if(c.clues.includes(b.dataset.clue)) b.dataset.found=""; else delete b.dataset.found; })); }
+  const fillT=t=>t==null?t:String(t).replace(/\{found\}/g,String(cRead().clues.length)).replace(/\{total\}/g,String(X.cs.size));
+  function xDo(o,x,from){ xClose("menu");
+    if(o.need&&cRead().clues.length<o.need){ xSay(fillT(o.locked),from); return; }
+    if(o.clue||o.solve||o.reset){ const c=cRead(); if(o.reset){ c.clues=[]; c.solved=false; } if(o.clue&&!c.clues.includes(o.clue)) c.clues.push(o.clue); if(o.solve) c.solved=true; cWrite(c); cShow(); }
+    if(o.back){ xBack(); if(from&&from.isConnected) from.focus(); return; } if(o.say!=null){ const t=fillT(o.say); xSay(t,from,o.title); if(o.speak) xSpeak(t,o.speak); return; } if(o.page) xPage(o.page,x,from); }
   // speak: a spot's line read aloud by the computer's voice (an actor in a play). Text only; pitch, rate and preferred voice names.
   // While a line is read, the page hears "meddev:voice" {on, sung} so a radio can duck its music (to silence for sung lines).
   let XV=0; const xVoice=(on,sung)=>{ try{ window.dispatchEvent(new CustomEvent("meddev:voice",{detail:{on,sung}})); }catch(e){} };
@@ -53,9 +68,9 @@
   function xScene(lay,step){ const n=+lay.dataset.scenes||1, cur=+lay.dataset.scene||0, nx=((cur+step)%n+n)%n;
     lay.dataset.prev=cur; lay.dataset.scene=nx; lay.querySelectorAll(".sx-spot[data-scene]").forEach(b=>{ b.hidden=+b.dataset.scene!==nx; });
     try{ window.speechSynthesis&&window.speechSynthesis.cancel(); }catch(e){} xClose("dlg"); }
-  function xSay(text,from){ xClose("dlg"); const d=el("div","sx-dialog"); d.setAttribute("role","alertdialog"); d.setAttribute("aria-label","Message");
+  function xSay(text,from,title){ xClose("dlg"); const d=el("div","sx-dialog"); d.setAttribute("role","alertdialog"); d.setAttribute("aria-label",title||"Message");
     const ok=el("button","btn sx-back","OK"); ok.type="button"; ok.addEventListener("click",()=>{ xClose("dlg"); xFocus("dlg"); });
-    d.append(el("p","sx-note",text),ok); document.body.appendChild(d); X.dlg=d; X.from.dlg=from; ok.focus(); }
+    if(title) d.appendChild(el("h2",null,title)); d.append(el("p","sx-note",text),ok); document.body.appendChild(d); X.dlg=d; X.from.dlg=from; ok.focus(); }
   function xPage(pid,x,from){ const ps=x.pages||{}, pg=Object.prototype.hasOwnProperty.call(ps,pid)?ps[pid]:null; if(!pg||!Array.isArray(pg.cols)||!Array.isArray(pg.rows)) return; if(X.page) X.page.remove();
     const P=el("section","sx-page"); P.setAttribute("aria-label",pg.title);
     const back=el("button","btn sx-back","← Back"); back.type="button"; back.addEventListener("click",()=>{ xBack(); xFocus("page"); });
@@ -67,7 +82,7 @@
   function xMenu(sp,btn,x){ if(X.menu&&X.menu.dataset.for===sp.label){ xClose("menu"); return; } xClose("menu");
     const m=el("div","sx-menu"); m.setAttribute("role","menu"); m.setAttribute("aria-label",sp.label); m.dataset.for=sp.label;
     sp.menu.forEach(e=>{ if(e.sep){ m.appendChild(el("div","sx-sep")); return; }
-      const b=el("button","sx-item"); b.type="button"; b.setAttribute("role","menuitem"); b.appendChild(el("span",null,e.text)); if(e.hint) b.appendChild(el("small",null,e.hint));
+      const b=el("button","sx-item"); b.type="button"; b.setAttribute("role","menuitem"); b.appendChild(el("span",null,fillT(e.text))); if(e.hint) b.appendChild(el("small",null,fillT(e.hint)));
       if(e.disabled) b.disabled=true; else b.addEventListener("click",ev=>{ ev.stopPropagation(); xDo(e,x,btn); }); m.appendChild(b); });
     document.body.appendChild(m); X.from.menu=btn; const r=btn.getBoundingClientRect();
     m.style.left=Math.max(4,Math.min(r.left,innerWidth-m.offsetWidth-4))+scrollX+"px"; m.style.top=(r.bottom+2+scrollY)+"px"; X.menu=m;
@@ -75,20 +90,23 @@
   function extras(pick){
     const x=pick&&pick.extras, id=pick&&pick.id;
     if(X.id===id&&X.x===x&&X.els.length&&X.els.every(e=>e.isConnected)) return;
-    xBack(); X.els.forEach(e=>e.remove()); X.els=[]; X.id=id; X.x=x; if(!x||!Array.isArray(x.layers)) return;
+    xBack(); X.els.forEach(e=>e.remove()); X.els=[]; X.id=id; X.x=x; X.cs=new Set();
+    if(!x||!Array.isArray(x.layers)){ cShow(); return; }
+    x.layers.forEach(L=>(L.spots||[]).forEach(sp=>{ if(sp.clue) X.cs.add(sp.clue); (sp.menu||[]).forEach(e=>{ if(e&&e.clue) X.cs.add(e.clue); }); }));
     const parts={top:".top .deck",station:".panel.station",pinfoot:".pinfoot"};
     x.layers.forEach(L=>{ const a=document.querySelector(parts[L.anchor]); if(!a) return; const lay=el("div","sx-layer");
       if(L.scenes){ lay.dataset.scenes=L.scenes; lay.dataset.scene="0"; }
       for(const [k,v] of Object.entries(L.box||{})) lay.style[k]=v;
       (L.spots||[]).forEach(sp=>{ const b=el("button","sx-spot"); b.type="button"; b.setAttribute("aria-label",sp.label); b.title=sp.label;
         for(const k of ["left","top","width","height"]) if(sp[k]) b.style[k]=sp[k];
-        if(sp.scene!=null){ b.dataset.scene=sp.scene; b.hidden=sp.scene!==0; }
+        if(sp.scene!=null){ b.dataset.scene=sp.scene; b.hidden=sp.scene!==0; } if(sp.clue) b.dataset.clue=sp.clue;
         if(sp.next||sp.prev){ b.addEventListener("click",ev=>{ ev.stopPropagation(); xScene(lay,sp.prev?-1:1); }); }
         else if(sp.open){ b.setAttribute("aria-pressed","false"); b.addEventListener("click",ev=>{ ev.stopPropagation(); b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")==="true"?"false":"true"); }); }
         else if(sp.menu){ b.setAttribute("aria-haspopup","menu"); b.addEventListener("click",ev=>{ ev.stopPropagation(); xMenu(sp,b,x); }); }
         else b.addEventListener("click",ev=>{ ev.stopPropagation(); xDo(sp,x,b); });
         lay.appendChild(b); });
       a.appendChild(lay); X.els.push(lay); });
+    cShow();
   }
   document.addEventListener("click",e=>{ if(X.menu&&!X.menu.contains(e.target)) xClose("menu"); });
   document.addEventListener("keydown",e=>{ if(e.key!=="Escape") return; if(X.menu){ xClose("menu"); xFocus("menu"); } else if(X.dlg){ xClose("dlg"); xFocus("dlg"); } else if(X.page){ xBack(); xFocus("page"); } });

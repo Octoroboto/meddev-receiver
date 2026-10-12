@@ -70,6 +70,34 @@ test("skin extras: plain data only, every page reachable and closable", async ()
   bad({ layers: [{ anchor: "top", spots: [{ label: "x", menu: [{ text: "a", open: true }] }] }] }, /isn't allowed/);
 });
 
+test("skin extras: mysteries (clues, locked accusations, solve, reset) and html[...] rules", async () => {
+  const { checkExtras, buildSkin } = await import("../scripts/skins.mjs");
+  const game = { layers: [{ anchor: "pinfoot", spots: [
+    { label: "Ledger", left: "0", top: "0", width: "40px", height: "40px", clue: "ledger", title: "The ledger", say: "Do not count the ladle." },
+    { label: "Notebook", left: "50px", top: "0", width: "40px", height: "40px", menu: [
+      { text: "Clues found: {found} of {total}", disabled: true },
+      { text: "Accuse the ladle", need: 1, locked: "Find more clues ({found} of {total}).", solve: true, say: "Case closed." },
+      { text: "Start over", reset: true, say: "Forgotten." }] }] }] };
+  assert.strictEqual(checkExtras("t", game), game);
+  const bad = (x, re) => assert.throws(() => checkExtras("t", x), re);
+  const S = s => ({ layers: [{ anchor: "pinfoot", spots: [s] }] });
+  bad(S({ label: "x", clue: "Bad Id", say: "a" }), /clue must be/);
+  bad(S({ label: "x", need: 2, say: "a" }), /locked/);
+  bad(S({ label: "x", locked: "no", say: "a" }), /locked goes with need/);
+  bad(S({ label: "x", need: 0, locked: "no", say: "a" }), /need must be/);
+  bad(S({ label: "x", solve: "yes", say: "a" }), /solve must be true/);
+  bad(S({ label: "x", clue: "a", open: true }), /go with say/);
+  bad(S({ label: "x", title: "T" }), /title goes with say/);
+  bad({ layers: [{ anchor: "pinfoot", spots: Array.from({ length: 41 }, (_, i) => ({ label: "c", clue: "c" + i, say: "a" })) }] }, /40 clues/);
+  // html[...] rules are scoped to the skin like html rules (e.g. a reward cursor once the case is solved)
+  const { mkdtempSync, mkdirSync, writeFileSync } = require("fs"), os = require("os"), path = require("path"), { pathToFileURL } = require("url");
+  const dir = mkdtempSync(path.join(os.tmpdir(), "sk-")); mkdirSync(path.join(dir, "t"));
+  writeFileSync(path.join(dir, "t", "skin.json"), JSON.stringify({ id: "t", name: "T" }));
+  writeFileSync(path.join(dir, "t", "skin.css"), "html[data-sx-solved] body,html[data-sx-solved] button{cursor:crosshair}");
+  const out = buildSkin(pathToFileURL(path.join(dir, "t") + "/"), "t");
+  assert.match(out.css, /html\[data-skin="t"\]\[data-sx-solved\] body,html\[data-skin="t"\]\[data-sx-solved\] button\{/);
+});
+
 test("selector lists split only at top-level commas", async () => {
   const { splitSel } = await import("../scripts/skins.mjs");
   assert.deepStrictEqual(splitSel(".a:is(.b,.c),.d:not(.e,.f)"), [".a:is(.b,.c)", ".d:not(.e,.f)"]);

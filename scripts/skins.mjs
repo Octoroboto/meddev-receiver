@@ -124,6 +124,8 @@ export const MIME = { png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg", w
 //   extras.layers[]: { anchor: "top"|"station"|"pinfoot", box: {left,right,top,bottom,width,height}, spots: [spot] }
 //   spot: { label, left, top, width, height, then one of: menu: [entry], say: "text", page: "<page id>", back: true }
 //   entry: { text, hint?, disabled?, say?, page?, back? } or { sep: true }
+//   mysteries (spots and entries, with say/page/back): clue: "<id>", need: n + locked: "text", solve: true, reset: true;
+//   say can have a title; say, text and hint can use {found} and {total}. Up to 40 clues.
 //   extras.pages: { <id>: { title, cols: [..], rows: [[..]], note? } }
 const LEN = /^(-?\d+(\.\d+)?(px|%|vw|vh|em|rem)?|0|auto|(calc|clamp|min|max)\([-+*\/ .,%0-9a-z()]*\))$/i;
 export function checkExtras(id, x) {
@@ -144,6 +146,13 @@ export function checkExtras(id, x) {
     if (pg.note != null) str(pg.note, 300, `page "${pid}" note`);
   }
   const act = (o, what) => { const n = ["say", "page", "back", "menu", "open", "next", "prev"].filter(k => o[k] != null).length; if (n > 1) bad(`${what}: one of say, page, back, menu, open, next or prev`);
+    // mysteries: clue / need + locked / solve / reset go with say, page or back (not with menus, doors or scene arrows)
+    if (["clue", "need", "solve", "reset"].some(k => o[k] != null) && ["menu", "open", "next", "prev"].some(k => o[k] != null)) bad(`${what}: clue, need, solve and reset go with say, page or back`);
+    if (o.clue != null && !(typeof o.clue === "string" && /^[a-z0-9-]{1,30}$/.test(o.clue))) bad(`${what}: clue must be an id of lowercase letters, numbers and dashes`);
+    if (o.need != null) { if (!(Number.isInteger(o.need) && o.need >= 1 && o.need <= 40)) bad(`${what}: need must be a whole number from 1 to 40`); str(o.locked, 300, `${what} locked`); }
+    else if (o.locked != null) bad(`${what}: locked goes with need`);
+    for (const k of ["solve", "reset"]) if (o[k] != null && o[k] !== true) bad(`${what}: ${k} must be true`);
+    if (o.title != null) { if (o.say == null) bad(`${what}: title goes with say`); str(o.title, 60, `${what} title`); }
     if (o.open != null && o.open !== true) bad(`${what}: open must be true`);
     for (const k of ["next", "prev"]) if (o[k] != null && o[k] !== true) bad(`${what}: ${k} must be true`);
     if (o.speak != null) { if (o.say == null) bad(`${what}: speak goes with say`); only(o.speak, ["pitch", "rate", "voices"], `${what} speak`);
@@ -158,15 +167,17 @@ export function checkExtras(id, x) {
     only(L.box || {}, ["left", "right", "top", "bottom", "width", "height"], `layer ${i} box`); for (const [k, v] of Object.entries(L.box || {})) len(v, `layer ${i} box ${k}`);
     if (!Array.isArray(L.spots)) bad(`layer ${i}: spots must be a list`);
     L.spots.forEach((sp, j) => { const w = `layer ${i} spot ${j}`; count++;
-      only(sp, ["label", "left", "top", "width", "height", "menu", "say", "page", "back", "open", "next", "prev", "speak", "scene"], w); str(sp.label, 60, `${w} label`);
+      only(sp, ["label", "left", "top", "width", "height", "menu", "say", "page", "back", "open", "next", "prev", "speak", "scene", "clue", "need", "locked", "solve", "reset", "title"], w); str(sp.label, 60, `${w} label`);
       if (sp.scene != null && !(L.scenes && Number.isInteger(sp.scene) && sp.scene >= 0 && sp.scene < L.scenes)) bad(`${w}: scene must be a scene number in a layer with scenes`);
       for (const k of ["left", "top", "width", "height"]) len(sp[k], `${w} ${k}`); act(sp, w);
       if (sp.menu != null) { if (!Array.isArray(sp.menu) || sp.menu.length > 16) bad(`${w}: menu must be a list of up to 16`);
         sp.menu.forEach((e, k) => { if (e && e.sep === true) { only(e, ["sep"], `${w} entry ${k}`); return; }
-          only(e, ["text", "hint", "disabled", "say", "page", "back", "speak"], `${w} entry ${k}`); str(e.text, 80, `${w} entry ${k} text`);
+          only(e, ["text", "hint", "disabled", "say", "page", "back", "speak", "clue", "need", "locked", "solve", "reset", "title"], `${w} entry ${k}`); str(e.text, 80, `${w} entry ${k} text`);
           if (e.hint != null) str(e.hint, 80, `${w} entry ${k} hint`); if (e.disabled != null && typeof e.disabled !== "boolean") bad(`${w} entry ${k}: disabled is true or false`); act(e, `${w} entry ${k}`); }); }
     }); });
   if (count > 60) bad("can have up to 60 spots");
+  const clues = new Set(); layers.forEach(L => L.spots.forEach(sp => { if (sp.clue) clues.add(sp.clue); (sp.menu || []).forEach(e => { if (e && e.clue) clues.add(e.clue); }); }));
+  if (clues.size > 40) bad("can have up to 40 clues");
   return x;
 }
 // Reads skins/<id> (skin.json + skin.css + images/) from a folder URL and returns { id, name, description, css } ready for skins.json.
@@ -186,7 +197,7 @@ export function buildSkin(dirUrl, id) {
   // scope every rule to this skin so it outranks the base look whatever order the styles load in (keyframes stay as they are)
   const scope = `html[data-skin="${id}"]`, [rules, frames] = splitKeyframes(c);
   c = rules.replace(/([^{};]+)\{/g, (m, sel) => { const t = sel.trim(); if (/^@/.test(t) || t.startsWith(scope)) return m;
-    return splitSel(t).map(x => x.trim()).map(x => x === "html" ? scope : x.startsWith("html ") ? scope + x.slice(4) : `${scope} ${x}`).join(",") + "{"; }) + frames.join("\n");
+    return splitSel(t).map(x => x.trim()).map(x => x === "html" ? scope : x.startsWith("html ") || x.startsWith("html[") ? scope + x.slice(4) : `${scope} ${x}`).join(",") + "{"; }) + frames.join("\n");
   if (/<\/(style|script)|javascript:|expression\(|@import(?!\s+url\(\s*["']?https:\/\/fonts\.googleapis\.com\/)/i.test(c)) throw new Error(`skin "${id}": only plain CSS is allowed (no tags, scripts or imports except Google Fonts)`);
   if (/url\(\s*(?!["']?(data:|#))/i.test(c.replace(/@import\s+url\([^)]*\)/g, ""))) throw new Error(`skin "${id}": images must be in the skin's images/ folder`);
   c = c.replace(/data:img(\d+)x(?=")/g, (m, n) => imgs[+n]);
