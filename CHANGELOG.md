@@ -2,6 +2,9 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.13.1 (2026-10-12, Rob)
+- The spray can no longer sits on the header buttons when the window is too narrow for it to rest beside the radio (browser windows about 800 to 1350 px wide): it tucks out to the edge with only its tip showing. It covered the right-hand "Station break" / "Station ID" button and took its clicks.
+
 ## 1.13.0 (2026-10-12, Rob)
 - **Layout pass (every skin, any window shape):**
   - Button LEDs sit right beside their button, however long the caption is. LET IT RIDE, UNDERWATER, ACCESSIBILITY and the like had their LED stranded at the caption's edge, which in some skins put it on the frame.
