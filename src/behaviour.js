@@ -368,8 +368,14 @@ ${(()=>{ const w=th.brand.split(" "); const two=th.brand.length>11&&w.length>1; 
     let y=120; if(hd){ const a=hd.getBoundingClientRect(), b=gr?gr.getBoundingClientRect():null; y=(b?(a.bottom+b.top)/2:a.bottom+10)+scrollY; }
     // Rest beside the radio, not at the far edge of a wide window; on phones tuck further out so less of the screen is covered.
     let x=W-62*SC; const wr=document.querySelector(".wrap"); if(wr){ const r=wr.getBoundingClientRect(); if(r.width>0) x=Math.min(x,r.right+44*SC); }
-    if(W<700) x=Math.max(x,W-22*SC);
-    else if(wr){ const r=wr.getBoundingClientRect(); if(r.width>0&&r.right+44*SC>W-62*SC) x=Math.max(x,W-8*SC); }   // no room beside the radio: tuck it out so it never sits on the header buttons
+    const roomy=wr&&W>=700&&(()=>{ const r=wr.getBoundingClientRect(); return r.width>0&&r.right+44*SC<=W-62*SC; })();
+    if(!roomy){   // no room beside the radio: out at the edge, but far enough to read BUG SPRAY / SUGAR MIST on its shoulder,
+      // at the height nearest the header gap where it covers nothing you can click (else just the tip, as before)
+      const xs=W-66*SC, free=yy=>{ const top=yy-scrollY; for(let px=xs-14;px<W;px+=8){ const h=45*SC;   // the can button's whole box takes clicks, not just the can's shape
+        for(let py=top-h;py<=top+h;py+=7){ if(py<0||py>=innerHeight) continue;
+          for(const el of document.elementsFromPoint(px,py)){ if(el.closest&&el.closest(".canlayer")) continue; if(el.closest&&el.closest("button,a,input,select,textarea,label,[role=slider],[role=button],[tabindex]:not([tabindex=\"-1\"])")) return false; } } } return true; };
+      const at=[0,30,-30,60,-60,90,-90,120,-120,150,-150,180,-180,220].map(d=>y+d).find(free); if(at!=null) return {x:xs,y:at};
+      return {x:Math.max(x,W-(W<700?22:8)*SC),y}; }
     return {x, y};
   }
   let spraying=false;
