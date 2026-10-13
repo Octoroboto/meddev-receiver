@@ -2,6 +2,10 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.13.3 (2026-10-13, Rob)
+- **The "What plays between songs" switches work in any app.** They used to assume the MDFM apps' settings bridge and broke (taking the rest of the page's wiring with them) in apps without it, or with an asynchronous one. Those apps now keep the switches on the device, like a browser.
+- **The Slack news switch** is only enabled where the app can connect Slack: the MDFM apps, or a kit app with `mdfm-live`. Elsewhere it says "needs Slack in this app".
+
 ## 1.13.2 (2026-10-13, Rob)
 - **The spray can shows its label again** (BUG SPRAY / SUGAR MIST) when there's no room beside the radio. Since 1.13.1 it had tucked so far out that only the white tip showed.
   - It now comes out far enough to read the shoulder, at the height nearest the header gap where it covers nothing clickable. The can's whole button box is counted, since that is what takes clicks.

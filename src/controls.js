@@ -38,18 +38,22 @@ window.MDFM_receiver=function(radio,{app=null}={}){
   if(radio.setLetItRide) mode("#rideBtn","#rideLed","mdfmRide",v=>radio.setLetItRide(v),()=>radio.isLetItRide());
   if(radio.setUnderwater) mode("#uwBtn","#uwLed","mdfmUnderwater",v=>radio.setUnderwater(v),()=>radio.isUnderwater());
   // Content types people can switch off. In the app they're saved with the app settings; in a browser, on this device.
-  const TYPES=(window.MDFM_TYPES||[]).map(([k,label])=>[k,label,k==="news"&&!app?"app only":""]);
+  // An app's settings are used when it has synchronous ones (the MDFM apps); any other app keeps them on this device,
+  // like a browser. Slack news needs an app that can connect Slack (the MDFM apps, or a kit app with mdfm-live).
+  const AS=(()=>{ try{ const s=app&&app.settings; if(!s||typeof s.get!=="function"||typeof s.set!=="function") return null; const v=s.get(); return v&&typeof v.then!=="function"?s:null; }catch(e){ return null; } })();
+  const slackable=!!(app&&app.slack&&typeof app.slack.connect==="function");
+  const TYPES=(window.MDFM_TYPES||[]).map(([k,label])=>[k,label,k==="news"&&!slackable?(app?"needs Slack in this app":"app only"):""]);
   const typeList=$("#typeList"); let types={}; if(!typeList) return;
-  try{ types=app?(app.settings.get().types||{}):JSON.parse(localStorage.getItem("mdfmTypes")||"{}"); }catch(e){}
-  if(app) types.news=!!app.settings.get().slackNews;
+  try{ types=AS?(AS.get().types||{}):JSON.parse(localStorage.getItem("mdfmTypes")||"{}"); }catch(e){}
+  try{ if(AS) types.news=!!AS.get().slackNews; }catch(e){}
   for(const [k,label,note] of TYPES){ const l=document.createElement("label"); l.className="opt";
     l.innerHTML=`<input type="checkbox" data-type="${k}"${k==="news"?' id="setSlackNews"':""}> <span>${label}${note?` <small>(${note})</small>`:""}</span>`;
-    const cb=l.querySelector("input"); cb.checked=types[k]!==false; if(k==="news"&&!app){ cb.disabled=true; cb.checked=false; } typeList.appendChild(l); }
+    const cb=l.querySelector("input"); cb.checked=types[k]!==false; if(k==="news"&&!slackable){ cb.disabled=true; cb.checked=false; } typeList.appendChild(l); }
   const typeState=()=>{ const t={}; typeList.querySelectorAll("input[data-type]").forEach(cb=>t[cb.dataset.type]=cb.checked); return t; };
   radio.setTypes(typeState());
   typeList.addEventListener("change",()=>{ const t=typeState(); radio.setTypes(t);
-    if(app) app.settings.set({types:t,slackNews:t.news}); else try{ localStorage.setItem("mdfmTypes",JSON.stringify(t)); }catch(e){} });
+    if(AS) AS.set({types:t,slackNews:t.news}); else { try{ localStorage.setItem("mdfmTypes",JSON.stringify(t)); }catch(e){} if(app&&app.liveSettings&&typeof app.liveSettings.set==="function") app.liveSettings.set({slackNews:t.news}); } });
   // In MD Hub the same switches are in the app's Settings too: follow changes made there.
-  if(app&&app.settings.onChange) app.settings.onChange(s=>{ if(!s) return; const t=Object.assign({},s.types||{}); if("slackNews" in s) t.news=!!s.slackNews;
+  if(AS&&AS.onChange) AS.onChange(s=>{ if(!s) return; const t=Object.assign({},s.types||{}); if("slackNews" in s) t.news=!!s.slackNews;
     typeList.querySelectorAll("input[data-type]").forEach(cb=>{ if(cb.dataset.type in t) cb.checked=t[cb.dataset.type]!==false; }); radio.setTypes(typeState()); });
 };
