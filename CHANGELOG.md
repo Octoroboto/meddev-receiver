@@ -2,6 +2,15 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.13.4 (2026-10-16, Rob)
+- **Lighter meters (from MDFM 1.25 and 1.26).** Nothing looks different.
+  - The LED EQ draws its unlit ladder once per size, then fills the lit segments and peak caps as one path each frame (it used to make about 380 separate draw calls a frame). It runs at 30 fps.
+  - The EQ and the VU meters do nothing while they're scrolled off screen or the tab is hidden: no level read, no repaint.
+  - The VU face measures its size twice a second instead of every frame (that was a layout read every frame).
+  - The reduced-motion media query is made once instead of every frame.
+- **The live updater (`client/updater.cjs`)** now gets the pruning that the MDFM apps already ship (from mdfm 1.25): only the newest two downloaded looks are kept, plus the one in use.
+- **`window.MDFM_lite`:** when a page sets it (MDFM's MIX does in LITE mode, on phones and tablets), the EQ and the VU meters run at 20 fps.
+
 ## 1.13.3 (2026-10-13, Rob)
 - **The "What plays between songs" switches work in any app.** They used to assume the MDFM apps' settings bridge and broke (taking the rest of the page's wiring with them) in apps without it, or with an asynchronous one. Those apps now keep the switches on the device, like a browser.
 - **The Slack news switch** is only enabled where the app can connect Slack: the MDFM apps, or a kit app with `mdfm-live`. Elsewhere it says "needs Slack in this app".
