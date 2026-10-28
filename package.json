@@ -1,6 +1,6 @@
 {
   "name": "meddev-receiver",
-  "version": "1.14.0",
+  "version": "1.14.1",
   "description": "The MedDev receiver look and controls: brushed steel, LCDs, LEDs, knobs, VU meters and the MedDev badging. One place to update it; every app that points here follows.",
   "private": true,
   "license": "UNLICENSED",

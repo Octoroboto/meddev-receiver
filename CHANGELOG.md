@@ -2,6 +2,10 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.14.1 (2026-10-27, Rob)
+- **VOID in the desktop apps resizes like a normal Mac app.** In an app window, AUTO no longer zooms the receiver with the window's width (that made dragging an edge look like the whole picture scaling with its shape kept) and there are no empty side gaps (they put the window's resize edges way out to the side). The receiver stays at 100 % and reflows to whatever size you drag the window to. The SIZE slider still sets a fixed 50-200 % if you want it bigger or smaller. Browsers are unchanged.
+- **The SIZE slider no longer jumps around.** It sits inside the receiver it resizes, so resizing while you dragged it moved it out from under the pointer. Now the number follows your drag and the new size is applied when you let go.
+
 ## 1.14.0 (2026-10-26, Rob)
 - **New skin: VOID.** Flat dark blocks with crisp lit edges: no textures, glass, glows, shadows, filters, animations or decorations. It's the look of MDFM's MIX › VOID button, but as a skin you pick in Looks, so it's on everywhere (radio, apps, hub page) and stays on. It's also the fastest look on phones and iPads (VOID mode measured 50-60 fps on an iPhone 13, where the textured skins managed about 2). The spray can and the flies stay, as in every skin.
 - **VOID resizes freely.** The receiver has no maximum width, and a **SIZE** row appears under the skin picker while VOID is on:

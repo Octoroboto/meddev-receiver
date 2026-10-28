@@ -131,11 +131,16 @@
   const sizeSave=v=>{ try{ localStorage.setItem(SKEY,String(v)); }catch(e){} try{ const a=app(); if(a&&a.settings) a.settings.set({skinSize:v}); }catch(e){} };
   // sideGap(): empty space (in screen px) kept on each side of the receiver on wide windows, so the spray can still has
   // room beside it as it does in Default (about 130 px at 1440). Narrow windows (under 1100 px) use the whole width.
-  const sideGap=()=>{ const w=window.innerWidth||1240; return w<1100?0:Math.round(Math.min(160,w*.09)); };
+  // inApp(): true inside a desktop app (MDFM Radio and friends set window.mdfmApp). There the window IS the receiver, so
+  // it should behave like any other Mac app: no empty side gaps (they put the window's resize edges far out to the side)
+  // and AUTO doesn't zoom (zooming with the width made a resize look like the whole picture scaling, aspect kept).
+  // Instead the receiver stays at 100 % and simply reflows to whatever size the window is dragged to.
+  const inApp=()=>!!app();
+  const sideGap=()=>{ if(inApp()) return 0; const w=window.innerWidth||1240; return w<1100?0:Math.round(Math.min(160,w*.09)); };
   // autoZoom(): the AUTO scale for the window's current width: the receiver is designed at up to 1240 px wide, so a window
   // with more room than that (after the side gaps and the page's 16 px padding) scales it up to fill it, to 220 % at most.
   // Narrower windows stay at 100 % and reflow (the receiver already adapts down to a 320 px phone).
-  const autoZoom=()=>{ const w=window.innerWidth||1240; return Math.max(1,Math.min(2.2,(w-2*sideGap()-32)/1240)); };
+  const autoZoom=()=>{ if(inApp()) return 1; const w=window.innerWidth||1240; return Math.max(1,Math.min(2.2,(w-2*sideGap()-32)/1240)); };
   // sizeApply(): sets --rx-zoom for a fluid skin (or removes it for every other skin) and updates every SIZE control.
   function sizeApply(){ const r=document.documentElement, on=r.dataset.fluid!=null, v=sizeGet(), z=v==="auto"?autoZoom():v/100;
     if(on){ r.style.setProperty("--rx-zoom",z.toFixed(3)); r.style.setProperty("--rx-gap",sideGap()+"px"); } else { r.style.removeProperty("--rx-zoom"); r.style.removeProperty("--rx-gap"); }
@@ -149,7 +154,11 @@
     const box=el("div","rx-size"); box.hidden=true; box.setAttribute("role","group"); box.setAttribute("aria-label","Receiver size");
     const lab=el("span","rx-size-l","SIZE"), rg=el("input"); rg.type="range"; rg.min=String(SMIN); rg.max=String(SMAX); rg.step="5"; rg.setAttribute("aria-label","Receiver size");
     const out=el("output",null,"100%"), au=el("button","btn rx-size-auto","AUTO"); au.type="button"; au.title="Fit the receiver to the window";
-    rg.addEventListener("input",()=>{ sizeSave(+rg.value); sizeApply(); });   // moving the slider sets a fixed size (AUTO off)
+    // The slider sits inside the receiver it resizes, so resizing while it's being dragged moved the slider out from under the
+    // pointer and the size jumped around (1.14.1 fix). Now dragging only shows the number; the size is applied when you let
+    // go ("change"), or for each arrow-key step, which also fires "change". Moving the slider sets a fixed size (AUTO off).
+    rg.addEventListener("input",()=>{ out.textContent=rg.value+"%"; });
+    rg.addEventListener("change",()=>{ sizeSave(+rg.value); sizeApply(); });
     au.addEventListener("click",()=>{ sizeSave(sizeGet()==="auto"?Math.round(autoZoom()*100):"auto"); sizeApply(); });   // AUTO on/off; off keeps the current scale
     box.append(lab,rg,out,au); host.after(box); }
   function fill(){
