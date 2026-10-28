@@ -1,0 +1,7 @@
+{
+  "id": "void",
+  "name": "VOID",
+  "description": "Flat dark blocks, no textures, glass or glow. The fastest look on phones and iPads. Resizes to any window, with a SIZE control.",
+  "flat": true,
+  "fluid": true
+}

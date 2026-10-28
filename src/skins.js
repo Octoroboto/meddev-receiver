@@ -21,6 +21,10 @@
     const css=pick?pick.css||"":""; if(theme().textContent!==css) theme().textContent=css;
     document.documentElement.dataset.skin=pick?pick.id:"default";
     if(pick&&pick.tint==="dye") document.documentElement.dataset.tint="dye"; else delete document.documentElement.dataset.tint;
+    // 1.14.0: a skin's "flat" and "fluid" switches (see scripts/skins.mjs). The receiver's stylesheet reads these two
+    // attributes; sizeApply() then sets (or clears) the page scale for a fluid skin.
+    const r=document.documentElement; if(pick&&pick.flat) r.dataset.flat=""; else delete r.dataset.flat; if(pick&&pick.fluid) r.dataset.fluid=""; else delete r.dataset.fluid;
+    sizeApply();
     decor(/skin-decor/.test(css)); extras(pick);
     fill(); try{ window.dispatchEvent(new Event("meddev:skin")); }catch(e){}
     return pick;
@@ -110,6 +114,44 @@
   }
   document.addEventListener("click",e=>{ if(X.menu&&!X.menu.contains(e.target)) xClose("menu"); });
   document.addEventListener("keydown",e=>{ if(e.key!=="Escape") return; if(X.menu){ xClose("menu"); xFocus("menu"); } else if(X.dlg){ xClose("dlg"); xFocus("dlg"); } else if(X.page){ xBack(); xFocus("page"); } });
+  // ---------- SIZE (1.14.0): only while a "fluid" skin (VOID) is on ----------
+  // The receiver (.wrap) is scaled with CSS zoom (--rx-zoom on <html>, used by receiver.css), so knobs, LCDs, text and
+  // meters all grow and shrink together and the layout reflows at the new size, as if the window were wider or narrower.
+  // Only .wrap is zoomed, not the whole page: the spray can and the flies live outside it and place themselves from
+  // on-screen positions, which a zoomed parent would throw off.
+  //   AUTO (the default): fills the window. Up to about 1500 px wide it is 100 % (the layout already adapts down to a
+  //     phone or a thin strip); on bigger windows the 1240 px design is scaled up to fill them, up to 220 %.
+  //   A fixed size: 50-200 %, from the SIZE slider. Smaller packs more into a small window (a strip along the top of the
+  //     screen); bigger is for across-the-room viewing. The receiver still fills the window's width.
+  // The choice is kept in this browser (localStorage "mdfmSkinSize": "auto" or a number) and, in the apps, with the app's
+  // settings too (skinSize), the same way the skin choice is.
+  const SKEY="mdfmSkinSize", SMIN=50, SMAX=200;
+  const sizeGet=()=>{ let v=null; try{ const a=app(); if(a&&a.settings){ const x=(a.settings.get()||{}).skinSize; if(x!=null) v=x; } }catch(e){} if(v==null) try{ v=localStorage.getItem(SKEY); }catch(e){}
+    const n=Number(v); return v!=null&&v!=="auto"&&Number.isFinite(n)?Math.max(SMIN,Math.min(SMAX,Math.round(n))):"auto"; };
+  const sizeSave=v=>{ try{ localStorage.setItem(SKEY,String(v)); }catch(e){} try{ const a=app(); if(a&&a.settings) a.settings.set({skinSize:v}); }catch(e){} };
+  // sideGap(): empty space (in screen px) kept on each side of the receiver on wide windows, so the spray can still has
+  // room beside it as it does in Default (about 130 px at 1440). Narrow windows (under 1100 px) use the whole width.
+  const sideGap=()=>{ const w=window.innerWidth||1240; return w<1100?0:Math.round(Math.min(160,w*.09)); };
+  // autoZoom(): the AUTO scale for the window's current width: the receiver is designed at up to 1240 px wide, so a window
+  // with more room than that (after the side gaps and the page's 16 px padding) scales it up to fill it, to 220 % at most.
+  // Narrower windows stay at 100 % and reflow (the receiver already adapts down to a 320 px phone).
+  const autoZoom=()=>{ const w=window.innerWidth||1240; return Math.max(1,Math.min(2.2,(w-2*sideGap()-32)/1240)); };
+  // sizeApply(): sets --rx-zoom for a fluid skin (or removes it for every other skin) and updates every SIZE control.
+  function sizeApply(){ const r=document.documentElement, on=r.dataset.fluid!=null, v=sizeGet(), z=v==="auto"?autoZoom():v/100;
+    if(on){ r.style.setProperty("--rx-zoom",z.toFixed(3)); r.style.setProperty("--rx-gap",sideGap()+"px"); } else { r.style.removeProperty("--rx-zoom"); r.style.removeProperty("--rx-gap"); }
+    document.querySelectorAll(".rx-size").forEach(box=>{ box.hidden=!on; const rg=box.querySelector("input"), out=box.querySelector("output"), au=box.querySelector("button");
+      const pct=Math.round(z*100); rg.value=String(Math.max(SMIN,Math.min(SMAX,pct))); rg.setAttribute("aria-valuetext",(v==="auto"?"auto, ":"")+pct+" percent");
+      out.textContent=pct+"%"; au.setAttribute("aria-pressed",String(v==="auto")); }); }
+  // follow the window: re-fit AUTO and the side gaps on resize, at most once per frame
+  let sizeRaf=0; if(typeof window.addEventListener==="function") window.addEventListener("resize",()=>{ if(sizeRaf||document.documentElement.dataset.fluid==null) return; sizeRaf=requestAnimationFrame(()=>{ sizeRaf=0; sizeApply(); }); });
+  // sizeBox(sel): adds the SIZE row after a skin picker (once). It stays hidden unless a fluid skin is on.
+  function sizeBox(sel){ const host=sel.closest("label,.fld")||sel; if(host.nextElementSibling&&host.nextElementSibling.classList.contains("rx-size")) return;
+    const box=el("div","rx-size"); box.hidden=true; box.setAttribute("role","group"); box.setAttribute("aria-label","Receiver size");
+    const lab=el("span","rx-size-l","SIZE"), rg=el("input"); rg.type="range"; rg.min=String(SMIN); rg.max=String(SMAX); rg.step="5"; rg.setAttribute("aria-label","Receiver size");
+    const out=el("output",null,"100%"), au=el("button","btn rx-size-auto","AUTO"); au.type="button"; au.title="Fit the receiver to the window";
+    rg.addEventListener("input",()=>{ sizeSave(+rg.value); sizeApply(); });   // moving the slider sets a fixed size (AUTO off)
+    au.addEventListener("click",()=>{ sizeSave(sizeGet()==="auto"?Math.round(autoZoom()*100):"auto"); sizeApply(); });   // AUTO on/off; off keeps the current scale
+    box.append(lab,rg,out,au); host.after(box); }
   function fill(){
     const cur=choice(), house=find(bundle.default)||bundle.skins[0];
     document.querySelectorAll("select[data-mdfm-skins]").forEach(sel=>{
@@ -117,13 +159,15 @@
         const o=document.createElement("option"); o.value=""; o.textContent=`House default (${house?house.name:"Default"})`; sel.appendChild(o);
         for(const s of bundle.skins){ const op=document.createElement("option"); op.value=s.id; op.textContent=s.name; if(s.description) op.title=s.description; sel.appendChild(op); }
         sel.dataset.filled=bundle.version+":"+bundle.skins.length+":"+bundle.default; }
-      sel.value=find(cur)?cur:"";
+      sel.value=find(cur)?cur:""; sizeBox(sel);
       if(!sel.dataset.wired){ sel.dataset.wired="1"; sel.addEventListener("change",()=>{ save(sel.value); apply(sel.value); }); }
     });
   }
-  const start=()=>{ bundle=load(); apply(choice());
+  const start=()=>{ bundle=load(); apply(choice()); sizeApply();
     try{ const a=app(); if(a&&a.settings&&a.settings.onChange) a.settings.onChange(s=>{ if(s&&"skin" in s) apply(s.skin||""); }); }catch(e){} };
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",start); else start();
   window.MDFM_skins={ list:()=>bundle?bundle.skins.map(({id,name,description})=>({id,name,description})):[], houseDefault:()=>bundle&&bundle.default,
-    current:()=>document.documentElement.dataset.skin, set:id=>{ save(id||""); return apply(id||""); }, refresh:()=>{ bundle=load(); apply(choice()); } };
+    current:()=>document.documentElement.dataset.skin, set:id=>{ save(id||""); return apply(id||""); }, refresh:()=>{ bundle=load(); apply(choice()); },
+    // 1.14.0: the SIZE of a fluid skin: size() reads ("auto" or 50-200), size(v) sets it
+    size:v=>{ if(v===undefined) return sizeGet(); sizeSave(v==="auto"?"auto":Math.max(SMIN,Math.min(SMAX,Math.round(+v)||100))); sizeApply(); return sizeGet(); } };
 })();

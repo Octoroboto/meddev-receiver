@@ -714,3 +714,48 @@ html[data-skin]:not([data-skin="default"]) :is(.wrap,.wrap *){-webkit-app-region
 .sx-grid th,.sx-grid td{border:1px solid #d9d9d9;padding:4px 8px;text-align:left;white-space:nowrap}
 .sx-grid th{background:#f2f2f2;font-weight:700}
 .sx-page .sx-note{color:#666;margin:0}
+/* ===== 1.14.0 VOID: the "flat" and "fluid" skin switches (skin.json "flat": true / "fluid": true; see scripts/skins.mjs) =====
+   FLAT (html[data-flat]): the same look as MDFM's MIX › VOID button, but as a skin, so it stays on everywhere: no
+   textures, glass layers, glows, shadows, filters, animations or decorations; flat dark blocks with crisp lit edges for
+   anything pressed or selected (--v-glow is the station's LCD colour). It is also the fastest look on phones and iPads,
+   because the browser has nothing expensive to repaint. Rules are !important because every other look in the receiver
+   (and in each app) is painted with layered backgrounds that must all go. The spray can and the flies are left alone
+   (:not(...) below), as in every skin. MDFM's MIX drawer adds its own flat rules for its parts (src/tune.js in mdfm).
+   --v-* are VOID's colour tokens: bg page, blk/blk2/blk3 blocks from darkest to lightest, line borders, txt/mute text,
+   scr screens (LCDs and fields). */
+html[data-flat]{--v-bg:#111215;--v-blk:#1b1c21;--v-blk2:#24252b;--v-blk3:#2e3038;--v-line:#33353e;--v-txt:#d8dae1;--v-mute:#8b8e9a;--v-glow:var(--lcd,#00e000);--v-scr:#0a0b0d;color-scheme:dark}
+html[data-flat] body{background:var(--v-bg)!important}
+html[data-flat] :not(.canlayer,.canlayer *,.nozzle,.nozzle *,.ffly,.ffly *,.swatter,.swatter *,.mistfx,.mistfx *),
+html[data-flat] :not(.canlayer,.canlayer *,.nozzle,.nozzle *,.ffly,.ffly *,.swatter,.swatter *,.mistfx,.mistfx *)::before,
+html[data-flat] :not(.canlayer,.canlayer *,.nozzle,.nozzle *,.ffly,.ffly *,.swatter,.swatter *,.mistfx,.mistfx *)::after{background-image:none!important;box-shadow:none!important;text-shadow:none!important;filter:none!important;mix-blend-mode:normal!important;animation:none!important;transition:none!important;border-image:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+/* decorations, skin extras and the glass/scratch overlays: gone */
+html[data-flat] .skin-decor,html[data-flat] .sx-layer,html[data-flat] .wtitle::before,html[data-flat] .wtitle::after,html[data-flat] .lcd::after,html[data-flat] .list::after,html[data-flat] .tabs::after,html[data-flat] .hits::after,html[data-flat] .msgs::after,html[data-flat] .vu-glass::after,html[data-flat] .glass::after{display:none!important}
+/* blocks: panels, decks and settings sections */
+html[data-flat] .deck,html[data-flat] .panel,html[data-flat] .wing,html[data-flat] .setsec,html[data-flat] .sheet,html[data-flat] .pop,html[data-flat] .bellpanel,html[data-flat] .syncbar,html[data-flat] .ahead{background-color:var(--v-blk)!important;border:1px solid var(--v-line)!important;border-radius:8px!important}
+html[data-flat] .wtitle{background-color:transparent!important;border:0!important;color:var(--v-mute)!important;letter-spacing:.3em!important;justify-content:flex-start!important}
+html[data-flat] header.top .wctl{position:static!important;transform:none!important;height:auto!important;padding:0!important;margin:0 18px 0 0!important;background:none!important}
+/* screens and fields: near-black, thin border (their lit text keeps the station's colours) */
+html[data-flat] .lcd,html[data-flat] .vu-glass,html[data-flat] input,html[data-flat] select,html[data-flat] textarea,html[data-flat] .list,html[data-flat] .tabs,html[data-flat] .hits,html[data-flat] .msgs{background-color:var(--v-scr)!important;border:1px solid var(--v-line)!important;border-radius:6px!important}
+/* buttons: flat blocks; round buttons and knobs: flat discs with a lit pointer */
+html[data-flat] .btn,html[data-flat] .wbtn button,html[data-flat] .stbtn,html[data-flat] .seg button,html[data-flat] .tabs button{background-color:var(--v-blk2)!important;border:1px solid var(--v-line)!important;border-radius:6px!important;color:var(--v-txt)!important}
+html[data-flat] .btn:hover,html[data-flat] .seg button:hover,html[data-flat] .tabs button:hover{background-color:var(--v-blk3)!important}
+html[data-flat] [aria-pressed=true],html[data-flat] [aria-checked=true],html[data-flat] [aria-selected=true],html[data-flat] .btn.on{border-color:var(--v-glow)!important;color:var(--v-glow)!important;outline:1px solid var(--v-glow)!important;outline-offset:-3px!important}
+html[data-flat] .rd-btn button,html[data-flat] .vizsw input,html[data-flat] .rd-knob,html[data-flat] .tk-knob,html[data-flat] .vol-knob{background-color:var(--v-blk3)!important;border:1px solid #474a55!important;border-radius:50%!important}
+html[data-flat] .rd-btn button[aria-pressed=true],html[data-flat] .rd-btn button:active{border-color:var(--v-glow)!important;background-color:var(--v-blk2)!important}
+html[data-flat] .rd-knob::after,html[data-flat] .tk-knob::after,html[data-flat] .vol-knob::after{background-color:var(--v-glow)!important}
+/* engraved and printed text becomes plain grey; summaries and labels plain light grey */
+html[data-flat] :is(small,.hint,h3,h4,.caption,.rd-cap,.tk-cap,.vol-cap){color:var(--v-mute)!important}
+html[data-flat] :is(summary,label,.fld,.faceplate){color:var(--v-txt)!important}
+/* the MedDev footer: no metal badge art, just its words in grey */
+html[data-flat] .pinfoot{color:var(--v-mute)!important}
+/* FLUID (html[data-fluid]): the receiver (.wrap) has no maximum width and scales with --rx-zoom (set by the SIZE control
+   in src/skins.js: AUTO fills the window, or 50-200 %). CSS zoom scales the layout itself, so things reflow at the new
+   size instead of being stretched like a picture. --rx-gap is the room kept beside it on wide windows (for the spray
+   can); the margins are divided by the zoom because a zoomed element's own margins are zoomed too. */
+html[data-fluid] .wrap{zoom:var(--rx-zoom,1);max-width:none!important;margin-left:calc(var(--rx-gap,0px) / var(--rx-zoom,1))!important;margin-right:calc(var(--rx-gap,0px) / var(--rx-zoom,1))!important}
+/* the SIZE row under the skin picker (only shown while a fluid skin is on) */
+.rx-size{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:6px;color:var(--label,#cfd2de);font:700 .72rem/1 Tahoma,Verdana,sans-serif;letter-spacing:.16em}
+.rx-size[hidden]{display:none}
+.rx-size input[type=range]{flex:1 1 110px;min-width:90px;max-width:220px;min-height:32px;accent-color:var(--v-glow,var(--lcd,#00e000))}
+.rx-size output{min-width:3.4em;font:400 1.15rem/1 var(--f-mono,monospace);letter-spacing:0;color:var(--lcd,#00e000);text-align:right}
+.rx-size .rx-size-auto{min-height:36px;padding:0 12px;font:700 .66rem/1 Tahoma,Verdana,sans-serif;letter-spacing:.16em}

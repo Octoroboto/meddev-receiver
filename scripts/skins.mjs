@@ -207,5 +207,12 @@ export function buildSkin(dirUrl, id) {
   // "tint": "dye" = the light-colour knobs re-colour this skin's screens (hue and saturation) without dimming them,
   // for skins whose screens aren't lights (Clara's embroidered cloth). The default, "light", dims lit screens to dark.
   if (meta.tint != null) { if (!["light", "dye"].includes(meta.tint)) throw new Error(`skin "${id}": tint must be "light" or "dye"`); if (meta.tint === "dye") out.tint = "dye"; }
+  // 1.14.0 (VOID): two switches a skin can turn on in skin.json. They aren't CSS, so the skin rules above don't apply to
+  // them; the receiver's own stylesheet (src/receiver.css) does the work, keyed on <html data-flat> and <html data-fluid>.
+  //   "flat": true  = the receiver drops every texture, glass layer, glow, shadow, filter and decoration and draws flat
+  //                   dark blocks instead (the look of MDFM's MIX › VOID, but always on). The spray can and flies stay.
+  //   "fluid": true = the receiver may grow to any width, and a SIZE control appears next to the skin picker that scales
+  //                   the whole page (AUTO fits the window; or 50-200 %). Other skins keep their fixed layout.
+  for (const k of ["flat", "fluid"]) if (meta[k] != null) { if (typeof meta[k] !== "boolean") throw new Error(`skin "${id}": ${k} must be true or false`); if (meta[k]) out[k] = true; }
   return out;
 }

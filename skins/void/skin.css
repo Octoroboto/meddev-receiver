@@ -1,0 +1,18 @@
+/* VOID (receiver 1.14.0): flat dark blocks. Almost all of the look comes from the receiver itself, because skin.json turns on
+   "flat" (no textures, glass, glow, shadows or decorations) and "fluid" (any width, plus the SIZE control); see the
+   html[data-flat] and html[data-fluid] rules at the end of src/receiver.css. This file only sets the metal colours to the
+   same flat greys, so anything the flat rules don't reach (an app's own panels) still reads as VOID. */
+:root{
+  --steel-a:#1b1c21; --steel-b:#1b1c21; --steel-c:#1b1c21;
+  --brushed:none; --brushed2:none; --grain:none; --spec:none; --streak:none;
+  --plate-1:#1b1c21; --plate-2:#1b1c21; --plate-3:#1b1c21;
+  --btn-1:#24252b; --btn-2:#24252b; --btn-3:#24252b; --btn-down-1:#2e3038; --btn-down-2:#2e3038; --btn-bezel:#33353e; --btn-rim:#33353e;
+  --knob-1:#2e3038; --knob-2:#2e3038; --knob-3:#2e3038; --knurl-1:#2e3038; --knurl-2:#2e3038;
+  --vol-1:#2e3038; --vol-2:#2e3038; --vol-3:#2e3038; --vol-cap:#2e3038; --vol-knurl-1:#2e3038; --vol-knurl-2:#2e3038; --vol-knurl-3:#2e3038;
+  --bezel-1:#33353e; --bezel-2:#33353e; --bezel-3:#33353e;
+  --key-1:#24252b; --key-2:#24252b; --key-hover-1:#2e3038; --key-hover-2:#2e3038;
+  --title-1:#1b1c21; --title-2:#1b1c21;
+  --ink:#d8dae1; --muted:#8b8e9a; --caption:#8b8e9a; --label:#d8dae1; --hint:#8b8e9a; --etch:#8b8e9a;
+  --gold:#8b8e9a; --gold-dark:#33353e;
+  --f-display:Tahoma,Verdana,"Segoe UI",sans-serif;
+}

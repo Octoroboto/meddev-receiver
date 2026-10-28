@@ -2,6 +2,16 @@
 
 Bump `version` in package.json, run `npm run build`, add an entry here, commit `dist/` and push. Apps that point here pick it up on their next check.
 
+## 1.14.0 (2026-10-26, Rob)
+- **New skin: VOID.** Flat dark blocks with crisp lit edges: no textures, glass, glows, shadows, filters, animations or decorations. It's the look of MDFM's MIX › VOID button, but as a skin you pick in Looks, so it's on everywhere (radio, apps, hub page) and stays on. It's also the fastest look on phones and iPads (VOID mode measured 50-60 fps on an iPhone 13, where the textured skins managed about 2). The spray can and the flies stay, as in every skin.
+- **VOID resizes freely.** The receiver has no maximum width, and a **SIZE** row appears under the skin picker while VOID is on:
+  - **AUTO** (the default) keeps 100 % up to about 1500 px wide and scales the receiver up to fill bigger windows (up to 220 %); smaller windows reflow as they always did (down to a 320 px phone).
+  - The slider sets a fixed **50-200 %**: smaller packs the receiver into a thin strip along the top of a screen, bigger is for across the room. The receiver still fills the window's width.
+  - It's kept in this browser (`mdfmSkinSize`) and, in the apps, in the app's settings (`skinSize`). Other skins keep their fixed layout and never show the SIZE row.
+  - In the Mac apps the window's own minimum size (set by the app) still applies until an app release lifts it.
+- **How it works (new skin switches, data in skin.json, not CSS):** `"flat": true` sets `<html data-flat>`, `"fluid": true` sets `<html data-fluid>`; the receiver's own stylesheet does the rest (end of `src/receiver.css`). The SIZE row and `--rx-zoom` / `--rx-gap` come from `src/skins.js`; only `.wrap` is zoomed, so the spray can and flies (which place themselves from on-screen positions) stay where they should. `MDFM_skins.size()` reads or sets the size. `buildSkin` checks both switches are true or false.
+- Tests: `test/skins.test.cjs` covers the switches.
+
 ## 1.13.4 (2026-10-16, Rob)
 - **Lighter meters (from MDFM 1.25 and 1.26).** Nothing looks different.
   - The LED EQ draws its unlit ladder once per size, then fills the lit segments and peak caps as one path each frame (it used to make about 380 separate draw calls a frame). It runs at 30 fps.

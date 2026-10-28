@@ -31,7 +31,10 @@ That's it. Installed MDFM Radio and MD Hub apps pick it up on their next check (
 
 Each skin lives in `skins/<id>/`:
 
-- `skin.json`: `{ "id", "name", "description" }`
+- `skin.json`: `{ "id", "name", "description" }`, plus optional switches:
+  - `"tint": "dye"`: the light-colour knobs re-colour the screens without dimming them (for screens that aren't lights).
+  - `"flat": true` (1.14.0): the receiver itself drops every texture, glass layer, glow, shadow, filter, animation and decoration and draws flat dark blocks (`html[data-flat]` rules at the end of `src/receiver.css`). The spray can and the flies stay. Used by VOID.
+  - `"fluid": true` (1.14.0): the receiver has no maximum width, and a **SIZE** row appears under the skin picker: **AUTO** (fills big windows, up to 220 %) or a fixed 50-200 %. It scales the receiver (`.wrap`) with CSS zoom, so everything grows or shrinks together and reflows. Kept in `localStorage` `mdfmSkinSize` and the app setting `skinSize`. Used by VOID.
 - `skin.css`
 - `images/` (optional; built in as data: URLs)
 
@@ -146,4 +149,4 @@ Paste the blocks from `dist/blocks.html`: the style in `<head>`, and the skins a
 - **Classes:** `.deck`, `.wtitle`, `.lcd`, `.rd-btn` with `.rd-led`, `.vizsw`, `.tk` / `.vol` knobs, `.vu`, `.rdeck`, `.pinfoot`.
 - **Badging:** `[data-mdfm-badges]`, `window.MDFM_BADGES`, `MDFM_mountBadges()`.
 - **Controls and version:** `MDFM_receiver(radio, { app })`, and `window.MedDevReceiver` (`version`, `mountBadges`, `mountControls`).
-- **Skins:** `window.MDFM_skins` (`list`, `current`, `set`, `houseDefault`), the `meddev:skin` event, `select[data-mdfm-skins]`, and `html[data-skin]`.
+- **Skins:** `window.MDFM_skins` (`list`, `current`, `set`, `houseDefault`, and since 1.14.0 `size()` / `size("auto" | 50-200)`), the `meddev:skin` event, `select[data-mdfm-skins]`, `html[data-skin]`, and (1.14.0) `html[data-flat]`, `html[data-fluid]` and the `--rx-zoom` / `--rx-gap` properties on `<html>`.

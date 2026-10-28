@@ -117,3 +117,16 @@ test("skins can't slip past the checks with nesting, escapes, quotes or prefixes
   ex(".fly:not([x=';']){display:none}"); ex(".\\66ly{display:none}"); ex(".btn{display:none;.fly{}}");
   ok('@import url("https://fonts.googleapis.com/css2?family=A:wght@600;700&display=swap");.btn::after{content:"ok"}');
 });
+
+// 1.14.0: the "flat" and "fluid" switches (VOID) come through the build as plain true values, and anything else is refused.
+test("flat and fluid skin switches", () => {
+  const d = fs.mkdtempSync(path.join(os.tmpdir(), "skin-")) + "/t-flat"; fs.mkdirSync(d); fs.writeFileSync(d + "/skin.css", ":root{--steel-a:#111}");
+  const put = meta => fs.writeFileSync(d + "/skin.json", JSON.stringify({ id: "t-flat", name: "T", ...meta }));
+  put({ flat: true, fluid: true }); let s = buildSkin(pathToFileURL(d + "/"), "t-flat"); assert.strictEqual(s.flat, true); assert.strictEqual(s.fluid, true);
+  put({ flat: false }); s = buildSkin(pathToFileURL(d + "/"), "t-flat"); assert.strictEqual(s.flat, undefined, "false is left out"); assert.strictEqual(s.fluid, undefined);
+  put({ fluid: "yes" }); assert.throws(() => buildSkin(pathToFileURL(d + "/"), "t-flat"), /fluid must be true or false/);
+});
+test("the VOID skin builds as flat and fluid", () => {
+  const s = buildSkin(pathToFileURL(path.join(__dirname, "../skins/void") + "/"), "void");
+  assert.strictEqual(s.flat, true); assert.strictEqual(s.fluid, true); assert.match(s.css, /html\[data-skin="void"\]\{\s*--steel-a/);
+});
